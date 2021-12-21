@@ -44,6 +44,7 @@ public class Game {
 
     public void start() {
         ongoing = true;
+        this.startTijd = LocalDateTime.now();
     }
 
     public boolean opslaan() {
@@ -100,14 +101,20 @@ public class Game {
             fileSaved = false;
         }
 
+        if(fileSaved) {
+            // Stop the game when it's saved.
+            this.stop();
+        }
         return fileSaved;
     }
 
     public void hervat(Speelbord speelbord) {
-
+        // Resume the timer
     }
 
     public void stop() {
-
+        ongoing = false;
+        this.eindTijd = LocalDateTime.now();
+        System.out.println("The game has been stopped.");
     }
 }
