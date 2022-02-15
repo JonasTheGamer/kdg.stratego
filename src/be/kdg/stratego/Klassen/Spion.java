@@ -1,6 +1,6 @@
-package be.kdg.Stratego.Klassen;
+package be.kdg.stratego.Klassen;
 
-public class Mineur extends BewegendSpeelstuk {
+public class Spion extends BewegendSpeelstuk {
     @Override
     protected void aanvallen(Speelstuk speelstuk) {
         super.aanvallen(speelstuk);

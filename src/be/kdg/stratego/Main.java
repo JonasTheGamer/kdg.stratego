@@ -1,6 +1,6 @@
-package be.kdg.Stratego;
+package be.kdg.stratego;
 
-import be.kdg.Stratego.Klassen.Game;
+import be.kdg.stratego.Klassen.Game;
 
 public class Main {
 

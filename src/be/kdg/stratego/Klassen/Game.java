@@ -1,5 +1,5 @@
-package be.kdg.Stratego.Klassen;
-import be.kdg.Stratego.CustomUtil.AskUtility;
+package be.kdg.stratego.Klassen;
+import be.kdg.stratego.CustomUtil.AskUtility;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

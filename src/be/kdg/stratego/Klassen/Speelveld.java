@@ -1,4 +1,4 @@
-package be.kdg.Stratego.Klassen;
+package be.kdg.stratego.Klassen;
 
 public class Speelveld extends Positie {
     private Speelstuk speelstuk;

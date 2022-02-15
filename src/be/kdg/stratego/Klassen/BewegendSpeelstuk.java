@@ -1,4 +1,4 @@
-package be.kdg.Stratego.Klassen;
+package be.kdg.stratego.Klassen;
 
 public abstract class BewegendSpeelstuk extends Speelstuk {
     protected int rang;
