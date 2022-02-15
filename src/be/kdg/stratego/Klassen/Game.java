@@ -10,7 +10,6 @@ public class Game {
     private Speler[] spelers;
     private LocalDateTime startTijd;
     private LocalDateTime eindTijd;
-    private Scanner keyboard = new Scanner(System.in);//Comment Liam: Onnodige door klasse AskUtility?
     private boolean ongoing = false;
     private Speelbord speelbord;
 
