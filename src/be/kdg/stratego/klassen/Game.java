@@ -1,10 +1,9 @@
-package be.kdg.stratego.Klassen;
-import be.kdg.stratego.CustomUtil.AskUtility;
+package be.kdg.stratego.klassen;
+import be.kdg.stratego.customUtil.AskUtility;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class Game {
     private Speler[] spelers;

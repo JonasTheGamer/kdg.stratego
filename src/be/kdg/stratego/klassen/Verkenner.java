@@ -1,4 +1,4 @@
-package be.kdg.stratego.Klassen;
+package be.kdg.stratego.klassen;
 
 public class Verkenner extends BewegendSpeelstuk {
     @Override

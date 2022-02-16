@@ -1,4 +1,4 @@
-package be.kdg.stratego.Klassen;
+package be.kdg.stratego.klassen;
 
 public class Speler {
     private String naam;

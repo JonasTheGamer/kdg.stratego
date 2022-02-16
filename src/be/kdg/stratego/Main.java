@@ -1,27 +1,21 @@
 package be.kdg.stratego;
 
-import be.kdg.stratego.Klassen.*;
+import be.kdg.stratego.klassen.*;
 
 import javafx.application.Application;
-import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class Main extends Application {
     public static void main(String[] args) {

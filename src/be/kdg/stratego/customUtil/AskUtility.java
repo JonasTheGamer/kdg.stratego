@@ -1,4 +1,4 @@
-package be.kdg.stratego.CustomUtil;
+package be.kdg.stratego.customUtil;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
