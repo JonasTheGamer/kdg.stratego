@@ -5,6 +5,7 @@ import be.kdg.stratego.klassen.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Cell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -50,8 +51,8 @@ public class Main extends Application {
         Button btnHelp = new Button("Help");
         Button btnQuit = new Button("Quit");
 
-        imgTitle.setFitHeight(300);
-        imgTitle.setFitWidth(600);
+        imgTitle.setScaleX(1.5);
+        imgTitle.setScaleY(1.5);
 
         btnPlay.setPrefWidth(widthBtn);
         btnHelp.setPrefWidth(widthBtn);
@@ -78,33 +79,28 @@ public class Main extends Application {
         lblHighscores.setStyle("-fx-font-size: 14; -fx-font-weight: bold");
 
         //Panes
-        VBox vBoxTitles = new VBox(imgTitle, btnPlay, btnHelp, btnQuit);
+        VBox vBoxTitles = new VBox(btnPlay, btnHelp, btnQuit);
         vBoxTitles.setSpacing(20);
-        vBoxTitles.setAlignment(Pos.CENTER);
         vBoxTitles.setBackground(backgroundPane);
 
         VBox vBoxLeaderboards = new VBox(lblHighscores, lblScores);
         vBoxLeaderboards.setBackground(backgroundPane);
-        vBoxLeaderboards.setSpacing(5);
-        vBoxLeaderboards.setPrefWidth(100);
-        vBoxLeaderboards.setPrefHeight(50);
+        vBoxLeaderboards.setSpacing(10);
 
-        HBox hBoxTitlesAndLeaderboard = new HBox();
-        hBoxTitlesAndLeaderboard.getChildren().addAll(vBoxTitles, vBoxLeaderboards);
+        HBox hBoxTitlesAndLeaderboard = new HBox(vBoxTitles, vBoxLeaderboards);
+        hBoxTitlesAndLeaderboard.setAlignment(Pos.TOP_CENTER);
         hBoxTitlesAndLeaderboard.setSpacing(40);
-        hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
 
-        VBox vBoxBackground = new VBox();
-        vBoxBackground.getChildren().addAll(imgTitle, hBoxTitlesAndLeaderboard);
-        vBoxBackground.setSpacing(20);
+        VBox vBoxBackground = new VBox(imgTitle, hBoxTitlesAndLeaderboard);
         vBoxBackground.setAlignment(Pos.CENTER);
+        vBoxBackground.setSpacing(60);
         // Achtergrond instellen
         vBoxBackground.setBackground(new Background(new BackgroundImage(
-                new Image("/background.png"),
-                BackgroundRepeat.ROUND,
-                BackgroundRepeat.REPEAT,
+                new Image("/background.jpg"),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.SPACE,
                 BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT
+                new BackgroundSize(1.0, 1.0, true, true, false, false)
         )));
 
         //Scene
@@ -112,7 +108,7 @@ public class Main extends Application {
 
         //Stage
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
         stage.setFullScreenExitHint("");
         stage.show();
 
