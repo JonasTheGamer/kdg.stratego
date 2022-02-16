@@ -1,7 +1,7 @@
 package be.kdg.stratego.customUtil;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+// Dit is een gigantisch grote test die nog nooit eerder gezien werd
 public class AskUtility {
     private final static Scanner keyboard = new Scanner(System.in);
 

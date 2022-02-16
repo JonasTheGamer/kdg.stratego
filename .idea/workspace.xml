@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/title.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/title.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" afterDir="false" />
+    <list default="true" id="2c23dd8a-2d6a-42da-b332-f922f5b31bb8" name="Changes" comment="import Javafx in Main.java">
+      <change afterPath="$PROJECT_DIR$/resources/legermanneke.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/ArmySetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_02_2022_12_23__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_02_2022_12_23__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_44__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_45__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_45__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_15_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_15_01__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kdg.stratego/background.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/schermen/NewGame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/schermen/NewGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/schermen/NewGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/customUtil/AskUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/customUtil/AskUtility.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +26,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="22acmVw5qpON9fK9EHkpWRAyiSY" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -26,7 +40,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -134,7 +150,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="intial commit" />
