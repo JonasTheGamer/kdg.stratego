@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/resources/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/title.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/title.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="22acmVw5qpON9fK9EHkpWRAyiSY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\LiamBo\KdG\Programmeren 1\kdg.stratego" />
+      <recent name="D:\LiamBo\KdG\Programmeren\OOP\kdg.stratego" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\LiamBo\KdG\Programmeren 1\kdg.stratego\resources" />
+      <recent name="D:\LiamBo\KdG\Programmeren\OOP\kdg.stratego\.idea" />
+      <recent name="D:\LiamBo\KdG\Programmeren\OOP\kdg.stratego" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="be.kdg.stratego.Main" />
+      <module name="kdg.stratego" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.media " />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="be.kdg.stratego.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="" />
+      <created>1640079308206</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640079308206</updated>
+      <workItem from="1640079314862" duration="1447000" />
+      <workItem from="1640209676693" duration="1522000" />
+      <workItem from="1640244203878" duration="36000" />
+      <workItem from="1640278545642" duration="7142000" />
+      <workItem from="1640338319756" duration="348000" />
+      <workItem from="1644323885169" duration="270000" />
+      <workItem from="1644480839207" duration="37000" />
+      <workItem from="1644924139618" duration="457000" />
+      <workItem from="1644929003156" duration="288000" />
+      <workItem from="1644999262510" duration="1333000" />
+      <workItem from="1645014365362" duration="5708000" />
+    </task>
+    <task id="LOCAL-00001" summary="intial commit">
+      <created>1640079735664</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640079735664</updated>
+    </task>
+    <task id="LOCAL-00002" summary="test">
+      <created>1640079985670</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640079985670</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update of BewegendSpeelstuk, small changes to Speelstuk, Speelveld and Verkenner. Commentary in class Game">
+      <created>1640285539545</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1640285539545</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Scanner weg gone loes">
+      <created>1644924303502</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1644924303502</updated>
+    </task>
+    <task id="LOCAL-00005" summary="import Javafx in Main.java">
+      <created>1645015070221</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1645015070222</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="intial commit" />
+    <MESSAGE value="test" />
+    <MESSAGE value="update of BewegendSpeelstuk, small changes to Speelstuk, Speelveld and Verkenner. Commentary in class Game" />
+    <MESSAGE value="Scanner weg gone loes" />
+    <MESSAGE value="import Javafx in Main.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="import Javafx in Main.java" />
+  </component>
+</project>
