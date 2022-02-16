@@ -1,13 +1,9 @@
 package be.kdg.stratego.schermen;
 
-import be.kdg.stratego.klassen.Game;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -34,7 +30,7 @@ public class NewGame extends Application {
         VBox vbSpeler2 = new VBox();
 
         hbMain.getChildren().addAll(vbSpeler1, bpMenu, vbSpeler2);
-        hbMain.setBackground(Backgrounds.gras);
+        hbMain.setBackground(Backgrounds.background);
         hbMain.setAlignment(Pos.CENTER);
 
         // Styling vbSpeler1

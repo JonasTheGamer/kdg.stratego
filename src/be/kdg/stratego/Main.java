@@ -2,6 +2,7 @@ package be.kdg.stratego;
 
 import be.kdg.stratego.klassen.*;
 
+import be.kdg.stratego.schermen.Backgrounds;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -95,13 +96,7 @@ public class Main extends Application {
         vBoxBackground.setAlignment(Pos.CENTER);
         vBoxBackground.setSpacing(60);
         // Achtergrond instellen
-        vBoxBackground.setBackground(new Background(new BackgroundImage(
-                new Image("/background.jpg"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.SPACE,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(1.0, 1.0, true, true, false, false)
-        )));
+        vBoxBackground.setBackground(Backgrounds.background);
 
         //Scene
         Scene scene = new Scene(vBoxBackground);
