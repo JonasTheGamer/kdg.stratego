@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="HomeScreen Window Fix">
+    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="Backgrounds Liam + Jonas Merge">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/background2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/background3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/CustomUtil/AskUtility.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/BewegendSpeelstuk.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Mineur.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Positie.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Speelbord.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Speelstuk.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Speelveld.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Speler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Spion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Verkenner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Vlag.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Main$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/schermen/Backgrounds.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/schermen/NewGame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/title.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/title.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/title.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +34,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="22acmVw5qpON9fK9EHkpWRAyiSY" />
   <component name="ProjectViewState">
@@ -27,9 +56,9 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -42,7 +71,7 @@
       <recent name="D:\LiamBo\KdG\Programmeren\OOP\kdg.stratego" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.NewGame">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="be.kdg.stratego.Main" />
       <module name="kdg.stratego" />
@@ -77,8 +106,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.NewGame" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.NewGame" />
       </list>
     </recent_temporary>
   </component>
@@ -101,6 +130,9 @@
       <workItem from="1644929003156" duration="288000" />
       <workItem from="1644999262510" duration="1333000" />
       <workItem from="1645014365362" duration="5708000" />
+      <workItem from="1645085237145" duration="968000" />
+      <workItem from="1645087715591" duration="54000" />
+      <workItem from="1645515850054" duration="2389000" />
     </task>
     <task id="LOCAL-00001" summary="intial commit">
       <created>1640079735664</created>
@@ -144,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645021535815</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Backgrounds Liam + Jonas Merge">
+      <created>1645021970165</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1645021970165</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,6 +208,7 @@
     <MESSAGE value="Scanner weg gone loes" />
     <MESSAGE value="import Javafx in Main.java" />
     <MESSAGE value="HomeScreen Window Fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="HomeScreen Window Fix" />
+    <MESSAGE value="Backgrounds Liam + Jonas Merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Backgrounds Liam + Jonas Merge" />
   </component>
 </project>

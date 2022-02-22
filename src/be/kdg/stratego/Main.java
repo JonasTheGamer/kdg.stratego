@@ -4,6 +4,7 @@ import be.kdg.stratego.klassen.*;
 
 import be.kdg.stratego.schermen.Backgrounds;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Cell;
@@ -82,14 +83,17 @@ public class Main extends Application {
         //Panes
         VBox vBoxTitles = new VBox(btnPlay, btnHelp, btnQuit);
         vBoxTitles.setSpacing(20);
+        vBoxTitles.setAlignment(Pos.CENTER);
         vBoxTitles.setBackground(backgroundPane);
 
         VBox vBoxLeaderboards = new VBox(lblHighscores, lblScores);
+        vBoxLeaderboards.setAlignment(Pos.CENTER);
         vBoxLeaderboards.setBackground(backgroundPane);
+
         vBoxLeaderboards.setSpacing(10);
 
         HBox hBoxTitlesAndLeaderboard = new HBox(vBoxTitles, vBoxLeaderboards);
-        hBoxTitlesAndLeaderboard.setAlignment(Pos.TOP_CENTER);
+        hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
         hBoxTitlesAndLeaderboard.setSpacing(40);
 
         VBox vBoxBackground = new VBox(imgTitle, hBoxTitlesAndLeaderboard);
@@ -103,7 +107,7 @@ public class Main extends Application {
 
         //Stage
         stage.setScene(scene);
-        stage.setFullScreen(false);
+        stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.show();
 
@@ -113,6 +117,20 @@ public class Main extends Application {
                 if (ke.getCode() == KeyCode.ESCAPE) {
                     stage.close();
                 }
+            }
+        });
+
+        btnQuit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.close();
+            }
+        });
+
+        btnHelp.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                btnHelp.setText("Nee");
             }
         });
     }
