@@ -1,4 +1,4 @@
-package be.kdg.stratego.schermen;
+package be.kdg.stratego.view;
 
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 public class Backgrounds {
     public static Background background = new Background(new BackgroundImage(
-            new Image("/background.jpg"),
+            new Image("resources/background.jpg"),
             BackgroundRepeat.NO_REPEAT,
             BackgroundRepeat.SPACE,
             BackgroundPosition.CENTER,

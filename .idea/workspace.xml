@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="Backgrounds Liam + Jonas Merge">
+      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/model/ProgrammaModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/mainmenu/MainMenuPresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/mainmenu/MainMenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_02_2022_12_23_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_02_2022_12_23__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_38_[Changes]/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_38_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_38_[Changes]/title.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_38__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_44_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_44__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/background2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/background3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/CustomUtil/AskUtility.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/BewegendSpeelstuk.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Mineur.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Positie.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Speelbord.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Speelstuk.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Speelveld.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Speler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Spion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Verkenner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Klassen/Vlag.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/schermen/Backgrounds.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/be/kdg/stratego/schermen/NewGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kdg.stratego/title.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/title.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/title.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/Backgrounds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/Backgrounds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/NewGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,7 +46,13 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="22acmVw5qpON9fK9EHkpWRAyiSY" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -56,6 +65,7 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -92,7 +102,7 @@
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.media " />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="be.kdg.stratego.schermen.*" />
+          <option name="PATTERN" value="be.kdg.stratego.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -133,6 +143,7 @@
       <workItem from="1645085237145" duration="968000" />
       <workItem from="1645087715591" duration="54000" />
       <workItem from="1645515850054" duration="2389000" />
+      <workItem from="1645700223672" duration="236000" />
     </task>
     <task id="LOCAL-00001" summary="intial commit">
       <created>1640079735664</created>
@@ -199,7 +210,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="intial commit" />

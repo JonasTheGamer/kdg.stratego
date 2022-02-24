@@ -1,25 +1,35 @@
 package be.kdg.stratego;
 
-import be.kdg.stratego.klassen.*;
-
-import be.kdg.stratego.schermen.Backgrounds;
+import be.kdg.stratego.model.ProgrammaModel;
+import be.kdg.stratego.view.mainmenu.MainMenuPresenter;
+import be.kdg.stratego.view.mainmenu.MainMenuView;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Cell;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        ProgrammaModel model = new ProgrammaModel();
+        MainMenuView view = new MainMenuView();
+        MainMenuPresenter presenter = new MainMenuPresenter(model, view);
+
+        // Set window to show this view
+        primaryStage.setScene(new Scene(view));
+
+        // Add event handlers
+        presenter.addWindowEventHandlers();
+
+        // Show window
+        primaryStage.setFullScreen(true);
+        primaryStage.show();
+    }
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
+}
+
+/*
 public class Main extends Application {
     public static void main(String[] args) {
         Application.launch(args);
@@ -83,17 +93,14 @@ public class Main extends Application {
         //Panes
         VBox vBoxTitles = new VBox(btnPlay, btnHelp, btnQuit);
         vBoxTitles.setSpacing(20);
-        vBoxTitles.setAlignment(Pos.CENTER);
         vBoxTitles.setBackground(backgroundPane);
 
         VBox vBoxLeaderboards = new VBox(lblHighscores, lblScores);
-        vBoxLeaderboards.setAlignment(Pos.CENTER);
         vBoxLeaderboards.setBackground(backgroundPane);
-
         vBoxLeaderboards.setSpacing(10);
 
         HBox hBoxTitlesAndLeaderboard = new HBox(vBoxTitles, vBoxLeaderboards);
-        hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
+        hBoxTitlesAndLeaderboard.setAlignment(Pos.TOP_CENTER);
         hBoxTitlesAndLeaderboard.setSpacing(40);
 
         VBox vBoxBackground = new VBox(imgTitle, hBoxTitlesAndLeaderboard);
@@ -107,7 +114,7 @@ public class Main extends Application {
 
         //Stage
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
         stage.setFullScreenExitHint("");
         stage.show();
 
@@ -119,19 +126,6 @@ public class Main extends Application {
                 }
             }
         });
-
-        btnQuit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                stage.close();
-            }
-        });
-
-        btnHelp.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                btnHelp.setText("Nee");
-            }
-        });
     }
 }
+*/
