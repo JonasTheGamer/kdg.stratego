@@ -1,4 +1,4 @@
-package be.kdg.stratego.klassen;
+package be.kdg.stratego.model;
 
 import java.util.ArrayList;
 import java.util.Objects;

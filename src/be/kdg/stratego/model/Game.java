@@ -1,4 +1,4 @@
-package be.kdg.stratego.klassen;
+package be.kdg.stratego.model;
 import be.kdg.stratego.customUtil.AskUtility;
 
 import java.io.*;
