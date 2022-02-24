@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="Backgrounds Liam + Jonas Merge">
-      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/model/ProgrammaModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/mainmenu/MainMenuPresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/mainmenu/MainMenuView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_02_2022_12_23_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_02_2022_12_23__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_38_[Changes]/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_38_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_38_[Changes]/title.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_38__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_44_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_02_2022_13_44__Changes_.xml" beforeDir="false" />
+    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="Use MVP model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/Backgrounds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/Backgrounds.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/NewGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/view/Backgrounds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/Backgrounds.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +52,8 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -143,7 +132,7 @@
       <workItem from="1645085237145" duration="968000" />
       <workItem from="1645087715591" duration="54000" />
       <workItem from="1645515850054" duration="2389000" />
-      <workItem from="1645700223672" duration="236000" />
+      <workItem from="1645700223672" duration="1055000" />
     </task>
     <task id="LOCAL-00001" summary="intial commit">
       <created>1640079735664</created>
@@ -194,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645021970165</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Use MVP model">
+      <created>1645700609233</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1645700609233</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +215,7 @@
     <MESSAGE value="import Javafx in Main.java" />
     <MESSAGE value="HomeScreen Window Fix" />
     <MESSAGE value="Backgrounds Liam + Jonas Merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="Backgrounds Liam + Jonas Merge" />
+    <MESSAGE value="Use MVP model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Use MVP model" />
   </component>
 </project>

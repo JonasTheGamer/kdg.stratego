@@ -22,6 +22,7 @@ public class Main extends Application {
 
         // Show window
         primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
         primaryStage.show();
     }
     public static void main(String[] args) {
