@@ -1,4 +1,4 @@
-package be.kdg.stratego.klassen;
+package be.kdg.stratego.model;
 
 public class Vlag extends Speelstuk {
     private String vlag;

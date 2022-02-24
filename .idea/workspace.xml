@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="Use MVP model">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/view/Backgrounds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/Backgrounds.java" afterDir="false" />
-    </list>
+    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="Use MVP model" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -132,7 +128,7 @@
       <workItem from="1645085237145" duration="968000" />
       <workItem from="1645087715591" duration="54000" />
       <workItem from="1645515850054" duration="2389000" />
-      <workItem from="1645700223672" duration="1055000" />
+      <workItem from="1645700223672" duration="1387000" />
     </task>
     <task id="LOCAL-00001" summary="intial commit">
       <created>1640079735664</created>
@@ -190,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645700609233</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Use MVP model">
+      <created>1645701298965</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1645701298965</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
