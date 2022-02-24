@@ -4,6 +4,7 @@ import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.view.mainmenu.MainMenuPresenter;
 import be.kdg.stratego.view.mainmenu.MainMenuView;
 import javafx.application.Application;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -23,6 +24,8 @@ public class Main extends Application {
         // Show window
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
         primaryStage.show();
     }
     public static void main(String[] args) {
