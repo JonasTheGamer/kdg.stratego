@@ -64,37 +64,39 @@ public class MainMenuView extends VBox {
         imgTitle.setScaleY(1.5);
 
         btnPlay.setPrefWidth(widthBtn);
-        btnHelp.setPrefWidth(widthBtn);
-        btnQuit.setPrefWidth(widthBtn);
-
         btnPlay.setPrefHeight(heightBtn);
-        btnHelp.setPrefHeight(heightBtn);
-        btnQuit.setPrefHeight(heightBtn);
-
         btnPlay.setBackground(backgroundBtn);
-        btnHelp.setBackground(backgroundBtn);
-        btnQuit.setBackground(backgroundBtn);
-
         btnPlay.setTextFill(textColorWhite);
-        btnHelp.setTextFill(textColorWhite);
-        btnQuit.setTextFill(textColorWhite);
-        lblScores.setTextFill(textColorWhite);
-        lblHighscores.setTextFill(textColorWhite);
 
+        btnHelp.setPrefWidth(widthBtn);
+        btnHelp.setPrefHeight(heightBtn);
+        btnHelp.setBackground(backgroundBtn);
+        btnHelp.setTextFill(textColorWhite);
+
+        btnQuit.setPrefWidth(widthBtn);
+        btnQuit.setPrefHeight(heightBtn);
+        btnQuit.setBackground(backgroundBtn);
+        btnQuit.setTextFill(textColorWhite);
+
+        lblScores.setTextFill(textColorWhite);
+
+        lblHighscores.setTextFill(textColorWhite);
         lblHighscores.setStyle("-fx-font-size: 14; -fx-font-weight: bold");
 
-        hBoxTitlesAndLeaderboard.setAlignment(Pos.TOP_CENTER);
+        hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
         hBoxTitlesAndLeaderboard.setSpacing(40);
 
         vBoxTitles.setBackground(backgroundPane);
+        vBoxTitles.setAlignment(Pos.CENTER);
         vBoxTitles.setSpacing(20);
 
         vBoxLeaderboards.setBackground(backgroundPane);
+        vBoxLeaderboards.setAlignment(Pos.CENTER);
         vBoxLeaderboards.setSpacing(10);
 
         this.setBackground(Backgrounds.background);
-        this.setSpacing(60);
         this.setAlignment(Pos.CENTER);
+        this.setSpacing(60);
 
         // Add to panes
         hBoxTitlesAndLeaderboard.getChildren().addAll(vBoxTitles, vBoxLeaderboards);
