@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="Force fullscreen">
-      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/armysetup/ArmySetupPresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/armysetup/ArmySetupView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/newgame/NewGamePresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/newgame/NewGameView.java" afterDir="false" />
+    <list default="true" id="1f74cbc5-4bff-4f1f-b501-edad9cbbf7af" name="Changes" comment="MVP v2">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/ArmySetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/armysetup/ArmySetupOld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/schermen/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/newgame/NewGameOld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/view/Backgrounds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/Backgrounds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/view/newgame/NewGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/newgame/NewGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/be/kdg/stratego/view/newgame/NewGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/be/kdg/stratego/view/newgame/NewGameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -65,9 +64,6 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="be.kdg.stratego.view.newgame" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\LiamBo\KdG\Programmeren 1\kdg.stratego" />
       <recent name="D:\LiamBo\KdG\Programmeren\OOP\kdg.stratego" />
@@ -78,7 +74,7 @@
       <recent name="D:\LiamBo\KdG\Programmeren\OOP\kdg.stratego" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="be.kdg.stratego.Main" />
       <module name="kdg.stratego" />
@@ -93,28 +89,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NewGameOld" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="be.kdg.stratego.view.newgame.NewGameOld" />
-      <module name="kdg.stratego" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.media " />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="be.kdg.stratego.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Application.NewGameOld" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.NewGameOld" />
       </list>
     </recent_temporary>
   </component>
@@ -140,9 +117,7 @@
       <workItem from="1645085237145" duration="968000" />
       <workItem from="1645087715591" duration="54000" />
       <workItem from="1645515850054" duration="2389000" />
-      <workItem from="1645700223672" duration="1387000" />
-      <workItem from="1646000772206" duration="5836000" />
-      <workItem from="1646146232540" duration="2277000" />
+      <workItem from="1645700223672" duration="1055000" />
     </task>
     <task id="LOCAL-00001" summary="intial commit">
       <created>1640079735664</created>
@@ -200,21 +175,7 @@
       <option name="project" value="LOCAL" />
       <updated>1645700609233</updated>
     </task>
-    <task id="LOCAL-00009" summary="Use MVP model">
-      <created>1645701298965</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1645701298965</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Force fullscreen">
-      <created>1645702404390</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1645702404390</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,6 +191,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="intial commit" />
@@ -240,7 +202,6 @@
     <MESSAGE value="HomeScreen Window Fix" />
     <MESSAGE value="Backgrounds Liam + Jonas Merge" />
     <MESSAGE value="Use MVP model" />
-    <MESSAGE value="Force fullscreen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Force fullscreen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Use MVP model" />
   </component>
 </project>
