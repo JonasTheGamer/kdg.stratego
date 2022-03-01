@@ -92,7 +92,7 @@ public class ArmySetupView extends BorderPane {
         //// Menu
         vbMenu.setBackground(Backgrounds.boxBackground);
         vbMenu.setAlignment(Pos.CENTER);
-        vbMenu.setPrefWidth(350);
+        vbMenu.setPrefWidth(400);
         vbMenu.setSpacing(50);
         this.setMargin(vbMenu, new Insets(25, 75,50,0));
         this.setRight(vbMenu);
