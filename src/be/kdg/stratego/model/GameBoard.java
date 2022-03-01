@@ -3,7 +3,7 @@ package be.kdg.stratego.model;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Speelbord {
+public class GameBoard {
     private int grootteX = 10;
     private int grootteY = 10;
     private Speelveld[][] speelvelden;
@@ -28,7 +28,7 @@ public class Speelbord {
         Speelveld foundField = null;
         for (Speelveld[] fieldsRow: speelvelden) {
             for (Speelveld field: fieldsRow) {
-                if(field.positieX == positieX && field.positieY == positieY) {
+                if(field.positionX == positieX && field.positionY == positieY) {
                     foundField = field;
                 }
             }
@@ -36,7 +36,7 @@ public class Speelbord {
         return foundField;
     }
 
-    public Speelstuk getSpeelstuk(int positieX, int positieY) {
+    public Piece getSpeelstuk(int positieX, int positieY) {
         Speelveld field = this.getSpeelveld(positieX, positieY);
 
         if(Objects.isNull(field)) {
@@ -46,16 +46,16 @@ public class Speelbord {
         }
     }
 
-    public Speelstuk[] zoekSpeelstukken(Speler player) {
-        ArrayList<Speelstuk> pieces = new ArrayList<Speelstuk>();
+    public Piece[] zoekSpeelstukken(Player player) {
+        ArrayList<Piece> pieces = new ArrayList<Piece>();
         for (Speelveld[] fieldsRow: speelvelden) {
             for (Speelveld field: fieldsRow) {
-                if(field.getSpeelstuk().getSpeler().equals(player)) {
+                if(field.getSpeelstuk().getPlayer().equals(player)) {
                     pieces.add(field.getSpeelstuk());
                 }
             }
         }
 
-        return (Speelstuk[]) pieces.toArray();
+        return (Piece[]) pieces.toArray();
     }
 }

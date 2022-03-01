@@ -1,15 +1,15 @@
 package be.kdg.stratego.model;
 
-public class Speelveld extends Positie {
-    private Speelstuk speelstuk;
+public class Speelveld extends Position {
+    private Piece speelstuk;
     private boolean bewandelbaar;
     private String achtergrondAfbeelding;
 
-    public Speelstuk getSpeelstuk() {
+    public Piece getSpeelstuk() {
         return speelstuk;
     }
 
-    public void setSpeelstuk(Speelstuk speelstuk) {
+    public void setSpeelstuk(Piece speelstuk) {
         this.speelstuk = speelstuk;
     }
 

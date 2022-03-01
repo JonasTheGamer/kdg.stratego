@@ -1,6 +1,6 @@
 package be.kdg.stratego.model;
 
-public class Speler {
+public class Player {
     private String naam;
     private String kleur;
     private boolean klaarOmTeSpelen;

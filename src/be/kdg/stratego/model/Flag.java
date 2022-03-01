@@ -1,6 +1,6 @@
 package be.kdg.stratego.model;
 
-public class Vlag extends Speelstuk {
+public class Flag extends Piece {
     private String vlag;
 
     public String getVlag() {
