@@ -1,11 +1,7 @@
-package be.kdg.stratego.schermen;
+package be.kdg.stratego.view.armysetup;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -15,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ArmySetup extends Application {
+public class ArmySetupOld extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }

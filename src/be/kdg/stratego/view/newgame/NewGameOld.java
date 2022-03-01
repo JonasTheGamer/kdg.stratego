@@ -1,4 +1,4 @@
-package be.kdg.stratego.schermen;
+package be.kdg.stratego.view.newgame;
 
 import be.kdg.stratego.view.Backgrounds;
 import javafx.application.Application;
@@ -12,7 +12,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
-public class NewGame extends Application {
+public class NewGameOld extends Application {
     public static void main(String[] args) {
         System.out.println("About to run!");
         Application.launch(args);
@@ -38,8 +38,6 @@ public class NewGame extends Application {
         //VBox.setMargin(vbSpeler1, new Insets(100,100,100,100));
         vbSpeler1.setBackground(Backgrounds.boxBackground);
         vbSpeler1.prefWidth(900);
-
-
 
 
         //bpMenu.setBackground(Backgrounds.green);
