@@ -139,7 +139,53 @@ public class ArmySetupView extends BorderPane {
 
         // Add to panes
 
-
     }
 
+    public Label getLblScreenTitle() {
+        return lblScreenTitle;
+    }
+
+    public Label getLblSetupTitle() {
+        return lblSetupTitle;
+    }
+
+    public Button getBtnLoad() {
+        return btnLoad;
+    }
+
+    public Button getBtnSave() {
+        return btnSave;
+    }
+
+    public Label getLblGameTitle() {
+        return lblGameTitle;
+    }
+
+    public Button getBtnStart() {
+        return btnStart;
+    }
+
+    public Button getBtnBack() {
+        return btnBack;
+    }
+
+    public GridPane getGpPieces() {
+        return gpPieces;
+    }
+
+    public GridPane getGpField() {
+        return gpField;
+    }
+
+    public VBox getVbSetup() {
+        return vbSetup;
+    }
+
+    public VBox getVbMenu() {
+        return vbMenu;
+    }
+
+    public VBox getVbGame() {
+        return vbGame;
+    }
 }
