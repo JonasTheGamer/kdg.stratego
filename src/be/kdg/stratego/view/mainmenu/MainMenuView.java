@@ -1,7 +1,7 @@
 package be.kdg.stratego.view.mainmenu;
 
 // Imports
-import be.kdg.stratego.view.Backgrounds;
+import be.kdg.stratego.view.Style;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -94,7 +94,7 @@ public class MainMenuView extends VBox {
         vBoxLeaderboards.setAlignment(Pos.CENTER);
         vBoxLeaderboards.setSpacing(10);
 
-        this.setBackground(Backgrounds.background);
+        this.setBackground(Style.applicationBackground);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(60);
 

@@ -1,6 +1,6 @@
 package be.kdg.stratego.view.newgame;
 
-import be.kdg.stratego.view.Backgrounds;
+import be.kdg.stratego.view.Style;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -11,38 +11,22 @@ import javafx.scene.text.Font;
 
 public class NewGameView extends HBox {
     // Controls
-    private Label lblNamePlayer1;
-    private Label lblNamePlayer2;
+    private Label[] lblName;
 
-    private Label lblTxtNamePlayer1;
-    private Label lblTxtNamePlayer2;
+    private Label[] lblTxtName;
 
-    private TextField txtNamePlayer1;
-    private TextField txtNamePlayer2;
+    private TextField[] txtName;
 
-    private Label lblCmbPlayer1Color;
-    private Label lblCmbPlayer2Color;
+    private Label[] lblCmbColor;
 
-    private ColorPicker cmbPlayer1Color;
-    private ColorPicker cmbPlayer2Color;
+    private ColorPicker[] cmbColor;
 
-    private Label lblPlayer1FlagTitle;
-    private Label lblPlayer2FlagTitle;
+    private Label[] lblFlagTitle;
 
-    private GridPane gpPlayer1Flags;
-    private GridPane gpPlayer2Flags;
+    private GridPane[] gpFlags;
 
-    private Button btnPlayer1Flag1;
-    private Button btnPlayer2Flag1;
-
-    private Button btnPlayer1Flag2;
-    private Button btnPlayer2Flag2;
-
-    private Button btnPlayer1Flag3;
-    private Button btnPlayer2Flag3;
-
-    private Button btnPlayer1Flag4;
-    private Button btnPlayer2Flag4;
+    private Button[] btnPlayer1Flag;
+    private Button[] btnPlayer2Flag;
 
     private ImageView imgTitle;
 
@@ -50,19 +34,14 @@ public class NewGameView extends HBox {
     private Button btnCancel;
 
     // Panes
-    private VBox vbPlayer1;
-    private VBox vbMenu;
-    private VBox vbPlayer2;
-    private HBox hbPlayer1Name;
-    private HBox hbPlayer2Name;
-    private HBox hbPlayer1Color;
-    private HBox hbPlayer2Color;
-    private VBox vbButtons;
-    private VBox vbPlayer1NameColor;
-    private VBox vbPlayer2NameColor;
-    private VBox vbPlayer1Flags;
-    private VBox vbPlayer2Flags;
+    private VBox[] vbPlayer;
+    private HBox[] hbName;
+    private HBox[] hbColor;
+    private VBox[] vbNameColor;
+    private VBox[] vbFlags;
 
+    private VBox vbMenu;
+    private VBox vbButtons;
 
     public NewGameView() {
         this.InitialiseNodes();
@@ -71,38 +50,45 @@ public class NewGameView extends HBox {
 
     public void InitialiseNodes() {
         // Controls
-        lblNamePlayer1 = new Label("Player 1");
-        lblNamePlayer2 = new Label("Player 2");
+        lblName = new Label[2];
+        lblName[1] = new Label("Player 1");
+        lblName[2] = new Label("Player 2");
 
-        lblTxtNamePlayer1 = new Label("Name");
-        lblTxtNamePlayer2 = new Label("Name");
+        lblTxtName = new Label[2];
+        lblTxtName[1] = new Label("Name");
+        lblTxtName[2] = new Label("Name");
 
-        txtNamePlayer1 = new TextField();
-        txtNamePlayer2 = new TextField();
+        txtName = new TextField[2];
+        txtName[1] = new TextField();
+        txtName[2] = new TextField();
 
-        lblCmbPlayer1Color = new Label("Color");
-        lblCmbPlayer2Color = new Label("Color");
+        lblCmbColor = new Label[2];
+        lblCmbColor[1] = new Label("Color");
+        lblCmbColor[2] = new Label("Color");
 
-        cmbPlayer1Color = new ColorPicker();
-        cmbPlayer2Color = new ColorPicker();
+        cmbColor = new ColorPicker[2];
+        cmbColor[1] = new ColorPicker();
+        cmbColor[2] = new ColorPicker();
 
-        lblPlayer1FlagTitle = new Label("Flag");
-        lblPlayer2FlagTitle = new Label("Flag");
+        lblFlagTitle = new Label[2];
+        lblFlagTitle[1] = new Label("Flag");
+        lblFlagTitle[2] = new Label("Flag");
 
-        gpPlayer1Flags = new GridPane();
-        gpPlayer2Flags = new GridPane();
+        gpFlags = new GridPane[2];
+        gpFlags[1] = new GridPane();
+        gpFlags[2] = new GridPane();
 
-        btnPlayer1Flag1 = new Button("Flag 1");
-        btnPlayer2Flag1 = new Button("Flag 1");
+        btnPlayer1Flag = new Button[4];
+        btnPlayer1Flag[1] = new Button("Flag 1");
+        btnPlayer1Flag[2] = new Button("Flag 2");
+        btnPlayer1Flag[3] = new Button("Flag 3");
+        btnPlayer1Flag[4] = new Button("Flag 4");
 
-        btnPlayer1Flag2 = new Button("Flag 2");
-        btnPlayer2Flag2 = new Button("Flag 2");
-
-        btnPlayer1Flag3 = new Button("Flag 3");
-        btnPlayer2Flag3 = new Button("Flag 3");
-
-        btnPlayer1Flag4 = new Button("Flag 4");
-        btnPlayer2Flag4 = new Button("Flag 4");
+        btnPlayer2Flag = new Button[4];
+        btnPlayer2Flag[1] = new Button("Flag 1");
+        btnPlayer2Flag[2] = new Button("Flag 2");
+        btnPlayer2Flag[3] = new Button("Flag 3");
+        btnPlayer2Flag[4] = new Button("Flag 4");
 
         imgTitle = new ImageView("/title.png");
 
@@ -110,9 +96,9 @@ public class NewGameView extends HBox {
         btnCancel = new Button("Cancel");
 
         // Panes
-        vbPlayer1 = new VBox();
         vbMenu = new VBox();
-        vbPlayer2 = new VBox();
+
+        vbPlayer[] = new VBox();
 
         hbPlayer1Name = new HBox();
         hbPlayer2Name = new HBox();
@@ -132,8 +118,6 @@ public class NewGameView extends HBox {
     public void layoutNodes() {
         // Styling variables
         final int playerSetupPrefWidth = 300;
-        double widthBtn = 400;
-        double heightBtn = 50;
         Color textColorWhite = new Color(1, 1, 1, 1);
         Background backgroundBtn = new Background(new BackgroundFill(
                 new Color(0, 0, 0.2, 0.9),
@@ -147,15 +131,22 @@ public class NewGameView extends HBox {
         ));
 
         // Styling
-        ///Player 1
-        lblNamePlayer1.setFont(Font.font("Verdana", 20));
-        lblNamePlayer1.setTextFill(Color.WHITE);
+        ///Players
+        for (Label lbl : lblName) {
+            lbl.setFont(Font.font("Verdana", 20));
+            lbl.setTextFill(Color.WHITE);
+        }
 
         ////Name
-        lblTxtNamePlayer1.setFont(Font.font("Verdana", 15));
-        lblTxtNamePlayer1.setTextFill(Color.WHITE);
+        for (Label lbl : lblTxtName) {
+            lbl.setFont(Font.font("Verdana", 15));
+            lbl.setTextFill(Color.WHITE);
+        }
 
-        txtNamePlayer1.setPrefWidth(200);
+        for (TextField txt : txtName) {
+            txt.setPrefWidth(200);
+        }
+
 
         hbPlayer1Name.getChildren().addAll(lblTxtNamePlayer1, txtNamePlayer1);
         hbPlayer1Name.setAlignment(Pos.CENTER);
@@ -177,7 +168,7 @@ public class NewGameView extends HBox {
         vbPlayer1NameColor.setAlignment(Pos.CENTER);
 
         ////Flags
-        lblPlayer1FlagTitle.setFont(Font.font("Verdana", 15));
+        lblFlagTitle[1].setFont(Font.font("Verdana", 15));
         lblPlayer1FlagTitle.setTextFill(Color.WHITE);
 
         btnPlayer1Flag1.setPrefSize(125, 70);
@@ -265,7 +256,7 @@ public class NewGameView extends HBox {
         ///View
         this.getChildren().addAll(vbPlayer1, vbMenu, vbPlayer2);
         this.setSpacing(50);
-        this.setBackground(Backgrounds.boxBackground);
+        this.setBackground(Style.background);
         this.setAlignment(Pos.CENTER);
     }
 

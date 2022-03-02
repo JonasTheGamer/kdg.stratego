@@ -1,6 +1,6 @@
 package be.kdg.stratego.view.newgame;
 
-import be.kdg.stratego.view.Backgrounds;
+import be.kdg.stratego.view.Style;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,17 +31,17 @@ public class NewGameOld extends Application {
         VBox vbSpeler2 = new VBox();
 
         hbMain.getChildren().addAll(vbSpeler1, bpMenu, vbSpeler2);
-        hbMain.setBackground(Backgrounds.background);
+        hbMain.setBackground(Style.applicationBackground);
         hbMain.setAlignment(Pos.CENTER);
 
         // Styling vbSpeler1
         //VBox.setMargin(vbSpeler1, new Insets(100,100,100,100));
-        vbSpeler1.setBackground(Backgrounds.boxBackground);
+        vbSpeler1.setBackground(Style.background);
         vbSpeler1.prefWidth(900);
 
 
         //bpMenu.setBackground(Backgrounds.green);
-        vbSpeler2.setBackground(Backgrounds.boxBackground);
+        vbSpeler2.setBackground(Style.background);
 
 
         // Create scene

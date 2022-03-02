@@ -1,6 +1,6 @@
 package be.kdg.stratego.view.armysetup;
 
-import be.kdg.stratego.view.Backgrounds;
+import be.kdg.stratego.view.Style;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -70,7 +70,7 @@ public class ArmySetupView extends BorderPane {
         ));
 
         // Main borderpane
-        this.setBackground(Backgrounds.background);
+        this.setBackground(Style.applicationBackground);
 
         // Header (title)
 
@@ -90,7 +90,7 @@ public class ArmySetupView extends BorderPane {
        this.setCenter(gpField);
 
         //// Menu
-        vbMenu.setBackground(Backgrounds.boxBackground);
+        vbMenu.setBackground(Style.background);
         vbMenu.setAlignment(Pos.CENTER);
         vbMenu.setPrefWidth(400);
         vbMenu.setSpacing(50);
