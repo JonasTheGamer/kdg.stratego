@@ -49,6 +49,7 @@ public class NewGameView extends HBox {
     }
 
     public void InitialiseNodes() {
+        /*
         // Controls
         lblName = new Label[2];
         lblName[1] = new Label("Player 1");
@@ -100,6 +101,7 @@ public class NewGameView extends HBox {
 
         vbPlayer[] = new VBox();
 
+
         hbPlayer1Name = new HBox();
         hbPlayer2Name = new HBox();
 
@@ -112,11 +114,12 @@ public class NewGameView extends HBox {
         vbPlayer1Flags = new VBox();
         vbPlayer2Flags = new VBox();
 
-        vbButtons = new VBox();
+        vbButtons = new VBox();*/
     }
 
     public void layoutNodes() {
         // Styling variables
+        /*
         final int playerSetupPrefWidth = 300;
         Color textColorWhite = new Color(1, 1, 1, 1);
         Background backgroundBtn = new Background(new BackgroundFill(
@@ -257,9 +260,10 @@ public class NewGameView extends HBox {
         this.getChildren().addAll(vbPlayer1, vbMenu, vbPlayer2);
         this.setSpacing(50);
         this.setBackground(Style.background);
-        this.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.CENTER);*/
     }
 
+    /*
     public Label getLblNamePlayer1() {
         return lblNamePlayer1;
     }
@@ -406,5 +410,5 @@ public class NewGameView extends HBox {
 
     public VBox getVbPlayer2Flags() {
         return vbPlayer2Flags;
-    }
+    }*/
 }

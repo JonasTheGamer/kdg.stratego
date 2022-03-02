@@ -20,6 +20,7 @@ public class NewGamePresenter {
     }
 
     private void addEventHandlers() {
+        /*
         // Code
         view.getTxtNamePlayer1().setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -34,6 +35,7 @@ public class NewGamePresenter {
                 view.getLblNamePlayer2().setText(view.getTxtNamePlayer2().getText());
             }
         });
+        */
     }
 
     private void updateView() {

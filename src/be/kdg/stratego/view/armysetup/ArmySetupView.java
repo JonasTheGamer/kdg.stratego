@@ -6,12 +6,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 public class ArmySetupView extends BorderPane {
     // Controls
     private Label lblScreenTitle;
-    private Label lblSetupTitle ;
+    private Label lblSetupTitle;
     private Button btnLoad;
     private Button btnSave;
 
@@ -48,7 +49,7 @@ public class ArmySetupView extends BorderPane {
         btnBack = new Button("Back");
 
         // Panes
-        gpPieces = new GridPane(); 
+        gpPieces = new GridPane();
         gpField = new GridPane();
         vbMenu = new VBox();
         vbSetup = new VBox();
@@ -63,6 +64,7 @@ public class ArmySetupView extends BorderPane {
         // Styling variables
         double btnWidth = 400;
         double btnHeight = 50;
+
         Background btnBackground = new Background(new BackgroundFill(
                 new Color(0, 0, 0.2, 0.9),
                 new CornerRadii(20),
@@ -77,24 +79,29 @@ public class ArmySetupView extends BorderPane {
         //// Title (player X, place your army)
         lblScreenTitle.setFont(Font.font("Verdana", 50));
         this.setAlignment(lblScreenTitle, Pos.CENTER);
-        this.setMargin(lblScreenTitle, new Insets(15,0,0,0));
+        this.setMargin(lblScreenTitle, new Insets(15, 0, 0, 0));
 
         this.setTop(lblScreenTitle);
 
         //// Army pieces
         ////// The gridpane will be filled in the presenter class with all pieces that are available.
-        this.setLeft(gpPieces);
+        //this.setLeft(gpPieces);
 
         //// Field
         ////// The field will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
-       this.setCenter(gpField);
+        this.setCenter(gpField);
+        gpField.setStyle("-fx-background-color: cell-border-color, cell-color;");
+        gpField.setStyle("-fx-background-insets: 0, 1 1 0 0;");
+        gpField.setStyle("-fx-padding: 1 ;");
+
+        gpField.setAlignment(Pos.CENTER);
 
         //// Menu
         vbMenu.setBackground(Style.background);
         vbMenu.setAlignment(Pos.CENTER);
         vbMenu.setPrefWidth(400);
         vbMenu.setSpacing(50);
-        this.setMargin(vbMenu, new Insets(25, 75,50,0));
+        this.setMargin(vbMenu, new Insets(25, 75, 50, 0));
         this.setRight(vbMenu);
 
         ////// Setup buttons (load & save)
@@ -104,15 +111,8 @@ public class ArmySetupView extends BorderPane {
         vbSetup.setAlignment(Pos.CENTER);
         vbSetup.setSpacing(20);
 
-        btnLoad.setPrefWidth(btnWidth);
-        btnLoad.setPrefHeight(btnHeight);
-        btnLoad.setTextFill(Color.WHITE);
-        btnLoad.setBackground(btnBackground);
-
-        btnSave.setPrefWidth(btnWidth);
-        btnSave.setPrefHeight(btnHeight);
-        btnSave.setTextFill(Color.WHITE);
-        btnSave.setBackground(btnBackground);
+        Style.btn(btnLoad, 15);
+        Style.btn(btnSave, 15);
 
         vbSetup.getChildren().addAll(lblSetupTitle, btnLoad, btnSave);
         vbMenu.getChildren().add(vbSetup);
@@ -124,15 +124,8 @@ public class ArmySetupView extends BorderPane {
         vbGame.setAlignment(Pos.CENTER);
         vbGame.setSpacing(20);
 
-        btnStart.setPrefWidth(btnWidth);
-        btnStart.setPrefHeight(btnHeight);
-        btnStart.setTextFill(Color.WHITE);
-        btnStart.setBackground(btnBackground);
-
-        btnBack.setPrefWidth(btnWidth);
-        btnBack.setPrefHeight(btnHeight);
-        btnBack.setTextFill(Color.WHITE);
-        btnBack.setBackground(btnBackground);
+        Style.btn(btnStart, 15);
+        Style.btn(btnBack, 15);
 
         vbGame.getChildren().addAll(lblGameTitle, btnStart, btnBack);
         vbMenu.getChildren().add(vbGame);
