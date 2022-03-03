@@ -20,22 +20,9 @@ public class NewGamePresenter {
     }
 
     private void addEventHandlers() {
-        /*
         // Code
-        view.getTxtNamePlayer1().setOnKeyTyped(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                view.getLblNamePlayer1().setText(view.getTxtNamePlayer1().getText());
-            }
-        });
-
-        view.getTxtNamePlayer2().setOnKeyTyped(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                view.getLblNamePlayer2().setText(view.getTxtNamePlayer2().getText());
-            }
-        });
-        */
+        view.getTxtName()[0].setOnKeyTyped(keyEvent -> view.getLblName()[0].setText(view.getTxtName()[0].getText()));
+        view.getTxtName()[1].setOnKeyTyped(keyEvent -> view.getLblName()[1].setText(view.getTxtName()[1].getText()));
     }
 
     private void updateView() {

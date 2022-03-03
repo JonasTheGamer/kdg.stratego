@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 public class Style {
@@ -62,7 +63,11 @@ public class Style {
 
     //Labels
     public static void txt(Labeled txt, double fontSize) {
+        Style.txt(txt, fontSize, Color.WHITE);
+    }
+
+    public static void txt(Labeled txt, double fontSize, Paint paint) {
         txt.setFont(Font.font("Verdana", fontSize));
-        txt.setTextFill(Color.WHITE);
+        txt.setTextFill(paint);
     }
 }

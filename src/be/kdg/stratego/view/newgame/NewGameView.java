@@ -1,13 +1,11 @@
 package be.kdg.stratego.view.newgame;
 
 import be.kdg.stratego.view.Style;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class NewGameView extends HBox {
     // Controls
@@ -17,16 +15,15 @@ public class NewGameView extends HBox {
 
     private TextField[] txtName;
 
-    private Label[] lblCmbColor;
+    private Label[] lblCpColor;
 
-    private ColorPicker[] cmbColor;
+    private ColorPicker[] cpColor;
 
     private Label[] lblFlagTitle;
 
     private GridPane[] gpFlags;
 
-    private Button[] btnPlayer1Flag;
-    private Button[] btnPlayer2Flag;
+    private Button[][] btnFlag;
 
     private ImageView imgTitle;
 
@@ -43,53 +40,48 @@ public class NewGameView extends HBox {
     private VBox vbMenu;
     private VBox vbButtons;
 
+    private HBox hb;
+
     public NewGameView() {
         this.InitialiseNodes();
         this.layoutNodes();
     }
 
     public void InitialiseNodes() {
-        /*
         // Controls
         lblName = new Label[2];
-        lblName[1] = new Label("Player 1");
-        lblName[2] = new Label("Player 2");
+        lblName[0] = new Label("Player 1");
+        lblName[1] = new Label("Player 2");
 
         lblTxtName = new Label[2];
+        lblTxtName[0] = new Label("Name");
         lblTxtName[1] = new Label("Name");
-        lblTxtName[2] = new Label("Name");
 
         txtName = new TextField[2];
+        txtName[0] = new TextField();
         txtName[1] = new TextField();
-        txtName[2] = new TextField();
 
-        lblCmbColor = new Label[2];
-        lblCmbColor[1] = new Label("Color");
-        lblCmbColor[2] = new Label("Color");
+        lblCpColor = new Label[2];
+        lblCpColor[0] = new Label("Color");
+        lblCpColor[1] = new Label("Color");
 
-        cmbColor = new ColorPicker[2];
-        cmbColor[1] = new ColorPicker();
-        cmbColor[2] = new ColorPicker();
+        cpColor = new ColorPicker[2];
+        cpColor[0] = new ColorPicker();
+        cpColor[1] = new ColorPicker();
 
         lblFlagTitle = new Label[2];
+        lblFlagTitle[0] = new Label("Flag");
         lblFlagTitle[1] = new Label("Flag");
-        lblFlagTitle[2] = new Label("Flag");
 
-        gpFlags = new GridPane[2];
-        gpFlags[1] = new GridPane();
-        gpFlags[2] = new GridPane();
-
-        btnPlayer1Flag = new Button[4];
-        btnPlayer1Flag[1] = new Button("Flag 1");
-        btnPlayer1Flag[2] = new Button("Flag 2");
-        btnPlayer1Flag[3] = new Button("Flag 3");
-        btnPlayer1Flag[4] = new Button("Flag 4");
-
-        btnPlayer2Flag = new Button[4];
-        btnPlayer2Flag[1] = new Button("Flag 1");
-        btnPlayer2Flag[2] = new Button("Flag 2");
-        btnPlayer2Flag[3] = new Button("Flag 3");
-        btnPlayer2Flag[4] = new Button("Flag 4");
+        btnFlag = new Button[2][4];
+        btnFlag[0][0] = new Button("Flag 1");
+        btnFlag[0][1] = new Button("Flag 2");
+        btnFlag[0][2] = new Button("Flag 3");
+        btnFlag[0][3] = new Button("Flag 4");
+        btnFlag[1][0] = new Button("Flag 1");
+        btnFlag[1][1] = new Button("Flag 2");
+        btnFlag[1][2] = new Button("Flag 3");
+        btnFlag[1][3] = new Button("Flag 4");
 
         imgTitle = new ImageView("/title.png");
 
@@ -97,259 +89,171 @@ public class NewGameView extends HBox {
         btnCancel = new Button("Cancel");
 
         // Panes
+        hbName = new HBox[2];
+        hbName[0] = new HBox();
+        hbName[1] = new HBox();
+
+        hbColor = new HBox[2];
+        hbColor[0] = new HBox();
+        hbColor[1] = new HBox();
+
+        vbNameColor = new VBox[2];
+        vbNameColor[0] = new VBox();
+        vbNameColor[1] = new VBox();
+
+        gpFlags = new GridPane[2];
+        gpFlags[0] = new GridPane();
+        gpFlags[1] = new GridPane();
+
+        vbFlags = new VBox[2];
+        vbFlags[0] = new VBox();
+        vbFlags[1] = new VBox();
+
+        vbPlayer = new VBox[2];
+        vbPlayer[0] = new VBox();
+        vbPlayer[1] = new VBox();
+
+        vbButtons = new VBox();
         vbMenu = new VBox();
 
-        vbPlayer[] = new VBox();
-
-
-        hbPlayer1Name = new HBox();
-        hbPlayer2Name = new HBox();
-
-        hbPlayer1Color = new HBox();
-        hbPlayer2Color = new HBox();
-
-        vbPlayer1NameColor = new VBox();
-        vbPlayer2NameColor = new VBox();
-
-        vbPlayer1Flags = new VBox();
-        vbPlayer2Flags = new VBox();
-
-        vbButtons = new VBox();*/
+        hb = new HBox();
     }
 
     public void layoutNodes() {
-        // Styling variables
-        /*
-        final int playerSetupPrefWidth = 300;
-        Color textColorWhite = new Color(1, 1, 1, 1);
-        Background backgroundBtn = new Background(new BackgroundFill(
-                new Color(0, 0, 0.2, 0.9),
-                new CornerRadii(20),
-                null
-        ));
-        Background backgroundPane = new Background(new BackgroundFill(
-                new Color(0, 0, 0, 0.8),
-                new CornerRadii(20),
-                new Insets(-10)
-        ));
-
-        // Styling
         ///Players
         for (Label lbl : lblName) {
-            lbl.setFont(Font.font("Verdana", 20));
-            lbl.setTextFill(Color.WHITE);
+            Style.txt(lbl, 20);
         }
 
         ////Name
         for (Label lbl : lblTxtName) {
-            lbl.setFont(Font.font("Verdana", 15));
-            lbl.setTextFill(Color.WHITE);
+            Style.txt(lbl, 15);
         }
 
         for (TextField txt : txtName) {
             txt.setPrefWidth(200);
         }
 
-
-        hbPlayer1Name.getChildren().addAll(lblTxtNamePlayer1, txtNamePlayer1);
-        hbPlayer1Name.setAlignment(Pos.CENTER);
-        hbPlayer1Name.setSpacing(20);
-
-        ////Color
-        lblCmbPlayer1Color.setFont(Font.font("Verdana", 15));
-        lblCmbPlayer1Color.setTextFill(Color.WHITE);
-
-        cmbPlayer1Color.setPrefWidth(200);
-
-        hbPlayer1Color.getChildren().addAll(lblCmbPlayer1Color, cmbPlayer1Color);
-        hbPlayer1Color.setAlignment(Pos.CENTER);
-        hbPlayer1Color.setSpacing(25);
-
-        ////Naam en Color
-        vbPlayer1NameColor.getChildren().addAll(lblNamePlayer1, hbPlayer1Name, hbPlayer1Color);
-        vbPlayer1NameColor.setSpacing(20);
-        vbPlayer1NameColor.setAlignment(Pos.CENTER);
-
-        ////Flags
-        lblFlagTitle[1].setFont(Font.font("Verdana", 15));
-        lblPlayer1FlagTitle.setTextFill(Color.WHITE);
-
-        btnPlayer1Flag1.setPrefSize(125, 70);
-        btnPlayer1Flag2.setPrefSize(125, 70);
-        btnPlayer1Flag3.setPrefSize(125, 70);
-        btnPlayer1Flag4.setPrefSize(125, 70);
-
-        gpPlayer1Flags.add(btnPlayer1Flag1, 0, 0);
-        gpPlayer1Flags.add(btnPlayer1Flag2, 1, 0);
-        gpPlayer1Flags.add(btnPlayer1Flag3, 0, 1);
-        gpPlayer1Flags.add(btnPlayer1Flag4, 1, 1);
-        gpPlayer1Flags.setHgap(10);
-        gpPlayer1Flags.setVgap(10);
-        gpPlayer1Flags.setAlignment(Pos.CENTER);
-
-        vbPlayer1Flags.getChildren().addAll(lblPlayer1FlagTitle, gpPlayer1Flags);
-        vbPlayer1Flags.setSpacing(20);
-        vbPlayer1Flags.setAlignment(Pos.CENTER);
-
-        ////Pane
-        vbPlayer1.getChildren().addAll(
-                vbPlayer1NameColor,
-                vbPlayer1Flags
-        );
-        vbPlayer1.setAlignment(Pos.CENTER);
-        vbPlayer1.setPrefWidth(playerSetupPrefWidth);
-        vbPlayer1.setSpacing(60);
-
-        ///Player 2
-        lblNamePlayer2.setFont(Font.font("Verdana", 20));
-        lblNamePlayer2.setTextFill(Color.WHITE);
-
-        ////Name
-        lblTxtNamePlayer2.setFont(Font.font("Verdana", 15));
-        lblTxtNamePlayer2.setTextFill(Color.WHITE);
-
-        hbPlayer2Name.getChildren().addAll(lblTxtNamePlayer2, txtNamePlayer2);
-        HBox.setMargin(hbPlayer2Name, new Insets(10, 10, 10, 10));
-        hbPlayer2Name.setSpacing(20);
+        for (int i = 0; i < hbName.length; i++) {
+            hbName[i].getChildren().addAll(lblTxtName[i], txtName[i]);
+            hbName[i].setAlignment(Pos.CENTER);
+            hbName[i].setSpacing(20);
+        }
 
         ////Color
-        lblCmbPlayer2Color.setFont(Font.font("Verdana", 15));
-        lblCmbPlayer2Color.setTextFill(Color.WHITE);
+        for (Label lbl : lblCpColor) {
+            Style.txt(lbl, 15);
+        }
 
-        hbPlayer2Color.getChildren().addAll(lblCmbPlayer2Color, cmbPlayer2Color);
-        hbPlayer2Color.setSpacing(20);
+        for (ColorPicker cp : cpColor) {
+            cp.setPrefWidth(200);
+        }
+
+        for (int i = 0; i < hbName.length; i++) {
+            hbColor[i].getChildren().addAll(lblCpColor[i], cpColor[i]);
+            hbColor[i].setAlignment(Pos.CENTER);
+            hbColor[i].setSpacing(25);
+        }
+
+        ////Name en Color
+        for (int i = 0; i < vbNameColor.length; i++) {
+            vbNameColor[i].getChildren().addAll(lblName[i], hbName[i], hbColor[i]);
+            vbNameColor[i].setAlignment(Pos.CENTER);
+            vbNameColor[i].setSpacing(20);
+        }
 
         ////Flags
-        gpPlayer2Flags.add(btnPlayer2Flag1, 0, 0);
-        gpPlayer2Flags.add(btnPlayer2Flag2, 1, 0);
-        gpPlayer2Flags.add(btnPlayer2Flag3, 0, 1);
-        gpPlayer2Flags.add(btnPlayer2Flag4, 1, 1);
+        for (Label lbl : lblFlagTitle) {
+            Style.txt(lbl, 15);
+        }
+
+        for (Button[] player : btnFlag) {
+            for (Button btn : player) {
+                btn.setPrefSize(125, 70);
+            }
+        }
+
+        for (int i = 0; i < gpFlags.length; i++) {
+            gpFlags[i].add(btnFlag[i][0], 0, 0);
+            gpFlags[i].add(btnFlag[i][1], 1, 0);
+            gpFlags[i].add(btnFlag[i][2], 0, 1);
+            gpFlags[i].add(btnFlag[i][3], 1, 1);
+
+            gpFlags[i].setHgap(10);
+            gpFlags[i].setVgap(10);
+            gpFlags[i].setAlignment(Pos.CENTER);
+        }
+
+        for (int i = 0; i < vbFlags.length; i++) {
+            vbFlags[i].getChildren().addAll(lblFlagTitle[i], gpFlags[i]);
+            vbFlags[i].setAlignment(Pos.CENTER);
+            vbFlags[i].setSpacing(20);
+        }
 
         ////Pane
-        vbPlayer2.getChildren().addAll(
-                lblNamePlayer2,
-                hbPlayer2Name,
-                hbPlayer2Color,
-                lblPlayer2FlagTitle,
-                gpPlayer2Flags
-        );
-        vbPlayer2.setAlignment(Pos.CENTER);
-        vbPlayer2.setPrefWidth(playerSetupPrefWidth);
+        for (int i = 0; i < vbPlayer.length; i++) {
+            vbPlayer[i].getChildren().addAll(vbNameColor[i], vbFlags[i]);
+            vbPlayer[i].setAlignment(Pos.CENTER);
+            vbPlayer[i].setSpacing(60);
+            vbPlayer[i].setPrefWidth(600);
+        }
 
         ///Menu
-        btnReady.setPrefWidth(widthBtn);
-        btnReady.setPrefHeight(heightBtn);
-        btnReady.setBackground(backgroundBtn);
-        btnReady.setTextFill(textColorWhite);
+        imgTitle.setScaleX(1.5);
+        imgTitle.setScaleY(1.5);
 
-        btnCancel.setPrefWidth(widthBtn);
-        btnCancel.setPrefHeight(heightBtn);
-        btnCancel.setBackground(backgroundBtn);
-        btnCancel.setTextFill(textColorWhite);
+        Style.btn(btnReady, 15);
+        Style.btn(btnCancel, 15);
 
         vbButtons.getChildren().addAll(btnReady, btnCancel);
-        vbButtons.setSpacing(20);
         vbButtons.setAlignment(Pos.CENTER);
+        vbButtons.setSpacing(20);
 
         vbMenu.getChildren().addAll(imgTitle, vbButtons);
         vbMenu.setAlignment(Pos.CENTER);
         vbMenu.setSpacing(150);
         vbMenu.setTranslateY(-140);
 
+        hb.setBackground(Style.background);
+        hb.getChildren().addAll(vbPlayer[0], vbMenu, vbPlayer[1]);
+
         ///View
-        this.getChildren().addAll(vbPlayer1, vbMenu, vbPlayer2);
-        this.setSpacing(50);
-        this.setBackground(Style.background);
-        this.setAlignment(Pos.CENTER);*/
+        this.getChildren().addAll(hb);
+        this.setSpacing(20);
+        this.setBackground(Style.applicationBackground);
+        this.setAlignment(Pos.CENTER);
     }
 
-    /*
-    public Label getLblNamePlayer1() {
-        return lblNamePlayer1;
+    public Label[] getLblName() {
+        return lblName;
     }
 
-    public Label getLblNamePlayer2() {
-        return lblNamePlayer2;
+    public Label[] getLblTxtName() {
+        return lblTxtName;
     }
 
-    public Label getLblTxtNamePlayer1() {
-        return lblTxtNamePlayer1;
+    public TextField[] getTxtName() {
+        return txtName;
     }
 
-    public Label getLblTxtNamePlayer2() {
-        return lblTxtNamePlayer2;
+    public Label[] getLblCpColor() {
+        return lblCpColor;
     }
 
-    public TextField getTxtNamePlayer1() {
-        return txtNamePlayer1;
+    public ColorPicker[] getCpColor() {
+        return cpColor;
     }
 
-    public TextField getTxtNamePlayer2() {
-        return txtNamePlayer2;
+    public Label[] getLblFlagTitle() {
+        return lblFlagTitle;
     }
 
-    public Label getLblCmbPlayer1Color() {
-        return lblCmbPlayer1Color;
+    public GridPane[] getGpFlags() {
+        return gpFlags;
     }
 
-    public Label getLblCmbPlayer2Color() {
-        return lblCmbPlayer2Color;
-    }
-
-    public ColorPicker getCmbPlayer1Color() {
-        return cmbPlayer1Color;
-    }
-
-    public ColorPicker getCmbPlayer2Color() {
-        return cmbPlayer2Color;
-    }
-
-    public Label getLblPlayer1FlagTitle() {
-        return lblPlayer1FlagTitle;
-    }
-
-    public Label getLblPlayer2FlagTitle() {
-        return lblPlayer2FlagTitle;
-    }
-
-    public GridPane getGpPlayer1Flags() {
-        return gpPlayer1Flags;
-    }
-
-    public GridPane getGpPlayer2Flags() {
-        return gpPlayer2Flags;
-    }
-
-    public Button getBtnPlayer1Flag1() {
-        return btnPlayer1Flag1;
-    }
-
-    public Button getBtnPlayer2Flag1() {
-        return btnPlayer2Flag1;
-    }
-
-    public Button getBtnPlayer1Flag2() {
-        return btnPlayer1Flag2;
-    }
-
-    public Button getBtnPlayer2Flag2() {
-        return btnPlayer2Flag2;
-    }
-
-    public Button getBtnPlayer1Flag3() {
-        return btnPlayer1Flag3;
-    }
-
-    public Button getBtnPlayer2Flag3() {
-        return btnPlayer2Flag3;
-    }
-
-    public Button getBtnPlayer1Flag4() {
-        return btnPlayer1Flag4;
-    }
-
-    public Button getBtnPlayer2Flag4() {
-        return btnPlayer2Flag4;
+    public Button[][] getBtnFlag() {
+        return btnFlag;
     }
 
     public ImageView getImgTitle() {
@@ -364,51 +268,35 @@ public class NewGameView extends HBox {
         return btnCancel;
     }
 
-    public VBox getVbPlayer1() {
-        return vbPlayer1;
+    public VBox[] getVbPlayer() {
+        return vbPlayer;
+    }
+
+    public HBox[] getHbName() {
+        return hbName;
+    }
+
+    public HBox[] getHbColor() {
+        return hbColor;
+    }
+
+    public VBox[] getVbNameColor() {
+        return vbNameColor;
+    }
+
+    public VBox[] getVbFlags() {
+        return vbFlags;
     }
 
     public VBox getVbMenu() {
         return vbMenu;
     }
 
-    public VBox getVbPlayer2() {
-        return vbPlayer2;
-    }
-
-    public HBox getHbPlayer1Name() {
-        return hbPlayer1Name;
-    }
-
-    public HBox getHbPlayer2Name() {
-        return hbPlayer2Name;
-    }
-
-    public HBox getHbPlayer1Color() {
-        return hbPlayer1Color;
-    }
-
-    public HBox getHbPlayer2Color() {
-        return hbPlayer2Color;
-    }
-
     public VBox getVbButtons() {
         return vbButtons;
     }
 
-    public VBox getVbPlayer1NameColor() {
-        return vbPlayer1NameColor;
+    public HBox getHb() {
+        return hb;
     }
-
-    public VBox getVbPlayer2NameColor() {
-        return vbPlayer2NameColor;
-    }
-
-    public VBox getVbPlayer1Flags() {
-        return vbPlayer1Flags;
-    }
-
-    public VBox getVbPlayer2Flags() {
-        return vbPlayer2Flags;
-    }*/
 }

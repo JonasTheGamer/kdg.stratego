@@ -18,20 +18,12 @@ public class MainMenuPresenter {
 
     private void addEventHandlers() {
         //Code
-        view.getBtnQuit().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Stage mainStage = (Stage) view.getScene().getWindow();
-                mainStage.close();
-            }
+        view.getBtnQuit().setOnAction(actionEvent -> {
+            Stage mainStage = (Stage) view.getScene().getWindow();
+            mainStage.close();
         });
 
-        view.getBtnHelp().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                view.getBtnHelp().setText("Nee");
-            }
-        });
+        view.getBtnHelp().setOnAction(actionEvent -> view.getBtnHelp().setText("Nee"));
     }
 
     private void updateView() {

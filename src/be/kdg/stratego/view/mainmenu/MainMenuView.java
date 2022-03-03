@@ -2,13 +2,11 @@ package be.kdg.stratego.view.mainmenu;
 
 // Imports
 import be.kdg.stratego.view.Style;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class MainMenuView extends VBox {
     // Controls
@@ -44,53 +42,26 @@ public class MainMenuView extends VBox {
     }
 
     private void layoutNodes() {
-        // Styling variables
-        double widthBtn = 400;
-        double heightBtn = 50;
-        Color textColorWhite = new Color(1, 1, 1, 1);
-        Background backgroundBtn = new Background(new BackgroundFill(
-                new Color(0, 0, 0.2, 0.9),
-                new CornerRadii(20),
-                null
-        ));
-        Background backgroundPane = new Background(new BackgroundFill(
-                new Color(0, 0, 0, 0.8),
-                new CornerRadii(20),
-                new Insets(-10)
-        ));
-
-        // Styling
         imgTitle.setScaleX(1.5);
         imgTitle.setScaleY(1.5);
 
-        btnPlay.setPrefWidth(widthBtn);
-        btnPlay.setPrefHeight(heightBtn);
-        btnPlay.setBackground(backgroundBtn);
-        btnPlay.setTextFill(textColorWhite);
+        Style.btn(btnPlay, 15);
+        Style.btn(btnHelp, 15);
+        Style.btn(btnQuit, 15);
 
-        btnHelp.setPrefWidth(widthBtn);
-        btnHelp.setPrefHeight(heightBtn);
-        btnHelp.setBackground(backgroundBtn);
-        btnHelp.setTextFill(textColorWhite);
+        Style.txt(lblScores, 10);
 
-        btnQuit.setPrefWidth(widthBtn);
-        btnQuit.setPrefHeight(heightBtn);
-        btnQuit.setBackground(backgroundBtn);
-        btnQuit.setTextFill(textColorWhite);
-
-        lblScores.setTextFill(textColorWhite);
-
-        lblHighscores.setTextFill(textColorWhite);
-        lblHighscores.setStyle("-fx-font-size: 14; -fx-font-weight: bold");
+        Style.txt(lblHighscores, 12);
+        lblHighscores.setStyle("-fx-font-weight: bold");
 
         hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
         hBoxTitlesAndLeaderboard.setSpacing(40);
 
-        vBoxTitles.setBackground(backgroundPane);
+        vBoxTitles.setBackground(Style.background);
         vBoxTitles.setAlignment(Pos.CENTER);
         vBoxTitles.setSpacing(20);
 
-        vBoxLeaderboards.setBackground(backgroundPane);
+        vBoxLeaderboards.setBackground(Style.background);
         vBoxLeaderboards.setAlignment(Pos.CENTER);
         vBoxLeaderboards.setSpacing(10);
 

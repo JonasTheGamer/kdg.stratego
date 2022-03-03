@@ -61,23 +61,13 @@ public class ArmySetupView extends BorderPane {
     }
 
     public void LayoutNodes() {
-        // Styling variables
-        double btnWidth = 400;
-        double btnHeight = 50;
-
-        Background btnBackground = new Background(new BackgroundFill(
-                new Color(0, 0, 0.2, 0.9),
-                new CornerRadii(20),
-                null
-        ));
-
         // Main borderpane
         this.setBackground(Style.applicationBackground);
 
         // Header (title)
 
         //// Title (player X, place your army)
-        lblScreenTitle.setFont(Font.font("Verdana", 50));
+        Style.txt(lblScreenTitle,50,Color.BLACK);
         this.setAlignment(lblScreenTitle, Pos.CENTER);
         this.setMargin(lblScreenTitle, new Insets(15, 0, 0, 0));
 
@@ -105,8 +95,7 @@ public class ArmySetupView extends BorderPane {
         this.setRight(vbMenu);
 
         ////// Setup buttons (load & save)
-        lblSetupTitle.setFont(Font.font("Verdana", 15));
-        lblSetupTitle.setTextFill(Color.WHITE);
+        Style.txt(lblSetupTitle, 15);
 
         vbSetup.setAlignment(Pos.CENTER);
         vbSetup.setSpacing(20);
@@ -118,8 +107,7 @@ public class ArmySetupView extends BorderPane {
         vbMenu.getChildren().add(vbSetup);
 
         ////// Game buttons (start & back)
-        lblGameTitle.setFont(Font.font("Verdana", 15));
-        lblGameTitle.setTextFill(Color.WHITE);
+        Style.txt(lblGameTitle, 15);
 
         vbGame.setAlignment(Pos.CENTER);
         vbGame.setSpacing(20);
