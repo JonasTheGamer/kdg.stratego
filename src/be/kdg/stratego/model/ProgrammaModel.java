@@ -31,59 +31,50 @@ public class ProgrammaModel {
     }
 
     private void InitializeBoard() {
-        int fieldWidth = gameBoard.getGrootteX();
-        int fieldHeight = gameBoard.getGrootteY();
+        int boardWidth = gameBoard.getGrootteX();
+        int boardHeight = gameBoard.getGrootteY();
 
-        int amountOfRowsPerPlayer = (fieldHeight -2 ) / 2;
+        int amountOfRowsPerPlayer = (boardHeight -2 ) / 2;
 
         //// Add empty rows on top
-        for (int posX = 0; posX < amountOfRowsPerPlayer; posX++) {
+        for (int posY = 0; posY < amountOfRowsPerPlayer; posY++) {
             // Per row
-            for (int posY = 0; posY < fieldWidth; posY++) {
+            for (int posX = 0; posX < boardWidth; posX++) {
                 // Per column
-                gameBoard.setSpeelveld(new Speelveld(posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
+                gameBoard.setSpeelveld(new Speelveld("unknown",posX, posY, FieldType.unknownField(fieldHeight, fieldWidth), true));
             }
         }
 
         //// Add paths & swamps
         ////// Paths
-        /////// Left path
-        gameBoard.setSpeelveld(new Speelveld(0, amountOfRowsPerPlayer, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(1, amountOfRowsPerPlayer, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(0, amountOfRowsPerPlayer + 1, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(1, amountOfRowsPerPlayer + 1, FieldType.grass(fieldHeight, fieldWidth), true));
+        for (int posY = amountOfRowsPerPlayer; posY < amountOfRowsPerPlayer + 2; posY++) {
+            // Per row
+            for (int posX = 0; posX < boardWidth; posX++) {
+                // Per column
+                gameBoard.setSpeelveld(new Speelveld("grass",posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
+            }
+        }
 
-        /////// Middle path
-        gameBoard.setSpeelveld(new Speelveld(4, amountOfRowsPerPlayer, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(5, amountOfRowsPerPlayer, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(4, amountOfRowsPerPlayer + 1, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(5, amountOfRowsPerPlayer + 1, FieldType.grass(fieldHeight, fieldWidth), true));
-
-        /////// Right path
-        gameBoard.setSpeelveld(new Speelveld(8, amountOfRowsPerPlayer, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(9, amountOfRowsPerPlayer, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(8, amountOfRowsPerPlayer + 1, FieldType.grass(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(9, amountOfRowsPerPlayer + 1, FieldType.grass(fieldHeight, fieldWidth), true));
 
         //// Swamps
         ////// Left swamp
-        gameBoard.setSpeelveld(new Speelveld(2, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(3, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(2, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(3, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), true));
+        gameBoard.setSpeelveld(new Speelveld("swampx2y4",2, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp",3, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp",2, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp",3, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), false));
 
         ////// Right swamp
-        gameBoard.setSpeelveld(new Speelveld(6, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(7, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(6, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), true));
-        gameBoard.setSpeelveld(new Speelveld(7, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), true));
+        gameBoard.setSpeelveld(new Speelveld("swamp",6, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp",7, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp",6, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp",7, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), false));
 
         //// Add empty rows on the bottom
-        for (int posX = amountOfRowsPerPlayer + 2; posX < gameBoard.getGrootteY(); posX++) {
+        for (int posY = amountOfRowsPerPlayer + 2; posY < boardHeight; posY++) {
             // Per row
-            for (int posY = 0; posY < fieldWidth; posY++) {
+            for (int posX = 0; posX < boardWidth; posX++) {
                 // Per column
-                gameBoard.setSpeelveld(new Speelveld(posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
+                gameBoard.setSpeelveld(new Speelveld("grass",posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
             }
         }
     }

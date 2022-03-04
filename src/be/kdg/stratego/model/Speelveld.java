@@ -10,8 +10,10 @@ public class Speelveld extends Position {
     private Piece piece;
     private StackPane type;
     private boolean walkable;
+    private String typeName;
 
-    public Speelveld(int posX, int posY, StackPane type, boolean walkable, Piece piece) {
+    public Speelveld(String typeName, int posX, int posY, StackPane type, boolean walkable, Piece piece) {
+        this.typeName = typeName;
         this.positionX = posX;
         this.positionY = posY;
 
@@ -20,13 +22,8 @@ public class Speelveld extends Position {
         this.piece = piece;
     }
 
-    public Speelveld(int posX, int posY, StackPane type, boolean walkable) {
-        this(posX, posY, type, walkable, null);
-        this.positionX = posX;
-        this.positionY = posY;
-
-        this.type = type;
-        this.walkable = walkable;
+    public Speelveld(String typeName, int posX, int posY, StackPane type, boolean walkable) {
+        this(typeName, posX, posY, type, walkable, null);
     }
 
     public Piece getPiece() {
@@ -55,5 +52,9 @@ public class Speelveld extends Position {
 
     public boolean isOccupied() {
         return !(Objects.isNull(this.piece));
+    }
+
+    public String getTypeName() {
+        return typeName;
     }
 }

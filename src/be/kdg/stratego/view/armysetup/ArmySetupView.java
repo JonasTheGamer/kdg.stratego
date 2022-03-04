@@ -54,7 +54,7 @@ public class ArmySetupView extends BorderPane {
         vbGame = new VBox();
 
         // The gridpane gpPieces will be filled in the presenter class with all pieces that are available.
-        // The gridpane gpField will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
+        // The gridpane gpBoard will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
 
     }
 
@@ -78,9 +78,7 @@ public class ArmySetupView extends BorderPane {
         //// Field
         ////// The field will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
         this.setCenter(gpBoard);
-        gpBoard.setStyle("-fx-background-color: cell-border-color, cell-color;");
-        gpBoard.setStyle("-fx-background-insets: 0, 1 1 0 0;");
-        gpBoard.setStyle("-fx-padding: 1 ;");
+        gpBoard.setBackground(Style.red);
 
         gpBoard.setAlignment(Pos.CENTER);
 

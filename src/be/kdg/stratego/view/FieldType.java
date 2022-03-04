@@ -50,16 +50,12 @@ public class FieldType {
         return container;
     };
 
-    public static ImageView bomb (double height, double width) {
-        ImageView iv = new ImageView("/pieces/bomb.png");
-        iv.setFitHeight(height);
-        iv.setFitWidth(width);
-        return iv;
-    };
-
     public static StackPane grass (double height, double width) {
         StackPane container = new StackPane();
         container.setBackground(Style.grass);
+
+        container.setPrefHeight(height);
+        container.setPrefWidth(width);
 
         return container;
     };
