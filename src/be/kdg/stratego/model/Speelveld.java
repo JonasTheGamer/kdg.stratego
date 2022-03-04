@@ -1,31 +1,59 @@
 package be.kdg.stratego.model;
 
+import be.kdg.stratego.view.FieldType;
+import javafx.scene.layout.StackPane;
+
+import java.util.Objects;
+import java.util.Stack;
+
 public class Speelveld extends Position {
-    private Piece speelstuk;
-    private boolean bewandelbaar;
-    private String achtergrondAfbeelding;
+    private Piece piece;
+    private StackPane type;
+    private boolean walkable;
 
-    public Piece getSpeelstuk() {
-        return speelstuk;
+    public Speelveld(int posX, int posY, StackPane type, boolean walkable, Piece piece) {
+        this.positionX = posX;
+        this.positionY = posY;
+
+        this.type = type;
+        this.walkable = walkable;
+        this.piece = piece;
     }
 
-    public void setSpeelstuk(Piece speelstuk) {
-        this.speelstuk = speelstuk;
+    public Speelveld(int posX, int posY, StackPane type, boolean walkable) {
+        this(posX, posY, type, walkable, null);
+        this.positionX = posX;
+        this.positionY = posY;
+
+        this.type = type;
+        this.walkable = walkable;
     }
 
-    public boolean isBewandelbaar() {
-        return bewandelbaar;
+    public Piece getPiece() {
+        return piece;
     }
 
-    public void setBewandelbaar(boolean bewandelbaar) {
-        this.bewandelbaar = bewandelbaar;
+    public void setPiece(Piece piece) {
+        this.piece = piece;
     }
 
-    public String getAchtergrondAfbeelding() {
-        return achtergrondAfbeelding;
+    public boolean isWalkable() {
+        return walkable;
     }
 
-    public void setAchtergrondAfbeelding(String achtergrondAfbeelding) {
-        this.achtergrondAfbeelding = achtergrondAfbeelding;
+    public void setWalkable(boolean walkable) {
+        this.walkable = walkable;
+    }
+
+    public StackPane getType() {
+        return type;
+    }
+
+    public void setType(StackPane type) {
+        this.type = type;
+    }
+
+    public boolean isOccupied() {
+        return !(Objects.isNull(this.piece));
     }
 }

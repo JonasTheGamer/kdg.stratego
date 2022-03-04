@@ -6,7 +6,11 @@ import java.util.Objects;
 public class GameBoard {
     private int grootteX = 10;
     private int grootteY = 10;
-    private Speelveld[][] speelvelden;
+    private Speelveld[][] speelvelden = new Speelveld[this.grootteX][this.grootteY];
+
+    public GameBoard() {
+
+    }
 
     public int getGrootteX() {
         return grootteX;
@@ -24,6 +28,10 @@ public class GameBoard {
         this.grootteY = grootteY;
     }
 
+    public Speelveld[][] getSpeelvelden() {
+        return this.speelvelden;
+    }
+
     public Speelveld getSpeelveld(int positieX, int positieY) {
         Speelveld foundField = null;
         for (Speelveld[] fieldsRow: speelvelden) {
@@ -36,13 +44,17 @@ public class GameBoard {
         return foundField;
     }
 
+    public void setSpeelveld(Speelveld field) {
+        this.speelvelden[field.positionX][field.positionY] = field;
+    }
+
     public Piece getSpeelstuk(int positieX, int positieY) {
         Speelveld field = this.getSpeelveld(positieX, positieY);
 
         if(Objects.isNull(field)) {
             return null;
         } else {
-            return field.getSpeelstuk();
+            return field.getPiece();
         }
     }
 
@@ -50,12 +62,14 @@ public class GameBoard {
         ArrayList<Piece> pieces = new ArrayList<Piece>();
         for (Speelveld[] fieldsRow: speelvelden) {
             for (Speelveld field: fieldsRow) {
-                if(field.getSpeelstuk().getPlayer().equals(player)) {
-                    pieces.add(field.getSpeelstuk());
+                if(field.getPiece().getPlayer().equals(player)) {
+                    pieces.add(field.getPiece());
                 }
             }
         }
 
         return (Piece[]) pieces.toArray();
     }
+
+
 }

@@ -8,7 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class FieldTypes {
+public class FieldType {
     public static StackPane unknownField (double height, double width) {
         StackPane container = new StackPane();
         container.setBackground(Style.grass);
@@ -41,11 +41,13 @@ public class FieldTypes {
         return container;
     };
 
-    public static ImageView swamp (double height, double width) {
-        ImageView iv = new ImageView("/swamp.png");
-        iv.setFitHeight(height);
-        iv.setFitWidth(width);
-        return iv;
+    public static StackPane swamp (double height, double width) {
+        StackPane container = new StackPane();
+        container.setBackground(Style.swamp);
+
+        container.setPrefHeight(height);
+        container.setPrefWidth(width);
+        return container;
     };
 
     public static ImageView bomb (double height, double width) {
@@ -88,14 +90,14 @@ public class FieldTypes {
 
     //Buttons
     public static void btn(Button btn, double fontSize) {
-        FieldTypes.btn(btn,fontSize,400,50);
+        FieldType.btn(btn,fontSize,400,50);
     }
 
     public static void btn(Button btn, double fontSize, double width, double height) {
         btn.setPrefWidth(width);
         btn.setPrefHeight(height);
-        btn.setBackground(FieldTypes.backgroundBtn);
-        FieldTypes.txt(btn,fontSize);
+        btn.setBackground(FieldType.backgroundBtn);
+        FieldType.txt(btn,fontSize);
     }
 
     //Labels

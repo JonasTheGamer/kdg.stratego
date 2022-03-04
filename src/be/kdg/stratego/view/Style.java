@@ -25,6 +25,14 @@ public class Style {
             new BackgroundSize(1.0, 1.0, true, true, false, true)
     ));
 
+    public static Background swamp = new Background(new BackgroundImage(
+            new Image("swamp.png"),
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundPosition.CENTER,
+            new BackgroundSize(1.0, 1.0, true, true, false, true)
+    ));
+
     public static Background background = new Background(new BackgroundFill(
             new Color(0, 0, 0, 0.8),
             new CornerRadii(20),

@@ -19,16 +19,16 @@ public abstract class MovingPiece extends Piece {
         int newY = newSpeelveld.getPositionY();
 
         // Check if newSpeelveld isBewandelbaar
-        if (newSpeelveld.isBewandelbaar()) {
+        if (newSpeelveld.isWalkable()) {
             //Check if newSpeelveld is next to current speelveld
             if ((newX == x + 1 | newX == x - 1 & newY == y) | (newY == y + 1 | newY == y - 1 & newX == x)) {
                 //Change Speelstuk of current speelveld because this speelstuk is changing position
-                this.speelveld.setSpeelstuk(null);
+                this.speelveld.setPiece(null);
                 //Change current speelveld to newSpeelveld
                 this.speelveld = newSpeelveld;
-                if (newSpeelveld.getSpeelstuk() != null) {
-                    if (newSpeelveld.getSpeelstuk().player != this.player) {
-                        attack(newSpeelveld.getSpeelstuk());
+                if (newSpeelveld.getPiece() != null) {
+                    if (newSpeelveld.getPiece().player != this.player) {
+                        attack(newSpeelveld.getPiece());
                     } else {
                         System.out.println("You can't attack your own team");
                     }

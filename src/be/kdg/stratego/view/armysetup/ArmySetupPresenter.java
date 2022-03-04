@@ -1,16 +1,13 @@
 package be.kdg.stratego.view.armysetup;
 
 import be.kdg.stratego.model.ProgrammaModel;
-import be.kdg.stratego.view.FieldTypes;
-import be.kdg.stratego.view.Style;
+import be.kdg.stratego.model.Speelveld;
+import be.kdg.stratego.view.FieldType;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.StackPane;
 
 public class ArmySetupPresenter {
     private ProgrammaModel model;
@@ -53,13 +50,26 @@ public class ArmySetupPresenter {
 
     private void updateView() {
         // Initialize variables
-        int fieldWidth = model.getGameBoard().getGrootteX();
-        int fieldHeight = model.getGameBoard().getGrootteY();
+        int boardWidth = model.getGameBoard().getGrootteX();
+        int boardHeight = model.getGameBoard().getGrootteY();
 
-        int amountOfRowsPerPlayer = (fieldHeight -2 ) / 2;
+        int amountOfRowsPerPlayer = (model.getGameBoard().getGrootteY() -2 ) / 2;
 
-        // Empty game field
-        view.getGpField().getChildren().clear();
+        // Empty game board
+        view.getGpBoard().getChildren().clear();
+
+        // Fill the board & add them to the gridpane
+
+        Speelveld[][] fields = model.getGameBoard().getSpeelvelden();
+        for (int posX = 0; posX < model.getGameBoard().getGrootteX(); posX++) {
+            for (int posY = 0; posY < model.getGameBoard().getGrootteY(); posY++) {
+                Speelveld field = fields[posX][posY];
+                StackPane fieldType = field.getType();
+                view.getGpBoard().add(fieldType, posX, posY);
+            }
+        }
+
+        /*
 
         // Add row and column constraints for styling
         double fieldRowHeight = 75;
@@ -71,63 +81,55 @@ public class ArmySetupPresenter {
         RowConstraints rowStyle = new RowConstraints();
         rowStyle.setPrefHeight(fieldRowHeight);
 
-        for (int i = 0; i < fieldHeight; i++) {
-            view.getGpField().getRowConstraints().add(rowStyle);
-        }
-
-        for (int i = 0; i < fieldWidth; i++) {
-            view.getGpField().getColumnConstraints().add(colStyle);
-        }
-
         // Fill top of field with question marks.
         for (int row = 0; row < amountOfRowsPerPlayer; row++) {
             // Per row
 
-            for (int col = 0; col < fieldWidth; col++) {
+            for (int col = 0; col < model.getGameBoard().getGrootteX(); col++) {
                 // Per column
-                view.getGpField().add(FieldTypes.unknownField(fieldRowHeight, fieldColWidth), col, row);
+                view.getGpField().add(FieldType.unknownField(fieldRowHeight, fieldColWidth), col, row);
             }
         }
 
         // Add no man's land
         //// Left path
-        view.getGpField().add(FieldTypes.occupiedField(fieldRowHeight, fieldColWidth, "bomb"), 0, amountOfRowsPerPlayer);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 1, amountOfRowsPerPlayer);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 0, amountOfRowsPerPlayer + 1);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 1, amountOfRowsPerPlayer + 1);
+        view.getGpField().add(FieldType.occupiedField(fieldRowHeight, fieldColWidth, "bomb"), 0, amountOfRowsPerPlayer);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 1, amountOfRowsPerPlayer);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 0, amountOfRowsPerPlayer + 1);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 1, amountOfRowsPerPlayer + 1);
 
         // First swamp
-        ImageView swamp1 = FieldTypes.swamp(fieldRowHeight * 2, fieldColWidth * 2);
+        StackPane swamp1 = FieldType.swamp(fieldRowHeight * 2, fieldColWidth * 2);
 
         view.getGpField().add(swamp1, 2, amountOfRowsPerPlayer);
         GridPane.setColumnSpan(swamp1, 2);
         GridPane.setRowSpan(swamp1, 2);
 
         //// Middle path
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 4, amountOfRowsPerPlayer);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 5, amountOfRowsPerPlayer);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 4, amountOfRowsPerPlayer + 1);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 5, amountOfRowsPerPlayer + 1);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 4, amountOfRowsPerPlayer);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 5, amountOfRowsPerPlayer);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 4, amountOfRowsPerPlayer + 1);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 5, amountOfRowsPerPlayer + 1);
 
         // Second swamp
-        ImageView swamp2 = FieldTypes.swamp(fieldRowHeight * 2, fieldColWidth * 2);
+        StackPane swamp2 = FieldType.swamp(fieldRowHeight * 2, fieldColWidth * 2);
 
         view.getGpField().add(swamp2, 6, amountOfRowsPerPlayer);
         GridPane.setColumnSpan(swamp2, 2);
         GridPane.setRowSpan(swamp2, 2);
 
         //// Right path
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 8, amountOfRowsPerPlayer);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 9, amountOfRowsPerPlayer);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 8, amountOfRowsPerPlayer + 1);
-        view.getGpField().add(FieldTypes.grass(fieldRowHeight, fieldColWidth), 9, amountOfRowsPerPlayer + 1);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 8, amountOfRowsPerPlayer);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 9, amountOfRowsPerPlayer);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 8, amountOfRowsPerPlayer + 1);
+        view.getGpField().add(FieldType.grass(fieldRowHeight, fieldColWidth), 9, amountOfRowsPerPlayer + 1);
 
         // Player fields
         // Fill top of field with question marks.
-        for (int row = amountOfRowsPerPlayer + 2; row < fieldHeight; row++) {
+        for (int row = amountOfRowsPerPlayer + 2; row < model.getGameBoard().getGrootteY(); row++) {
             // Per row
 
-            for (int col = 0; col < fieldWidth; col++) {
+            for (int col = 0; col < model.getGameBoard().getGrootteX(); col++) {
                 // Per column
                 Button emptyClickableField = new Button();
                 emptyClickableField.setBackground(Style.grass);
@@ -141,6 +143,7 @@ public class ArmySetupPresenter {
                 view.getGpField().add(emptyClickableField, col, row);
             }
         }
+        */
 
     }
 

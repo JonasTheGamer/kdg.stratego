@@ -6,8 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 
 public class ArmySetupView extends BorderPane {
     // Controls
@@ -22,7 +20,7 @@ public class ArmySetupView extends BorderPane {
 
     // Panes
     private GridPane gpPieces;
-    private GridPane gpField;
+    private GridPane gpBoard;
     private VBox vbSetup;
     private VBox vbMenu;
     private VBox vbGame;
@@ -50,7 +48,7 @@ public class ArmySetupView extends BorderPane {
 
         // Panes
         gpPieces = new GridPane();
-        gpField = new GridPane();
+        gpBoard = new GridPane();
         vbMenu = new VBox();
         vbSetup = new VBox();
         vbGame = new VBox();
@@ -79,12 +77,12 @@ public class ArmySetupView extends BorderPane {
 
         //// Field
         ////// The field will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
-        this.setCenter(gpField);
-        gpField.setStyle("-fx-background-color: cell-border-color, cell-color;");
-        gpField.setStyle("-fx-background-insets: 0, 1 1 0 0;");
-        gpField.setStyle("-fx-padding: 1 ;");
+        this.setCenter(gpBoard);
+        gpBoard.setStyle("-fx-background-color: cell-border-color, cell-color;");
+        gpBoard.setStyle("-fx-background-insets: 0, 1 1 0 0;");
+        gpBoard.setStyle("-fx-padding: 1 ;");
 
-        gpField.setAlignment(Pos.CENTER);
+        gpBoard.setAlignment(Pos.CENTER);
 
         //// Menu
         vbMenu.setBackground(Style.background);
@@ -154,8 +152,8 @@ public class ArmySetupView extends BorderPane {
         return gpPieces;
     }
 
-    public GridPane getGpField() {
-        return gpField;
+    public GridPane getGpBoard() {
+        return gpBoard;
     }
 
     public VBox getVbSetup() {
