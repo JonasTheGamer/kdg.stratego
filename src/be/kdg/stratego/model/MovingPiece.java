@@ -1,20 +1,22 @@
 package be.kdg.stratego.model;
 
 public abstract class MovingPiece extends Piece {
-    protected int rank;
 
-    public int getRank() {
-        return rank;
+    public MovingPiece() {
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
+    public MovingPiece(Player player, String name, String image, int rank, Speelveld field) {
+        super(player, name, image, rank, field);
+    }
+
+    public MovingPiece(Player player, String name, String image, int rank) {
+        super(player, name, image, rank);
     }
 
     public void changePosition(Speelveld newSpeelveld) {
         //Variables to shorten code
-        int x = this.speelveld.positionX;
-        int y = this.speelveld.positionY;
+        int x = this.field.positionX;
+        int y = this.field.positionY;
         int newX = newSpeelveld.getPositionX();
         int newY = newSpeelveld.getPositionY();
 
@@ -23,9 +25,9 @@ public abstract class MovingPiece extends Piece {
             //Check if newSpeelveld is next to current speelveld
             if ((newX == x + 1 | newX == x - 1 & newY == y) | (newY == y + 1 | newY == y - 1 & newX == x)) {
                 //Change Speelstuk of current speelveld because this speelstuk is changing position
-                this.speelveld.setPiece(null);
+                this.field.setPiece(null);
                 //Change current speelveld to newSpeelveld
-                this.speelveld = newSpeelveld;
+                this.field = newSpeelveld;
                 if (newSpeelveld.getPiece() != null) {
                     if (newSpeelveld.getPiece().player != this.player) {
                         attack(newSpeelveld.getPiece());
@@ -47,15 +49,15 @@ public abstract class MovingPiece extends Piece {
         if (speelstuk.name.equals("flag")) {
             //Liam: Game.stop()
         } else if (speelstuk.name.equals("bomb")) {
-            this.dead = true;
+            this.field = null;
             System.out.println("Your " + this.name + " was killed by a " + speelstuk.getName());
         } else if (true/*Liam: Speelstuk instanceof ....*/) {
             MovingPiece movingPiece = (MovingPiece) speelstuk;
             if (this.rank > movingPiece.getRank()) {
-                speelstuk.setDead(true);
+                speelstuk.setField(null);
                 System.out.println("Your " + this.name + " has killed a " + speelstuk.getName());
             } else {
-                this.dead = true;
+                this.field = null;
                 System.out.println("Your " + this.name + " was killed by a " + speelstuk.getName());
             }
         }

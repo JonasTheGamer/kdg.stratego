@@ -17,14 +17,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         ProgrammaModel model = new ProgrammaModel();
 
-        //MainMenuView view = new MainMenuView();
-        //MainMenuPresenter presenter = new MainMenuPresenter(model, view);
+        MainMenuView view = new MainMenuView();
+        MainMenuPresenter presenter = new MainMenuPresenter(model, view);
 
         //NewGameView view = new NewGameView();
         //NewGamePresenter presenter = new NewGamePresenter(model, view);
 
-        ArmySetupView view = new ArmySetupView();
-        ArmySetupPresenter presenter = new ArmySetupPresenter(model, view);
+        //ArmySetupView view = new ArmySetupView();
+        //ArmySetupPresenter presenter = new ArmySetupPresenter(model, view);
 
 
         // Set window to show this view

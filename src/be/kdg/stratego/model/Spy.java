@@ -1,8 +1,20 @@
 package be.kdg.stratego.model;
 
 public class Spy extends MovingPiece {
-    @Override
-    protected void attack(Piece speelstuk) {
-        super.attack(speelstuk);
+
+    public Spy(Player player, Speelveld field) {
+        this.player = player;
+        this.name = "spy";
+        this.image = "/pieces/spy.png";
+        this.rank = 1;
+        this.field = field;
+    }
+
+    public Spy(Player player) {
+        this(player, null);
+    }
+    
+    public void detonate() {
+        this.field = null;
     }
 }

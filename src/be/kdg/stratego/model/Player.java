@@ -1,31 +1,39 @@
 package be.kdg.stratego.model;
 
+import javafx.scene.paint.Color;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+
 public class Player {
-    private String naam;
-    private String kleur;
-    private boolean klaarOmTeSpelen;
+    private String name;
+    private Color color;
+    private ArrayList<Piece> pieces = new ArrayList<>();
 
-    public String getNaam() {
-        return naam;
+    public Player(String naam, Color color) {
+        this.name = naam;
+        this.color = color;
+        // Fill pieces
+
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public String getName() {
+        return name;
     }
 
-    public String getKleur() {
-        return kleur;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setKleur(String kleur) {
-        this.kleur = kleur;
+    public Color getColor() {
+        return color;
     }
 
-    public boolean isKlaarOmTeSpelen() {
-        return klaarOmTeSpelen;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
-    public void setKlaarOmTeSpelen(boolean klaarOmTeSpelen) {
-        this.klaarOmTeSpelen = klaarOmTeSpelen;
+    public ArrayList<Piece> getPieces() {
+        return pieces;
     }
 }

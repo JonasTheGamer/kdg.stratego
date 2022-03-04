@@ -1,13 +1,21 @@
 package be.kdg.stratego.model;
 
 public class Flag extends Piece {
-    private String vlag;
 
-    public String getVlag() {
-        return vlag;
+    public Flag(Player player, String flagImagePath, Speelveld field ) {
+        if (flagImagePath.equals("default")) {
+            flagImagePath = "/pieces/flag.png";
+        }
+
+        this.player = player;
+        this.name = "flag";
+        this.image = flagImagePath;
+        this.rank = 0;
+        this.field = field;
     }
 
-    public void setVlag(String vlag) {
-        this.vlag = vlag;
+    public Flag(Player player, String flagImagePath) {
+        this(player, flagImagePath, null);
     }
+
 }

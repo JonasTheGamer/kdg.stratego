@@ -1,5 +1,6 @@
 package be.kdg.stratego.view.armysetup;
 
+import be.kdg.stratego.view.FieldType;
 import be.kdg.stratego.view.Style;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -73,13 +74,15 @@ public class ArmySetupView extends BorderPane {
 
         //// Army pieces
         ////// The gridpane will be filled in the presenter class with all pieces that are available.
-        //this.setLeft(gpPieces);
+        gpPieces.setPrefWidth(450);
+        gpPieces.setHgap(30);
+        gpPieces.setVgap(30);
+        gpPieces.setAlignment(Pos.CENTER_RIGHT);
+        this.setLeft(gpPieces);
 
         //// Field
         ////// The field will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
         this.setCenter(gpBoard);
-        gpBoard.setBackground(Style.red);
-
         gpBoard.setAlignment(Pos.CENTER);
 
         //// Menu
