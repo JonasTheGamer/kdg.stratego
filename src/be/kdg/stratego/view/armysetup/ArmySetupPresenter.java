@@ -19,33 +19,42 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ArmySetupPresenter {
     private ProgrammaModel model;
     private ArmySetupView view;
     private HashMap<String, Integer> piecesToPlace = new HashMap();
     private Player currentPlayer;
+    private String lastClickedId = "";
 
-    private EventHandler onFieldClick = new EventHandler<MouseEvent>() {
+    private Boolean placingPiece = false;
+    private Piece lastClickedPlaceablePiece;
+    private EventHandler onPlaceablePieceClick = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            // Find out which of the fields actually got pressed. All we need to know is the coordinates.
-            StackPane clickedButton = (StackPane) mouseEvent.getSource();
-            String clickedId = clickedButton.getId();
+            // Find out which piece the user would like to place on the field
+            VBox clickedVbox = (VBox) mouseEvent.getSource();
+            String clickedId = clickedVbox.getId();
             String[] idData = clickedId.split("-");
 
-            int btnCol = Integer.parseInt(idData[1]);
-            int btnRow = Integer.parseInt(idData[2]);
+            String pieceClassName = idData[1];
 
-            // Currently, for debugging purposes, send an alert showing what the location is.
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            // Make sure we still have pieces left to place
+            int amountPlacable = piecesToPlace.get(pieceClassName);
+            if (amountPlacable == 0) {
+                return;
+            }
 
-            alert.setTitle("Ding dong!");
-            alert.setHeaderText(null);
-            alert.setContentText("You clicked on me! My location is: \n\nX: " + btnCol + "\nY: " + btnRow + " and my type is " + idData[0]);
-            alert.initOwner(view.getScene().getWindow());
 
-            alert.showAndWait();
+            // Get a random piece that has this name to place on the field later on
+            Piece pieceToPlace = getPieceFromName(pieceClassName);
+            lastClickedPlaceablePiece = pieceToPlace;
+
+            // Remember that the user is placing this piece.
+            placingPiece = true;
+
+            lastClickedId = clickedId;
         }
     };
 
@@ -54,27 +63,73 @@ public class ArmySetupPresenter {
         this.view = view;
         this.currentPlayer = currentPlayer;
 
-        // Setup piecesToPlace
-        piecesToPlace.put("Bomb",6);
-        piecesToPlace.put("Marshal",1);
-        piecesToPlace.put("General",1);
-        piecesToPlace.put("Colonel",2);
-        piecesToPlace.put("Major",3);
-        piecesToPlace.put("Captain",4);
-        piecesToPlace.put("Lieutenant",4);
-        piecesToPlace.put("Sergeant",4);
-        piecesToPlace.put("Miner",5);
-        piecesToPlace.put("Scout",8);
-        piecesToPlace.put("Spy",1);
-        piecesToPlace.put("Flag",1);
-
         this.addEventHandlers();
         this.updateView();
     }
 
     public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
         this(model, view, new Player("Test player 1", Color.WHITE));
-    }
+    }    private EventHandler onFieldClick = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+            // Find out which of the fields actually got pressed. All we need to know is the coordinates.
+            StackPane clickedButton = (StackPane) mouseEvent.getSource();
+            String clickedId = clickedButton.getId();
+
+            String[] idData = clickedId.split("-");
+
+            int posX = Integer.parseInt(idData[1]);
+            int posY = Integer.parseInt(idData[2]);
+
+            // Now, figure out the field object
+            Speelveld field = model.getGameBoard().getSpeelveld(posX, posY);
+
+            // Check if we were placing a piece.
+            if (placingPiece) {
+                // Only allow placing in row 6 to 9;
+                if(posY < (model.getGameBoard().getGrootteY() / 2) + 1 || posY > model.getGameBoard().getGrootteY() - 1) {
+                    return;
+                }
+                
+                // Check if the field is already occupied.
+                if (field.isOccupied()) {
+                    placingPiece = false;
+                    return;
+                }
+
+                // Place on the field
+                lastClickedPlaceablePiece.placeOnField(field);
+
+                // Add it to the board
+                model.getGameBoard().setSpeelveld(field);
+
+                // Stop placing
+                placingPiece = false;
+
+                // Refresh the view
+                updateView();
+                return;
+            } else {
+                // Check if the field is already occupied
+                System.out.println("Removing piece from field");
+                if (!Objects.isNull(field.getPiece())) {
+                    Piece pieceOnField = field.getPiece();
+
+                    if (!Objects.isNull(pieceOnField)) {
+                        pieceOnField.removeFromField();
+                    }
+
+                    // Refresh the view
+                    updateView();
+                    return;
+                }
+            }
+
+
+            lastClickedId = clickedId;
+        }
+    };
+
     private void addEventHandlers() {
         // Code
         view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
@@ -83,6 +138,35 @@ public class ArmySetupPresenter {
                 NewGameView newGameView = new NewGameView();
                 NewGamePresenter newGamePresenter = new NewGamePresenter(model, newGameView);
                 view.getScene().setRoot(newGameView);
+            }
+        });
+
+        view.getBtnStart().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                // Check if the player has placed all pieces
+                boolean foundPieceThatHasNoField = false;
+
+                for (Piece piece : currentPlayer.getPieces()) {
+                    // If the piece is already on the field, no need to figure everything out
+                    if (!piece.isOnField()) {
+                        foundPieceThatHasNoField = true;
+                    }
+                }
+
+                if(foundPieceThatHasNoField) {
+                    return;
+                }
+
+                // Hide the current player's pieces
+                for (Piece piece : currentPlayer.getPieces()) {
+                    piece.hide();
+                }
+
+                // Switch to the army setup view!
+                ArmySetupView armySetupView = new ArmySetupView();
+                ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getPlayers()[1]);
+                view.getScene().setRoot(armySetupView);
             }
         });
 
@@ -95,7 +179,7 @@ public class ArmySetupPresenter {
 
         int boardWidth = model.getGameBoard().getGrootteX();
         int boardHeight = model.getGameBoard().getGrootteY();
-        int amountOfRowsPerPlayer = (model.getGameBoard().getGrootteY() -2 ) / 2;
+        int amountOfRowsPerPlayer = (model.getGameBoard().getGrootteY() - 2) / 2;
 
         // Set title
         view.getLblScreenTitle().setText(currentPlayer.getName() + ": Place your army");
@@ -107,7 +191,7 @@ public class ArmySetupPresenter {
         //// Add the fresh ones in
         for (Piece piece : currentPlayer.getPieces()) {
             // If the piece is already on the field, no need to figure everything out
-            if(piece.isOnField()) {
+            if (piece.isOnField()) {
                 continue;
             }
 
@@ -115,7 +199,7 @@ public class ArmySetupPresenter {
 
             // Figure out if there's already something placed
             int amountPlacable = 0;
-            if(piecesToPlace.containsKey(pieceName)) {
+            if (piecesToPlace.containsKey(pieceName)) {
                 amountPlacable = piecesToPlace.get(pieceName);
             }
             piecesToPlace.put(pieceName, amountPlacable + 1);
@@ -126,6 +210,7 @@ public class ArmySetupPresenter {
         int posXCounter = 0;
         int posYCounter = 0;
 
+        view.getGpPieces().getChildren().clear();
         for (String pieceName : piecesToPlace.keySet()) {
             int amountPlacable = piecesToPlace.get(pieceName);
             // Get a random piece that has this name. We'll use it to find out the image
@@ -154,6 +239,8 @@ public class ArmySetupPresenter {
             Style.txt(lblPlacable, 15);
             pieceContainer.getChildren().add(lblPlacable);
 
+            pieceContainer.setId("placablePiece-" + pieceName);
+            pieceContainer.setOnMouseClicked(onPlaceablePieceClick);
 
             view.getGpPieces().add(pieceContainer, posXCounter, posYCounter);
 
@@ -191,8 +278,8 @@ public class ArmySetupPresenter {
 
     public Piece getPieceFromName(String name) {
         Piece foundPiece = null;
-        for (Piece piece: currentPlayer.getPieces()) {
-            if(piece.getClass().getName().equals(name)) {
+        for (Piece piece : currentPlayer.getPieces()) {
+            if (piece.getClass().getName().equals(name) && Objects.isNull(piece.getField())) {
                 foundPiece = piece;
                 break;
             }
@@ -200,4 +287,8 @@ public class ArmySetupPresenter {
 
         return foundPiece;
     }
+
+
+
+
 }

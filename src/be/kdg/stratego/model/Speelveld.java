@@ -32,6 +32,12 @@ public class Speelveld extends Position {
 
     public void setPiece(Piece piece) {
         this.piece = piece;
+        if (!Objects.isNull(piece)) {
+            this.type = FieldType.occupiedField(type.getHeight(), type.getWidth(), piece.getName());
+        } else {
+            this.type = FieldType.grass(type.getHeight(), type.getWidth());
+        }
+
     }
 
     public boolean isWalkable() {

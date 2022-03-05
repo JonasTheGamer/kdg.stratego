@@ -1,5 +1,7 @@
 package be.kdg.stratego.model;
 
+import be.kdg.stratego.view.FieldType;
+
 import java.util.Objects;
 
 public class Piece {
@@ -67,4 +69,27 @@ public class Piece {
     public String getImage() {
         return image;
     }
+
+    public void removeFromField() {
+        this.field.setPiece(null);
+        this.field = null;
+    }
+
+    public void placeOnField(Speelveld field) {
+        this.field = field;
+        this.field.setPiece(this);
+    }
+
+    public void hide() {
+        if(!Objects.isNull(field)) {
+            field.setType(FieldType.unknownField(field.getPositionX(), field.getPositionY()));
+        }
+    }
+
+    public void show() {
+        if(!Objects.isNull(field)) {
+            field.setType(FieldType.occupiedField(field.getPositionX(), field.getPositionY(), this.name));
+        }
+    }
+
 }
