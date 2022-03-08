@@ -174,8 +174,8 @@ public class ArmySetupPresenter {
 
     private void updateView() {
         // Initialize variables
-        double placeablePieceHeight = Style.height(120);
-        double placeablePieceWidth = Style.width(90);
+        double placeablePieceHeight = Style.height(100);
+        double placeablePieceWidth = Style.width(75);
 
         int boardWidth = model.getGameBoard().getGrootteX();
         int boardHeight = model.getGameBoard().getGrootteY();
@@ -231,12 +231,12 @@ public class ArmySetupPresenter {
 
             // Piece title
             Label lblPieceTitle = new Label(piece.getName());
-            Style.txt(lblPieceTitle, 15);
+            Style.txt(lblPieceTitle, Style.fontSize(15));
             pieceContainer.getChildren().add(lblPieceTitle);
 
             // Amount left to place
             Label lblPlacable = new Label(Integer.toString(amountPlacable));
-            Style.txt(lblPlacable, 15);
+            Style.txt(lblPlacable, Style.fontSize(15));
             pieceContainer.getChildren().add(lblPlacable);
 
             pieceContainer.setId("placablePiece-" + pieceName);

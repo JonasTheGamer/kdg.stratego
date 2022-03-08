@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 
 public class Style {
+    private static double base = 1.25;
     public static Background applicationBackground = new Background(new BackgroundImage(
             new Image("background.jpg"),
             BackgroundRepeat.NO_REPEAT,
@@ -27,7 +28,7 @@ public class Style {
     ));
 
     public static Background swamp = new Background(new BackgroundImage(
-            new Image("swamp.png"),
+            new Image("waterTexture.png"),
             BackgroundRepeat.NO_REPEAT,
             BackgroundRepeat.NO_REPEAT,
             BackgroundPosition.CENTER,
@@ -38,6 +39,12 @@ public class Style {
             new Color(0, 0, 0, 0.8),
             new CornerRadii(20),
             new Insets(-10)
+    ));
+
+    public static Background bgBoxNoPadding  = new Background(new BackgroundFill(
+            new Color(0, 0, 0, 0.8),
+            new CornerRadii(20),
+            null
     ));
 
     public static Background backgroundBtn = new Background(new BackgroundFill(
@@ -64,8 +71,8 @@ public class Style {
     }
 
     public static void btn(Button btn, double fontSize, double width, double height) {
-        btn.setPrefWidth(width);
-        btn.setPrefHeight(height);
+        btn.setPrefWidth(Style.width(width));
+        btn.setPrefHeight(Style.height(height));
         btn.setBackground(Style.backgroundBtn);
         Style.txt(btn,fontSize);
     }
@@ -83,7 +90,6 @@ public class Style {
     // Responsive handler
     public static double height(double pixels) {
         Screen screen = Screen.getPrimary();
-        double base = 1.25;
         double scaleY = screen.getOutputScaleY();
 
         return (pixels / scaleY * base);
@@ -91,9 +97,26 @@ public class Style {
 
     public static double width(double pixels) {
         Screen screen = Screen.getPrimary();
-        double base = 1.25;
         double scaleX = screen.getOutputScaleY();
 
         return (pixels / scaleX * base);
+    }
+
+    public static double fontSize(double pixels) {
+        return height(pixels);
+    }
+
+    public static double scaleX(double scale) {
+        Screen screen = Screen.getPrimary();
+        double scaleX = screen.getOutputScaleX();
+
+        return (scale / scaleX * base);
+    }
+
+    public static double scaleY(double scale) {
+        Screen screen = Screen.getPrimary();
+        double scaleY = screen.getOutputScaleY();
+
+        return (scale / scaleY * base);
     }
 }

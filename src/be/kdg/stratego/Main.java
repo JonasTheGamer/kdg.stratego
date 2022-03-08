@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 public class Main extends Application {
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) {
         ProgrammaModel model = new ProgrammaModel();
@@ -40,8 +44,5 @@ public class Main extends Application {
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
         primaryStage.show();
-    }
-    public static void main(String[] args) {
-        Application.launch(args);
     }
 }

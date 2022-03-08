@@ -42,16 +42,16 @@ public class MainMenuView extends VBox {
     }
 
     private void layoutNodes() {
-        imgTitle.setScaleX(1.5);
-        imgTitle.setScaleY(1.5);
+        imgTitle.setScaleX(Style.scaleX(1.5));
+        imgTitle.setScaleY(Style.scaleY(1.5));
 
-        Style.btn(btnPlay, 15);
-        Style.btn(btnHelp, 15);
-        Style.btn(btnQuit, 15);
+        Style.btn(btnPlay, Style.fontSize(15));
+        Style.btn(btnHelp, Style.fontSize(15));
+        Style.btn(btnQuit, Style.fontSize(15));
 
-        Style.txt(lblScores, 10);
+        Style.txt(lblScores, Style.fontSize(10));
 
-        Style.txt(lblHighscores, 12);
+        Style.txt(lblHighscores, Style.fontSize(12));
         lblHighscores.setStyle("-fx-font-weight: bold");
 
         hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);

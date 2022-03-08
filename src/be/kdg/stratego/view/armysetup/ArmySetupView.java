@@ -66,7 +66,7 @@ public class ArmySetupView extends BorderPane {
         // Header (title)
 
         //// Title (player X, place your army)
-        Style.txt(lblScreenTitle,50,Color.BLACK);
+        Style.txt(lblScreenTitle,Style.fontSize(40),Color.BLACK);
         this.setAlignment(lblScreenTitle, Pos.CENTER);
         this.setMargin(lblScreenTitle, new Insets(Style.height(15), 0, 0, 0));
 
@@ -74,10 +74,12 @@ public class ArmySetupView extends BorderPane {
 
         //// Army pieces
         ////// The gridpane will be filled in the presenter class with all pieces that are available.
-        gpPieces.setPrefWidth(Style.width(450));
+        gpPieces.setPrefWidth(Style.width(400));
         gpPieces.setHgap(Style.width(30));
         gpPieces.setVgap(Style.height(30));
-        gpPieces.setAlignment(Pos.CENTER_RIGHT);
+        gpPieces.setAlignment(Pos.CENTER);
+
+        this.setMargin(gpPieces, new Insets(0, Style.width(50), 0, Style.width(50)));
         this.setLeft(gpPieces);
 
         //// Field
@@ -86,33 +88,35 @@ public class ArmySetupView extends BorderPane {
         gpBoard.setAlignment(Pos.CENTER);
 
         //// Menu
-        vbMenu.setBackground(Style.background);
+        vbMenu.setBackground(Style.bgBoxNoPadding);
         vbMenu.setAlignment(Pos.CENTER);
-        vbMenu.setPrefWidth(Style.width(400));
-        vbMenu.setSpacing(Style.height(400));
-        this.setMargin(vbMenu, new Insets(Style.height(25), Style.width(75), Style.width(50), Style.height(0)));
+
+        vbMenu.setSpacing(Style.height(100));
+        vbMenu.setPadding(new Insets(0, Style.width(50), 0, Style.width(50)));
+        this.setMargin(vbMenu, new Insets(Style.height(138), Style.width(92), Style.height(138), Style.width(98)));
+
         this.setRight(vbMenu);
 
         ////// Setup buttons (load & save)
-        Style.txt(lblSetupTitle, 15);
+        Style.txt(lblSetupTitle, Style.fontSize(20));
 
         vbSetup.setAlignment(Pos.CENTER);
         vbSetup.setSpacing(Style.height(20));
 
-        Style.btn(btnLoad, 15);
-        Style.btn(btnSave, 15);
+        Style.btn(btnLoad, Style.fontSize(15), 225, 50);
+        Style.btn(btnSave, Style.fontSize(15),  225, 50);
 
         vbSetup.getChildren().addAll(lblSetupTitle, btnLoad, btnSave);
         vbMenu.getChildren().add(vbSetup);
 
         ////// Game buttons (start & back)
-        Style.txt(lblGameTitle, 15);
+        Style.txt(lblGameTitle, Style.fontSize(20));
 
         vbGame.setAlignment(Pos.CENTER);
         vbGame.setSpacing(Style.height(20));
 
-        Style.btn(btnStart, 15);
-        Style.btn(btnBack, 15);
+        Style.btn(btnStart, Style.fontSize(15), 225,50);
+        Style.btn(btnBack, Style.fontSize(15), 225,50);
 
         vbGame.getChildren().addAll(lblGameTitle, btnStart, btnBack);
         vbMenu.getChildren().add(vbGame);
