@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class GameBoard {
-    private int grootteX = 10;
-    private int grootteY = 10;
-    private Speelveld[][] speelvelden = new Speelveld[this.grootteX][this.grootteY];
+    private int grootteX;
+    private int grootteY;
+    private Speelveld[][] speelvelden;
 
     public GameBoard() {
-
+        grootteX = 10;
+        grootteY = 10;
+        speelvelden = new Speelveld[this.grootteX][this.grootteY];
     }
 
     public int getGrootteX() {
