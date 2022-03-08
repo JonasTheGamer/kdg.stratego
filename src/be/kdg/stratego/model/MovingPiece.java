@@ -23,7 +23,7 @@ public abstract class MovingPiece extends Piece {
         // Check if newSpeelveld isBewandelbaar
         if (newSpeelveld.isWalkable()) {
             //Check if newSpeelveld is next to current speelveld
-            if ((newX == x + 1 | newX == x - 1 & newY == y) | (newY == y + 1 | newY == y - 1 & newX == x)) {
+            if ((newX == x + 1 | newX == x - 1) & newY == y | (newY == y + 1 | newY == y - 1) & newX == x) {
                 //Change Speelstuk of current speelveld because this speelstuk is changing position
                 this.field.setPiece(null);
                 //Change current speelveld to newSpeelveld
