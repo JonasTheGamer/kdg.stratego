@@ -15,6 +15,10 @@ import javafx.scene.Scene;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
+        // For debugging purposes, print the screen dots per inch
+        System.out.println(java.awt.Toolkit.getDefaultToolkit().getScreenResolution());
+
+
         ProgrammaModel model = new ProgrammaModel();
 
         MainMenuView view = new MainMenuView();
