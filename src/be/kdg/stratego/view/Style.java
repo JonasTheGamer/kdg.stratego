@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 
 public class Style {
     public static Background applicationBackground = new Background(new BackgroundImage(
@@ -77,5 +78,22 @@ public class Style {
     public static void txt(Labeled txt, double fontSize, Paint paint) {
         txt.setFont(Font.font("Verdana", fontSize));
         txt.setTextFill(paint);
+    }
+
+    // Responsive handler
+    public static double height(double pixels) {
+        Screen screen = Screen.getPrimary();
+        double base = 1.25;
+        double scaleY = screen.getOutputScaleY();
+
+        return (pixels / scaleY * base);
+    }
+
+    public static double width(double pixels) {
+        Screen screen = Screen.getPrimary();
+        double base = 1.25;
+        double scaleX = screen.getOutputScaleY();
+
+        return (pixels / scaleX * base);
     }
 }

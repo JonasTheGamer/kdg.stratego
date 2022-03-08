@@ -68,15 +68,15 @@ public class ArmySetupView extends BorderPane {
         //// Title (player X, place your army)
         Style.txt(lblScreenTitle,50,Color.BLACK);
         this.setAlignment(lblScreenTitle, Pos.CENTER);
-        this.setMargin(lblScreenTitle, new Insets(15, 0, 0, 0));
+        this.setMargin(lblScreenTitle, new Insets(Style.height(15), 0, 0, 0));
 
         this.setTop(lblScreenTitle);
 
         //// Army pieces
         ////// The gridpane will be filled in the presenter class with all pieces that are available.
-        gpPieces.setPrefWidth(450);
-        gpPieces.setHgap(30);
-        gpPieces.setVgap(30);
+        gpPieces.setPrefWidth(Style.width(450));
+        gpPieces.setHgap(Style.width(30));
+        gpPieces.setVgap(Style.height(30));
         gpPieces.setAlignment(Pos.CENTER_RIGHT);
         this.setLeft(gpPieces);
 
@@ -88,16 +88,16 @@ public class ArmySetupView extends BorderPane {
         //// Menu
         vbMenu.setBackground(Style.background);
         vbMenu.setAlignment(Pos.CENTER);
-        vbMenu.setPrefWidth(400);
-        vbMenu.setSpacing(50);
-        this.setMargin(vbMenu, new Insets(25, 75, 50, 0));
+        vbMenu.setPrefWidth(Style.width(400));
+        vbMenu.setSpacing(Style.height(400));
+        this.setMargin(vbMenu, new Insets(Style.height(25), Style.width(75), Style.width(50), Style.height(0)));
         this.setRight(vbMenu);
 
         ////// Setup buttons (load & save)
         Style.txt(lblSetupTitle, 15);
 
         vbSetup.setAlignment(Pos.CENTER);
-        vbSetup.setSpacing(20);
+        vbSetup.setSpacing(Style.height(20));
 
         Style.btn(btnLoad, 15);
         Style.btn(btnSave, 15);
@@ -109,7 +109,7 @@ public class ArmySetupView extends BorderPane {
         Style.txt(lblGameTitle, 15);
 
         vbGame.setAlignment(Pos.CENTER);
-        vbGame.setSpacing(20);
+        vbGame.setSpacing(Style.height(20));
 
         Style.btn(btnStart, 15);
         Style.btn(btnBack, 15);

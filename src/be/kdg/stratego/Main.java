@@ -9,16 +9,13 @@ import be.kdg.stratego.view.newgame.NewGamePresenter;
 import be.kdg.stratego.view.newgame.NewGameView;
 import javafx.application.Application;
 import javafx.scene.input.KeyCombination;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        // For debugging purposes, print the screen dots per inch
-        System.out.println(java.awt.Toolkit.getDefaultToolkit().getScreenResolution());
-
-
         ProgrammaModel model = new ProgrammaModel();
 
         MainMenuView view = new MainMenuView();

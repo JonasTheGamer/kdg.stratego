@@ -55,19 +55,19 @@ public class MainMenuView extends VBox {
         lblHighscores.setStyle("-fx-font-weight: bold");
 
         hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
-        hBoxTitlesAndLeaderboard.setSpacing(40);
+        hBoxTitlesAndLeaderboard.setSpacing(Style.width(40));
 
         vBoxTitles.setBackground(Style.background);
         vBoxTitles.setAlignment(Pos.CENTER);
-        vBoxTitles.setSpacing(20);
+        vBoxTitles.setSpacing(Style.height(20));
 
         vBoxLeaderboards.setBackground(Style.background);
         vBoxLeaderboards.setAlignment(Pos.CENTER);
-        vBoxLeaderboards.setSpacing(10);
+        vBoxLeaderboards.setSpacing(Style.height(10));
 
         this.setBackground(Style.applicationBackground);
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(60);
+        this.setSpacing(Style.height(60));
 
         // Add to panes
         hBoxTitlesAndLeaderboard.getChildren().addAll(vBoxTitles, vBoxLeaderboards);

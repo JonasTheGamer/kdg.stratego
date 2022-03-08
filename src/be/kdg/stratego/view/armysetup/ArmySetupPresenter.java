@@ -174,8 +174,8 @@ public class ArmySetupPresenter {
 
     private void updateView() {
         // Initialize variables
-        int placeablePieceHeight = 120;
-        int placeablePieceWidth = 90;
+        double placeablePieceHeight = Style.height(120);
+        double placeablePieceWidth = Style.width(90);
 
         int boardWidth = model.getGameBoard().getGrootteX();
         int boardHeight = model.getGameBoard().getGrootteY();

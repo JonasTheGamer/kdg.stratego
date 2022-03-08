@@ -3,7 +3,6 @@ package be.kdg.stratego.view.newgame;
 import be.kdg.stratego.view.Style;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
@@ -131,13 +130,13 @@ public class NewGameView extends HBox {
         }
 
         for (TextField txt : txtName) {
-            txt.setPrefWidth(200);
+            txt.setPrefWidth(Style.width(200));
         }
 
         for (int i = 0; i < hbName.length; i++) {
             hbName[i].getChildren().addAll(lblTxtName[i], txtName[i]);
             hbName[i].setAlignment(Pos.CENTER);
-            hbName[i].setSpacing(20);
+            hbName[i].setSpacing(Style.width(20));
         }
 
         ////Color
@@ -146,20 +145,20 @@ public class NewGameView extends HBox {
         }
 
         for (ColorPicker cp : cpColor) {
-            cp.setPrefWidth(200);
+            cp.setPrefWidth(Style.width(200));
         }
 
         for (int i = 0; i < hbName.length; i++) {
             hbColor[i].getChildren().addAll(lblCpColor[i], cpColor[i]);
             hbColor[i].setAlignment(Pos.CENTER);
-            hbColor[i].setSpacing(25);
+            hbColor[i].setSpacing(Style.width(25));
         }
 
         ////Name en Color
         for (int i = 0; i < vbNameColor.length; i++) {
             vbNameColor[i].getChildren().addAll(lblName[i], hbName[i], hbColor[i]);
             vbNameColor[i].setAlignment(Pos.CENTER);
-            vbNameColor[i].setSpacing(20);
+            vbNameColor[i].setSpacing(Style.width(20));
         }
 
         ////Flags
@@ -169,7 +168,7 @@ public class NewGameView extends HBox {
 
         for (Button[] player : btnFlag) {
             for (Button btn : player) {
-                btn.setPrefSize(125, 70);
+                btn.setPrefSize(Style.width(125), Style.height(70));
             }
         }
 
@@ -179,23 +178,23 @@ public class NewGameView extends HBox {
             gpFlags[i].add(btnFlag[i][2], 0, 1);
             gpFlags[i].add(btnFlag[i][3], 1, 1);
 
-            gpFlags[i].setHgap(10);
-            gpFlags[i].setVgap(10);
+            gpFlags[i].setHgap(Style.width(10));
+            gpFlags[i].setVgap(Style.height(10));
             gpFlags[i].setAlignment(Pos.CENTER);
         }
 
         for (int i = 0; i < vbFlags.length; i++) {
             vbFlags[i].getChildren().addAll(lblFlagTitle[i], gpFlags[i]);
             vbFlags[i].setAlignment(Pos.CENTER);
-            vbFlags[i].setSpacing(20);
+            vbFlags[i].setSpacing(Style.height(20));
         }
 
         ////Pane
         for (int i = 0; i < vbPlayer.length; i++) {
             vbPlayer[i].getChildren().addAll(vbNameColor[i], vbFlags[i]);
             vbPlayer[i].setAlignment(Pos.CENTER);
-            vbPlayer[i].setSpacing(60);
-            vbPlayer[i].setPrefWidth(600);
+            vbPlayer[i].setSpacing(Style.height(60));
+            vbPlayer[i].setPrefWidth(Style.height(600));
         }
 
         ///Menu
@@ -207,19 +206,19 @@ public class NewGameView extends HBox {
 
         vbButtons.getChildren().addAll(btnReady, btnCancel);
         vbButtons.setAlignment(Pos.CENTER);
-        vbButtons.setSpacing(20);
+        vbButtons.setSpacing(Style.height(20));
 
         vbMenu.getChildren().addAll(imgTitle, vbButtons);
         vbMenu.setAlignment(Pos.CENTER);
-        vbMenu.setSpacing(150);
-        vbMenu.setTranslateY(-140);
+        vbMenu.setSpacing(Style.height(150));
+        vbMenu.setTranslateY(Style.height(-140));
 
         hb.setBackground(Style.background);
         hb.getChildren().addAll(vbPlayer[0], vbMenu, vbPlayer[1]);
 
         ///View
         this.getChildren().addAll(hb);
-        this.setSpacing(20);
+        this.setSpacing(Style.width(20));
         this.setBackground(Style.applicationBackground);
         this.setAlignment(Pos.CENTER);
     }
