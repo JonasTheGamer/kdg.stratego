@@ -4,12 +4,10 @@ import be.kdg.stratego.view.FieldType;
 import be.kdg.stratego.view.Style;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-
 public class ProgrammaModel {
     // Constants
-    private final double fieldHeight = Style.height(45);
-    private final double fieldWidth = Style.width(45);
+    private final double fieldHeight = Style.size(50);
+    private final double fieldWidth = Style.size(50);
     // Players
     private Player[] players = new Player[2];
     private GameBoard gameBoard;

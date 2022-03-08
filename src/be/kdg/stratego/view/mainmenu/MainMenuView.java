@@ -42,8 +42,8 @@ public class MainMenuView extends VBox {
     }
 
     private void layoutNodes() {
-        imgTitle.setScaleX(Style.scaleX(1.5));
-        imgTitle.setScaleY(Style.scaleY(1.5));
+        imgTitle.setScaleX(Style.scale(1.5));
+        imgTitle.setScaleY(Style.scale(1.5));
 
         Style.btn(btnPlay, Style.fontSize(15));
         Style.btn(btnHelp, Style.fontSize(15));
@@ -55,19 +55,19 @@ public class MainMenuView extends VBox {
         lblHighscores.setStyle("-fx-font-weight: bold");
 
         hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
-        hBoxTitlesAndLeaderboard.setSpacing(Style.width(40));
+        hBoxTitlesAndLeaderboard.setSpacing(Style.size(40));
 
         vBoxTitles.setBackground(Style.background);
         vBoxTitles.setAlignment(Pos.CENTER);
-        vBoxTitles.setSpacing(Style.height(20));
+        vBoxTitles.setSpacing(Style.size(20));
 
         vBoxLeaderboards.setBackground(Style.background);
         vBoxLeaderboards.setAlignment(Pos.CENTER);
-        vBoxLeaderboards.setSpacing(Style.height(10));
+        vBoxLeaderboards.setSpacing(Style.size(10));
 
         this.setBackground(Style.applicationBackground);
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(Style.height(60));
+        this.setSpacing(Style.size(60));
 
         // Add to panes
         hBoxTitlesAndLeaderboard.getChildren().addAll(vBoxTitles, vBoxLeaderboards);

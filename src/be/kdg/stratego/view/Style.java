@@ -71,8 +71,8 @@ public class Style {
     }
 
     public static void btn(Button btn, double fontSize, double width, double height) {
-        btn.setPrefWidth(Style.width(width));
-        btn.setPrefHeight(Style.height(height));
+        btn.setPrefWidth(Style.size(width));
+        btn.setPrefHeight(Style.size(height));
         btn.setBackground(Style.backgroundBtn);
         Style.txt(btn,fontSize);
     }
@@ -88,35 +88,21 @@ public class Style {
     }
 
     // Responsive handler
-    public static double height(double pixels) {
+    public static double size(double pixels) {
         Screen screen = Screen.getPrimary();
-        double scaleY = screen.getOutputScaleY();
+        double screenScale = screen.getOutputScaleX();
 
-        return (pixels / scaleY * base);
-    }
-
-    public static double width(double pixels) {
-        Screen screen = Screen.getPrimary();
-        double scaleX = screen.getOutputScaleY();
-
-        return (pixels / scaleX * base);
+        return (pixels / screenScale * base);
     }
 
     public static double fontSize(double pixels) {
-        return height(pixels);
+        return size(pixels);
     }
 
-    public static double scaleX(double scale) {
+    public static double scale(double scale) {
         Screen screen = Screen.getPrimary();
-        double scaleX = screen.getOutputScaleX();
+        double screenScale = screen.getOutputScaleX();
 
-        return (scale / scaleX * base);
-    }
-
-    public static double scaleY(double scale) {
-        Screen screen = Screen.getPrimary();
-        double scaleY = screen.getOutputScaleY();
-
-        return (scale / scaleY * base);
+        return (scale / screenScale * base);
     }
 }

@@ -130,13 +130,13 @@ public class NewGameView extends HBox {
         }
 
         for (TextField txt : txtName) {
-            txt.setPrefWidth(Style.width(200));
+            txt.setPrefWidth(Style.size(200));
         }
 
         for (int i = 0; i < hbName.length; i++) {
             hbName[i].getChildren().addAll(lblTxtName[i], txtName[i]);
             hbName[i].setAlignment(Pos.CENTER);
-            hbName[i].setSpacing(Style.width(20));
+            hbName[i].setSpacing(Style.size(20));
         }
 
         ////Color
@@ -145,20 +145,20 @@ public class NewGameView extends HBox {
         }
 
         for (ColorPicker cp : cpColor) {
-            cp.setPrefWidth(Style.width(200));
+            cp.setPrefWidth(Style.size(200));
         }
 
         for (int i = 0; i < hbName.length; i++) {
             hbColor[i].getChildren().addAll(lblCpColor[i], cpColor[i]);
             hbColor[i].setAlignment(Pos.CENTER);
-            hbColor[i].setSpacing(Style.width(25));
+            hbColor[i].setSpacing(Style.size(25));
         }
 
         ////Name en Color
         for (int i = 0; i < vbNameColor.length; i++) {
             vbNameColor[i].getChildren().addAll(lblName[i], hbName[i], hbColor[i]);
             vbNameColor[i].setAlignment(Pos.CENTER);
-            vbNameColor[i].setSpacing(Style.width(20));
+            vbNameColor[i].setSpacing(Style.size(20));
         }
 
         ////Flags
@@ -168,7 +168,7 @@ public class NewGameView extends HBox {
 
         for (Button[] player : btnFlag) {
             for (Button btn : player) {
-                btn.setPrefSize(Style.width(125), Style.height(70));
+                btn.setPrefSize(Style.size(125), Style.size(70));
             }
         }
 
@@ -178,47 +178,47 @@ public class NewGameView extends HBox {
             gpFlags[i].add(btnFlag[i][2], 0, 1);
             gpFlags[i].add(btnFlag[i][3], 1, 1);
 
-            gpFlags[i].setHgap(Style.width(10));
-            gpFlags[i].setVgap(Style.height(10));
+            gpFlags[i].setHgap(Style.size(10));
+            gpFlags[i].setVgap(Style.size(10));
             gpFlags[i].setAlignment(Pos.CENTER);
         }
 
         for (int i = 0; i < vbFlags.length; i++) {
             vbFlags[i].getChildren().addAll(lblFlagTitle[i], gpFlags[i]);
             vbFlags[i].setAlignment(Pos.CENTER);
-            vbFlags[i].setSpacing(Style.height(20));
+            vbFlags[i].setSpacing(Style.size(20));
         }
 
         ////Pane
         for (int i = 0; i < vbPlayer.length; i++) {
             vbPlayer[i].getChildren().addAll(vbNameColor[i], vbFlags[i]);
             vbPlayer[i].setAlignment(Pos.CENTER);
-            vbPlayer[i].setSpacing(Style.height(60));
-            vbPlayer[i].setPrefWidth(Style.height(600));
+            vbPlayer[i].setSpacing(Style.size(60));
+            vbPlayer[i].setPrefWidth(Style.size(600));
         }
 
         ///Menu
-        imgTitle.setScaleX(Style.scaleX(1.5));
-        imgTitle.setScaleY(Style.scaleY(1.5));
+        imgTitle.setScaleX(Style.scale(1.5));
+        imgTitle.setScaleY(Style.scale(1.5));
 
         Style.btn(btnReady, Style.fontSize(15));
         Style.btn(btnCancel, Style.fontSize(15));
 
         vbButtons.getChildren().addAll(btnReady, btnCancel);
         vbButtons.setAlignment(Pos.CENTER);
-        vbButtons.setSpacing(Style.height(20));
+        vbButtons.setSpacing(Style.size(20));
 
         vbMenu.getChildren().addAll(imgTitle, vbButtons);
         vbMenu.setAlignment(Pos.CENTER);
-        vbMenu.setSpacing(Style.height(150));
-        vbMenu.setTranslateY(Style.height(-140));
+        vbMenu.setSpacing(Style.size(150));
+        vbMenu.setTranslateY(Style.size(-140));
 
         hb.setBackground(Style.background);
         hb.getChildren().addAll(vbPlayer[0], vbMenu, vbPlayer[1]);
 
         ///View
         this.getChildren().addAll(hb);
-        this.setSpacing(Style.width(20));
+        this.setSpacing(Style.size(20));
         this.setBackground(Style.applicationBackground);
         this.setAlignment(Pos.CENTER);
     }

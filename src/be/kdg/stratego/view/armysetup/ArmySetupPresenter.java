@@ -10,7 +10,6 @@ import be.kdg.stratego.view.newgame.NewGameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -184,8 +183,8 @@ public class ArmySetupPresenter {
 
     private void updateView() {
         // Initialize variables
-        double placeablePieceHeight = Style.height(100);
-        double placeablePieceWidth = Style.width(75);
+        double placeablePieceHeight = Style.size(100);
+        double placeablePieceWidth = Style.size(75);
 
         int boardWidth = model.getGameBoard().getGrootteX();
         int boardHeight = model.getGameBoard().getGrootteY();
