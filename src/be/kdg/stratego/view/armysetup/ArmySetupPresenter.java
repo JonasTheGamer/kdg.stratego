@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -46,7 +47,6 @@ public class ArmySetupPresenter {
                 return;
             }
 
-
             // Get a random piece that has this name to place on the field later on
             Piece pieceToPlace = getPieceFromName(pieceClassName);
             lastClickedPlaceablePiece = pieceToPlace;
@@ -57,19 +57,7 @@ public class ArmySetupPresenter {
             lastClickedId = clickedId;
         }
     };
-
-    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view, Player currentPlayer) {
-        this.model = model;
-        this.view = view;
-        this.currentPlayer = currentPlayer;
-
-        this.addEventHandlers();
-        this.updateView();
-    }
-
-    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
-        this(model, view, new Player("Test player 1", Color.WHITE));
-    }    private EventHandler onFieldClick = new EventHandler<MouseEvent>() {
+    private EventHandler onFieldClick = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
             // Find out which of the fields actually got pressed. All we need to know is the coordinates.
@@ -84,32 +72,8 @@ public class ArmySetupPresenter {
             // Now, figure out the field object
             Speelveld field = model.getGameBoard().getSpeelveld(posX, posY);
 
-            // Check if we were placing a piece.
-            if (placingPiece) {
-                // Only allow placing in row 6 to 9;
-                if(posY < (model.getGameBoard().getGrootteY() / 2) + 1 || posY > model.getGameBoard().getGrootteY() - 1) {
-                    return;
-                }
-                
-                // Check if the field is already occupied.
-                if (field.isOccupied()) {
-                    placingPiece = false;
-                    return;
-                }
-
-                // Place on the field
-                lastClickedPlaceablePiece.placeOnField(field);
-
-                // Add it to the board
-                model.getGameBoard().setSpeelveld(field);
-
-                // Stop placing
-                placingPiece = false;
-
-                // Refresh the view
-                updateView();
-                return;
-            } else {
+            // Check if player wants to remove a piece from the board
+            if(mouseEvent.getButton() == MouseButton.SECONDARY) {
                 // Check if the field is already occupied
                 System.out.println("Removing piece from field");
                 if (!Objects.isNull(field.getPiece())) {
@@ -125,10 +89,56 @@ public class ArmySetupPresenter {
                 }
             }
 
+            // Check if we were placing a piece.
+            if (placingPiece) {
+                // Only allow placing in row 6 to 9;
+                if(posY < (model.getGameBoard().getGrootteY() / 2) + 1 || posY > model.getGameBoard().getGrootteY() - 1) {
+                    return;
+                }
+
+                // Check if the field is already occupied.
+                if (field.isOccupied()) {
+                    placingPiece = false;
+                    return;
+                }
+
+                // Grab a random piece that's not on the field yet
+                Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getClass().getName());
+
+                // Place on the field
+                pieceToPlace.placeOnField(field);
+
+                // Add it to the board
+                model.getGameBoard().setSpeelveld(field);
+
+                // Stop placing
+                if(piecesToPlace.get(pieceToPlace.getClass().getName()) == 1) {
+                    placingPiece = false;
+                }
+
+                // Refresh the view
+                updateView();
+                return;
+            }
+
 
             lastClickedId = clickedId;
         }
     };
+
+
+    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view, Player currentPlayer) {
+        this.model = model;
+        this.view = view;
+        this.currentPlayer = currentPlayer;
+
+        this.addEventHandlers();
+        this.updateView();
+    }
+
+    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
+        this(model, view, new Player("Test player 1", Color.WHITE));
+    }
 
     private void addEventHandlers() {
         // Code
