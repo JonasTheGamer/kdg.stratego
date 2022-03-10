@@ -30,15 +30,11 @@ public class NewGamePresenter {
         view.getTxtName()[1].setOnKeyTyped(keyEvent -> view.getLblName()[1].setText(view.getTxtName()[1].getText()));
 
         view.getBtnReady().setOnAction(actionEvent -> {
-            // Create both players
-            model.createPlayers(
-                    view.getLblName()[0].getText(),
-                    view.getCpColor()[0].getValue(),
-                    "default",
-                    view.getLblName()[1].getText(),
-                    view.getCpColor()[1].getValue(),
-                    "default"
-            );
+            // Create first player
+            model.createPlayer(0, view.getLblName()[0].getText(), view.getCpColor()[0].getValue(),"default");
+
+            // Create second player
+            model.createPlayer(1, view.getLblName()[1].getText(), view.getCpColor()[1].getValue(),"default");
 
             // Get the board ready
             model.createGameBoard();
