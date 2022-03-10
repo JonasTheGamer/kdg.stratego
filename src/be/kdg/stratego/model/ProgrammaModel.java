@@ -7,6 +7,7 @@ public class ProgrammaModel {
     // Constants
     private final double gameBoardFieldHeight;
     private final double gameBoardFieldWidth;
+
     // Players
     private Player[] players;
     private GameBoard gameBoard;
