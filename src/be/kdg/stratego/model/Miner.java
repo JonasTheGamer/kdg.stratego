@@ -2,7 +2,7 @@ package be.kdg.stratego.model;
 
 public class Miner extends MovingPiece {
 
-    public Miner(Player player, Speelveld field) {
+    public Miner(Player player, GameBoardField field) {
         this.player = player;
         this.name = "miner";
         this.image = "/pieces/miner.png";

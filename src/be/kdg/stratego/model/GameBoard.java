@@ -6,12 +6,12 @@ import java.util.Objects;
 public class GameBoard {
     private int grootteX;
     private int grootteY;
-    private Speelveld[][] speelvelden;
+    private GameBoardField[][] gameBoardFields;
 
     public GameBoard() {
         grootteX = 10;
         grootteY = 10;
-        speelvelden = new Speelveld[this.grootteX][this.grootteY];
+        gameBoardFields = new GameBoardField[this.grootteX][this.grootteY];
     }
 
     public int getGrootteX() {
@@ -30,14 +30,14 @@ public class GameBoard {
         this.grootteY = grootteY;
     }
 
-    public Speelveld[][] getSpeelvelden() {
-        return this.speelvelden;
+    public GameBoardField[][] getGameBoardFields() {
+        return this.gameBoardFields;
     }
 
-    public Speelveld getSpeelveld(int positieX, int positieY) {
-        Speelveld foundField = null;
-        for (Speelveld[] fieldsRow: speelvelden) {
-            for (Speelveld field: fieldsRow) {
+    public GameBoardField getGameBoardField(int positieX, int positieY) {
+        GameBoardField foundField = null;
+        for (GameBoardField[] fieldsRow: gameBoardFields) {
+            for (GameBoardField field: fieldsRow) {
                 if(field.positionX == positieX && field.positionY == positieY) {
                     foundField = field;
                 }
@@ -46,12 +46,12 @@ public class GameBoard {
         return foundField;
     }
 
-    public void setSpeelveld(Speelveld field) {
-        this.speelvelden[field.positionX][field.positionY] = field;
+    public void setGameBoardView(GameBoardField field) {
+        this.gameBoardFields[field.positionX][field.positionY] = field;
     }
 
     public Piece getSpeelstuk(int positieX, int positieY) {
-        Speelveld field = this.getSpeelveld(positieX, positieY);
+        GameBoardField field = this.getGameBoardField(positieX, positieY);
 
         if(Objects.isNull(field)) {
             return null;
@@ -62,8 +62,8 @@ public class GameBoard {
 
     public Piece[] zoekSpeelstukken(Player player) {
         ArrayList<Piece> pieces = new ArrayList<Piece>();
-        for (Speelveld[] fieldsRow: speelvelden) {
-            for (Speelveld field: fieldsRow) {
+        for (GameBoardField[] fieldsRow: gameBoardFields) {
+            for (GameBoardField field: fieldsRow) {
                 if(field.getPiece().getPlayer().equals(player)) {
                     pieces.add(field.getPiece());
                 }

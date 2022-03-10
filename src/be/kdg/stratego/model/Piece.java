@@ -8,13 +8,13 @@ public class Piece {
     protected Player player;
     protected String name;
     protected int rank;
-    protected Speelveld field;
+    protected GameBoardField field;
     protected String image;
 
     // Default constructor
     public Piece() {}
 
-    public Piece(Player player, String name, String image, int rank, Speelveld field)  {
+    public Piece(Player player, String name, String image, int rank, GameBoardField field)  {
         this.player = player;
         this.name = name;
         this.rank = rank;
@@ -50,11 +50,11 @@ public class Piece {
         this.name = name;
     }
 
-    public Speelveld getField() {
+    public GameBoardField getField() {
         return field;
     }
 
-    public void setField(Speelveld field) {
+    public void setField(GameBoardField field) {
         this.field = field;
     }
 
@@ -75,7 +75,7 @@ public class Piece {
         this.field = null;
     }
 
-    public void placeOnField(Speelveld field) {
+    public void placeOnField(GameBoardField field) {
         this.field = field;
         this.field.setPiece(this);
     }

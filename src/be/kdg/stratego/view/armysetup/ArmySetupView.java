@@ -17,6 +17,7 @@ public class ArmySetupView extends BorderPane {
     private Label lblGameTitle;
     private Button btnStart;
     private Button btnBack;
+    private Button btnFill;
 
     // Panes
     private GridPane gpPieces;
@@ -45,6 +46,7 @@ public class ArmySetupView extends BorderPane {
         lblGameTitle = new Label("Game");
         btnStart = new Button("Start");
         btnBack = new Button("Back");
+        btnFill = new Button("Fill board");
 
         // Panes
         gpPieces = new GridPane();
@@ -116,12 +118,10 @@ public class ArmySetupView extends BorderPane {
 
         Style.btn(btnStart, Style.fontSize(15), 225,50);
         Style.btn(btnBack, Style.fontSize(15), 225,50);
+        Style.btn(btnFill, Style.fontSize(15), 225, 50);
 
-        vbGame.getChildren().addAll(lblGameTitle, btnStart, btnBack);
+        vbGame.getChildren().addAll(lblGameTitle, btnStart, btnBack, btnFill);
         vbMenu.getChildren().add(vbGame);
-
-        // Add to panes
-
     }
 
     public Label getLblScreenTitle() {
@@ -150,6 +150,10 @@ public class ArmySetupView extends BorderPane {
 
     public Button getBtnBack() {
         return btnBack;
+    }
+
+    public Button getBtnFill() {
+        return btnFill;
     }
 
     public GridPane getGpPieces() {

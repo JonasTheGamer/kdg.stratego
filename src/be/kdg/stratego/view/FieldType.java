@@ -13,16 +13,18 @@ public class FieldType {
         StackPane container = new StackPane();
         container.setBackground(Style.grass);
 
-        ImageView iv = new ImageView("/hiddenTower.png");
-        iv.setFitHeight(height);
-        iv.setFitWidth(width);
+        container.setPrefHeight(height);
+        container.setPrefWidth(width);
 
-        container.getChildren().add(iv);
+        // Tower
+        ImageView ivTower = new ImageView("/emptyTower.png");
+        ivTower.setFitHeight(height * 0.95);
+        ivTower.setFitWidth(width * 0.95);
+
+        container.getChildren().addAll(ivTower);
 
         return container;
     }
-
-    ;
 
     public static StackPane occupiedField(double height, double width, String occupiedBy) {
         StackPane container = new StackPane();
@@ -46,8 +48,6 @@ public class FieldType {
         return container;
     }
 
-    ;
-
     public static StackPane water(double height, double width) {
         StackPane container = new StackPane();
         container.setBackground(Style.water);
@@ -57,7 +57,7 @@ public class FieldType {
         return container;
     }
 
-    ;
+
 
     public static StackPane grass(double height, double width) {
         StackPane container = new StackPane();
@@ -69,5 +69,5 @@ public class FieldType {
         return container;
     }
 
-    ;
+
 }

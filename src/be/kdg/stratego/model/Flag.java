@@ -2,7 +2,7 @@ package be.kdg.stratego.model;
 
 public class Flag extends Piece {
 
-    public Flag(Player player, String flagImagePath, Speelveld field ) {
+    public Flag(Player player, String flagImagePath, GameBoardField field ) {
         if (flagImagePath.equals("default")) {
             flagImagePath = "/pieces/flag.png";
         }

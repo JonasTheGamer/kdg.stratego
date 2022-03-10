@@ -2,7 +2,7 @@ package be.kdg.stratego.model;
 
 public class Bomb extends Piece {
 
-    public Bomb(Player player, Speelveld field ) {
+    public Bomb(Player player, GameBoardField field ) {
         this.player = player;
         this.name = "bomb";
         this.image = "/pieces/bomb.png";

@@ -5,7 +5,7 @@ public abstract class MovingPiece extends Piece {
     public MovingPiece() {
     }
 
-    public MovingPiece(Player player, String name, String image, int rank, Speelveld field) {
+    public MovingPiece(Player player, String name, String image, int rank, GameBoardField field) {
         super(player, name, image, rank, field);
     }
 
@@ -13,24 +13,24 @@ public abstract class MovingPiece extends Piece {
         super(player, name, image, rank);
     }
 
-    public void changePosition(Speelveld newSpeelveld) {
+    public void changePosition(GameBoardField newGameBoardField) {
         //Variables to shorten code
         int x = this.field.positionX;
         int y = this.field.positionY;
-        int newX = newSpeelveld.getPositionX();
-        int newY = newSpeelveld.getPositionY();
+        int newX = newGameBoardField.getPositionX();
+        int newY = newGameBoardField.getPositionY();
 
-        // Check if newSpeelveld isBewandelbaar
-        if (newSpeelveld.isWalkable()) {
-            //Check if newSpeelveld is next to current speelveld
+        // Check if newGameBoardField isWalkable
+        if (newGameBoardField.isWalkable()) {
+            //Check if newGameBoardField is next to current gameBoardField
             if ((newX == x + 1 | newX == x - 1) & newY == y | (newY == y + 1 | newY == y - 1) & newX == x) {
-                //Change Speelstuk of current speelveld because this speelstuk is changing position
+                //Change Piece of current GameBOardField because this Piece is changing position
                 this.field.setPiece(null);
-                //Change current speelveld to newSpeelveld
-                this.field = newSpeelveld;
-                if (newSpeelveld.getPiece() != null) {
-                    if (newSpeelveld.getPiece().player != this.player) {
-                        attack(newSpeelveld.getPiece());
+                //Change current GameBoardField to newGameBoardField
+                this.field = newGameBoardField;
+                if (newGameBoardField.getPiece() != null) {
+                    if (newGameBoardField.getPiece().player != this.player) {
+                        attack(newGameBoardField.getPiece());
                     } else {
                         System.out.println("You can't attack your own team");
                     }

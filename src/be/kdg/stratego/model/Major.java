@@ -2,7 +2,7 @@ package be.kdg.stratego.model;
 
 public class Major extends MovingPiece {
 
-    public Major(Player player, Speelveld field) {
+    public Major(Player player, GameBoardField field) {
         this.player = player;
         this.name = "major";
         this.image = "/pieces/major.png";

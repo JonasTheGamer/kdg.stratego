@@ -2,7 +2,7 @@ package be.kdg.stratego.model;
 
 public class Scout extends MovingPiece {
 
-    public Scout(Player player, Speelveld field) {
+    public Scout(Player player, GameBoardField field) {
         this.player = player;
         this.name = "scout";
         this.image = "/pieces/scout.png";
