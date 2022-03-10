@@ -1,5 +1,6 @@
 package be.kdg.stratego.view.newgame;
 
+import be.kdg.stratego.model.Player;
 import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.view.armysetup.ArmySetupPresenter;
 import be.kdg.stratego.view.armysetup.ArmySetupView;
@@ -30,18 +31,16 @@ public class NewGamePresenter {
         view.getTxtName()[1].setOnKeyTyped(keyEvent -> view.getLblName()[1].setText(view.getTxtName()[1].getText()));
 
         view.getBtnReady().setOnAction(actionEvent -> {
-            // Create first player
-            model.createPlayer(0, view.getLblName()[0].getText(), view.getCpColor()[0].getValue(),"default");
-
-            // Create second player
-            model.createPlayer(1, view.getLblName()[1].getText(), view.getCpColor()[1].getValue(),"default");
+            // Create players
+            model.getGame().setPlayer1(new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(),"default"));
+            model.getGame().setPlayer2(new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(),"default"));
 
             // Get the board ready
             model.createGameBoard();
 
             // Switch to the army setup view!
             ArmySetupView armySetupView = new ArmySetupView();
-            ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getPlayers()[0]);
+            ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[0]);
             view.getScene().setRoot(armySetupView);
         });
 

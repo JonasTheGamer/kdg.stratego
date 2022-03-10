@@ -6,22 +6,27 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 public class Game {
-    private Player[] spelers;
+    private Player[] players;
     private LocalDateTime startTijd;
     private LocalDateTime eindTijd;
     private boolean ongoing = false;
     private GameBoard speelbord;
 
     public Game() {
+        this.players = new Player[2];
         this.speelbord = new GameBoard();
     }
 
-    public Player[] getSpelers() {
-        return spelers;
+    public Player[] getPlayers() {
+        return players;
     }
 
-    public void setSpelers(Player[] spelers) {
-        this.spelers = spelers;
+    public void setPlayer1(Player player) {
+        this.players[0] = player;
+    }
+
+    public void setPlayer2(Player player) {
+        this.players[1] = player;
     }
 
     public LocalDateTime getStartTijd() {

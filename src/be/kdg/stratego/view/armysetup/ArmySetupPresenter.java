@@ -172,7 +172,7 @@ public class ArmySetupPresenter {
 
                 // Switch to the army setup view!
                 ArmySetupView armySetupView = new ArmySetupView();
-                ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getPlayers()[1]);
+                ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[1]);
                 view.getScene().setRoot(armySetupView);
             }
         });
