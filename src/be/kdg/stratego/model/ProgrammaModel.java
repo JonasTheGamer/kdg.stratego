@@ -9,82 +9,19 @@ public class ProgrammaModel {
     private final double fieldHeight = Style.size(50);
     private final double fieldWidth = Style.size(50);
     // Players
-    private Player[] players = new Player[2];
+    private Player[] players;
     private GameBoard gameBoard;
 
+    // Constructor
     public ProgrammaModel() {
-
+        // Initialize player array
+        players = new Player[2];
     }
 
-    public GameBoard getGameBoard() {
-        return gameBoard;
-    }
-
-    public void createPlayers(String plr1Name, Color plr1Color, String plr1Flag, String plr2name, Color plr2Color, String plr2Flag) {
-        // Empty current players
-        players[0] = null;
-        players[1] = null;
-
-        // Create the two players
-        players[0] = new Player(plr1Name, plr1Color);
-        players[1] = new Player(plr2name, plr2Color);
-
-        // Give them all pieces they need, except the flags
-        for (Player player : players) {
-
-            // 6 bombs
-            for (int i = 0; i < 6; i++) {
-                player.getPieces().add(new Bomb(player));
-            }
-            
-            // 1 marshal
-            player.getPieces().add(new Marshal(player));
-            
-            // 1 general
-            player.getPieces().add(new General(player));
-            
-            // 2 colonels
-            for (int i = 0; i < 2; i++) {
-                player.getPieces().add(new Colonel(player));
-            }
-
-            // 3 majors
-            for (int i = 0; i < 3; i++) {
-                player.getPieces().add(new Major(player));
-            }
-
-            // 4 captains
-            for (int i = 0; i < 4; i++) {
-                player.getPieces().add(new Captain(player));
-            }
-
-            // 4 lieutenants
-            for (int i = 0; i < 4; i++) {
-                player.getPieces().add(new Lieutenant(player));
-            }
-
-            // 4 sergeants
-            for (int i = 0; i < 4; i++) {
-                player.getPieces().add(new Sergeant(player));
-            }
-
-            // 5 miners
-            for (int i = 0; i < 5; i++) {
-                player.getPieces().add(new Miner(player));
-            }
-
-            // 8 scouts
-            for (int i = 0; i < 8; i++) {
-                player.getPieces().add(new Scout(player));
-            }
-
-            // 1 Spy
-            player.getPieces().add(new Spy(player));
-        }
-
-        // Give each player their flag
-        players[0].getPieces().add(new Flag(players[0], plr1Flag));
-        players[1].getPieces().add(new Flag(players[1], plr2Flag));
+    public void createPlayer(int index, String name, Color color, String flag) {
+        players[index] = null;
+        players[index] = new Player(name, color);
+        players[index].givePieces(flag);
     }
 
     public void createGameBoard() {
@@ -141,7 +78,11 @@ public class ProgrammaModel {
         }
     }
 
+    // Getters & setters
     public Player[] getPlayers() {
         return players;
+    }
+    public GameBoard getGameBoard() {
+        return gameBoard;
     }
 }
