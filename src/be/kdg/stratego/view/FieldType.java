@@ -9,6 +9,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class FieldType {
+    private Background background;
+    private boolean isHidden;
+    private boolean isOccupied;
+    private String occupiedBy;
+
     public static StackPane unknownField (double height, double width) {
         StackPane container = new StackPane();
         container.setBackground(Style.grass);
@@ -28,8 +33,8 @@ public class FieldType {
 
         // Tower
         ImageView ivTower = new ImageView("/emptyTower.png");
-        ivTower.setFitHeight(height);
-        ivTower.setFitWidth(width);
+        ivTower.setFitHeight(height * 0.95);
+        ivTower.setFitWidth(width * 0.95);
 
         // Piece
         ImageView ivPiece = new ImageView("/pieces/"+occupiedBy+".png");

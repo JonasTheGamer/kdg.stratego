@@ -120,7 +120,6 @@ public class ArmySetupPresenter {
                 return;
             }
 
-
             lastClickedId = clickedId;
         }
     };
