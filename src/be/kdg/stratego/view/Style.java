@@ -27,7 +27,7 @@ public class Style {
             new BackgroundSize(1.0, 1.0, true, true, false, true)
     ));
 
-    public static Background swamp = new Background(new BackgroundImage(
+    public static Background water = new Background(new BackgroundImage(
             new Image("waterTexture.png"),
             BackgroundRepeat.NO_REPEAT,
             BackgroundRepeat.NO_REPEAT,
@@ -41,7 +41,7 @@ public class Style {
             new Insets(-10)
     ));
 
-    public static Background bgBoxNoPadding  = new Background(new BackgroundFill(
+    public static Background bgBoxNoPadding = new Background(new BackgroundFill(
             new Color(0, 0, 0, 0.8),
             new CornerRadii(20),
             null
@@ -67,14 +67,14 @@ public class Style {
 
     //Buttons
     public static void btn(Button btn, double fontSize) {
-        Style.btn(btn,fontSize,400,50);
+        Style.btn(btn, fontSize, 400, 50);
     }
 
     public static void btn(Button btn, double fontSize, double width, double height) {
         btn.setPrefWidth(Style.size(width));
         btn.setPrefHeight(Style.size(height));
         btn.setBackground(Style.backgroundBtn);
-        Style.txt(btn,fontSize);
+        Style.txt(btn, fontSize);
     }
 
     //Labels

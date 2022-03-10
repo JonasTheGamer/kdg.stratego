@@ -124,16 +124,16 @@ public class ProgrammaModel {
 
         //// Swamps
         ////// Left swamp
-        gameBoard.setSpeelveld(new Speelveld("swampx2y4", 2, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), false));
-        gameBoard.setSpeelveld(new Speelveld("swamp", 3, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), false));
-        gameBoard.setSpeelveld(new Speelveld("swamp", 2, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), false));
-        gameBoard.setSpeelveld(new Speelveld("swamp", 3, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swampx2y4", 2, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp", 3, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp", 2, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp", 3, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
 
         ////// Right swamp
-        gameBoard.setSpeelveld(new Speelveld("swamp", 6, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), false));
-        gameBoard.setSpeelveld(new Speelveld("swamp", 7, amountOfRowsPerPlayer, FieldType.swamp(fieldHeight, fieldWidth), false));
-        gameBoard.setSpeelveld(new Speelveld("swamp", 6, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), false));
-        gameBoard.setSpeelveld(new Speelveld("swamp", 7, amountOfRowsPerPlayer + 1, FieldType.swamp(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp", 6, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp", 7, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp", 6, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
+        gameBoard.setSpeelveld(new Speelveld("swamp", 7, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
 
         //// Add empty rows on the bottom
         for (int posY = amountOfRowsPerPlayer + 2; posY < boardHeight; posY++) {
