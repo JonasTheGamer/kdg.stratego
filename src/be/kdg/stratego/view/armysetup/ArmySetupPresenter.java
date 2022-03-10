@@ -65,8 +65,8 @@ public class ArmySetupPresenter {
 
             String[] idData = clickedId.split("-");
 
-            int posX = Integer.parseInt(idData[1]);
-            int posY = Integer.parseInt(idData[2]);
+            int posX = Integer.parseInt(idData[0]);
+            int posY = Integer.parseInt(idData[1]);
 
             // Now, figure out the field object
             GameBoardField field = model.getGameBoard().getGameBoardField(posX, posY);
@@ -108,7 +108,7 @@ public class ArmySetupPresenter {
                 pieceToPlace.placeOnField(field);
 
                 // Add it to the board
-                model.getGameBoard().setGameBoardView(field);
+                model.getGameBoard().setGameBoardField(field);
 
                 // Stop placing
                 if(piecesToPlace.get(pieceToPlace.getClass().getName()) == 1) {
@@ -274,7 +274,7 @@ public class ArmySetupPresenter {
         for (int posX = 0; posX < model.getGameBoard().getGrootteX(); posX++) {
             for (int posY = 0; posY < model.getGameBoard().getGrootteY(); posY++) {
                 GameBoardField field = fields[posX][posY];
-                field.getType().setId(field.getTypeName() + "-" + field.getPositionX() + "-" + field.getPositionY());
+                field.getType().setId(field.getPositionX() + "-" + field.getPositionY());
 
                 field.getType().setOnMouseClicked(onFieldClick);
                 view.getGpBoard().add(field.getType(), field.getPositionX(), field.getPositionY());

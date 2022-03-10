@@ -25,57 +25,7 @@ public class ProgrammaModel {
     }
 
     public void createGameBoard() {
-        this.gameBoard = new GameBoard();
-        this.InitializeBoard();
-    }
-
-    private void InitializeBoard() {
-        int boardWidth = gameBoard.getGrootteX();
-        int boardHeight = gameBoard.getGrootteY();
-
-        int amountOfRowsPerPlayer = (boardHeight - 2) / 2;
-
-        //// Add empty rows on top
-        for (int posY = 0; posY < amountOfRowsPerPlayer; posY++) {
-            // Per row
-            for (int posX = 0; posX < boardWidth; posX++) {
-                // Per column
-                gameBoard.setGameBoardView(new GameBoardField("grass", posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
-            }
-        }
-
-        //// Add paths & swamps
-        ////// Paths
-        for (int posY = amountOfRowsPerPlayer; posY < amountOfRowsPerPlayer + 2; posY++) {
-            // Per row
-            for (int posX = 0; posX < boardWidth; posX++) {
-                // Per column
-                gameBoard.setGameBoardView(new GameBoardField("grass", posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
-            }
-        }
-
-
-        //// Swamps
-        ////// Left swamp
-        gameBoard.setGameBoardView(new GameBoardField("swampx2y4", 2, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
-        gameBoard.setGameBoardView(new GameBoardField("swamp", 3, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
-        gameBoard.setGameBoardView(new GameBoardField("swamp", 2, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
-        gameBoard.setGameBoardView(new GameBoardField("swamp", 3, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
-
-        ////// Right swamp
-        gameBoard.setGameBoardView(new GameBoardField("swamp", 6, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
-        gameBoard.setGameBoardView(new GameBoardField("swamp", 7, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
-        gameBoard.setGameBoardView(new GameBoardField("swamp", 6, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
-        gameBoard.setGameBoardView(new GameBoardField("swamp", 7, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
-
-        //// Add empty rows on the bottom
-        for (int posY = amountOfRowsPerPlayer + 2; posY < boardHeight; posY++) {
-            // Per row
-            for (int posX = 0; posX < boardWidth; posX++) {
-                // Per column
-                gameBoard.setGameBoardView(new GameBoardField("grass", posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
-            }
-        }
+        this.gameBoard = new GameBoard(fieldHeight, fieldWidth);
     }
 
     // Getters & setters
