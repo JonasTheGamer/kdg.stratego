@@ -30,11 +30,8 @@ public class ProgrammaModel {
         players[1] = new Player(plr2name, plr2Color);
 
         // Give them all pieces they need, except the flags
-
         for (Player player : players) {
 
-            String hallo = "hoi";
-            System.out.println("player.getPieces() = " + player.getPieces());
             // 6 bombs
             for (int i = 0; i < 6; i++) {
                 player.getPieces().add(new Bomb(player));
