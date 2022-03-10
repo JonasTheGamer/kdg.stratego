@@ -1,16 +1,19 @@
 package be.kdg.stratego.model;
 
 public abstract class MovingPiece extends Piece {
+    protected int rank;
 
     public MovingPiece() {
     }
 
     public MovingPiece(Player player, String name, String image, int rank, GameBoardField field) {
-        super(player, name, image, rank, field);
+        super(player, name, image, field);
+        this.rank = rank;
     }
 
     public MovingPiece(Player player, String name, String image, int rank) {
-        super(player, name, image, rank);
+        super(player, name, image);
+        this.rank = rank;
     }
 
     public void changePosition(GameBoardField newGameBoardField) {
@@ -61,5 +64,9 @@ public abstract class MovingPiece extends Piece {
                 System.out.println("Your " + this.name + " was killed by a " + speelstuk.getName());
             }
         }
+    }
+
+    public int getRank() {
+        return rank;
     }
 }

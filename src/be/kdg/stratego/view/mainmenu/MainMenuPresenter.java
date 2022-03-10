@@ -8,6 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
+
 public class MainMenuPresenter {
     private ProgrammaModel model;
     private MainMenuView view;
@@ -43,7 +48,28 @@ public class MainMenuPresenter {
     }
 
     private void updateView() {
+        /* Highscores */
+        try {
+            File highscores = new File("highscores.csv");
+            if (!highscores.exists()) {
+                highscores.createNewFile();
+            }
+            List<String> inhoud = Files.readAllLines(highscores.toPath());
+            int teller = 1;
+            String scores = "";
 
+            for (String huidigeRegel : inhoud) {
+                if (teller <= 10) {
+                    scores += huidigeRegel + "\n";
+                }
+                teller++;
+            }
+            view.getLblScores().setText(scores);
+
+
+        } catch (IOException ex) {
+            System.out.println("Fout");
+        }
     }
 
     public void addWindowEventHandlers() {

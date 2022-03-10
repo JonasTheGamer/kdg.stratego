@@ -5,7 +5,6 @@ import java.util.Objects;
 public class Piece {
     protected Player player;
     protected String name;
-    protected int rank;
     protected GameBoardField field;
     protected String image;
     protected boolean hidden;
@@ -16,29 +15,23 @@ public class Piece {
     public Piece() {}
 
     //// Constructor with field
-    public Piece(Player player, String name, String image, int rank, GameBoardField field)  {
+    public Piece(Player player, String name, String image, GameBoardField field)  {
         this.player = player;
         this.name = name;
-        this.rank = rank;
         this.field = field;
         this.image = image;
         this.hidden = false;
     }
 
     //// Constructor without field
-    public Piece(Player player, String name, String defaultImage, int rank) {
-        this(player, name, defaultImage, rank, null);
+    public Piece(Player player, String name, String defaultImage) {
+        this(player, name, defaultImage, null);
     }
 
     // Getters & setters
     //// Get the piece name
     public String getName() {
         return name;
-    }
-
-    //// Get piece rank
-    public int getRank() {
-        return rank;
     }
 
     //// Field placing
@@ -63,11 +56,6 @@ public class Piece {
     //// Get player who the piece belongs to
     public Player getPlayer() {
         return player;
-    }
-
-    //// Get whether the piece is dead (not on the board)
-    public boolean isDead() {
-        return Objects.isNull(field);
     }
 
     //// Get whether the piece is on a field (on the board)

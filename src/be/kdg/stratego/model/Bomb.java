@@ -6,7 +6,6 @@ public class Bomb extends Piece {
         this.player = player;
         this.name = "bomb";
         this.image = "/pieces/bomb.png";
-        this.rank = 0;
         this.field = field;
     }
 
