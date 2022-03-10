@@ -23,7 +23,6 @@ public class ProgrammaModel {
     }
 
     public void createPlayer(int index, String name, Color color, String flag) {
-        players[index] = null;
         players[index] = new Player(name, color, flag);
     }
 
