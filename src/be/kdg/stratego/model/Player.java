@@ -8,16 +8,18 @@ import java.util.ArrayList;
 public class Player {
     private String name;
     private Color color;
+    private String flag;
     private ArrayList<Piece> pieces = new ArrayList<>();
 
     public Player(String naam, Color color, String flag) {
         this.name = naam;
         this.color = color;
+        this.flag = flag;
 
-        givePieces(flag);
+        this.givePieces();
     }
 
-    public void givePieces(String flag) {
+    public void givePieces() {
         // 6 bombs
         for (int i = 0; i < 6; i++) {
             pieces.add(new Bomb(this));
@@ -68,7 +70,7 @@ public class Player {
         pieces.add(new Spy(this));
 
         // 1 Flag
-        pieces.add(new Flag(this, flag));
+        pieces.add(new Flag(this, this.flag));
     }
 
     public String getName() {

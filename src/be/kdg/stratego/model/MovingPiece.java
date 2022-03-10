@@ -1,6 +1,7 @@
 package be.kdg.stratego.model;
 
 public abstract class MovingPiece extends Piece {
+    protected int rank;
 
     public MovingPiece() {
     }
@@ -61,5 +62,9 @@ public abstract class MovingPiece extends Piece {
                 System.out.println("Your " + this.name + " was killed by a " + speelstuk.getName());
             }
         }
+    }
+
+    public int getRank() {
+        return rank;
     }
 }
