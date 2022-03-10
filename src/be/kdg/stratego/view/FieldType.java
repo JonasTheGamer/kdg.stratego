@@ -33,8 +33,8 @@ public class FieldType {
 
         // Tower
         ImageView ivTower = new ImageView("/emptyTower.png");
-        ivTower.setFitHeight(height * 0.90);
-        ivTower.setFitWidth(width * 0.90);
+        ivTower.setFitHeight(height);
+        ivTower.setFitWidth(width);
 
         // Piece
         ImageView ivPiece = new ImageView("/pieces/"+occupiedBy+".png");
