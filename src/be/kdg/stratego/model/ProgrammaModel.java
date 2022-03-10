@@ -1,13 +1,12 @@
 package be.kdg.stratego.model;
 
-import be.kdg.stratego.view.FieldType;
 import be.kdg.stratego.view.Style;
 import javafx.scene.paint.Color;
 
 public class ProgrammaModel {
     // Constants
-    private final double fieldHeight = Style.size(50);
-    private final double fieldWidth = Style.size(50);
+    private final double gameBoardFieldHeight;
+    private final double gameBoardFieldWidth;
     // Players
     private Player[] players;
     private GameBoard gameBoard;
@@ -16,6 +15,10 @@ public class ProgrammaModel {
     public ProgrammaModel() {
         // Initialize player array
         players = new Player[2];
+
+        // Set field height & width
+        gameBoardFieldHeight = Style.size(50);
+        gameBoardFieldWidth = Style.size(50);
     }
 
     public void createPlayer(int index, String name, Color color, String flag) {
@@ -25,7 +28,7 @@ public class ProgrammaModel {
     }
 
     public void createGameBoard() {
-        this.gameBoard = new GameBoard(fieldHeight, fieldWidth);
+        this.gameBoard = new GameBoard(gameBoardFieldHeight, gameBoardFieldWidth);
     }
 
     // Getters & setters
