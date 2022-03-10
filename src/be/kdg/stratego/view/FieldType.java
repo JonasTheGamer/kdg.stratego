@@ -28,6 +28,9 @@ public class FieldType {
         StackPane container = new StackPane();
         container.setBackground(Style.grass);
 
+        container.setPrefHeight(height);
+        container.setPrefWidth(width);
+
         // Tower
         ImageView ivTower = new ImageView("/emptyTower.png");
         ivTower.setFitHeight(height * 0.95);
