@@ -7,11 +7,13 @@ public abstract class MovingPiece extends Piece {
     }
 
     public MovingPiece(Player player, String name, String image, int rank, GameBoardField field) {
-        super(player, name, image, rank, field);
+        super(player, name, image, field);
+        this.rank = rank;
     }
 
     public MovingPiece(Player player, String name, String image, int rank) {
-        super(player, name, image, rank);
+        super(player, name, image);
+        this.rank = rank;
     }
 
     public void changePosition(GameBoardField newGameBoardField) {

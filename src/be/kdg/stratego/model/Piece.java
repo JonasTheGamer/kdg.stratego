@@ -15,7 +15,7 @@ public class Piece {
     public Piece() {}
 
     //// Constructor with field
-    public Piece(Player player, String name, String image, int rank, GameBoardField field)  {
+    public Piece(Player player, String name, String image, GameBoardField field)  {
         this.player = player;
         this.name = name;
         this.field = field;
@@ -24,8 +24,8 @@ public class Piece {
     }
 
     //// Constructor without field
-    public Piece(Player player, String name, String defaultImage, int rank) {
-        this(player, name, defaultImage, rank, null);
+    public Piece(Player player, String name, String defaultImage) {
+        this(player, name, defaultImage, null);
     }
 
     // Getters & setters
