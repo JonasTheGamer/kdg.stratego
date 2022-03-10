@@ -24,8 +24,7 @@ public class ProgrammaModel {
 
     public void createPlayer(int index, String name, Color color, String flag) {
         players[index] = null;
-        players[index] = new Player(name, color);
-        players[index].givePieces(flag);
+        players[index] = new Player(name, color, flag);
     }
 
     public void createGameBoard() {

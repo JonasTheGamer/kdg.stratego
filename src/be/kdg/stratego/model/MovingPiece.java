@@ -21,7 +21,7 @@ public abstract class MovingPiece extends Piece {
         int newY = newGameBoardField.getPositionY();
 
         // Check if newGameBoardField isWalkable
-        if (newGameBoardField.isWalkable()) {
+        if (newGameBoardField.getWalkable()) {
             //Check if newGameBoardField is next to current gameBoardField
             if ((newX == x + 1 | newX == x - 1) & newY == y | (newY == y + 1 | newY == y - 1) & newX == x) {
                 //Change Piece of current GameBOardField because this Piece is changing position
@@ -54,7 +54,7 @@ public abstract class MovingPiece extends Piece {
         } else if (true/*Liam: Speelstuk instanceof ....*/) {
             MovingPiece movingPiece = (MovingPiece) speelstuk;
             if (this.rank > movingPiece.getRank()) {
-                speelstuk.setField(null);
+                speelstuk.removeFromField();
                 System.out.println("Your " + this.name + " has killed a " + speelstuk.getName());
             } else {
                 this.field = null;

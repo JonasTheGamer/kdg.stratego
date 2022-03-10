@@ -134,7 +134,7 @@ public class ArmySetupPresenter {
     }
 
     public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
-        this(model, view, new Player("Test player 1", Color.WHITE));
+        this(model, view, new Player("Test player 1", Color.WHITE, "default"));
     }
 
     private void addEventHandlers() {
@@ -167,7 +167,7 @@ public class ArmySetupPresenter {
 
                 // Hide the current player's pieces
                 for (Piece piece : currentPlayer.getPieces()) {
-                    piece.hide();
+                    piece.setHidden(true);
                 }
 
                 // Switch to the army setup view!
@@ -274,10 +274,12 @@ public class ArmySetupPresenter {
         for (int posX = 0; posX < model.getGameBoard().getGrootteX(); posX++) {
             for (int posY = 0; posY < model.getGameBoard().getGrootteY(); posY++) {
                 GameBoardField field = fields[posX][posY];
-                field.getType().setId(field.getPositionX() + "-" + field.getPositionY());
+                StackPane fieldPane = field.getPane();
+                fieldPane.setOnMouseClicked(onFieldClick);
 
-                field.getType().setOnMouseClicked(onFieldClick);
-                view.getGpBoard().add(field.getType(), field.getPositionX(), field.getPositionY());
+                //field.getType().setId(field.getPositionX() + "-" + field.getPositionY());
+                //field.getType().setOnMouseClicked(onFieldClick);
+                view.getGpBoard().add(field.getPane(), field.getPositionX(), field.getPositionY());
             }
         }
 

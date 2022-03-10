@@ -10,11 +10,11 @@ public class Player {
     private Color color;
     private ArrayList<Piece> pieces = new ArrayList<>();
 
-    public Player(String naam, Color color) {
+    public Player(String naam, Color color, String flag) {
         this.name = naam;
         this.color = color;
-        // Fill pieces
 
+        givePieces(flag);
     }
 
     public void givePieces(String flag) {

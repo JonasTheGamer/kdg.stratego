@@ -1,6 +1,5 @@
 package be.kdg.stratego.model;
 
-import be.kdg.stratego.view.FieldType;
 import be.kdg.stratego.view.Style;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class GameBoard {
             // Per row
             for (int posX = 0; posX < boardWidth; posX++) {
                 // Per column
-                this.setGameBoardField(new GameBoardField("grass", posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
+                this.setGameBoardField(new GameBoardField(posX, posY, fieldHeight, fieldWidth, GameBoardField.GroundType.GRASS));
             }
         }
 
@@ -37,29 +36,29 @@ public class GameBoard {
             // Per row
             for (int posX = 0; posX < boardWidth; posX++) {
                 // Per column
-                this.setGameBoardField(new GameBoardField("grass", posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
+                this.setGameBoardField(new GameBoardField(posX, posY, fieldHeight, fieldWidth, GameBoardField.GroundType.GRASS));
             }
         }
 
         //// Water
         ////// Left water
-        this.setGameBoardField(new GameBoardField("water", 2, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
-        this.setGameBoardField(new GameBoardField("water", 3, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
-        this.setGameBoardField(new GameBoardField("water", 2, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
-        this.setGameBoardField(new GameBoardField("water", 3, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
+        this.setGameBoardField(new GameBoardField(2, amountOfRowsPerPlayer, fieldHeight, fieldWidth, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(3, amountOfRowsPerPlayer, fieldHeight, fieldWidth, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(2, amountOfRowsPerPlayer + 1, fieldHeight, fieldWidth, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(3, amountOfRowsPerPlayer + 1, fieldHeight, fieldWidth, GameBoardField.GroundType.WATER));
 
         ////// Right water
-        this.setGameBoardField(new GameBoardField("water", 6, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
-        this.setGameBoardField(new GameBoardField("water", 7, amountOfRowsPerPlayer, FieldType.water(fieldHeight, fieldWidth), false));
-        this.setGameBoardField(new GameBoardField("water", 6, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
-        this.setGameBoardField(new GameBoardField("water", 7, amountOfRowsPerPlayer + 1, FieldType.water(fieldHeight, fieldWidth), false));
+        this.setGameBoardField(new GameBoardField(6, amountOfRowsPerPlayer, fieldHeight, fieldWidth, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(7, amountOfRowsPerPlayer, fieldHeight, fieldWidth, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(6, amountOfRowsPerPlayer + 1, fieldHeight, fieldWidth, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(7, amountOfRowsPerPlayer + 1, fieldHeight, fieldWidth, GameBoardField.GroundType.WATER));
 
         //// Add empty rows on the bottom
         for (int posY = amountOfRowsPerPlayer + 2; posY < boardHeight; posY++) {
             // Per row
             for (int posX = 0; posX < boardWidth; posX++) {
                 // Per column
-                this.setGameBoardField(new GameBoardField("grass", posX, posY, FieldType.grass(fieldHeight, fieldWidth), true));
+                this.setGameBoardField(new GameBoardField(posX, posY, fieldHeight, fieldWidth, GameBoardField.GroundType.GRASS));
             }
         }
     }
