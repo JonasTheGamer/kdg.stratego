@@ -1,8 +1,10 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.view.Style;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
@@ -58,8 +60,6 @@ public class GameBoardField extends Position {
         container.setPrefHeight(paneHeight);
         container.setPrefWidth(paneWidth);
 
-        container.setId(this.positionX + "-" + this.positionY);
-
         // Set the right background
         container.setBackground((groundType == GroundType.GRASS) ? Style.grass : Style.water);
 
@@ -81,6 +81,12 @@ public class GameBoardField extends Position {
                 container.getChildren().add(ivPiece);
             }
         }
+
+        // For debugging purposes: include the position
+        Label lblPosition = new Label("X: " + positionX + "\nY: " + positionY);
+        lblPosition.setTextFill(Color.RED);
+        container.getChildren().add(lblPosition);
+        container.setId(this.positionX + "-" + this.positionY);
 
         this.pane = container;
     }

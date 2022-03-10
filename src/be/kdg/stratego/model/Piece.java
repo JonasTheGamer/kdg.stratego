@@ -56,6 +56,7 @@ public class Piece {
     ////// Remove the piece from the field
     public void removeFromField() {
         this.field.setPiece(null);
+        this.field.regeneratePane();
         this.field = null;
     }
 
@@ -84,6 +85,9 @@ public class Piece {
     public void setHidden(boolean hidden) {
         if(!Objects.isNull(field)) {
             this.hidden = hidden;
+            if(this.isOnField()) {
+                this.field.regeneratePane();
+            }
         }
     }
 

@@ -138,7 +138,7 @@ public class ArmySetupPresenter {
     }
 
     private void addEventHandlers() {
-        // Code
+        // Back button
         view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -148,6 +148,7 @@ public class ArmySetupPresenter {
             }
         });
 
+        // Start button
         view.getBtnStart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -167,8 +168,11 @@ public class ArmySetupPresenter {
 
                 // Hide the current player's pieces
                 for (Piece piece : currentPlayer.getPieces()) {
-                    piece.setHidden(true);
+                    //piece.setHidden(true);
                 }
+
+                // Flip the board
+                model.getGameBoard().flipBoard();
 
                 // Switch to the army setup view!
                 ArmySetupView armySetupView = new ArmySetupView();

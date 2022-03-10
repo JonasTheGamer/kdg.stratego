@@ -3,6 +3,8 @@ package be.kdg.stratego.model;
 import be.kdg.stratego.view.Style;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class GameBoard {
@@ -113,18 +115,74 @@ public class GameBoard {
         }
     }
 
-    public Piece[] zoekSpeelstukken(Player player) {
-        ArrayList<Piece> pieces = new ArrayList<Piece>();
-        for (GameBoardField[] fieldsRow: gameBoardFields) {
-            for (GameBoardField field: fieldsRow) {
-                if(field.getPiece().getPlayer().equals(player)) {
-                    pieces.add(field.getPiece());
+    public void flipBoard() {
+        // Reverse 2D array
+        //// Reverse the rows
+        for (int i = 0; i < gameBoardFields.length; i++) {
+            // Get the row
+            GameBoardField[] row = gameBoardFields[i];
+
+            // Cast it to a list & reverse it
+            List<GameBoardField> rowAsList = gbfArrayToList(row);
+            Collections.reverse(rowAsList);
+
+            // Update the array
+            gameBoardFields[i] = gbfListToArray(rowAsList);
+        }
+
+        //// Reverse the colums
+        ////// Cast it to a list & reverse it
+        List<GameBoardField[]> rowAsList = gbfArrArrayToList(gameBoardFields);
+        Collections.reverse(rowAsList);
+
+        // Update the array
+        gameBoardFields = gbfArrListToArray(rowAsList);
+
+        // Now, loop through the field's pieces and update their position
+        for (int posX = 0; posX < grootteX; posX++) {
+            for (int posY = 0; posY < grootteY; posY++) {
+                GameBoardField field = gameBoardFields[posY][posX];
+                if(field.isOccupied()) {
+                    field.setPositionX(posX);
+                    field.setPositionY(posY);
                 }
             }
         }
-
-        return (Piece[]) pieces.toArray();
     }
 
+    // Utility methods for reversing the board fields
+    public static List<GameBoardField> gbfArrayToList(GameBoardField[] arr) {
+        List<GameBoardField> intList = new ArrayList<GameBoardField>(arr.length);
 
+        for (GameBoardField i : arr)
+        {
+            intList.add(i);
+        }
+
+        return intList;
+    }
+    public static List<GameBoardField[]> gbfArrArrayToList(GameBoardField[][] arr) {
+        List<GameBoardField[]> gbfList = new ArrayList<>(arr.length);
+
+        for (GameBoardField[] i : arr)
+        {
+            gbfList.add(i);
+        }
+        return gbfList;
+    }
+
+    public static GameBoardField[] gbfListToArray(List<GameBoardField> list) {
+        GameBoardField[] convertedArray = new GameBoardField[list.size()];
+        for (int index = 0; index < list.size(); index++) {
+            convertedArray[index] = list.get(index);
+        }
+        return convertedArray;
+    }
+    public static GameBoardField[][] gbfArrListToArray(List<GameBoardField[]> list) {
+        GameBoardField[][] convertedArray = new GameBoardField[list.size()][list.get(0).length];
+        for (int index = 0; index < list.size(); index++) {
+            convertedArray[index] = list.get(index);
+        }
+        return convertedArray;
+    }
 }

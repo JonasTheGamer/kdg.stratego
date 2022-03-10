@@ -3,6 +3,9 @@ package be.kdg.stratego.model;
 import be.kdg.stratego.view.Style;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProgrammaModel {
     // Constants
     private final double gameBoardFieldHeight;
