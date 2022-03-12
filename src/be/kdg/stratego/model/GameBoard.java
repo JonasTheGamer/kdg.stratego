@@ -3,7 +3,6 @@ package be.kdg.stratego.model;
 import be.kdg.stratego.view.Style;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -102,10 +101,10 @@ public class GameBoard {
     }
 
     public void setGameBoardField(GameBoardField field) {
-        this.gameBoardFields[field.positionX][field.positionY] = field;
+        this.gameBoardFields[field.getPositionX()][field.getPositionY()] = field;
     }
 
-    public Piece getSpeelstuk(int positieX, int positieY) {
+    public Piece getPiece(int positieX, int positieY) {
         GameBoardField field = this.getGameBoardField(positieX, positieY);
 
         if(Objects.isNull(field)) {
@@ -115,39 +114,29 @@ public class GameBoard {
         }
     }
 
-    public void flipBoard() {
-        // Reverse 2D array
-        //// Reverse the rows
-        for (int i = 0; i < gameBoardFields.length; i++) {
-            // Get the row
-            GameBoardField[] row = gameBoardFields[i];
+    public void rotate() {
 
-            // Cast it to a list & reverse it
-            List<GameBoardField> rowAsList = gbfArrayToList(row);
-            Collections.reverse(rowAsList);
-
-            // Update the array
-            gameBoardFields[i] = gbfListToArray(rowAsList);
-        }
-
-        //// Reverse the colums
-        ////// Cast it to a list & reverse it
-        List<GameBoardField[]> rowAsList = gbfArrArrayToList(gameBoardFields);
-        Collections.reverse(rowAsList);
-
-        // Update the array
-        gameBoardFields = gbfArrListToArray(rowAsList);
-
-        // Now, loop through the field's pieces and update their position
+        // First, give all fields a new position
         for (int posX = 0; posX < grootteX; posX++) {
             for (int posY = 0; posY < grootteY; posY++) {
-                GameBoardField field = gameBoardFields[posY][posX];
-                if(field.isOccupied()) {
-                    field.setPositionX(posX);
-                    field.setPositionY(posY);
-                }
+                GameBoardField field = gameBoardFields [posX][posY];
+                field.setPositionX(grootteX - 1 - field.getPositionX());
+                field.setPositionY(grootteY  - 1 - field.getPositionY());
             }
         }
+
+        // Then, loop trough them to update their position in the 2D array
+        GameBoardField[][] tempGameBoardFields = new GameBoardField[grootteX][grootteY];
+
+        for (int posX = 0; posX < grootteX; posX++) {
+            for (int posY = 0; posY < grootteY; posY++) {
+                GameBoardField field = gameBoardFields [posX][posY];
+                tempGameBoardFields[field.getPositionX()][field.getPositionY()] = field;
+            }
+        }
+
+        // Update the 2D array that holds all pieces
+        gameBoardFields = tempGameBoardFields;
     }
 
     // Utility methods for reversing the board fields
@@ -185,4 +174,6 @@ public class GameBoard {
         }
         return convertedArray;
     }
+
+
 }

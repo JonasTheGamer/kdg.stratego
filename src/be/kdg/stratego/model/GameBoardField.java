@@ -83,9 +83,10 @@ public class GameBoardField extends Position {
         }
 
         // For debugging purposes: include the position
-        Label lblPosition = new Label("X: " + positionX + "\nY: " + positionY);
+        /*Label lblPosition = new Label("X: " + positionX + "\nY: " + positionY);
         lblPosition.setTextFill(Color.RED);
-        container.getChildren().add(lblPosition);
+        container.getChildren().add(lblPosition);*/
+
         container.setId(this.positionX + "-" + this.positionY);
 
         this.pane = container;
@@ -118,4 +119,17 @@ public class GameBoardField extends Position {
         return pane;
     }
 
+    // Overrides
+
+    @Override
+    public void setPositionX(int positionX) {
+        super.setPositionX(positionX);
+        regeneratePane();
+    }
+
+    @Override
+    public void setPositionY(int positionY) {
+        super.setPositionY(positionY);
+        regeneratePane();
+    }
 }

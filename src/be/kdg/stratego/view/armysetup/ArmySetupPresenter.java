@@ -73,17 +73,18 @@ public class ArmySetupPresenter {
 
             // Check if player wants to remove a piece from the board
             if(mouseEvent.getButton() == MouseButton.SECONDARY) {
-                // Check if the field is already occupied
+                // Check if the field is occupied
                 System.out.println("Removing piece from field");
-                if (!Objects.isNull(field.getPiece())) {
+                if (field.isOccupied()) {
+                    // Make sure the piece is not hidden (you can't remove your opponent's pieces)
                     Piece pieceOnField = field.getPiece();
-
-                    if (!Objects.isNull(pieceOnField)) {
+                    if(!pieceOnField.getHidden()) {
+                        // Remove the piece from the field
                         pieceOnField.removeFromField();
-                    }
 
-                    // Refresh the view
-                    updateView();
+                        // Refresh the view
+                        updateView();
+                    }
                     return;
                 }
             }
@@ -167,12 +168,10 @@ public class ArmySetupPresenter {
                 }
 
                 // Hide the current player's pieces
-                for (Piece piece : currentPlayer.getPieces()) {
-                    //piece.setHidden(true);
-                }
+                currentPlayer.hidePieces();
 
                 // Flip the board
-                model.getGameBoard().flipBoard();
+                model.getGameBoard().rotate();
 
                 // Switch to the army setup view!
                 ArmySetupView armySetupView = new ArmySetupView();
@@ -269,25 +268,19 @@ public class ArmySetupPresenter {
         }
 
         // Game board
-        //// Empty game board
+        //// Empty game board gridpane
         view.getGpBoard().getChildren().clear();
 
-        //// Fill the board & add them to the gridpane
+        //// Add the fields to the gridpane
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
 
-        for (int posX = 0; posX < model.getGameBoard().getGrootteX(); posX++) {
-            for (int posY = 0; posY < model.getGameBoard().getGrootteY(); posY++) {
-                GameBoardField field = fields[posX][posY];
+        for (GameBoardField[] fieldColumn : fields) {
+            for (GameBoardField field : fieldColumn) {
                 StackPane fieldPane = field.getPane();
                 fieldPane.setOnMouseClicked(onFieldClick);
-
-                //field.getType().setId(field.getPositionX() + "-" + field.getPositionY());
-                //field.getType().setOnMouseClicked(onFieldClick);
-                view.getGpBoard().add(field.getPane(), field.getPositionX(), field.getPositionY());
+                view.getGpBoard().add(fieldPane, field.getPositionX(), field.getPositionY());
             }
         }
-
-
     }
 
     public void addWindowEventHandlers() {

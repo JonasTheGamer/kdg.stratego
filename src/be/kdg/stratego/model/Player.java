@@ -11,6 +11,7 @@ public class Player {
     private String flag;
     private ArrayList<Piece> pieces = new ArrayList<>();
 
+    // Constructor
     public Player(String naam, Color color, String flag) {
         this.name = naam;
         this.color = color;
@@ -19,6 +20,7 @@ public class Player {
         this.givePieces();
     }
 
+    // Methods
     public void givePieces() {
         // 6 bombs
         for (int i = 0; i < 6; i++) {
@@ -73,6 +75,19 @@ public class Player {
         pieces.add(new Flag(this, this.flag));
     }
 
+    public void hidePieces() {
+        for (Piece piece : pieces) {
+            piece.setHidden(true);
+        }
+    }
+
+    public void showPieces() {
+        for (Piece piece : pieces) {
+            piece.setHidden(false);
+        }
+    }
+
+    // Getters and setters
     public String getName() {
         return name;
     }
