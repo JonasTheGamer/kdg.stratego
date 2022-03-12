@@ -1,7 +1,11 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.view.Style;
+import javafx.beans.binding.Bindings;
+import javafx.scene.CacheHint;
 import javafx.scene.control.Label;
+import javafx.scene.effect.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -66,9 +70,38 @@ public class GameBoardField extends Position {
         // If there's a piece on it, place it
         if(this.isOccupied()) {
             // Define the tower image
-            ImageView ivTower = new ImageView((this.piece.getHidden() ? "/hiddenTower.png" : "/emptyTower.png"));
+            String towerImage = (this.piece.getHidden() ? "/towerBackView.png" : "/towerFrontView.png");
+
+            // Define the main imageView
+            ImageView ivTower = new ImageView(towerImage);
             ivTower.setFitHeight(paneHeight * 0.95);
             ivTower.setFitWidth(paneWidth * 0.95);
+
+            // Define the clip imageView
+            ImageView ivClip = new ImageView(towerImage);
+            ivClip.setFitHeight(paneHeight * 0.95);
+            ivClip.setFitWidth(paneWidth * 0.95);
+
+            // Set the image view clip
+            ivTower.setClip(ivClip);
+
+            // Color the tower image
+            ColorAdjust monochrome = new ColorAdjust();
+            monochrome.setSaturation(-1.0);
+
+            Blend blush = new Blend(
+                    BlendMode.MULTIPLY,
+                    monochrome,
+                    new ColorInput(
+                            0,
+                            0,
+                            ivTower.getImage().getWidth(),
+                            ivTower.getImage().getHeight(),
+                            piece.getPlayer().getColor()
+                    )
+            );
+
+            ivTower.setEffect(blush);
 
             container.getChildren().add(ivTower);
 

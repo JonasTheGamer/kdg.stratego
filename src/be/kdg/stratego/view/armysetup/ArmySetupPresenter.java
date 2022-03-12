@@ -5,6 +5,8 @@ import be.kdg.stratego.model.Player;
 import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.model.GameBoardField;
 import be.kdg.stratego.view.Style;
+import be.kdg.stratego.view.battlefield.BattleFieldPresenter;
+import be.kdg.stratego.view.battlefield.BattleFieldView;
 import be.kdg.stratego.view.newgame.NewGamePresenter;
 import be.kdg.stratego.view.newgame.NewGameView;
 import javafx.event.ActionEvent;
@@ -26,6 +28,8 @@ public class ArmySetupPresenter {
     private ArmySetupView view;
     private HashMap<String, Integer> piecesToPlace = new HashMap();
     private Player currentPlayer;
+    private int playerIndex;
+
     private String lastClickedId = "";
 
     private Boolean placingPiece = false;
@@ -125,17 +129,14 @@ public class ArmySetupPresenter {
         }
     };
 
-    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view, Player currentPlayer) {
+    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view, Player currentPlayer, int playerIndex) {
         this.model = model;
         this.view = view;
         this.currentPlayer = currentPlayer;
+        this.playerIndex = playerIndex;
 
         this.addEventHandlers();
         this.updateView();
-    }
-
-    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
-        this(model, view, new Player("Test player 1", Color.WHITE, "default"));
     }
 
     private void addEventHandlers() {
@@ -173,10 +174,18 @@ public class ArmySetupPresenter {
                 // Flip the board
                 model.getGameBoard().rotate();
 
-                // Switch to the army setup view!
-                ArmySetupView armySetupView = new ArmySetupView();
-                ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[1]);
-                view.getScene().setRoot(armySetupView);
+                // Check if we're on the first (0) or second (1) player
+                if(playerIndex == 0) {
+                    // Reload this windo for the next player
+                    ArmySetupView armySetupView = new ArmySetupView();
+                    ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[1], 1);
+                    view.getScene().setRoot(armySetupView);
+                } else {
+                    // Start the game!
+                    BattleFieldView battleFieldView = new BattleFieldView();
+                    BattleFieldPresenter battleFieldPresenter = new BattleFieldPresenter(model, battleFieldView);
+                    view.getScene().setRoot(battleFieldView);
+                }
             }
         });
 

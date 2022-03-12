@@ -56,8 +56,6 @@ public class ArmySetupView extends BorderPane {
         vbGame = new VBox();
 
         // The gridpane gpPieces will be filled in the presenter class with all pieces that are available.
-        // The gridpane gpBoard will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
-
     }
 
     public void LayoutNodes() {
