@@ -1,8 +1,8 @@
 package be.kdg.stratego.model;
 
+import be.kdg.stratego.model.pieces.*;
 import javafx.scene.paint.Color;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class Player {
