@@ -24,16 +24,38 @@ public class NewGamePresenter {
     }
 
     private void addEventHandlers() {
-        // Code
 
-        // Change name label on text change
-        view.getTxtName()[0].setOnKeyTyped(keyEvent -> view.getLblName()[0].setText(view.getTxtName()[0].getText()));
-        view.getTxtName()[1].setOnKeyTyped(keyEvent -> view.getLblName()[1].setText(view.getTxtName()[1].getText()));
+        int maxCharacters = 10;
+        view.getTxtName()[0].setOnKeyTyped(keyEvent -> {
+            //Max characters for name
+            String input = view.getTxtName()[0].getText();
+
+            if (input.length() > maxCharacters) {
+                view.getTxtName()[0].setText(input.substring(0, maxCharacters));
+                view.getTxtName()[0].positionCaret(maxCharacters);
+            }
+
+            //Change Lblname
+            view.getLblName()[0].setText(view.getTxtName()[0].getText());
+        });
+        view.getTxtName()[1].setOnKeyTyped(keyEvent -> {
+            //Max characters for name
+            String input = view.getTxtName()[1].getText();
+
+            if (input.length() > maxCharacters) {
+                view.getTxtName()[1].setText(input.substring(0, maxCharacters));
+                view.getTxtName()[1].positionCaret(maxCharacters);
+            }
+
+            //Change Lblname
+            view.getLblName()[1].setText(view.getTxtName()[1].getText());
+        });
+
 
         view.getBtnReady().setOnAction(actionEvent -> {
             // Create players
-            model.getGame().setPlayer1(new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(),"default"));
-            model.getGame().setPlayer2(new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(),"default"));
+            model.getGame().setPlayer1(new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(), "default"));
+            model.getGame().setPlayer2(new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(), "default"));
 
             // Get the board ready
             model.createGameBoard();
@@ -44,12 +66,12 @@ public class NewGamePresenter {
             view.getScene().setRoot(armySetupView);
         });
 
+
         view.getBtnCancel().setOnAction(actionEvent -> {
             MainMenuView newMainMenuView = new MainMenuView();
             MainMenuPresenter newMainMenuPresenter = new MainMenuPresenter(model, newMainMenuView);
             view.getScene().setRoot(newMainMenuView);
         });
-
     }
 
     private void updateView() {
