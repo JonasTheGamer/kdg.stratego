@@ -38,11 +38,6 @@ public class MainMenuPresenter {
         });
 
         view.getBtnHelp().setOnAction(actionEvent -> view.getBtnHelp().setText("Nee"));
-
-        view.getGpHighscores().setOnMouseClicked(mouseEvent -> {
-            model.getHighscores().clear();
-            model.updateHighscores();
-        });
     }
 
     private void updateView() {
