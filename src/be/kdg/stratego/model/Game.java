@@ -60,7 +60,7 @@ public class Game {
                 System.out.println("An error occurred whilst trying to check if the file already exists. Please make sure the path is valid.");
                 fileOk = false;
             }
-        };
+        }
 
         // Let the saving begin!
         try {
