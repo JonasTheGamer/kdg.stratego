@@ -3,30 +3,22 @@ package be.kdg.stratego.model;
 import be.kdg.stratego.view.Style;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProgrammaModel {
-    // Constants
-    private final double gameBoardFieldHeight;
-    private final double gameBoardFieldWidth;
-
     private Game game;
-    private GameBoard gameBoard;
+    private Highscore[] highscore;
 
     // Constructor
     public ProgrammaModel() {
-        // Initialize player array
         game = new Game();
-
-        // Set field height & width
-        gameBoardFieldHeight = Style.size(50);
-        gameBoardFieldWidth = Style.size(50);
     }
 
-    public void createGameBoard() {
-        this.gameBoard = new GameBoard(gameBoardFieldHeight, gameBoardFieldWidth);
-    }
+    // Methoden
 
     // Getters & setters
     public Game getGame() {
@@ -34,6 +26,6 @@ public class ProgrammaModel {
     }
 
     public GameBoard getGameBoard() {
-        return gameBoard;
+        return game.getGameBoard();
     }
 }

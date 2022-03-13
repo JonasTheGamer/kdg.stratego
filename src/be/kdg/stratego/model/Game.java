@@ -1,48 +1,24 @@
 package be.kdg.stratego.model;
 import be.kdg.stratego.customUtil.AskUtility;
+import be.kdg.stratego.view.Style;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 public class Game {
+    private final double gameBoardFieldHeight = Style.size(50);
+    private final double gameBoardFieldWidth = Style.size(50);
+
     private Player[] players;
     private LocalDateTime startTijd;
     private LocalDateTime eindTijd;
     private boolean ongoing = false;
-    private GameBoard speelbord;
+    private GameBoard gameBoard;
 
     public Game() {
         this.players = new Player[2];
-        this.speelbord = new GameBoard();
-    }
-
-    public Player[] getPlayers() {
-        return players;
-    }
-
-    public void setPlayer1(Player player) {
-        this.players[0] = player;
-    }
-
-    public void setPlayer2(Player player) {
-        this.players[1] = player;
-    }
-
-    public LocalDateTime getStartTijd() {
-        return startTijd;
-    }
-
-    public void setStartTijd(LocalDateTime startTijd) {
-        this.startTijd = startTijd;
-    }
-
-    public LocalDateTime getEindTijd() {
-        return eindTijd;
-    }
-
-    public void setEindTijd(LocalDateTime eindTijd) {
-        this.eindTijd = eindTijd;
+        this.gameBoard = new GameBoard(gameBoardFieldHeight, gameBoardFieldWidth);
     }
 
     public void start() {
@@ -119,5 +95,49 @@ public class Game {
         ongoing = false;
         this.eindTijd = LocalDateTime.now();
         System.out.println("The game has been stopped.");
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public void setPlayer1(Player player) {
+        this.players[0] = player;
+    }
+
+    public void setPlayer2(Player player) {
+        this.players[1] = player;
+    }
+
+    public LocalDateTime getStartTijd() {
+        return startTijd;
+    }
+
+    public void setStartTijd(LocalDateTime startTijd) {
+        this.startTijd = startTijd;
+    }
+
+    public LocalDateTime getEindTijd() {
+        return eindTijd;
+    }
+
+    public void setEindTijd(LocalDateTime eindTijd) {
+        this.eindTijd = eindTijd;
+    }
+
+    public boolean isOngoing() {
+        return ongoing;
+    }
+
+    public void setOngoing(boolean ongoing) {
+        this.ongoing = ongoing;
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
     }
 }

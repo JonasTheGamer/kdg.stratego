@@ -57,9 +57,6 @@ public class NewGamePresenter {
             model.getGame().setPlayer1(new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(), "default"));
             model.getGame().setPlayer2(new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(), "default"));
 
-            // Get the board ready
-            model.createGameBoard();
-
             // Switch to the army setup view!
             ArmySetupView armySetupView = new ArmySetupView();
             ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[0], 0);
