@@ -21,20 +21,6 @@ public class ProgrammaModel {
     }
 
     // Methoden
-    public void setNewHighscore(String name, int score) {
-        ArrayList<String> lines = new ArrayList<String>();
-
-        /// Add line to list
-        lines.add(name + ";" + score);
-
-        /// Write lines to file
-        try {
-            Files.write(this.highscoreFile.toPath(), lines, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void updateHighscores() {
         /// Deleting duplicates
         highscores.clear();
@@ -54,7 +40,22 @@ public class ProgrammaModel {
         }
     }
 
-    // Getters & setters
+    // Setter
+    public void setNewHighscore(String name, int score) {
+        ArrayList<String> lines = new ArrayList<String>();
+
+        /// Add line to list
+        lines.add(name + ";" + score);
+
+        /// Write lines to file
+        try {
+            Files.write(this.highscoreFile.toPath(), lines, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Getters
     public Game getGame() {
         return game;
     }
