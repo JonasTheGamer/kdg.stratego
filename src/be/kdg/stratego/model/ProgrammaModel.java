@@ -18,7 +18,6 @@ public class ProgrammaModel {
     public ProgrammaModel() {
         game = new Game();
         highscores = new TreeSet<Highscore>();
-        updateHighscores();
     }
 
     // Methoden
