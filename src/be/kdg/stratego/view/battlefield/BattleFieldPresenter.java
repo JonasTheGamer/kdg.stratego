@@ -14,8 +14,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.logging.SocketHandler;
 
 public class BattleFieldPresenter {
     private ProgrammaModel model;
@@ -24,6 +27,7 @@ public class BattleFieldPresenter {
 
     // Variables for moving a piece
     private MovingPiece selectedPiece;
+    private HashSet<GameBoardField> allowedMoves;
 
     private final EventHandler onFieldClick = new EventHandler<MouseEvent>() {
         @Override
@@ -40,7 +44,17 @@ public class BattleFieldPresenter {
             // Now, figure out the field object
             GameBoardField field = model.getGameBoard().getGameBoardField(posX, posY);
 
-            // Did the player click on a piece that's one of their own?
+            // UNSELECT - Check if player clicked on the currently selected piece
+            if(field.isOccupied() && field.getPiece().equals(selectedPiece)) {
+                // Clear the selection
+                clearSelection();
+
+                // Update view
+                updateView();
+                return;
+            }
+
+            // SELECT - Did the player click on a piece that's one of their own?
             if (field.isOccupied() && field.getPiece().getPlayer().equals(currentPlayer)) {
                 // They probably want to move this piece
                 Piece piece = field.getPiece();
@@ -49,22 +63,35 @@ public class BattleFieldPresenter {
                 if(piece instanceof MovingPiece) {
                     // Select it for movement!
                     selectedPiece = (MovingPiece) piece;
+
+                    // Get the allowed moves
+                    allowedMoves = model.getGameBoard().getAllowedMoves(selectedPiece);
+
+                    // Highlight them
+                    model.getGameBoard().highLightAllowedMoves(selectedPiece);
+
+                    updateView();
+
                     return;
-                } else {
-                    // Ignore their request
-                    return;
-                }
-            } else {
-                // They probably clicked somewhere where they want their selected piece to go.
-                // Let's check if they have one selected
-                if(!Objects.isNull(selectedPiece)) {
-                    // Attempt to move the piece
                 } else {
                     // Ignore their request
                     return;
                 }
             }
 
+            // MOVE - Did the player click in one of the allowed fields (allowedMoves)?
+            if(allowedMoves.contains(field)) {
+                MovingPiece piece = (MovingPiece) selectedPiece;
+
+                // Clear the selection
+                clearSelection();
+
+                // Move the field
+                piece.moveTo(field);
+
+                // Update the view
+                updateView();
+            }
         }
     };
 
@@ -75,6 +102,9 @@ public class BattleFieldPresenter {
         // Set the first player who will be playing
         currentPlayer = model.getGame().getPlayers()[0];
 
+        // Initialize allowed moves
+        allowedMoves = new HashSet<>();
+
         // Make their pieces visible
         currentPlayer.showPieces();
 
@@ -82,6 +112,14 @@ public class BattleFieldPresenter {
         this.updateView();
     }
 
+    public void clearSelection() {
+        // Unhighlight
+        model.getGameBoard().unHighlightAllFields();
+
+        // Unselect
+        selectedPiece = null;
+        allowedMoves.clear();
+    }
     private void addEventHandlers() {
 
     }

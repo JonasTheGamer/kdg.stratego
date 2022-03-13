@@ -16,6 +16,7 @@ public class GameBoardField extends Position {
     // GameBoardField properties
     private Piece piece;
     private boolean walkable;
+    private boolean highlighted;
 
     // Field (stackpane) properties
     private StackPane pane;
@@ -38,6 +39,9 @@ public class GameBoardField extends Position {
 
         // Set piece
         this.piece = piece;
+
+        // Set highligted to false
+        this.highlighted = false;
 
         // Set parameters for the pane
         this.paneHeight = paneHeight;
@@ -65,7 +69,11 @@ public class GameBoardField extends Position {
         container.setPrefWidth(paneWidth);
 
         // Set the right background
-        container.setBackground((groundType == GroundType.GRASS) ? Style.grass : Style.water);
+        if(groundType == GroundType.GRASS) {
+            container.setBackground((this.highlighted) ? Style.highlightedGrass : Style.grass);
+        } else {
+            container.setBackground(Style.water);
+        }
 
         // If there's a piece on it, place it
         if(this.isOccupied()) {
@@ -103,6 +111,9 @@ public class GameBoardField extends Position {
 
             ivTower.setEffect(blush);
 
+            ivTower.setCache(true);
+            ivTower.setCacheHint(CacheHint.SPEED);
+
             container.getChildren().add(ivTower);
 
             // If the piece is not hidden, add the icon
@@ -128,6 +139,18 @@ public class GameBoardField extends Position {
     // Check if a piece is placed on this field
     public boolean isOccupied() {
         return !(Objects.isNull(this.piece));
+    }
+
+    // Highlight field
+    public void highLight() {
+        this.highlighted = true;
+        regeneratePane();
+    }
+
+    // Unhighlight field
+    public void unHighLight() {
+        this.highlighted = false;
+        regeneratePane();
     }
 
     // Getters & setters

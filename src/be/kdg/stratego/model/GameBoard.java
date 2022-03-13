@@ -2,8 +2,7 @@ package be.kdg.stratego.model;
 
 import be.kdg.stratego.view.Style;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class GameBoard {
@@ -68,52 +67,7 @@ public class GameBoard {
         this(Style.size(50), Style.size(50));
     }
 
-    public int getGrootteX() {
-        return grootteX;
-    }
-
-    public void setGrootteX(int grootteX) {
-        this.grootteX = grootteX;
-    }
-
-    public int getGrootteY() {
-        return grootteY;
-    }
-
-    public void setGrootteY(int grootteY) {
-        this.grootteY = grootteY;
-    }
-
-    public GameBoardField[][] getGameBoardFields() {
-        return this.gameBoardFields;
-    }
-
-    public GameBoardField getGameBoardField(int positieX, int positieY) {
-        GameBoardField foundField = null;
-        for (GameBoardField[] fieldsRow: gameBoardFields) {
-            for (GameBoardField field: fieldsRow) {
-                if(field.positionX == positieX && field.positionY == positieY) {
-                    foundField = field;
-                }
-            }
-        }
-        return foundField;
-    }
-
-    public void setGameBoardField(GameBoardField field) {
-        this.gameBoardFields[field.getPositionX()][field.getPositionY()] = field;
-    }
-
-    public Piece getPiece(int positieX, int positieY) {
-        GameBoardField field = this.getGameBoardField(positieX, positieY);
-
-        if(Objects.isNull(field)) {
-            return null;
-        } else {
-            return field.getPiece();
-        }
-    }
-
+    // Method to rotate the board
     public void rotate() {
 
         // First, give all fields a new position
@@ -139,41 +93,95 @@ public class GameBoard {
         gameBoardFields = tempGameBoardFields;
     }
 
-    // Utility methods for reversing the board fields
-    public static List<GameBoardField> gbfArrayToList(GameBoardField[] arr) {
-        List<GameBoardField> intList = new ArrayList<GameBoardField>(arr.length);
+    public HashSet<GameBoardField> getAllowedMoves(MovingPiece piece) {
+        HashSet<GameBoardField> allowedMoves = new HashSet<>();
+        HashSet<GameBoardField> allFields = new HashSet<>();
+        GameBoardField field = piece.getField();
 
-        for (GameBoardField i : arr)
-        {
-            intList.add(i);
+        // First, check if the piece is a scout
+        if(piece.rank == 2) {
+            // Do stuff for scout
+        } else {
+            // Do stuff for other pieces. They can move one step at a time
+            GameBoardField fieldOnTop = this.getGameBoardField(field.positionX, field.positionY -1 );
+            GameBoardField fieldOnBottom = this.getGameBoardField(field.positionX, field.positionY +1 );
+            GameBoardField fieldOnLeft = this.getGameBoardField(field.positionX -1, field.positionY );
+            GameBoardField fieldOnRight = this.getGameBoardField(field.positionX +1, field.positionY );
+
+            if(!Objects.isNull(fieldOnTop)) allFields.add(fieldOnTop);
+            if(!Objects.isNull(fieldOnBottom)) allFields.add(fieldOnBottom);
+            if(!Objects.isNull(fieldOnLeft)) allFields.add(fieldOnLeft);
+            if(!Objects.isNull(fieldOnRight)) allFields.add(fieldOnRight);
         }
 
-        return intList;
-    }
-    public static List<GameBoardField[]> gbfArrArrayToList(GameBoardField[][] arr) {
-        List<GameBoardField[]> gbfList = new ArrayList<>(arr.length);
-
-        for (GameBoardField[] i : arr)
-        {
-            gbfList.add(i);
+        // Check if the fields are allowed (basically, no piece from the same player can be on it)
+        for(GameBoardField fieldToCheck : allFields) {
+            if(fieldToCheck.getPiece() == null || fieldToCheck.getPiece().getPlayer() != piece.getPlayer()) {
+                allowedMoves.add(fieldToCheck);
+            }
         }
-        return gbfList;
+
+        return allowedMoves;
     }
 
-    public static GameBoardField[] gbfListToArray(List<GameBoardField> list) {
-        GameBoardField[] convertedArray = new GameBoardField[list.size()];
-        for (int index = 0; index < list.size(); index++) {
-            convertedArray[index] = list.get(index);
+    // Method to highlight allowed moves
+    public void highLightAllowedMoves(MovingPiece piece) {
+        GameBoardField field = piece.getField();
+
+        // Unhighlight all fields
+        unHighlightAllFields();
+
+        // Highlight the field itself
+        field.highLight();
+
+        // Get the allowed moves
+        HashSet<GameBoardField> allowedMoves = getAllowedMoves(piece);
+
+        // Highlight them
+        for(GameBoardField fieldToHighlight : allowedMoves) {
+            fieldToHighlight.highLight();
         }
-        return convertedArray;
-    }
-    public static GameBoardField[][] gbfArrListToArray(List<GameBoardField[]> list) {
-        GameBoardField[][] convertedArray = new GameBoardField[list.size()][list.get(0).length];
-        for (int index = 0; index < list.size(); index++) {
-            convertedArray[index] = list.get(index);
-        }
-        return convertedArray;
     }
 
+    // Method to unhighlight all fields
+    public void unHighlightAllFields() {
+        // Loop through all fields
+        for (int posX = 0; posX < grootteX; posX++) {
+            for (int posY = 0; posY < grootteY; posY++) {
+                GameBoardField field = gameBoardFields[posX][posY];
+                field.unHighLight();
+            }
+        }
+    }
+
+    public int getGrootteX() {
+        return grootteX;
+    }
+
+    public int getGrootteY() {
+        return grootteY;
+    }
+
+    public GameBoardField[][] getGameBoardFields() {
+        return this.gameBoardFields;
+    }
+
+    public GameBoardField getGameBoardField(int posX, int posY) {
+        GameBoardField foundField = null;
+
+        // We're looping through it this way so it throws null instead of an indexOutOfBoundsException
+        for (GameBoardField[] fieldsRow: gameBoardFields) {
+            for (GameBoardField field: fieldsRow) {
+                if(field.positionX == posX && field.positionY == posY) {
+                    foundField = field;
+                }
+            }
+        }
+        return foundField;
+    }
+
+    public void setGameBoardField(GameBoardField field) {
+        this.gameBoardFields[field.getPositionX()][field.getPositionY()] = field;
+    }
 
 }
