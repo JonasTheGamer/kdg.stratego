@@ -15,7 +15,10 @@ public class MainMenuView extends VBox {
     private Button btnHelp;
     private Button btnQuit;
     private Label lblHighscores;
-    private Label lblScores;
+    private Label lblPositie;
+    private Label lblScore;
+    private Label lblName;
+    private GridPane gpHighscores;
 
     // Panes
     private VBox vBoxTitles;
@@ -33,7 +36,10 @@ public class MainMenuView extends VBox {
         this.btnHelp = new Button("Help");
         this.btnQuit = new Button("Quit");
         this.lblHighscores = new Label("Highscores");
-        this.lblScores = new Label("score\nscore\nscore\nscore\nscore\nscore\nscore\nscore\nscore\nscore");
+        this.lblPositie = new Label("Rank");
+        this.lblScore = new Label("Score");
+        this.lblName = new Label("Name");
+        this.gpHighscores = new GridPane();
 
         // Panes
         this.vBoxTitles = new VBox();
@@ -49,10 +55,17 @@ public class MainMenuView extends VBox {
         Style.btn(btnHelp, Style.fontSize(15));
         Style.btn(btnQuit, Style.fontSize(15));
 
-        Style.txt(lblScores, Style.fontSize(10));
-
         Style.txt(lblHighscores, Style.fontSize(12));
         lblHighscores.setStyle("-fx-font-weight: bold");
+
+        Style.txt(lblPositie, Style.fontSize(10));
+        Style.txt(lblScore, Style.fontSize(10));
+        Style.txt(lblName, Style.fontSize(10));
+
+        gpHighscores.add(lblPositie,0,0);
+        gpHighscores.add(lblScore,1,0);
+        gpHighscores.add(lblName,2,0);
+        gpHighscores.setHgap(20);
 
         hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
         hBoxTitlesAndLeaderboard.setSpacing(Style.size(40));
@@ -72,7 +85,7 @@ public class MainMenuView extends VBox {
         // Add to panes
         hBoxTitlesAndLeaderboard.getChildren().addAll(vBoxTitles, vBoxLeaderboards);
         vBoxTitles.getChildren().addAll(btnPlay, btnHelp, btnQuit);
-        vBoxLeaderboards.getChildren().addAll(lblHighscores, lblScores);
+        vBoxLeaderboards.getChildren().addAll(lblHighscores, gpHighscores);
 
         this.getChildren().addAll(imgTitle, hBoxTitlesAndLeaderboard);
     }
@@ -97,8 +110,8 @@ public class MainMenuView extends VBox {
         return lblHighscores;
     }
 
-    public Label getLblScores() {
-        return lblScores;
+    public GridPane getGpHighscores() {
+        return gpHighscores;
     }
 
     public VBox getvBoxTitles() {
