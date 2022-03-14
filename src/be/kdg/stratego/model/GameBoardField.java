@@ -26,19 +26,15 @@ public class GameBoardField extends Position {
     private double paneWidth;
 
     // Enumeration for ground type
-    public static enum GroundType {
+    public enum GroundType {
         GRASS,
         WATER
     }
 
-    // Constructor with piece to be placed on the field
-    public GameBoardField(int posX, int posY, double paneHeight, double paneWidth, GroundType groundType, Piece piece) {
+    public GameBoardField(int posX, int posY, double paneHeight , double paneWidth, GroundType groundType) {
         // Set position
         this.positionX = posX;
         this.positionY = posY;
-
-        // Set piece
-        this.piece = piece;
 
         // Set highligted to false
         this.highlighted = false;
@@ -55,16 +51,10 @@ public class GameBoardField extends Position {
         regeneratePane();
     }
 
-    // Constructor without the piece to be placed on the field
-    public GameBoardField(int posX, int posY, double paneHeight , double paneWidth, GroundType groundType) {
-        this(posX, posY,paneHeight, paneWidth, groundType, null);
-    }
-
     // Methodes
     public void regeneratePane() {
         // Generate the main stackpane
         StackPane container = new StackPane();
-        container.setBackground(Style.water);
 
         container.setPrefHeight(paneHeight);
         container.setPrefWidth(paneWidth);

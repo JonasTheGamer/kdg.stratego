@@ -6,12 +6,8 @@ import be.kdg.stratego.model.Player;
 
 public class Spy extends MovingPiece {
 
-    public Spy(Player player, GameBoardField field) {
-        super(player, "spy", "/pieces/spy.png", 1, field);
-    }
-
     public Spy(Player player) {
-        this(player, null);
+        super(player, "spy", "/pieces/spy.png", 1);
     }
 
     public void detonate() {

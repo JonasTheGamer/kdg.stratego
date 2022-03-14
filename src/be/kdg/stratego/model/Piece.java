@@ -9,23 +9,11 @@ public class Piece {
     protected String image;
     protected boolean hidden;
 
-    // Constructors
-
-    //// Default constructor
-    public Piece() {}
-
-    //// Constructor with field
-    public Piece(Player player, String name, String image, GameBoardField field)  {
+    public Piece(Player player, String name, String image)  {
         this.player = player;
         this.name = name;
-        this.field = field;
         this.image = image;
         this.hidden = false;
-    }
-
-    //// Constructor without field
-    public Piece(Player player, String name, String defaultImage) {
-        this(player, name, defaultImage, null);
     }
 
     //Methods

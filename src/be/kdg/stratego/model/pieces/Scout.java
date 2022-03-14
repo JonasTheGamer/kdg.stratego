@@ -6,12 +6,8 @@ import be.kdg.stratego.model.Player;
 
 public class Scout extends MovingPiece {
 
-    public Scout(Player player, GameBoardField field) {
-        super(player, "scout", "/pieces/scout.png", 2, field);
-    }
-
     public Scout(Player player) {
-        this(player, null);
+        super(player, "scout", "/pieces/scout.png", 2);
     }
 
     public void detonate() {

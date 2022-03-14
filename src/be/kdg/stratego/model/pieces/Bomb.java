@@ -6,12 +6,8 @@ import be.kdg.stratego.model.Player;
 
 public class Bomb extends Piece {
 
-    public Bomb(Player player, GameBoardField field ) {
-        super(player,"bomb","/pieces/bomb.png",field);
-    }
-
     public Bomb(Player player) {
-        this(player, null);
+        super(player,"bomb","/pieces/bomb.png");
     }
 
     public void detonate() {

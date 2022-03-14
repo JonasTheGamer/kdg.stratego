@@ -6,12 +6,8 @@ import be.kdg.stratego.model.Player;
 
 public class Colonel extends MovingPiece {
 
-    public Colonel(Player player, GameBoardField field) {
-        super(player, "colonel", "/pieces/colonel.png", 8, field);
-    }
-
     public Colonel(Player player) {
-        this(player, null);
+        super(player, "colonel", "/pieces/colonel.png", 8);
     }
 
     public void detonate() {
