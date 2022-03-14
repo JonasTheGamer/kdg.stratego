@@ -5,6 +5,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.shape.StrokeType;
 
 public class NewGameView extends HBox {
     // Controls
@@ -73,14 +77,14 @@ public class NewGameView extends HBox {
         lblFlagTitle[1] = new Label("Flag");
 
         btnFlag = new Button[2][4];
-        btnFlag[0][0] = new Button("Flag 1");
-        btnFlag[0][1] = new Button("Flag 2");
-        btnFlag[0][2] = new Button("Flag 3");
-        btnFlag[0][3] = new Button("Flag 4");
-        btnFlag[1][0] = new Button("Flag 1");
-        btnFlag[1][1] = new Button("Flag 2");
-        btnFlag[1][2] = new Button("Flag 3");
-        btnFlag[1][3] = new Button("Flag 4");
+        btnFlag[0][0] = new Button();
+        btnFlag[0][1] = new Button();
+        btnFlag[0][2] = new Button();
+        btnFlag[0][3] = new Button();
+        btnFlag[1][0] = new Button();
+        btnFlag[1][1] = new Button();
+        btnFlag[1][2] = new Button();
+        btnFlag[1][3] = new Button();
 
         imgTitle = new ImageView("/title.png");
 
@@ -166,10 +170,16 @@ public class NewGameView extends HBox {
             Style.txt(lbl, 15);
         }
 
-        for (Button[] player : btnFlag) {
-            for (Button btn : player) {
+        for (Button[] playerButtons : btnFlag) {
+            for (Button btn : playerButtons) {
                 btn.setPrefSize(Style.size(125), Style.size(70));
             }
+            playerButtons[0].setId("/pieces/flag.png");
+            playerButtons[0].setBackground(Style.bgImage("/pieces/flag.png", false));
+            playerButtons[0].setBorder(Style.borderWhite);
+            playerButtons[1].setId("/pieces/flag.png");
+            playerButtons[2].setId("/pieces/flag.png");
+            playerButtons[3].setId("/pieces/flag.png");
         }
 
         for (int i = 0; i < gpFlags.length; i++) {
@@ -219,7 +229,7 @@ public class NewGameView extends HBox {
         ///View
         this.getChildren().addAll(hb);
         this.setSpacing(Style.size(20));
-        this.setBackground(Style.applicationBackground);
+        this.setBackground(Style.bgApplication);
         this.setAlignment(Pos.CENTER);
     }
 

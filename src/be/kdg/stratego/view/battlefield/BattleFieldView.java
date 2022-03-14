@@ -1,7 +1,6 @@
 package be.kdg.stratego.view.battlefield;
 
 import be.kdg.stratego.view.Style;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -40,7 +39,7 @@ public class BattleFieldView extends BorderPane {
 
     public void LayoutNodes() {
         // Main borderpane
-        this.setBackground(Style.applicationBackground);
+        this.setBackground(Style.bgApplication);
 
         // Header (clock, title & close button)
         hbHeader.setAlignment(Pos.CENTER);

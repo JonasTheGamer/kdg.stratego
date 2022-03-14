@@ -78,7 +78,7 @@ public class MainMenuView extends VBox {
         vBoxLeaderboards.setAlignment(Pos.CENTER);
         vBoxLeaderboards.setSpacing(Style.size(10));
 
-        this.setBackground(Style.applicationBackground);
+        this.setBackground(Style.bgApplication);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(Style.size(60));
 

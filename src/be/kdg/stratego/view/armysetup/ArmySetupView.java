@@ -60,7 +60,7 @@ public class ArmySetupView extends BorderPane {
 
     public void LayoutNodes() {
         // Main borderpane
-        this.setBackground(Style.applicationBackground);
+        this.setBackground(Style.bgApplication);
 
         // Header (title)
 

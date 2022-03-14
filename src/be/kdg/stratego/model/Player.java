@@ -107,4 +107,8 @@ public class Player {
     public ArrayList<Piece> getPieces() {
         return pieces;
     }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
 }

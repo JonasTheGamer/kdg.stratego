@@ -11,37 +11,24 @@ import javafx.stage.Screen;
 
 public class Style {
     private static double base = 1.25;
-    public static Background applicationBackground = new Background(new BackgroundImage(
-            new Image("background.jpg"),
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.SPACE,
-            BackgroundPosition.CENTER,
-            new BackgroundSize(1.0, 1.0, true, true, false, false)
-    ));
 
-    public static Background grass = new Background(new BackgroundImage(
-            new Image("grassTexture.png"),
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER,
-            new BackgroundSize(1.0, 1.0, true, true, false, true)
-    ));
+    public static Background bgImage(String path, boolean contain) {
+        return new Background(new BackgroundImage(
+                new Image(path),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(1.0, 1.0, true, true, true, contain)
+        ));
+    }
 
-    public static Background highlightedGrass = new Background(new BackgroundImage(
-            new Image("highlightedGrassTexture.png"),
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER,
-            new BackgroundSize(1.0, 1.0, true, true, false, true)
-    ));
+    public static Background bgApplication = bgImage("background.jpg", true);
 
-    public static Background water = new Background(new BackgroundImage(
-            new Image("waterTexture.png"),
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER,
-            new BackgroundSize(1.0, 1.0, true, true, false, true)
-    ));
+    public static Background grass = bgImage("grassTexture.png", true);
+
+    public static Background highlightedGrass = bgImage("highlightedGrassTexture.png", true);
+
+    public static Background water = bgImage("waterTexture.png", true);
 
     public static Background background = new Background(new BackgroundFill(
             new Color(0, 0, 0, 0.8),
@@ -72,6 +59,19 @@ public class Style {
             new CornerRadii(20),
             null
     ));
+
+    //Borders
+    public static Border border(Paint paint, double width) {
+        return new Border(new BorderStroke(
+                paint,
+                new BorderStrokeStyle(null, null, null, 1, 0, null),
+                new CornerRadii(5),
+                new BorderWidths(width)
+        ));
+    }
+
+    public static Border borderWhite = border(Color.WHITE, 1);
+
 
     //Buttons
     public static void btn(Button btn, double fontSize) {

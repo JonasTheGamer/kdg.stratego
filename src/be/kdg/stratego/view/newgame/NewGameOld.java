@@ -31,7 +31,7 @@ public class NewGameOld extends Application {
         VBox vbSpeler2 = new VBox();
 
         hbMain.getChildren().addAll(vbSpeler1, bpMenu, vbSpeler2);
-        hbMain.setBackground(Style.applicationBackground);
+        hbMain.setBackground(Style.bgApplication);
         hbMain.setAlignment(Pos.CENTER);
 
         // Styling vbSpeler1
