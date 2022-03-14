@@ -7,17 +7,13 @@ import be.kdg.stratego.model.Player;
 public class Major extends MovingPiece {
 
     public Major(Player player, GameBoardField field) {
-        this.player = player;
-        this.name = "major";
-        this.image = "/pieces/major.png";
-        this.rank = 7;
-        this.field = field;
+        super(player, "major", "/pieces/major.png", 7, field);
     }
 
     public Major(Player player) {
         this(player, null);
     }
-    
+
     public void detonate() {
         this.field = null;
     }

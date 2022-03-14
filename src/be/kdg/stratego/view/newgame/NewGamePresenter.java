@@ -54,8 +54,8 @@ public class NewGamePresenter {
 
         view.getBtnReady().setOnAction(actionEvent -> {
             // Create players
-            model.getGame().setPlayer1(new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(), "default"));
-            model.getGame().setPlayer2(new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(), "default"));
+            model.getGame().setPlayer1(new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(), ""));
+            model.getGame().setPlayer2(new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(), ""));
 
             // Switch to the army setup view!
             ArmySetupView armySetupView = new ArmySetupView();

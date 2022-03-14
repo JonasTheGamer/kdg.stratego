@@ -6,15 +6,12 @@ import be.kdg.stratego.model.Player;
 
 public class Flag extends Piece {
 
-    public Flag(Player player, String flagImagePath, GameBoardField field) {
-        if (flagImagePath.equals("default")) {
-            flagImagePath = "/pieces/flag.png";
-        }
+    public Flag(Player player, String flagImage, GameBoardField field) {
+        super(player, "flag", "", field);
 
-        this.player = player;
-        this.name = "flag";
-        this.image = flagImagePath;
-        this.field = field;
+        switch (flagImage) {
+            default: this.setImage("/pieces/flag.png");
+        }
     }
 
     public Flag(Player player, String flagImagePath) {

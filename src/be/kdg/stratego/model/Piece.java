@@ -83,4 +83,8 @@ public class Piece {
     public boolean getHidden() {
         return hidden;
     }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
