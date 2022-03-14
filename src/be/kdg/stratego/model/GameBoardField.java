@@ -109,7 +109,7 @@ public class GameBoardField extends Position {
 
             // If the piece is not hidden, add the icon
             if(!this.piece.getHidden()) {
-                ImageView ivPiece = new ImageView("/pieces/" + this.piece.getName() + ".png");
+                ImageView ivPiece = new ImageView(piece.getImage());
                 ivPiece.setFitHeight(paneHeight * 0.4);
                 ivPiece.setFitWidth(paneWidth * 0.4);
 
