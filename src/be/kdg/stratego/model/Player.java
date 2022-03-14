@@ -87,28 +87,16 @@ public class Player {
         }
     }
 
-    // Getters and setters
+    // Getters
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public ArrayList<Piece> getPieces() {
         return pieces;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
     }
 }

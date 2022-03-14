@@ -60,6 +60,7 @@ public class GameBoardField extends Position {
         this(posX, posY,paneHeight, paneWidth, groundType, null);
     }
 
+    // Methodes
     public void regeneratePane() {
         // Generate the main stackpane
         StackPane container = new StackPane();
@@ -136,11 +137,6 @@ public class GameBoardField extends Position {
         this.pane = container;
     }
 
-    // Check if a piece is placed on this field
-    public boolean isOccupied() {
-        return !(Objects.isNull(this.piece));
-    }
-
     // Highlight field
     public void highLight() {
         this.highlighted = true;
@@ -153,29 +149,24 @@ public class GameBoardField extends Position {
         regeneratePane();
     }
 
-    // Getters & setters
-    //// Find out which piece is placed on this field
+    // Getters
     public Piece getPiece() {
         return piece;
     }
 
-    //// Place a piece on this field
-    public void setPiece(Piece piece) {
-        this.piece = piece;
-        regeneratePane();
-    }
-
-    //// Check if this is walkable
-    public boolean getWalkable() {
-        return walkable;
-    }
-
-    //// Get the stackpane type
     public StackPane getPane() {
         return pane;
     }
 
-    // Overrides
+    public boolean isOccupied() {
+        return !(Objects.isNull(this.piece));
+    }
+
+    // Setters
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+        regeneratePane();
+    }
 
     @Override
     public void setPositionX(int positionX) {

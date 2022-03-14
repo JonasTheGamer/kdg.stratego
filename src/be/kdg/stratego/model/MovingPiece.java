@@ -16,6 +16,7 @@ public abstract class MovingPiece extends Piece {
         this.rank = rank;
     }
 
+    // Methods
     public void moveTo(GameBoardField destination) {
         this.removeFromField();
         this.placeOnField(destination);
@@ -39,6 +40,7 @@ public abstract class MovingPiece extends Piece {
         }
     }
 
+    // Getters
     public int getRank() {
         return rank;
     }

@@ -40,6 +40,19 @@ public class ProgrammaModel {
         }
     }
 
+    // Getters
+    public Game getGame() {
+        return game;
+    }
+
+    public GameBoard getGameBoard() {
+        return game.getGameBoard();
+    }
+
+    public TreeSet<Highscore> getHighscores() {
+        return highscores;
+    }
+
     // Setter
     public void setNewHighscore(String name, int score) {
         ArrayList<String> lines = new ArrayList<String>();
@@ -53,18 +66,5 @@ public class ProgrammaModel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    // Getters
-    public Game getGame() {
-        return game;
-    }
-
-    public GameBoard getGameBoard() {
-        return game.getGameBoard();
-    }
-
-    public TreeSet<Highscore> getHighscores() {
-        return highscores;
     }
 }

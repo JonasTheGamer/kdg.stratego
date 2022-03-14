@@ -1,4 +1,5 @@
 package be.kdg.stratego.model;
+
 import be.kdg.stratego.customUtil.AskUtility;
 import be.kdg.stratego.view.Style;
 
@@ -11,8 +12,8 @@ public class Game {
     private final double gameBoardFieldWidth = Style.size(50);
 
     private Player[] players;
-    private LocalDateTime startTijd;
-    private LocalDateTime eindTijd;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private boolean ongoing = false;
     private GameBoard gameBoard;
 
@@ -21,18 +22,19 @@ public class Game {
         this.gameBoard = new GameBoard(gameBoardFieldHeight, gameBoardFieldWidth);
     }
 
+    // Methods
     public void start() {
         ongoing = true;
-        this.startTijd = LocalDateTime.now();
+        this.startTime = LocalDateTime.now();
     }
 
-    public boolean opslaan() {
+    public boolean save() {
         // Check to allow for a loop that keeps asking for a valid file location
         boolean fileOk = false;
         boolean fileSaved = false;
 
         // Check if the game has already been started
-        if(!ongoing) {
+        if (!ongoing) {
             System.out.println("The game has to be started before you can save its progress.");
             return false;
         }
@@ -72,7 +74,7 @@ public class Game {
             System.out.println("The game's progress has been saved successfully. Congratulations!");
             fileSaved = true;
 
-        } catch (FileNotFoundException | UnsupportedEncodingException exc){
+        } catch (FileNotFoundException | UnsupportedEncodingException exc) {
             System.out.println("Something went wrong whilst trying to save your progress. Please try again at a later time.");
             fileSaved = false;
         } catch (IOException e) {
@@ -80,64 +82,38 @@ public class Game {
             fileSaved = false;
         }
 
-        if(fileSaved) {
+        if (fileSaved) {
             // Stop the game when it's saved.
             this.stop();
         }
         return fileSaved;
     }
 
-    public void hervat(GameBoard speelbord) {
+    public void continueSave(GameBoard speelbord) {
         // Resume the timer
     }
 
     public void stop() {
         ongoing = false;
-        this.eindTijd = LocalDateTime.now();
+        this.endTime = LocalDateTime.now();
         System.out.println("The game has been stopped.");
     }
 
+    // Getters
     public Player[] getPlayers() {
         return players;
-    }
-
-    public void setPlayer1(Player player) {
-        this.players[0] = player;
-    }
-
-    public void setPlayer2(Player player) {
-        this.players[1] = player;
-    }
-
-    public LocalDateTime getStartTijd() {
-        return startTijd;
-    }
-
-    public void setStartTijd(LocalDateTime startTijd) {
-        this.startTijd = startTijd;
-    }
-
-    public LocalDateTime getEindTijd() {
-        return eindTijd;
-    }
-
-    public void setEindTijd(LocalDateTime eindTijd) {
-        this.eindTijd = eindTijd;
-    }
-
-    public boolean isOngoing() {
-        return ongoing;
-    }
-
-    public void setOngoing(boolean ongoing) {
-        this.ongoing = ongoing;
     }
 
     public GameBoard getGameBoard() {
         return gameBoard;
     }
 
-    public void setGameBoard(GameBoard gameBoard) {
-        this.gameBoard = gameBoard;
+    // Setters
+    public void setPlayer1(Player player) {
+        this.players[0] = player;
+    }
+
+    public void setPlayer2(Player player) {
+        this.players[1] = player;
     }
 }

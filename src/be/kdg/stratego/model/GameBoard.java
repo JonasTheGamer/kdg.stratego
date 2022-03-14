@@ -63,10 +63,7 @@ public class GameBoard {
         }
     }
 
-    public GameBoard() {
-        this(Style.size(50), Style.size(50));
-    }
-
+    // Methods
     // Method to rotate the board
     public void rotate() {
 
@@ -154,6 +151,7 @@ public class GameBoard {
         }
     }
 
+    // Getters
     public int getGrootteX() {
         return grootteX;
     }
@@ -180,8 +178,8 @@ public class GameBoard {
         return foundField;
     }
 
+    // Setters
     public void setGameBoardField(GameBoardField field) {
         this.gameBoardFields[field.getPositionX()][field.getPositionY()] = field;
     }
-
 }

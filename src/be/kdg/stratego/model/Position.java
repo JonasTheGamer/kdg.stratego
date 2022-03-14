@@ -4,16 +4,18 @@ public class Position {
     protected int positionX;
     protected int positionY;
 
+    // Getters
     public int getPositionX() {
         return positionX;
     }
 
-    public void setPositionX(int positionX) {
-        this.positionX = positionX;
-    }
-
     public int getPositionY() {
         return positionY;
+    }
+
+    // Setters
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
     }
 
     public void setPositionY(int positionY) {
