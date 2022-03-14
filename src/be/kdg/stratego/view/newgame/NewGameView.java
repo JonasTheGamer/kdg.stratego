@@ -151,6 +151,8 @@ public class NewGameView extends HBox {
         for (ColorPicker cp : cpColor) {
             cp.setPrefWidth(Style.size(200));
         }
+        cpColor[0].setValue(Color.DARKBLUE);
+        cpColor[1].setValue(Color.DARKRED);
 
         for (int i = 0; i < hbName.length; i++) {
             hbColor[i].getChildren().addAll(lblCpColor[i], cpColor[i]);
