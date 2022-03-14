@@ -121,12 +121,12 @@ public class NewGameView extends HBox {
     public void layoutNodes() {
         ///Players
         for (Label lbl : lblName) {
-            Style.txt(lbl, Style.fontSize(20));
+            Style.txt(lbl, 20);
         }
 
         ////Name
         for (Label lbl : lblTxtName) {
-            Style.txt(lbl, Style.fontSize(15));
+            Style.txt(lbl, 15);
         }
 
         for (TextField txt : txtName) {
@@ -141,7 +141,7 @@ public class NewGameView extends HBox {
 
         ////Color
         for (Label lbl : lblCpColor) {
-            Style.txt(lbl, Style.fontSize(15));
+            Style.txt(lbl, 15);
         }
 
         for (ColorPicker cp : cpColor) {
@@ -163,7 +163,7 @@ public class NewGameView extends HBox {
 
         ////Flags
         for (Label lbl : lblFlagTitle) {
-            Style.txt(lbl, Style.fontSize(15));
+            Style.txt(lbl, 15);
         }
 
         for (Button[] player : btnFlag) {
@@ -201,8 +201,8 @@ public class NewGameView extends HBox {
         imgTitle.setScaleX(Style.scale(1.5));
         imgTitle.setScaleY(Style.scale(1.5));
 
-        Style.btn(btnReady, Style.fontSize(15));
-        Style.btn(btnCancel, Style.fontSize(15));
+        Style.btn(btnReady, 15);
+        Style.btn(btnCancel, 15);
 
         vbButtons.getChildren().addAll(btnReady, btnCancel);
         vbButtons.setAlignment(Pos.CENTER);

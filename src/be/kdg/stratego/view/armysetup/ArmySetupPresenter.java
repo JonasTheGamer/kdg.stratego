@@ -255,12 +255,12 @@ public class ArmySetupPresenter {
 
             // Piece title
             Label lblPieceTitle = new Label(piece.getName());
-            Style.txt(lblPieceTitle, Style.fontSize(15));
+            Style.txt(lblPieceTitle, 15);
             pieceContainer.getChildren().add(lblPieceTitle);
 
             // Amount left to place
             Label lblPlacable = new Label(Integer.toString(amountPlacable));
-            Style.txt(lblPlacable, Style.fontSize(15));
+            Style.txt(lblPlacable, 15);
             pieceContainer.getChildren().add(lblPlacable);
 
             pieceContainer.setId("placablePiece-" + pieceName);

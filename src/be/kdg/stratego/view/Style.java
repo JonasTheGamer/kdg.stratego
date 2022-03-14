@@ -91,7 +91,7 @@ public class Style {
     }
 
     public static void txt(Labeled txt, double fontSize, Paint paint) {
-        txt.setFont(Font.font("Verdana", fontSize));
+        txt.setFont(Font.font("Verdana", size(fontSize)));
         txt.setTextFill(paint);
     }
 
@@ -101,10 +101,6 @@ public class Style {
         double screenScale = screen.getOutputScaleX();
 
         return (pixels / screenScale * base);
-    }
-
-    public static double fontSize(double pixels) {
-        return size(pixels);
     }
 
     public static double scale(double scale) {

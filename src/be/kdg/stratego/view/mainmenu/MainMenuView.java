@@ -51,16 +51,16 @@ public class MainMenuView extends VBox {
         imgTitle.setScaleX(Style.scale(1.5));
         imgTitle.setScaleY(Style.scale(1.5));
 
-        Style.btn(btnPlay, Style.fontSize(15));
-        Style.btn(btnHelp, Style.fontSize(15));
-        Style.btn(btnQuit, Style.fontSize(15));
+        Style.btn(btnPlay, 15);
+        Style.btn(btnHelp, 15);
+        Style.btn(btnQuit, 15);
 
-        Style.txt(lblHighscores, Style.fontSize(12));
+        Style.txt(lblHighscores, 12);
         lblHighscores.setStyle("-fx-font-weight: bold");
 
-        Style.txt(lblPositie, Style.fontSize(10));
-        Style.txt(lblScore, Style.fontSize(10));
-        Style.txt(lblName, Style.fontSize(10));
+        Style.txt(lblPositie, 10);
+        Style.txt(lblScore, 10);
+        Style.txt(lblName, 10);
 
         gpHighscores.add(lblPositie,0,0);
         gpHighscores.add(lblScore,1,0);

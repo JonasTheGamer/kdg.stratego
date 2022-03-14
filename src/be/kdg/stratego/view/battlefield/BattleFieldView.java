@@ -46,13 +46,13 @@ public class BattleFieldView extends BorderPane {
         hbHeader.setAlignment(Pos.CENTER);
 
         //// Clock
-        Style.txt(lblClock, Style.fontSize(20), Color.BLACK);
+        Style.txt(lblClock, 20, Color.BLACK);
 
         //// Title (player X, place your army)
-        Style.txt(lblScreenTitle,Style.fontSize(40),Color.BLACK);
+        Style.txt(lblScreenTitle,40,Color.BLACK);
 
         //// Close button
-        Style.btn(btnClose, Style.fontSize(20), Style.size(45), Style.size(45));
+        Style.btn(btnClose, 20, Style.size(45), Style.size(45));
 
         hbHeader.getChildren().addAll(lblClock, lblScreenTitle, btnClose);
 
