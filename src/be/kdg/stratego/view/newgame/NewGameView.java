@@ -173,13 +173,12 @@ public class NewGameView extends HBox {
         for (Button[] playerButtons : btnFlag) {
             for (Button btn : playerButtons) {
                 btn.setPrefSize(Style.size(125), Style.size(70));
+                btn.setBorder(Style.borderWhite);
             }
-            playerButtons[0].setId("/pieces/flag.png");
             playerButtons[0].setBackground(Style.bgImage("/pieces/flag.png", false));
-            playerButtons[0].setBorder(Style.borderWhite);
-            playerButtons[1].setId("/pieces/flag.png");
-            playerButtons[2].setId("/pieces/flag.png");
-            playerButtons[3].setId("/pieces/flag.png");
+            playerButtons[1].setBackground(Style.bgImage("/pieces/flag_belguim.png", false));
+            playerButtons[2].setBackground(Style.bgImage("/pieces/flag_europe.gif", false));
+            playerButtons[3].setBackground(Style.bgImage("/pieces/flag.png", false));
         }
 
         for (int i = 0; i < gpFlags.length; i++) {

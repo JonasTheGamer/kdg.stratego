@@ -63,7 +63,7 @@ public class NewGamePresenter {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    selectedFlag[0] = btn.getId();
+                    selectedFlag[0] = btn.getBackground().getImages().get(0).getImage().getUrl();
                 }
             });
         }
@@ -72,7 +72,7 @@ public class NewGamePresenter {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    selectedFlag[1] = btn.getId();
+                    selectedFlag[1] = btn.getBackground().getImages().get(0).getImage().getUrl();
                 }
             });
         }
