@@ -58,14 +58,14 @@ public class GameBoardField extends Position {
         container.setPrefWidth(paneWidth);
 
         // Set the right background
-        if(groundType == GroundType.GRASS) {
+        if (groundType == GroundType.GRASS) {
             container.setBackground((this.highlighted) ? Style.highlightedGrass : Style.grass);
         } else {
             container.setBackground(Style.water);
         }
 
         // If there's a piece on it, place it
-        if(this.isOccupied()) {
+        if (this.isOccupied()) {
             // Define the tower image
             String towerImage = (this.piece.getHidden() ? "/towerBackView.png" : "/towerFrontView.png");
 
@@ -82,13 +82,9 @@ public class GameBoardField extends Position {
             // Set the image view clip
             ivTower.setClip(ivClip);
 
-            // Color the tower image
-            ColorAdjust monochrome = new ColorAdjust();
-            monochrome.setSaturation(-1.0);
-
             Blend blush = new Blend(
                     BlendMode.MULTIPLY,
-                    monochrome,
+                    null,
                     new ColorInput(
                             0,
                             0,
@@ -106,7 +102,7 @@ public class GameBoardField extends Position {
             container.getChildren().add(ivTower);
 
             // If the piece is not hidden, add the icon
-            if(!this.piece.getHidden()) {
+            if (!this.piece.getHidden()) {
                 ImageView ivPiece = new ImageView(piece.getImage());
                 ivPiece.setFitHeight(paneHeight * 0.4);
                 ivPiece.setFitWidth(paneWidth * 0.4);
