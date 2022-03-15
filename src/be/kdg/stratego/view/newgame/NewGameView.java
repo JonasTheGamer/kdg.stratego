@@ -175,7 +175,7 @@ public class NewGameView extends HBox {
         for (Button[] playerButtons : btnFlag) {
             for (Button btn : playerButtons) {
                 btn.setPrefSize(Style.size(125), Style.size(70));
-                btn.setBorder(Style.borderWhite);
+                btn.setBorder(Style.border(Color.WHITE));
             }
             playerButtons[0].setBackground(Style.bgImage("/pieces/flag.png", false));
             playerButtons[1].setBackground(Style.bgImage("/pieces/flag_belguim.png", false));

@@ -70,7 +70,9 @@ public class Style {
         ));
     }
 
-    public static Border borderWhite = border(Color.WHITE, 1);
+    public static Border border(Paint paint) {
+        return border(paint,1);
+    }
 
 
     //Buttons

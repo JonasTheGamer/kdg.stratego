@@ -2,6 +2,7 @@ package be.kdg.stratego.view.newgame;
 
 import be.kdg.stratego.model.Player;
 import be.kdg.stratego.model.ProgrammaModel;
+import be.kdg.stratego.view.Style;
 import be.kdg.stratego.view.armysetup.ArmySetupPresenter;
 import be.kdg.stratego.view.armysetup.ArmySetupView;
 import be.kdg.stratego.view.mainmenu.MainMenuPresenter;
@@ -11,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class NewGamePresenter {
@@ -57,13 +59,21 @@ public class NewGamePresenter {
 
 
         //BtnFlag
-        String[] selectedFlag = {"",""};
+        String[] selectedFlag = {"", ""};
         ///Player 1
         for (Button btn : view.getBtnFlag()[0]) {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
+                    //// Save clicked btnFlag
                     selectedFlag[0] = btn.getBackground().getImages().get(0).getImage().getUrl();
+
+                    //// Set all borders white
+                    for (int i = 0; i < view.getBtnFlag()[0].length; i++) {
+                        view.getBtnFlag()[0][i].setBorder(Style.border(Color.WHITE));
+                    }
+                    //// Set current border red
+                    btn.setBorder(Style.border(Color.RED));
                 }
             });
         }
@@ -72,7 +82,16 @@ public class NewGamePresenter {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
+                    //// Save clicked btnFlag
                     selectedFlag[1] = btn.getBackground().getImages().get(0).getImage().getUrl();
+
+                    //// Set all borders white
+                    for (int i = 0; i < view.getBtnFlag()[1].length; i++) {
+                        view.getBtnFlag()[1][i].setBorder(Style.border(Color.WHITE));
+                    }
+
+                    //// Set current border red
+                    btn.setBorder(Style.border(Color.RED));
                 }
             });
         }
