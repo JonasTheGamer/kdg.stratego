@@ -10,7 +10,4 @@ public class Miner extends MovingPiece {
         super(player = player, "miner", "/pieces/miner.png", 3);
     }
 
-    public void detonate() {
-        this.field = null;
-    }
 }

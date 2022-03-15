@@ -16,11 +16,15 @@ public class ProgrammaModel {
 
     // Constructor
     public ProgrammaModel() {
-        game = new Game();
         highscores = new TreeSet<Highscore>();
     }
 
     // Methoden
+    public void newGame() {
+        game = new Game();
+
+    }
+
     public void updateHighscores() {
         /// Deleting duplicates
         highscores.clear();

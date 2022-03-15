@@ -9,8 +9,4 @@ public class Colonel extends MovingPiece {
     public Colonel(Player player) {
         super(player, "colonel", "/pieces/colonel.png", 8);
     }
-
-    public void detonate() {
-        this.field = null;
-    }
 }

@@ -9,7 +9,6 @@ public class Spy extends MovingPiece {
     public Spy(Player player) {
         super(player, "spy", "/pieces/spy.png", 1);
     }
-
     public void detonate() {
         this.field = null;
     }

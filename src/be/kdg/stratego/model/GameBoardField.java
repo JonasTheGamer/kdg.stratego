@@ -152,6 +152,10 @@ public class GameBoardField extends Position {
         return !(Objects.isNull(this.piece));
     }
 
+    public boolean isWalkable() {
+        return this.walkable;
+    }
+
     // Setters
     public void setPiece(Piece piece) {
         this.piece = piece;

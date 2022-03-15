@@ -9,8 +9,4 @@ public class Captain extends MovingPiece {
     public Captain(Player player) {
         super(player, "captain", "/pieces/captain.png", 6);
     }
-
-    public void detonate() {
-        this.field = null;
-    }
 }

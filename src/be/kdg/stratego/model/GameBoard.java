@@ -86,10 +86,10 @@ public class GameBoard {
             GameBoardField fieldOnLeft = this.getGameBoardField(field.positionX - 1, field.positionY);
             GameBoardField fieldOnRight = this.getGameBoardField(field.positionX + 1, field.positionY);
 
-            if (!Objects.isNull(fieldOnTop)) allFields.add(fieldOnTop);
-            if (!Objects.isNull(fieldOnBottom)) allFields.add(fieldOnBottom);
-            if (!Objects.isNull(fieldOnLeft)) allFields.add(fieldOnLeft);
-            if (!Objects.isNull(fieldOnRight)) allFields.add(fieldOnRight);
+            if(!Objects.isNull(fieldOnTop) && fieldOnTop.isWalkable()) allFields.add(fieldOnTop);
+            if(!Objects.isNull(fieldOnBottom) && fieldOnBottom.isWalkable()) allFields.add(fieldOnBottom);
+            if(!Objects.isNull(fieldOnLeft) && fieldOnLeft.isWalkable()) allFields.add(fieldOnLeft);
+            if(!Objects.isNull(fieldOnRight) && fieldOnRight.isWalkable()) allFields.add(fieldOnRight);
         }
 
         // Check if the fields are allowed (basically, no piece from the same player can be on it)
@@ -162,5 +162,13 @@ public class GameBoard {
     // Setters
     public void setGameBoardField(GameBoardField field) {
         this.gameBoardFields[field.getPositionX()][field.getPositionY()] = field;
+    }
+
+    public void clearGameBoardFields() {
+        for (int posX = 0; posX < getGrootteX(); posX++) {
+            for (int posY = 0; posY < getGrootteY(); posY++) {
+                gameBoardFields[posX][posY] = null;
+            }
+        }
     }
 }

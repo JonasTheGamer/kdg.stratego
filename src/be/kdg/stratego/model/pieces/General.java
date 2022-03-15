@@ -10,7 +10,4 @@ public class General extends MovingPiece {
         super(player, "general", "/pieces/general.png", 9);
     }
 
-    public void detonate() {
-        this.field = null;
-    }
 }

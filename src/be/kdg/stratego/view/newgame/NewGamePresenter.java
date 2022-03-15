@@ -100,6 +100,7 @@ public class NewGamePresenter {
         //BtnReady
         view.getBtnReady().setOnAction(actionEvent -> {
             /// Create players
+            model.newGame();
             model.getGame().setPlayer1(new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(), selectedFlag[0]));
             model.getGame().setPlayer2(new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(), selectedFlag[1]));
 
