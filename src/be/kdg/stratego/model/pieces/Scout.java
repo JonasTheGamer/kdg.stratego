@@ -10,7 +10,4 @@ public class Scout extends MovingPiece {
         super(player, "scout", "/pieces/scout.png", 2);
     }
 
-    public void detonate() {
-        this.field = null;
-    }
 }

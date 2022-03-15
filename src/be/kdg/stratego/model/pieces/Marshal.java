@@ -10,7 +10,4 @@ public class Marshal extends MovingPiece {
         super(player, "marshal", "/pieces/marshal.png", 10);
     }
 
-    public void detonate() {
-        this.field = null;
-    }
 }
