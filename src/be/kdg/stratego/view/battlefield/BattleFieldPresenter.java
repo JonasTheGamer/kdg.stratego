@@ -126,6 +126,7 @@ public class BattleFieldPresenter {
                 view.getGpBoard().add(fieldPane, field.getPositionX(), field.getPositionY());
             }
         }
+        addEventHandlers();
     }
 
     private void addWindowEventHandlers() {
