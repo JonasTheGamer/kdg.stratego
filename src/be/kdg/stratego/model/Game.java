@@ -8,9 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 public class Game {
-    private final double gameBoardFieldHeight = Style.size(50);
-    private final double gameBoardFieldWidth = Style.size(50);
-
     private Player[] players;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -19,7 +16,7 @@ public class Game {
 
     public Game() {
         this.players = new Player[2];
-        this.gameBoard = new GameBoard(gameBoardFieldHeight, gameBoardFieldWidth);
+        this.gameBoard = new GameBoard();
     }
 
     // Methods

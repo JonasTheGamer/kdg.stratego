@@ -22,8 +22,8 @@ public class GameBoardField extends Position {
     private StackPane pane;
     private GroundType groundType;
 
-    private double paneHeight;
-    private double paneWidth;
+    private final double paneHeight = Style.size(50);
+    private final double paneWidth = Style.size(50);
 
     // Enumeration for ground type
     public enum GroundType {
@@ -31,7 +31,7 @@ public class GameBoardField extends Position {
         WATER
     }
 
-    public GameBoardField(int posX, int posY, double paneHeight , double paneWidth, GroundType groundType) {
+    public GameBoardField(int posX, int posY, GroundType groundType) {
         // Set position
         this.positionX = posX;
         this.positionY = posY;
@@ -40,8 +40,6 @@ public class GameBoardField extends Position {
         this.highlighted = false;
 
         // Set parameters for the pane
-        this.paneHeight = paneHeight;
-        this.paneWidth = paneWidth;
         this.groundType = groundType;
 
         // Figure out whether the field is walkable.
