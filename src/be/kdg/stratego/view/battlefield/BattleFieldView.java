@@ -54,15 +54,12 @@ public class BattleFieldView extends BorderPane {
         Style.btn(btnClose, 20, Style.size(45), Style.size(45));
 
         hbHeader.getChildren().addAll(lblClock, lblScreenTitle, btnClose);
-
         this.setTop(hbHeader);
-
 
         //// Field
         ////// The field will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
         this.setCenter(gpBoard);
         gpBoard.setAlignment(Pos.CENTER);
-
     }
 
     public Label getLblScreenTitle() {

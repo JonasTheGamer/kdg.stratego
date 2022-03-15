@@ -144,6 +144,10 @@ public class ArmySetupPresenter {
         view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                // Empty the board
+                model.getGameBoard().clearGameBoardFields();
+
+                // Switch back to the newGameView
                 NewGameView newGameView = new NewGameView();
                 NewGamePresenter newGamePresenter = new NewGamePresenter(model, newGameView);
                 view.getScene().setRoot(newGameView);
