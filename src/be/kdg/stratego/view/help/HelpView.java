@@ -2,8 +2,6 @@ package be.kdg.stratego.view.help;
 
 import be.kdg.stratego.view.Style;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,14 +28,15 @@ public class HelpView extends StackPane {
     }
 
     private void layoutNodes() {
-        mediaView.setFitHeight(this.getHeight());
-        mediaView.setFitWidth(this.getWidth());
+        mediaView.setFitWidth(Style.size(1120));
+        mediaView.setFitHeight(Style.size(630));
 
-        btnControl.setBackground(Style.bgImage("btnPlay.png",true));
-        btnControl.setPrefSize(Style.size(100),Style.size(100));
+        btnControl.setBackground(Style.bgImage("btnPlay.png", true));
+        btnControl.setPrefSize(Style.size(100), Style.size(100));
 
-        this.getChildren().addAll(mediaView,btnControl);
-        this.setPrefSize(Style.size(1000),Style.size(500));
+        this.getChildren().addAll(mediaView, btnControl);
+        this.setMaxWidth(mediaView.getFitWidth());
+        this.setMaxHeight(mediaView.getFitHeight());
     }
 
     public MediaPlayer getMediaPlayer() {

@@ -27,10 +27,8 @@ import java.util.logging.SocketHandler;
 
 
 public class BattleFieldPresenter {
-    // Sleep locker
-    private static Object LOCK = new Object();
 
-    //
+    // References
     private ProgrammaModel model;
     private BattleFieldView view;
     private Player currentPlayer;
@@ -61,8 +59,8 @@ public class BattleFieldPresenter {
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
-                StackPane fieldPane = field.getPane();
 
+                StackPane fieldPane = field.getPane();
                 fieldPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
@@ -153,7 +151,7 @@ public class BattleFieldPresenter {
         }
         addEventHandlers();
     }
-    private void addWindowEventHandlers() {
+    public void addWindowEventHandlers() {
 
     }
 

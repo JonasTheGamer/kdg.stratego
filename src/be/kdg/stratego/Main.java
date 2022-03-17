@@ -25,23 +25,12 @@ public class Main extends Application {
         MainMenuView view = new MainMenuView();
         MainMenuPresenter presenter = new MainMenuPresenter(model, view);
 
-        //NewGameView view = new NewGameView();
-        //NewGamePresenter presenter = new NewGamePresenter(model, view);
-
-        //ArmySetupView view = new ArmySetupView();
-        //ArmySetupPresenter presenter = new ArmySetupPresenter(model, view);
-
-
-        // Set window to show this view
         primaryStage.setScene(new Scene(view));
-
-        // Add event handlers
-        presenter.addWindowEventHandlers();
-
-        // Show window
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
+        presenter.addWindowEventHandlers();
 
         primaryStage.show();
     }

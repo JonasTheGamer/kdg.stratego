@@ -11,9 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -36,23 +33,25 @@ public class MainMenuPresenter {
                 NewGameView newGameView = new NewGameView();
                 NewGamePresenter newGamePresenter = new NewGamePresenter(model, newGameView);
                 view.getScene().setRoot(newGameView);
+                newGamePresenter.addWindowEventHandlers();
             }
-        });
-
-        view.getBtnQuit().setOnAction(actionEvent -> {
-            Stage mainStage = (Stage) view.getScene().getWindow();
-            mainStage.close();
         });
 
         view.getBtnHelp().setOnAction(actionEvent -> {
             HelpView helpView = new HelpView();
             HelpPresenter helpPresenter = new HelpPresenter(model, helpView);
 
-            Stage mijnStage = new Stage();
-            mijnStage.initOwner(view.getScene().getWindow());
-            mijnStage.initModality(Modality.APPLICATION_MODAL);
-            mijnStage.setScene(new Scene(helpView));
-            mijnStage.showAndWait();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(helpView));
+
+            stage.setTitle("Instructie video");
+            stage.initOwner(view.getScene().getWindow());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+
+            helpPresenter.addWindowEventHandlers();
+
+            stage.showAndWait();
         });
     }
 
@@ -83,7 +82,11 @@ public class MainMenuPresenter {
     }
 
     public void addWindowEventHandlers() {
+        Stage stage = (Stage) view.getScene().getWindow();
 
+        view.getBtnQuit().setOnAction(actionEvent -> {
+            stage.close();
+        });
     }
 
 }

@@ -108,14 +108,16 @@ public class NewGamePresenter {
             ArmySetupView armySetupView = new ArmySetupView();
             ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[0], 0);
             view.getScene().setRoot(armySetupView);
+            armySetupPresenter.addWindowEventHandlers();
         });
 
 
         //BtnCancel
         view.getBtnCancel().setOnAction(actionEvent -> {
-            MainMenuView newMainMenuView = new MainMenuView();
-            MainMenuPresenter newMainMenuPresenter = new MainMenuPresenter(model, newMainMenuView);
-            view.getScene().setRoot(newMainMenuView);
+            MainMenuView mainMenuView = new MainMenuView();
+            MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(model, mainMenuView);
+            view.getScene().setRoot(mainMenuView);
+            mainMenuPresenter.addWindowEventHandlers();
         });
     }
 

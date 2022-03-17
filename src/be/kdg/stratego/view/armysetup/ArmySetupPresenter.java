@@ -30,7 +30,7 @@ import java.util.Objects;
 public class ArmySetupPresenter {
     private ProgrammaModel model;
     private ArmySetupView view;
-    private HashMap<String, Integer> piecesToPlace = new HashMap();
+    private HashMap<String, Integer> piecesToPlace;
     private Player currentPlayer;
     private int playerIndex;
 
@@ -40,6 +40,7 @@ public class ArmySetupPresenter {
     public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view, Player currentPlayer, int playerIndex) {
         this.model = model;
         this.view = view;
+        this.piecesToPlace = new HashMap();
         this.currentPlayer = currentPlayer;
         this.playerIndex = playerIndex;
 
@@ -48,21 +49,6 @@ public class ArmySetupPresenter {
     }
 
     private void addEventHandlers() {
-        // Back button
-        view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                // Empty the board
-                model.getGameBoard().clearGameBoardFields();
-
-                // Switch back to the newGameView
-                NewGameView newGameView = new NewGameView();
-                NewGamePresenter newGamePresenter = new NewGamePresenter(model, newGameView);
-                view.getScene().setRoot(newGameView);
-            }
-        });
-
-        // Start button
         view.getBtnStart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -92,16 +78,33 @@ public class ArmySetupPresenter {
                     ArmySetupView armySetupView = new ArmySetupView();
                     ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[1], 1);
                     view.getScene().setRoot(armySetupView);
+                    armySetupPresenter.addWindowEventHandlers();
                 } else {
                     // Start the game!
                     BattleFieldView battleFieldView = new BattleFieldView();
                     BattleFieldPresenter battleFieldPresenter = new BattleFieldPresenter(model, battleFieldView);
                     view.getScene().setRoot(battleFieldView);
+                    battleFieldPresenter.addWindowEventHandlers();
                 }
             }
         });
 
-        // Fill button
+
+        view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                // Empty the board
+                model.getGameBoard().clearGameBoardFields();
+
+                // Switch back to the newGameView
+                NewGameView newGameView = new NewGameView();
+                NewGamePresenter newGamePresenter = new NewGamePresenter(model, newGameView);
+                view.getScene().setRoot(newGameView);
+                newGamePresenter.addWindowEventHandlers();
+            }
+        });
+
+
         view.getBtnFill().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -127,9 +130,10 @@ public class ArmySetupPresenter {
             }
         });
 
+
         // Placable pieces
         ObservableList<Node> stpPlacablePieces = view.getGpPieces().getChildren();
-        for (Node stpPiece:stpPlacablePieces) {
+        for (Node stpPiece : stpPlacablePieces) {
             stpPiece.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -153,6 +157,7 @@ public class ArmySetupPresenter {
                 }
             });
         }
+
 
         // Fields
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
@@ -293,7 +298,8 @@ public class ArmySetupPresenter {
 
     }
 
-    public Piece getPieceFromName(String name) {
+    //Methoden
+    private Piece getPieceFromName(String name) {
         Piece foundPiece = null;
         for (Piece piece : currentPlayer.getPieces()) {
             if (piece.getClass().getName().equals(name) && Objects.isNull(piece.getField())) {
@@ -305,7 +311,7 @@ public class ArmySetupPresenter {
         return foundPiece;
     }
 
-    public void refreshPlacablePieces() {
+    private void refreshPlacablePieces() {
         // Clear pieces to place
         piecesToPlace.clear();
 
@@ -328,7 +334,7 @@ public class ArmySetupPresenter {
 
     }
 
-    public GameBoardField getNextAvailableField() {
+    private GameBoardField getNextAvailableField() {
         int boardSizeX = model.getGameBoard().getGrootteX();
         int boardSizeY = model.getGameBoard().getGrootteX();
 
