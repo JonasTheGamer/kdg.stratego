@@ -17,6 +17,8 @@ public class GameBoardField extends Position {
     private Piece piece;
     private boolean walkable;
     private boolean highlighted;
+    private boolean invalid;
+    private GameBoard gameBoard;
 
     // Field (stackpane) properties
     private StackPane pane;
@@ -31,7 +33,10 @@ public class GameBoardField extends Position {
         WATER
     }
 
-    public GameBoardField(int posX, int posY, GroundType groundType) {
+    public GameBoardField(GameBoard gameBoard, int posX, int posY, GroundType groundType) {
+        // Set gameboard
+        this.gameBoard = gameBoard;
+
         // Set position
         this.positionX = posX;
         this.positionY = posY;
@@ -49,7 +54,16 @@ public class GameBoardField extends Position {
         regeneratePane();
     }
 
-    // Methodes
+    // Methods
+    public void findInformationAboutSurroundingFields() {
+        // I need:
+        // - The location of this piece within the board
+        // - Reference to surrounding fields
+        // - I can then ask the other fields whether they are occupied
+
+
+    }
+
     public void regeneratePane() {
         // Generate the main stackpane
         StackPane container = new StackPane();
@@ -109,10 +123,13 @@ public class GameBoardField extends Position {
             }
         }
 
-        // For debugging purposes: include the position
-        /*Label lblPosition = new Label("X: " + positionX + "\nY: " + positionY);
-        lblPosition.setTextFill(Color.RED);
-        container.getChildren().add(lblPosition);*/
+        // If the field is invalid, show an X
+        if (this.invalid) {
+            ImageView ivInvalid = new ImageView("error.png");
+            ivInvalid.setFitHeight(paneHeight);
+            ivInvalid.setFitWidth(paneWidth);
+            container.getChildren().add(ivInvalid);
+        }
 
         container.setId(this.positionX + "-" + this.positionY);
 
@@ -148,6 +165,10 @@ public class GameBoardField extends Position {
         return this.walkable;
     }
 
+    public boolean isInvalid() {
+        return invalid;
+    }
+
     // Setters
     public void setPiece(Piece piece) {
         this.piece = piece;
@@ -164,5 +185,10 @@ public class GameBoardField extends Position {
     public void setPositionY(int positionY) {
         super.setPositionY(positionY);
         regeneratePane();
+    }
+
+    public void setInvalid(boolean invalid) {
+        this.invalid = invalid;
+        this.regeneratePane();
     }
 }

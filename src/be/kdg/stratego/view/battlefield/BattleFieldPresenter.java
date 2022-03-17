@@ -1,5 +1,6 @@
 package be.kdg.stratego.view.battlefield;
 
+import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.model.*;
 import be.kdg.stratego.view.Style;
 import be.kdg.stratego.view.newgame.NewGamePresenter;
@@ -7,6 +8,7 @@ import be.kdg.stratego.view.newgame.NewGameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -14,13 +16,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.SocketHandler;
 
+
 public class BattleFieldPresenter {
+    // Sleep locker
+    private static Object LOCK = new Object();
+
+    //
     private ProgrammaModel model;
     private BattleFieldView view;
     private Player currentPlayer;
@@ -47,8 +56,8 @@ public class BattleFieldPresenter {
     }
 
     private void addEventHandlers() {
+        // Click on field
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
-
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
                 StackPane fieldPane = field.getPane();
@@ -91,19 +100,34 @@ public class BattleFieldPresenter {
                             }
                         }
 
-                        // MOVE - Did the player click in one of the allowed fields (allowedMoves)?
-                        if (allowedMoves.contains(field)) {
-                            MovingPiece piece = (MovingPiece) selectedPiece;
+                        // MOVE
+                        MovingPiece piece = (MovingPiece) selectedPiece;
 
-                            // Clear the selection
-                            clearSelection();
+                        // Clear the selection
+                        clearSelection();
 
-                            // Move the field
-                            piece.moveTo(field);
+                        // Move the field
+                        try {
+                            model.getGameBoard().movePiece(piece, field);
+                        } catch (InvalidMoveException exception) {
+                            // Place an X on the field
+                            System.out.println("PLAATSEEH");
 
-                            // Update the view
+                            field.setInvalid(true);
                             updateView();
+
+                            /*
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Opgelet");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Je kunt dit stuk niet naar daar verplaatsen.");
+
+                            alert.initOwner(view.getScene().getWindow());
+                            alert.showAndWait();*/
                         }
+
+                        // Update the view
+                        updateView();
                     }
                 });
             }

@@ -1,5 +1,6 @@
 package be.kdg.stratego.model;
 
+import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.view.Style;
 
 import java.util.HashSet;
@@ -28,26 +29,26 @@ public class GameBoard {
             // Per row
             for (int posX = 0; posX < boardWidth; posX++) {
                 // Per column
-                this.setGameBoardField(new GameBoardField(posX, posY, GameBoardField.GroundType.GRASS));
+                this.setGameBoardField(new GameBoardField(this, posX, posY, GameBoardField.GroundType.GRASS));
             }
         }
 
         //// Water
         ////// Left water
-        this.setGameBoardField(new GameBoardField(2, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(3, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(2, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(3, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,2, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,3, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,2, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,3, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
 
         ////// Right water
-        this.setGameBoardField(new GameBoardField(6, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(7, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(6, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(7, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,6, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,7, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,6, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,7, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
     }
 
     // Methods
-    // Method to rotate the board
+    // Rotate the board
     public void rotate() {
 
         // First, give all fields a new position
@@ -73,6 +74,7 @@ public class GameBoard {
         gameBoardFields = tempGameBoardFields;
     }
 
+    // Get the allowed moves
     public HashSet<GameBoardField> getAllowedMoves(MovingPiece piece) {
         HashSet<GameBoardField> allowedMoves = new HashSet<>();
         HashSet<GameBoardField> allFields = new HashSet<>();
@@ -104,7 +106,7 @@ public class GameBoard {
         return allowedMoves;
     }
 
-    // Method to highlight allowed moves
+    // Highlight the allowed moves
     public void highLightAllowedMoves(MovingPiece piece) {
         GameBoardField field = piece.getField();
 
@@ -123,7 +125,7 @@ public class GameBoard {
         }
     }
 
-    // Method to unhighlight all fields
+    // Unhighlight all fields
     public void unHighlightAllFields() {
         // Loop through all fields
         for (int posX = 0; posX < grootteX; posX++) {
@@ -131,6 +133,17 @@ public class GameBoard {
                 GameBoardField field = gameBoardFields[posX][posY];
                 field.unHighLight();
             }
+        }
+    }
+
+    // Move piece
+    public void movePiece(MovingPiece piece, GameBoardField field) throws InvalidMoveException {
+        if(this.getAllowedMoves(piece).contains(field)) {
+            System.out.println("Deze zet is toegelaten");
+            piece.moveTo(field);
+        } else {
+            System.out.println("Deze zet is niet toegelaten");
+            throw new InvalidMoveException();
         }
     }
 

@@ -10,7 +10,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 
 public class Style {
-    private static double base = 1.25;
+    private final static double base = 1.25;
 
     public static Background bgImage(String path, boolean contain) {
         return new Background(new BackgroundImage(
