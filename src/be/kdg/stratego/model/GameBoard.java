@@ -1,5 +1,6 @@
 package be.kdg.stratego.model;
 
+import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.view.Style;
 
 import java.util.HashSet;
@@ -28,26 +29,26 @@ public class GameBoard {
             // Per row
             for (int posX = 0; posX < boardWidth; posX++) {
                 // Per column
-                this.setGameBoardField(new GameBoardField(posX, posY, GameBoardField.GroundType.GRASS));
+                this.setGameBoardField(new GameBoardField(this, posX, posY, GameBoardField.GroundType.GRASS));
             }
         }
 
         //// Water
         ////// Left water
-        this.setGameBoardField(new GameBoardField(2, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(3, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(2, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(3, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,2, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,3, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,2, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,3, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
 
         ////// Right water
-        this.setGameBoardField(new GameBoardField(6, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(7, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(6, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(7, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,6, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,7, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,6, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this,7, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
     }
 
     // Methods
-    // Method to rotate the board
+    // Rotate the board
     public void rotate() {
 
         // First, give all fields a new position
@@ -73,38 +74,7 @@ public class GameBoard {
         gameBoardFields = tempGameBoardFields;
     }
 
-    public HashSet<GameBoardField> getAllowedMoves(MovingPiece piece) {
-        HashSet<GameBoardField> allowedMoves = new HashSet<>();
-        HashSet<GameBoardField> allFields = new HashSet<>();
-        GameBoardField field = piece.getField();
-
-        // First, check if the piece is a scout
-        if (piece.getRank() == 2) {
-            // Do stuff for scout
-        } else {
-            // Do stuff for other pieces. They can move one step at a time
-            GameBoardField fieldOnTop = this.getGameBoardField(field.positionX, field.positionY - 1);
-            GameBoardField fieldOnBottom = this.getGameBoardField(field.positionX, field.positionY + 1);
-            GameBoardField fieldOnLeft = this.getGameBoardField(field.positionX - 1, field.positionY);
-            GameBoardField fieldOnRight = this.getGameBoardField(field.positionX + 1, field.positionY);
-
-            if(!Objects.isNull(fieldOnTop) && fieldOnTop.isWalkable()) allFields.add(fieldOnTop);
-            if(!Objects.isNull(fieldOnBottom) && fieldOnBottom.isWalkable()) allFields.add(fieldOnBottom);
-            if(!Objects.isNull(fieldOnLeft) && fieldOnLeft.isWalkable()) allFields.add(fieldOnLeft);
-            if(!Objects.isNull(fieldOnRight) && fieldOnRight.isWalkable()) allFields.add(fieldOnRight);
-        }
-
-        // Check if the fields are allowed (basically, no piece from the same player can be on it)
-        for (GameBoardField fieldToCheck : allFields) {
-            if (fieldToCheck.getPiece() == null || fieldToCheck.getPiece().getPlayer() != piece.getPlayer()) {
-                allowedMoves.add(fieldToCheck);
-            }
-        }
-
-        return allowedMoves;
-    }
-
-    // Method to highlight allowed moves
+    // Highlight the allowed moves
     public void highLightAllowedMoves(MovingPiece piece) {
         GameBoardField field = piece.getField();
 
@@ -115,7 +85,7 @@ public class GameBoard {
         field.highLight();
 
         // Get the allowed moves
-        HashSet<GameBoardField> allowedMoves = getAllowedMoves(piece);
+        HashSet<GameBoardField> allowedMoves = piece.getAllowedMoves();
 
         // Highlight them
         for (GameBoardField fieldToHighlight : allowedMoves) {
@@ -123,7 +93,7 @@ public class GameBoard {
         }
     }
 
-    // Method to unhighlight all fields
+    // Unhighlight all fields
     public void unHighlightAllFields() {
         // Loop through all fields
         for (int posX = 0; posX < grootteX; posX++) {
