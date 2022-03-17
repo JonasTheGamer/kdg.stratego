@@ -35,7 +35,7 @@ public class ArmySetupView extends BorderPane {
         // Controls
 
         //// Header
-        lblScreenTitle = new Label("Player 1: Place your army");
+        lblScreenTitle = new Label();
 
         //// Menu setup
         lblSetupTitle = new Label("Setup");

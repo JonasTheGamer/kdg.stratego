@@ -82,7 +82,7 @@ public class GameBoardField extends Position {
             // Set the image view clip
             ivTower.setClip(ivClip);
 
-            Blend blush = new Blend(
+            ivTower.setEffect(new Blend(
                     BlendMode.MULTIPLY,
                     null,
                     new ColorInput(
@@ -92,9 +92,7 @@ public class GameBoardField extends Position {
                             ivTower.getImage().getHeight(),
                             piece.getPlayer().getColor()
                     )
-            );
-
-            ivTower.setEffect(blush);
+            ));
 
             ivTower.setCache(true);
             ivTower.setCacheHint(CacheHint.SPEED);

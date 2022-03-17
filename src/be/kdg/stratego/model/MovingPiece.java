@@ -15,10 +15,10 @@ public abstract class MovingPiece extends Piece {
     }
 
     protected void attack(Piece piece) {
-        if (piece.name.equals("flag")) {
+        if (piece.getName().equals("flag")) {
             //Liam: Game.stop()
             // Jonas:
-        } else if (piece.name.equals("bomb")) {
+        } else if (piece.getName().equals("bomb")) {
             this.field = null;
             System.out.println("Your " + this.name + " was killed by a " + piece.getName());
         } else if (true/*Liam: Speelstuk instanceof ....*/) {
