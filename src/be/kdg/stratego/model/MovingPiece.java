@@ -1,7 +1,9 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.exceptions.InvalidMoveException;
+import be.kdg.stratego.model.pieces.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -15,30 +17,50 @@ public abstract class MovingPiece extends Piece {
 
     // Methods
     // Attack
-    protected void attack(Piece piece) {
-        if (piece.getName().equals("flag")) {
-            //Liam: Game.stop()
-            // Jonas:
-        } else if (piece.getName().equals("bomb")) {
-            this.field = null;
-            System.out.println("Your " + this.name + " was killed by a " + piece.getName());
-        } else if (true/*Liam: Speelstuk instanceof ....*/) {
-            MovingPiece movingPiece = (MovingPiece) piece;
-            if (this.rank > movingPiece.getRank()) {
-                piece.removeFromField();
-                System.out.println("Your " + this.name + " has killed a " + piece.getName());
+    protected ArrayList<Piece> attack(Piece piece) {
+        ArrayList<Piece> killedPieces = new ArrayList<>();
+
+        if(piece instanceof MovingPiece) {
+            // Highest rank always wins
+            MovingPiece convertedPiece = (MovingPiece) piece;
+            if(rank < convertedPiece.getRank()) {
+                killedPieces.add(this);
+                this.startKill(); // No need to specify attacker, the winning piece doesn't have to move
+            } else if(rank > convertedPiece.getRank()) {
+                killedPieces.add(piece);
+                piece.startKill(this);
             } else {
-                this.field = null;
-                System.out.println("Your " + this.name + " was killed by a " + piece.getName());
+                // Ranks are equal, both pieces die
+                killedPieces.add(this);
+                this.startKill();
+                killedPieces.add(piece);
+                piece.startKill();
+
+            }
+        } else {
+            // Check if piece jumps on flag
+            if(piece instanceof Flag) {
+                // We won! :D
+            }
+
+            // We jumped on a bomb
+            if(piece instanceof Bomb) {
+                killedPieces.add(this);
             }
         }
+        return killedPieces;
     }
 
     // Move
     public void moveTo(GameBoardField destination) throws InvalidMoveException {
         if(this.getAllowedMoves().contains(destination)) {
-            this.removeFromField();
-            this.placeOnField(destination);
+            if(!destination.isOccupied()) {
+                this.removeFromField();
+                this.placeOnField(destination);
+            } else {
+                this.attack(destination.getPiece());
+            }
+
         } else {
             throw new InvalidMoveException();
         }
