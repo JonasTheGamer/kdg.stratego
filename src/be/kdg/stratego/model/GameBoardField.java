@@ -169,6 +169,26 @@ public class GameBoardField extends Position {
         return invalid;
     }
 
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public GameBoardField getFieldAbove() {
+        return gameBoard.getGameBoardField(this.positionX, this.positionY - 1);
+    }
+
+    public GameBoardField getFieldBelow() {
+        return gameBoard.getGameBoardField(this.positionX, this.positionY + 1);
+    }
+
+    public GameBoardField getFieldOnLeft() {
+        return gameBoard.getGameBoardField(this.positionX - 1, this.positionY);
+    }
+
+    public GameBoardField getFieldOnRight() {
+        return gameBoard.getGameBoardField(this.positionX + 1, this.positionY);
+    }
+
     // Setters
     public void setPiece(Piece piece) {
         this.piece = piece;

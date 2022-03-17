@@ -74,38 +74,6 @@ public class GameBoard {
         gameBoardFields = tempGameBoardFields;
     }
 
-    // Get the allowed moves
-    public HashSet<GameBoardField> getAllowedMoves(MovingPiece piece) {
-        HashSet<GameBoardField> allowedMoves = new HashSet<>();
-        HashSet<GameBoardField> allFields = new HashSet<>();
-        GameBoardField field = piece.getField();
-
-        // First, check if the piece is a scout
-        if (piece.getRank() == 2) {
-            // Do stuff for scout
-        } else {
-            // Do stuff for other pieces. They can move one step at a time
-            GameBoardField fieldOnTop = this.getGameBoardField(field.positionX, field.positionY - 1);
-            GameBoardField fieldOnBottom = this.getGameBoardField(field.positionX, field.positionY + 1);
-            GameBoardField fieldOnLeft = this.getGameBoardField(field.positionX - 1, field.positionY);
-            GameBoardField fieldOnRight = this.getGameBoardField(field.positionX + 1, field.positionY);
-
-            if(!Objects.isNull(fieldOnTop) && fieldOnTop.isWalkable()) allFields.add(fieldOnTop);
-            if(!Objects.isNull(fieldOnBottom) && fieldOnBottom.isWalkable()) allFields.add(fieldOnBottom);
-            if(!Objects.isNull(fieldOnLeft) && fieldOnLeft.isWalkable()) allFields.add(fieldOnLeft);
-            if(!Objects.isNull(fieldOnRight) && fieldOnRight.isWalkable()) allFields.add(fieldOnRight);
-        }
-
-        // Check if the fields are allowed (basically, no piece from the same player can be on it)
-        for (GameBoardField fieldToCheck : allFields) {
-            if (fieldToCheck.getPiece() == null || fieldToCheck.getPiece().getPlayer() != piece.getPlayer()) {
-                allowedMoves.add(fieldToCheck);
-            }
-        }
-
-        return allowedMoves;
-    }
-
     // Highlight the allowed moves
     public void highLightAllowedMoves(MovingPiece piece) {
         GameBoardField field = piece.getField();
@@ -117,7 +85,7 @@ public class GameBoard {
         field.highLight();
 
         // Get the allowed moves
-        HashSet<GameBoardField> allowedMoves = getAllowedMoves(piece);
+        HashSet<GameBoardField> allowedMoves = piece.getAllowedMoves();
 
         // Highlight them
         for (GameBoardField fieldToHighlight : allowedMoves) {
@@ -133,17 +101,6 @@ public class GameBoard {
                 GameBoardField field = gameBoardFields[posX][posY];
                 field.unHighLight();
             }
-        }
-    }
-
-    // Move piece
-    public void movePiece(MovingPiece piece, GameBoardField field) throws InvalidMoveException {
-        if(this.getAllowedMoves(piece).contains(field)) {
-            System.out.println("Deze zet is toegelaten");
-            piece.moveTo(field);
-        } else {
-            System.out.println("Deze zet is niet toegelaten");
-            throw new InvalidMoveException();
         }
     }
 

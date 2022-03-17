@@ -86,7 +86,7 @@ public class BattleFieldPresenter {
                                 selectedPiece = (MovingPiece) piece;
 
                                 // Get the allowed moves
-                                allowedMoves = model.getGameBoard().getAllowedMoves(selectedPiece);
+                                allowedMoves = selectedPiece.getAllowedMoves();
 
                                 // Highlight them
                                 model.getGameBoard().highLightAllowedMoves(selectedPiece);
@@ -101,14 +101,14 @@ public class BattleFieldPresenter {
                         }
 
                         // MOVE
-                        MovingPiece piece = (MovingPiece) selectedPiece;
+                        MovingPiece piece = selectedPiece;
 
                         // Clear the selection
                         clearSelection();
 
                         // Move the field
                         try {
-                            model.getGameBoard().movePiece(piece, field);
+                            piece.moveTo(field);
                         } catch (InvalidMoveException exception) {
                             // Place an X on the field
                             System.out.println("PLAATSEEH");
