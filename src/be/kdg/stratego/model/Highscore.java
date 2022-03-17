@@ -1,6 +1,7 @@
 package be.kdg.stratego.model;
 
 import java.io.File;
+import java.util.Objects;
 
 public class Highscore implements Comparable<Highscore> {
     private String naam;
@@ -13,8 +14,21 @@ public class Highscore implements Comparable<Highscore> {
 
     // Methods
     @Override
-    public int compareTo(Highscore o) {
-        return Integer.compare(o.getScore(), this.score);
+    public int compareTo(Highscore highscore) {
+        return Integer.compare(highscore.getScore(), this.score);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Highscore highscore = (Highscore) o;
+        return score == highscore.score && naam.equals(highscore.naam);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(naam, score);
     }
 
     // Getters
