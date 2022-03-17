@@ -56,8 +56,6 @@ public class BattleFieldPresenter {
                 fieldPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        //Liam: Model
-
                         // UNSELECT - Check if player clicked on the currently selected piece
                         if (field.isOccupied() && field.getPiece().equals(selectedPiece)) {
                             // Clear the selection
