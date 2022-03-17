@@ -79,7 +79,7 @@ public class GameBoard {
         GameBoardField field = piece.getField();
 
         // First, check if the piece is a scout
-        if (piece.rank == 2) {
+        if (piece.getRank() == 2) {
             // Do stuff for scout
         } else {
             // Do stuff for other pieces. They can move one step at a time
