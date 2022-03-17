@@ -5,6 +5,7 @@ import be.kdg.stratego.model.*;
 import be.kdg.stratego.view.Style;
 import be.kdg.stratego.view.newgame.NewGamePresenter;
 import be.kdg.stratego.view.newgame.NewGameView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -55,7 +56,7 @@ public class BattleFieldPresenter {
         this.updateView();
     }
 
-    private void addEventHandlers() {
+    private synchronized void addEventHandlers() {
         // Click on field
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
         for (GameBoardField[] fieldColumn : fields) {
@@ -103,27 +104,29 @@ public class BattleFieldPresenter {
                         // MOVE
                         MovingPiece piece = selectedPiece;
 
-                        // Clear the selection
-                        clearSelection();
-
-                        // Move the field
+                        // Move the piece
                         try {
                             piece.moveTo(field);
+                            clearSelection();
                         } catch (InvalidMoveException exception) {
                             // Place an X on the field
-                            System.out.println("PLAATSEEH");
-
                             field.setInvalid(true);
                             updateView();
 
-                            /*
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setTitle("Opgelet");
-                            alert.setHeaderText(null);
-                            alert.setContentText("Je kunt dit stuk niet naar daar verplaatsen.");
-
-                            alert.initOwner(view.getScene().getWindow());
-                            alert.showAndWait();*/
+                            // delay & exit on other thread
+                            Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                    // Wait 2 seconds
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException ex) {
+                                    }
+                                    // Remove the x from the field)
+                                    field.setInvalid(false);
+                                    updateView();
+                                }
+                            });
                         }
 
                         // Update the view
@@ -150,7 +153,6 @@ public class BattleFieldPresenter {
         }
         addEventHandlers();
     }
-
     private void addWindowEventHandlers() {
 
     }
