@@ -1,18 +1,16 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.view.Style;
-import javafx.beans.binding.Bindings;
 import javafx.scene.CacheHint;
-import javafx.scene.control.Label;
 import javafx.scene.effect.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
 public class GameBoardField extends Position {
+    private final double fieldSize = Style.size(50);
+
     // GameBoardField properties
     private Piece piece;
     private boolean walkable;
@@ -23,9 +21,6 @@ public class GameBoardField extends Position {
     // Field (stackpane) properties
     private StackPane pane;
     private GroundType groundType;
-
-    private final double paneHeight = Style.size(50);
-    private final double paneWidth = Style.size(50);
 
     // Enumeration for ground type
     public enum GroundType {
@@ -68,8 +63,7 @@ public class GameBoardField extends Position {
         // Generate the main stackpane
         StackPane container = new StackPane();
 
-        container.setPrefHeight(paneHeight);
-        container.setPrefWidth(paneWidth);
+        container.setPrefSize(fieldSize,fieldSize);
 
         // Set the right background
         if (groundType == GroundType.GRASS) {
@@ -85,13 +79,13 @@ public class GameBoardField extends Position {
 
             // Define the main imageView
             ImageView ivTower = new ImageView(towerImage);
-            ivTower.setFitHeight(paneHeight * 0.95);
-            ivTower.setFitWidth(paneWidth * 0.95);
+            ivTower.setFitHeight(fieldSize * 0.95);
+            ivTower.setFitWidth(fieldSize * 0.95);
 
             // Define the clip imageView
             ImageView ivClip = new ImageView(towerImage);
-            ivClip.setFitHeight(paneHeight * 0.95);
-            ivClip.setFitWidth(paneWidth * 0.95);
+            ivClip.setFitHeight(fieldSize * 0.95);
+            ivClip.setFitWidth(fieldSize * 0.95);
 
             // Set the image view clip
             ivTower.setClip(ivClip);
@@ -116,8 +110,8 @@ public class GameBoardField extends Position {
             // If the piece is not hidden, add the icon
             if (!this.piece.getHidden()) {
                 ImageView ivPiece = new ImageView(piece.getImage());
-                ivPiece.setFitHeight(paneHeight * 0.4);
-                ivPiece.setFitWidth(paneWidth * 0.4);
+                ivPiece.setFitHeight(fieldSize * 0.4);
+                ivPiece.setFitWidth(fieldSize * 0.4);
 
                 container.getChildren().add(ivPiece);
             }
@@ -126,8 +120,8 @@ public class GameBoardField extends Position {
         // If the field is invalid, show an X
         if (this.invalid) {
             ImageView ivInvalid = new ImageView("error.png");
-            ivInvalid.setFitHeight(paneHeight);
-            ivInvalid.setFitWidth(paneWidth);
+            ivInvalid.setFitHeight(fieldSize);
+            ivInvalid.setFitWidth(fieldSize);
             container.getChildren().add(ivInvalid);
         }
 

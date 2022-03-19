@@ -10,8 +10,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 
 public class Style {
-    private final static double base = 1.25;
+    private final static double baseScale = 1.25;
 
+    //Backgrounds
     public static Background bgImage(String path, boolean contain) {
         return new Background(new BackgroundImage(
                 new Image(path),
@@ -71,7 +72,7 @@ public class Style {
     }
 
     public static Border border(Paint paint) {
-        return border(paint,1);
+        return border(paint, 1);
     }
 
 
@@ -102,13 +103,14 @@ public class Style {
         Screen screen = Screen.getPrimary();
         double screenScale = screen.getOutputScaleX();
 
-        return (pixels / screenScale * base);
+        return (pixels / screenScale * baseScale);
     }
 
     public static double scale(double scale) {
         Screen screen = Screen.getPrimary();
         double screenScale = screen.getOutputScaleX();
 
-        return (scale / screenScale * base);
+        return (scale / screenScale * baseScale);
     }
+
 }

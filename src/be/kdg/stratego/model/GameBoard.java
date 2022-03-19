@@ -9,8 +9,6 @@ import java.util.Objects;
 public class GameBoard {
     private int grootteX;
     private int grootteY;
-    private final double gameBoardFieldHeight = Style.size(50);
-    private final double gameBoardFieldWidth = Style.size(50);
     private GameBoardField[][] gameBoardFields;
 
     public GameBoard() {
