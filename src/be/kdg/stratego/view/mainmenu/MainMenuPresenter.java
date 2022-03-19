@@ -44,7 +44,7 @@ public class MainMenuPresenter {
             Stage stage = new Stage();
             stage.setScene(new Scene(helpView));
 
-            stage.setTitle("Instructie video");
+            stage.setTitle("How to play Stratego");
             stage.initOwner(view.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
