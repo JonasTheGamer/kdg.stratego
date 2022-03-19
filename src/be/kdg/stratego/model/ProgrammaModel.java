@@ -12,6 +12,7 @@ public class ProgrammaModel {
     private final File highscoreFile = new File("highscores.csv");
 
     private Game game;
+    private GameBoard gameBoard;
     private TreeSet<Highscore> highscores;
 
     // Constructor
@@ -22,7 +23,7 @@ public class ProgrammaModel {
     // Methoden
     public void newGame() {
         game = new Game();
-
+        gameBoard = game.getGameBoard();
     }
 
     public void updateHighscores() {
@@ -50,7 +51,7 @@ public class ProgrammaModel {
     }
 
     public GameBoard getGameBoard() {
-        return game.getGameBoard();
+        return gameBoard;
     }
 
     public TreeSet<Highscore> getHighscores() {
