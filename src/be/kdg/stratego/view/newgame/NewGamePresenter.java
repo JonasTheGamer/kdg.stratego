@@ -7,17 +7,14 @@ import be.kdg.stratego.view.armysetup.ArmySetupPresenter;
 import be.kdg.stratego.view.armysetup.ArmySetupView;
 import be.kdg.stratego.view.mainmenu.MainMenuPresenter;
 import be.kdg.stratego.view.mainmenu.MainMenuView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 public class NewGamePresenter {
     private ProgrammaModel model;
     private NewGameView view;
+
+    private String[] selectedFlag = new String[2];
 
     public NewGamePresenter(ProgrammaModel model, NewGameView view) {
         this.model = model;
@@ -27,73 +24,21 @@ public class NewGamePresenter {
     }
 
     private void addEventHandlers() {
-
-        //TxtName maxCharacters
-        int maxCharacters = 10;
+        //MaxNameCharacters
         ///Player 1
-        view.getTxtName()[0].setOnKeyTyped(keyEvent -> {
-            //Max characters for name
-            String input = view.getTxtName()[0].getText();
-
-            if (input.length() > maxCharacters) {
-                view.getTxtName()[0].setText(input.substring(0, maxCharacters));
-                view.getTxtName()[0].positionCaret(maxCharacters);
-            }
-
-            //Change Lblname
-            view.getLblName()[0].setText(view.getTxtName()[0].getText());
-        });
+        view.getTxtName()[0].setOnKeyTyped(keyEvent -> maxNameCharacters(0));
         /// Player 2
-        view.getTxtName()[1].setOnKeyTyped(keyEvent -> {
-            //Max characters for name
-            String input = view.getTxtName()[1].getText();
-
-            if (input.length() > maxCharacters) {
-                view.getTxtName()[1].setText(input.substring(0, maxCharacters));
-                view.getTxtName()[1].positionCaret(maxCharacters);
-            }
-
-            //Change Lblname
-            view.getLblName()[1].setText(view.getTxtName()[1].getText());
-        });
+        view.getTxtName()[1].setOnKeyTyped(keyEvent -> maxNameCharacters(1));
 
 
         //BtnFlag
-        String[] selectedFlag = {"", ""};
         ///Player 1
         for (Button btn : view.getBtnFlag()[0]) {
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    //// Save clicked btnFlag
-                    selectedFlag[0] = btn.getBackground().getImages().get(0).getImage().getUrl();
-
-                    //// Set all borders white
-                    for (int i = 0; i < view.getBtnFlag()[0].length; i++) {
-                        view.getBtnFlag()[0][i].setBorder(Style.border(Color.WHITE));
-                    }
-                    //// Set current border red
-                    btn.setBorder(Style.border(Color.RED));
-                }
-            });
+            btn.setOnAction(actionEvent -> selectFlag(btn, 0));
         }
         ///Player 2
         for (Button btn : view.getBtnFlag()[1]) {
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    //// Save clicked btnFlag
-                    selectedFlag[1] = btn.getBackground().getImages().get(0).getImage().getUrl();
-
-                    //// Set all borders white
-                    for (int i = 0; i < view.getBtnFlag()[1].length; i++) {
-                        view.getBtnFlag()[1][i].setBorder(Style.border(Color.WHITE));
-                    }
-
-                    //// Set current border red
-                    btn.setBorder(Style.border(Color.RED));
-                }
-            });
+            btn.setOnAction(actionEvent -> selectFlag(btn, 1));
         }
 
 
@@ -127,5 +72,32 @@ public class NewGamePresenter {
 
     public void addWindowEventHandlers() {
 
+    }
+
+    //Private methods
+    private void selectFlag(Button btn, int player) {
+        /// Save clicked btnFlag
+        selectedFlag[player] = btn.getBackground().getImages().get(0).getImage().getUrl();
+
+        /// Set all borders white
+        for (int i = 0; i < view.getBtnFlag()[player].length; i++) {
+            view.getBtnFlag()[player][i].setBorder(Style.border(Color.WHITE));
+        }
+
+        /// Set current border red
+        btn.setBorder(Style.border(Color.RED));
+    }
+
+    private void maxNameCharacters(int player) {
+        ///Max characters for name
+        String input = view.getTxtName()[player].getText();
+
+        if (input.length() > Player.maxNameCharacters) {
+            view.getTxtName()[player].setText(input.substring(0, Player.maxNameCharacters));
+            view.getTxtName()[player].positionCaret(Player.maxNameCharacters);
+        }
+
+        ///Change Lblname
+        view.getLblName()[player].setText(view.getTxtName()[player].getText());
     }
 }

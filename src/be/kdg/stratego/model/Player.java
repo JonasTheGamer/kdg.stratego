@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
 public class Player {
+    public static final int maxNameCharacters = 10;
+
     private String name;
     private Color color;
     private String flag;
