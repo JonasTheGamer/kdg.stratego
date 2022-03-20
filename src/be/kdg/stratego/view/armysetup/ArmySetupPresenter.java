@@ -297,10 +297,7 @@ public class ArmySetupPresenter {
 
     private GameBoardField getNextAvailableField() {
         int boardSizeX = model.getGameBoard().getGrootteX();
-        int boardSizeY = model.getGameBoard().getGrootteX();
-
-        int currBoardPosX = 0;
-        int currBoardPosY = 0;
+        int boardSizeY = model.getGameBoard().getGrootteY();
 
         GameBoardField availableField = null;
         for (int posY = 0; posY < boardSizeY; posY++) {

@@ -7,25 +7,19 @@ import java.util.HashSet;
 import java.util.Objects;
 
 public class GameBoard {
-    private int grootteX;
-    private int grootteY;
+    private final int grootteX = 10;
+    private final int grootteY = 10;
     private GameBoardField[][] gameBoardFields;
 
     public GameBoard() {
-        grootteX = 10;
-        grootteY = 10;
         gameBoardFields = new GameBoardField[this.grootteX][this.grootteY];
 
-        // Create empty fields
-        int boardWidth = grootteX;
-        int boardHeight = grootteY;
-
-        int amountOfRowsPerPlayer = boardHeight / 2 - 1;
+        int amountOfRowsPerPlayer = grootteY / 2 - 1;
 
         //// Add fields
-        for (int posY = 0; posY < boardHeight; posY++) {
+        for (int posY = 0; posY < grootteY; posY++) {
             // Per row
-            for (int posX = 0; posX < boardWidth; posX++) {
+            for (int posX = 0; posX < grootteX; posX++) {
                 // Per column
                 this.setGameBoardField(new GameBoardField(this, posX, posY, GameBoardField.GroundType.GRASS));
             }
@@ -33,16 +27,16 @@ public class GameBoard {
 
         //// Water
         ////// Left water
-        this.setGameBoardField(new GameBoardField(this,2, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(this,3, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(this,2, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(this,3, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this, coordinateX(3), coordinateY(5), GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this, coordinateX(3), coordinateY(6), GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this, coordinateX(4), coordinateY(5), GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this, coordinateX(4), coordinateY(6), GameBoardField.GroundType.WATER));
 
         ////// Right water
-        this.setGameBoardField(new GameBoardField(this,6, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(this,7, amountOfRowsPerPlayer, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(this,6, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
-        this.setGameBoardField(new GameBoardField(this,7, amountOfRowsPerPlayer + 1, GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this, coordinateX(7), coordinateY(5), GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this, coordinateX(7), coordinateY(6), GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this, coordinateX(8), coordinateY(5), GameBoardField.GroundType.WATER));
+        this.setGameBoardField(new GameBoardField(this, coordinateX(8), coordinateY(6), GameBoardField.GroundType.WATER));
     }
 
     // Methods
@@ -100,6 +94,17 @@ public class GameBoard {
                 field.unHighLight();
             }
         }
+    }
+
+
+    public int coordinateX(int x) {
+        //Humanreadable version x in GameBoard(Field)
+        return x - 1;
+    }
+
+    public int coordinateY(int y) {
+        //Humanreadable version y in GameBoard(Field)
+        return grootteY - y;
     }
 
     // Getters
