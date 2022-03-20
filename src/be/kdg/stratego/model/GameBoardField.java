@@ -5,6 +5,7 @@ import javafx.scene.CacheHint;
 import javafx.scene.effect.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
@@ -98,7 +99,8 @@ public class GameBoardField extends Position {
                             0,
                             ivTower.getImage().getWidth(),
                             ivTower.getImage().getHeight(),
-                            piece.getPlayer().getColor()
+                            Color.valueOf(piece.getPlayer().getColor())
+
                     )
             ));
 

@@ -46,8 +46,8 @@ public class NewGamePresenter {
         view.getBtnReady().setOnAction(actionEvent -> {
             /// Create new game with players
             model.newGame(
-                    new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(), selectedFlag[0]),
-                    new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(), selectedFlag[1])
+                    new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue().toString(), selectedFlag[0]),
+                    new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue().toString(), selectedFlag[1])
             );
 
 

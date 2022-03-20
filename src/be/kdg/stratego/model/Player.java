@@ -1,7 +1,6 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.model.pieces.*;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -9,12 +8,12 @@ public class Player {
     public static final int maxNameCharacters = 10;
 
     private String name;
-    private Color color;
+    private String color;
     private String flag;
     private ArrayList<Piece> pieces = new ArrayList<>();
 
     // Constructor
-    public Player(String naam, Color color, String flag) {
+    public Player(String naam, String color, String flag) {
         this.name = naam;
         this.color = color;
         this.flag = flag;
@@ -94,7 +93,7 @@ public class Player {
         return name;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
