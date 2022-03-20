@@ -35,36 +35,23 @@ public class ArmySetupPresenter {
 
     private void addEventHandlers() {
         view.getBtnStart().setOnAction(actionEvent -> {
-            // Check if the player has placed all pieces
-            boolean foundPieceThatHasNoField = false;
 
-            for (Piece piece : model.getGame().getCurrentPlayer().getPieces()) {
-                // If the piece is already on the field, no need to figure everything out
-                if (!piece.isOnField()) {
-                    foundPieceThatHasNoField = true;
+            // Check if the player has placed all pieces
+            if (model.getGame().getCurrentPlayer().isPiecesPlaced()) {
+
+                // Check if we're on the first (0) or second (1) player
+                if (model.getGame().getCurrentPlayer().equals(model.getGame().getPlayers()[0])) {
+                    // Next turn
+                    model.getGame().nextTurn();
+                    view.getBtnStart().setText("Start");
+                    updateView();
+                } else {
+                    // Start the game!
+                    model.getGame().nextTurn();
+                    Style.changeScreen(Style.Screens.BATTLEFIELD, model, view);
                 }
             }
 
-            if (foundPieceThatHasNoField) {
-                return;
-            }
-
-            // Hide the current player's pieces
-            model.getGame().getCurrentPlayer().hidePieces();
-
-            // Flip the board
-            model.getGameBoard().rotate();
-
-            // Check if we're on the first (0) or second (1) player
-            if (model.getGame().getCurrentPlayer().equals(model.getGame().getPlayers()[0])) {
-                // Reload this windo for the next player
-                model.getGame().switchPlayer();
-                Style.changeScreen(Style.Screens.ARMYSETUP, model, view);
-            } else {
-                // Start the game!
-                model.getGame().switchPlayer();
-                Style.changeScreen(Style.Screens.BATTLEFIELD, model, view);
-            }
         });
 
 

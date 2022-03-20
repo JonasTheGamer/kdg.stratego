@@ -23,7 +23,8 @@ public class Game {
 
     // Methods
     public void start() {
-        ongoing = true;
+        //Set starting variables
+        this.ongoing = true;
         this.startTime = LocalDateTime.now();
     }
 
@@ -95,17 +96,23 @@ public class Game {
         System.out.println("The game has been stopped.");
     }
 
-    public void switchPlayer() {
+    public void nextTurn() {
+        if (ongoing) {
+            //Liam: Hier komen das punten per turn enzo ...
+        }
+
+        // Rotate gameboard
+        gameBoard.rotate();
+
+        // Hide the current player's pieces
+        currentPlayer.hidePieces();
+
+        // Switch player
         if (currentPlayer.equals(players[0])) {
             currentPlayer = players[1];
         } else {
             currentPlayer = players[0];
         }
-    }
-
-    public void nextTurn() {
-        //Liam: Hier komen das punten per turn enzo ...
-        switchPlayer();
     }
 
     // Getters

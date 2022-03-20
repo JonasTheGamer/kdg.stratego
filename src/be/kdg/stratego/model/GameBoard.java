@@ -13,9 +13,7 @@ public class GameBoard {
 
     public GameBoard() {
         gameBoardFields = new GameBoardField[this.grootteX][this.grootteY];
-
-        int amountOfRowsPerPlayer = grootteY / 2 - 1;
-
+        
         //// Add fields
         for (int posY = 0; posY < grootteY; posY++) {
             // Per row

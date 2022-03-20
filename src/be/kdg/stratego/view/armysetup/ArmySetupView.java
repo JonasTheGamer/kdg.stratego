@@ -44,7 +44,7 @@ public class ArmySetupView extends BorderPane {
 
         //// Menu game
         lblGameTitle = new Label("Game");
-        btnStart = new Button("Start");
+        btnStart = new Button("Continue");
         btnBack = new Button("Back");
         btnFill = new Button("Fill board");
 
@@ -66,8 +66,8 @@ public class ArmySetupView extends BorderPane {
 
         //// Title (player X, place your army)
         Style.txt(lblScreenTitle,40,Color.BLACK);
-        this.setAlignment(lblScreenTitle, Pos.CENTER);
-        this.setMargin(lblScreenTitle, new Insets(Style.size(15), 0, 0, 0));
+        setAlignment(lblScreenTitle, Pos.CENTER);
+        setMargin(lblScreenTitle, new Insets(Style.size(15), 0, 0, 0));
 
         this.setTop(lblScreenTitle);
 
@@ -78,7 +78,7 @@ public class ArmySetupView extends BorderPane {
         gpPieces.setVgap(Style.size(30));
         gpPieces.setAlignment(Pos.CENTER);
 
-        this.setMargin(gpPieces, new Insets(0, Style.size(50), 0, Style.size(50)));
+        setMargin(gpPieces, new Insets(0, Style.size(50), 0, Style.size(50)));
         this.setLeft(gpPieces);
 
         //// Field
@@ -92,7 +92,7 @@ public class ArmySetupView extends BorderPane {
 
         vbMenu.setSpacing(Style.size(100));
         vbMenu.setPadding(new Insets(0, Style.size(50), 0, Style.size(50)));
-        this.setMargin(vbMenu, new Insets(Style.size(138), Style.size(92), Style.size(138), Style.size(98)));
+        setMargin(vbMenu, new Insets(Style.size(138), Style.size(92), Style.size(138), Style.size(98)));
 
         this.setRight(vbMenu);
 

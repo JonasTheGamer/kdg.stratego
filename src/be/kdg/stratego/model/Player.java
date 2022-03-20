@@ -11,12 +11,14 @@ public class Player {
     private String color;
     private String flag;
     private ArrayList<Piece> pieces = new ArrayList<>();
+    private boolean piecesPlaced;
 
     // Constructor
     public Player(String naam, String color, String flag) {
         this.name = naam;
         this.color = color;
         this.flag = flag;
+        this.piecesPlaced = false;
 
         this.givePieces();
     }
@@ -99,5 +101,17 @@ public class Player {
 
     public ArrayList<Piece> getPieces() {
         return pieces;
+    }
+
+    public boolean isPiecesPlaced() {
+        piecesPlaced = true;
+
+        for (Piece piece : this.getPieces()) {
+            // If the piece is already on the field, no need to figure everything out
+            if (!piece.isOnField()) {
+                this.piecesPlaced = false;
+            }
+        }
+        return piecesPlaced;
     }
 }
