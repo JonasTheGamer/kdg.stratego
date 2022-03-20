@@ -132,6 +132,39 @@ public class ArmySetupPresenter {
                 StackPane fieldPane = field.getPane();
                 fieldPane.setOnMouseClicked(mouseEvent -> {
 
+                    // PLACE - Check if we were placing a piece.
+                    if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                        if (placingPiece) {
+                            // Only allow placing in row 6 to 9;
+                            if (field.getPositionY() < (model.getGameBoard().getGrootteY() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGrootteY() - 1) {
+                                return;
+                            }
+
+                            // Check if the field is already occupied.
+                            if (field.isOccupied()) {
+                                return;
+                            }
+
+                            // Grab a random piece that's not on the field yet
+                            Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getClass().getName());
+
+                            // Place on the field
+                            pieceToPlace.placeOnField(field);
+
+                            // Add it to the board
+                            model.getGameBoard().setGameBoardField(field);
+
+                            // Stop placing
+                            if (piecesToPlace.get(pieceToPlace.getClass().getName()) == 1) {
+                                placingPiece = false;
+                            }
+
+                            // Refresh the view
+                            updateView();
+                        }
+                    }
+
+
                     // REMOVE - Check if player wants to remove a piece from the board
                     if (mouseEvent.getButton() == MouseButton.SECONDARY) {
 
@@ -143,36 +176,6 @@ public class ArmySetupPresenter {
                             // Refresh the view
                             updateView();
                         }
-                    }
-
-                    // PLACE - Check if we were placing a piece.
-                    if (placingPiece) {
-                        // Only allow placing in row 6 to 9;
-                        if (field.getPositionY() < (model.getGameBoard().getGrootteY() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGrootteY() - 1) {
-                            return;
-                        }
-
-                        // Check if the field is already occupied.
-                        if (field.isOccupied()) {
-                            return;
-                        }
-
-                        // Grab a random piece that's not on the field yet
-                        Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getClass().getName());
-
-                        // Place on the field
-                        pieceToPlace.placeOnField(field);
-
-                        // Add it to the board
-                        model.getGameBoard().setGameBoardField(field);
-
-                        // Stop placing
-                        if (piecesToPlace.get(pieceToPlace.getClass().getName()) == 1) {
-                            placingPiece = false;
-                        }
-
-                        // Refresh the view
-                        updateView();
                     }
                 });
             }
