@@ -13,9 +13,11 @@ public class Game {
     private LocalDateTime endTime;
     private boolean ongoing = false;
     private GameBoard gameBoard;
+    private Player currentPlayer;
 
-    public Game() {
-        this.players = new Player[2];
+    public Game(Player player1, Player player2) {
+        this.players = new Player[]{player1, player2};
+        this.currentPlayer = player1;
         this.gameBoard = new GameBoard();
     }
 
@@ -57,7 +59,6 @@ public class Game {
                 }
             } catch (IOException e) {
                 System.out.println("An error occurred whilst trying to check if the file already exists. Please make sure the path is valid.");
-                fileOk = false;
             }
         }
 
@@ -73,10 +74,8 @@ public class Game {
 
         } catch (FileNotFoundException | UnsupportedEncodingException exc) {
             System.out.println("Something went wrong whilst trying to save your progress. Please try again at a later time.");
-            fileSaved = false;
         } catch (IOException e) {
             e.printStackTrace();
-            fileSaved = false;
         }
 
         if (fileSaved) {
@@ -96,21 +95,29 @@ public class Game {
         System.out.println("The game has been stopped.");
     }
 
+    public void switchPlayer() {
+        if (currentPlayer.equals(players[0])) {
+            currentPlayer = players[1];
+        } else {
+            currentPlayer = players[0];
+        }
+    }
+
+    public void nextTurn() {
+        //Liam: Hier komen das punten per turn enzo ...
+        switchPlayer();
+    }
+
     // Getters
     public Player[] getPlayers() {
         return players;
     }
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public GameBoard getGameBoard() {
         return gameBoard;
-    }
-
-    // Setters
-    public void setPlayer1(Player player) {
-        this.players[0] = player;
-    }
-
-    public void setPlayer2(Player player) {
-        this.players[1] = player;
     }
 }

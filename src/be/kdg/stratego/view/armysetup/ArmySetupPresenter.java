@@ -1,160 +1,126 @@
 package be.kdg.stratego.view.armysetup;
 
-import be.kdg.stratego.model.Piece;
-import be.kdg.stratego.model.Player;
-import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.model.GameBoardField;
+import be.kdg.stratego.model.Piece;
+import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.view.Style;
-import be.kdg.stratego.view.battlefield.BattleFieldPresenter;
-import be.kdg.stratego.view.battlefield.BattleFieldView;
-import be.kdg.stratego.view.newgame.NewGamePresenter;
-import be.kdg.stratego.view.newgame.NewGameView;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 public class ArmySetupPresenter {
     private ProgrammaModel model;
     private ArmySetupView view;
     private HashMap<String, Integer> piecesToPlace;
-    private Player currentPlayer;
-    private int playerIndex;
 
     private Boolean placingPiece = false;
     private Piece lastClickedPlaceablePiece;
 
-    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view, Player currentPlayer, int playerIndex) {
+    public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
         this.model = model;
         this.view = view;
-        this.piecesToPlace = new HashMap();
-        this.currentPlayer = currentPlayer;
-        this.playerIndex = playerIndex;
+        this.piecesToPlace = new HashMap<>();
 
         this.addEventHandlers();
         this.updateView();
     }
 
     private void addEventHandlers() {
-        view.getBtnStart().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                // Check if the player has placed all pieces
-                boolean foundPieceThatHasNoField = false;
+        view.getBtnStart().setOnAction(actionEvent -> {
+            // Check if the player has placed all pieces
+            boolean foundPieceThatHasNoField = false;
 
-                for (Piece piece : currentPlayer.getPieces()) {
-                    // If the piece is already on the field, no need to figure everything out
-                    if (!piece.isOnField()) {
-                        foundPieceThatHasNoField = true;
-                    }
+            for (Piece piece : model.getGame().getCurrentPlayer().getPieces()) {
+                // If the piece is already on the field, no need to figure everything out
+                if (!piece.isOnField()) {
+                    foundPieceThatHasNoField = true;
                 }
+            }
 
-                if (foundPieceThatHasNoField) {
-                    return;
-                }
+            if (foundPieceThatHasNoField) {
+                return;
+            }
 
-                // Hide the current player's pieces
-                currentPlayer.hidePieces();
+            // Hide the current player's pieces
+            model.getGame().getCurrentPlayer().hidePieces();
 
-                // Flip the board
-                model.getGameBoard().rotate();
+            // Flip the board
+            model.getGameBoard().rotate();
 
-                // Check if we're on the first (0) or second (1) player
-                if (playerIndex == 0) {
-                    // Reload this windo for the next player
-                    ArmySetupView armySetupView = new ArmySetupView();
-                    ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[1], 1);
-                    view.getScene().setRoot(armySetupView);
-                    armySetupPresenter.addWindowEventHandlers();
-                } else {
-                    // Start the game!
-                    BattleFieldView battleFieldView = new BattleFieldView();
-                    BattleFieldPresenter battleFieldPresenter = new BattleFieldPresenter(model, battleFieldView);
-                    view.getScene().setRoot(battleFieldView);
-                    battleFieldPresenter.addWindowEventHandlers();
-                }
+            // Check if we're on the first (0) or second (1) player
+            if (model.getGame().getCurrentPlayer().equals(model.getGame().getPlayers()[0])) {
+                // Reload this windo for the next player
+                model.getGame().switchPlayer();
+                Style.changeScreen(Style.Screens.ARMYSETUP, model, view);
+            } else {
+                // Start the game!
+                model.getGame().switchPlayer();
+                Style.changeScreen(Style.Screens.BATTLEFIELD, model, view);
             }
         });
 
 
-        view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                // Empty the board
-                model.getGameBoard().clearGameBoardFields();
+        view.getBtnBack().setOnAction(actionEvent -> {
+            // Empty the board
+            model.getGameBoard().clearGameBoardFields();
 
-                // Switch back to the newGameView
-                NewGameView newGameView = new NewGameView();
-                NewGamePresenter newGamePresenter = new NewGamePresenter(model, newGameView);
-                view.getScene().setRoot(newGameView);
-                newGamePresenter.addWindowEventHandlers();
-            }
+            // Switch back to the newGameView
+            Style.changeScreen(Style.Screens.NEWGAME, model, view);
         });
 
 
-        view.getBtnFill().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+        view.getBtnFill().setOnAction(actionEvent -> {
 
-                // Loop through placable pieces
-                for (String pieceName : piecesToPlace.keySet()) {
-                    int amountPlacable = piecesToPlace.get(pieceName);
+            // Loop through placable pieces
+            for (String pieceName : piecesToPlace.keySet()) {
+                int amountPlacable = piecesToPlace.get(pieceName);
 
-                    for (int i = 0; i < amountPlacable; i++) {
-                        // Get a random piece that has this name
-                        Piece piece = getPieceFromName(pieceName);
+                for (int i = 0; i < amountPlacable; i++) {
+                    // Get a random piece that has this name
+                    Piece piece = getPieceFromName(pieceName);
 
-                        // Get the next unoccupied (available) field
-                        GameBoardField field = getNextAvailableField();
+                    // Get the next unoccupied (available) field
+                    GameBoardField field = getNextAvailableField();
 
-                        // Place the piece on the field
-                        piece.placeOnField(field);
-                    }
+                    // Place the piece on the field
+                    piece.placeOnField(field);
                 }
-
-                // Now, update the view
-                updateView();
             }
+
+            // Now, update the view
+            updateView();
         });
 
 
         // Placable pieces
         ObservableList<Node> stpPlacablePieces = view.getGpPieces().getChildren();
         for (Node stpPiece : stpPlacablePieces) {
-            stpPiece.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    // Find out which piece the user would like to place on the field
-                    String clickedId = stpPiece.getId();
-                    String[] idData = clickedId.split("-");
-                    String pieceClassName = idData[1];
+            stpPiece.setOnMouseClicked(mouseEvent -> {
+                // Find out which piece the user would like to place on the field
+                String clickedId = stpPiece.getId();
+                String[] idData = clickedId.split("-");
+                String pieceClassName = idData[1];
 
-                    // Make sure we still have pieces left to place
-                    int amountPlacable = piecesToPlace.get(pieceClassName);
-                    if (amountPlacable == 0) {
-                        return;
-                    }
-
-                    // Get a random piece that has this name to place on the field later on
-                    Piece pieceToPlace = getPieceFromName(pieceClassName);
-                    lastClickedPlaceablePiece = pieceToPlace;
-
-                    // Remember that the user is placing this piece.
-                    placingPiece = true;
+                // Make sure we still have pieces left to place
+                int amountPlacable = piecesToPlace.get(pieceClassName);
+                if (amountPlacable == 0) {
+                    return;
                 }
+
+                // Get a random piece that has this name to place on the field later on
+                Piece pieceToPlace = getPieceFromName(pieceClassName);
+                lastClickedPlaceablePiece = pieceToPlace;
+
+                // Remember that the user is placing this piece.
+                placingPiece = true;
             });
         }
 
@@ -164,53 +130,49 @@ public class ArmySetupPresenter {
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
                 StackPane fieldPane = field.getPane();
-                fieldPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
+                fieldPane.setOnMouseClicked(mouseEvent -> {
 
-                        // REMOVE - Check if player wants to remove a piece from the board
-                        if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                    // REMOVE - Check if player wants to remove a piece from the board
+                    if (mouseEvent.getButton() == MouseButton.SECONDARY) {
 
-                            // Only remove if the field is occupied & the piece is not hidden
-                            if (field.isOccupied() && !field.getPiece().getHidden()) {
-                                // Remove the piece from the field
-                                field.getPiece().removeFromField();
-
-                                // Refresh the view
-                                updateView();
-                            }
-                        }
-
-                        // PLACE - Check if we were placing a piece.
-                        if (placingPiece) {
-                            // Only allow placing in row 6 to 9;
-                            if (field.getPositionY() < (model.getGameBoard().getGrootteY() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGrootteY() - 1) {
-                                return;
-                            }
-
-                            // Check if the field is already occupied.
-                            if (field.isOccupied()) {
-                                return;
-                            }
-
-                            // Grab a random piece that's not on the field yet
-                            Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getClass().getName());
-
-                            // Place on the field
-                            pieceToPlace.placeOnField(field);
-
-                            // Add it to the board
-                            model.getGameBoard().setGameBoardField(field);
-
-                            // Stop placing
-                            if (piecesToPlace.get(pieceToPlace.getClass().getName()) == 1) {
-                                placingPiece = false;
-                            }
+                        // Only remove if the field is occupied & the piece is not hidden
+                        if (field.isOccupied() && !field.getPiece().getHidden()) {
+                            // Remove the piece from the field
+                            field.getPiece().removeFromField();
 
                             // Refresh the view
                             updateView();
+                        }
+                    }
+
+                    // PLACE - Check if we were placing a piece.
+                    if (placingPiece) {
+                        // Only allow placing in row 6 to 9;
+                        if (field.getPositionY() < (model.getGameBoard().getGrootteY() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGrootteY() - 1) {
                             return;
                         }
+
+                        // Check if the field is already occupied.
+                        if (field.isOccupied()) {
+                            return;
+                        }
+
+                        // Grab a random piece that's not on the field yet
+                        Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getClass().getName());
+
+                        // Place on the field
+                        pieceToPlace.placeOnField(field);
+
+                        // Add it to the board
+                        model.getGameBoard().setGameBoardField(field);
+
+                        // Stop placing
+                        if (piecesToPlace.get(pieceToPlace.getClass().getName()) == 1) {
+                            placingPiece = false;
+                        }
+
+                        // Refresh the view
+                        updateView();
                     }
                 });
             }
@@ -222,45 +184,41 @@ public class ArmySetupPresenter {
         double placeablePieceHeight = Style.size(100);
         double placeablePieceWidth = Style.size(75);
 
-        int boardWidth = model.getGameBoard().getGrootteX();
-        int boardHeight = model.getGameBoard().getGrootteY();
-        int amountOfRowsPerPlayer = (model.getGameBoard().getGrootteY() - 2) / 2;
-
         // Set title
-        view.getLblScreenTitle().setText(currentPlayer.getName() + ": Place your army");
+        view.getLblScreenTitle().setText(model.getGame().getCurrentPlayer().getName() + ": Place your army");
 
         // Refresh pieces that are placable
         refreshPlacablePieces();
 
-        // Add them to the gridPane
+        // Available Pieces
         int posXCounter = 0;
         int posYCounter = 0;
 
         view.getGpPieces().getChildren().clear();
         for (String pieceName : piecesToPlace.keySet()) {
             int amountPlacable = piecesToPlace.get(pieceName);
-            // Get a random piece that has this name. We'll use it to find out the image
+            /// Get a random piece that has this name. We'll use it to find out the image
             Piece piece = getPieceFromName(pieceName);
 
-            // Main piece container
+            /// Main piece container
             VBox pieceContainer = new VBox();
             pieceContainer.setBackground(Style.background);
             pieceContainer.setAlignment(Pos.CENTER);
             pieceContainer.setPrefHeight(placeablePieceHeight);
             pieceContainer.setPrefWidth(placeablePieceWidth);
 
-            // Piece image
+            /// Piece image
             ImageView ivPiece = new ImageView(piece.getImage());
             ivPiece.setFitWidth(placeablePieceWidth * 0.5);
             ivPiece.setFitHeight(placeablePieceWidth * 0.5);
             pieceContainer.getChildren().add(ivPiece);
 
-            // Piece title
+            /// Piece title
             Label lblPieceTitle = new Label(piece.getName());
             Style.txt(lblPieceTitle, 15);
             pieceContainer.getChildren().add(lblPieceTitle);
 
-            // Amount left to place
+            /// Amount left to place
             Label lblPlacable = new Label(Integer.toString(amountPlacable));
             Style.txt(lblPlacable, 15);
             pieceContainer.getChildren().add(lblPlacable);
@@ -301,7 +259,7 @@ public class ArmySetupPresenter {
     //Methoden
     private Piece getPieceFromName(String name) {
         Piece foundPiece = null;
-        for (Piece piece : currentPlayer.getPieces()) {
+        for (Piece piece : model.getGame().getCurrentPlayer().getPieces()) {
             if (piece.getClass().getName().equals(name) && Objects.isNull(piece.getField())) {
                 foundPiece = piece;
                 break;
@@ -316,7 +274,7 @@ public class ArmySetupPresenter {
         piecesToPlace.clear();
 
         // Add the fresh ones in
-        for (Piece piece : currentPlayer.getPieces()) {
+        for (Piece piece : model.getGame().getCurrentPlayer().getPieces()) {
             // If the piece is already on the board, it's not placable anymore
             if (piece.isOnField()) {
                 continue;

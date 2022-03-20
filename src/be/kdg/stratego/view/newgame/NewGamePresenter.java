@@ -44,26 +44,20 @@ public class NewGamePresenter {
 
         //BtnReady
         view.getBtnReady().setOnAction(actionEvent -> {
-            /// Create players
-            model.newGame();
-            model.getGame().setPlayer1(new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(), selectedFlag[0]));
-            model.getGame().setPlayer2(new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(), selectedFlag[1]));
+            /// Create new game with players
+            model.newGame(
+                    new Player(view.getLblName()[0].getText(), view.getCpColor()[0].getValue(), selectedFlag[0]),
+                    new Player(view.getLblName()[1].getText(), view.getCpColor()[1].getValue(), selectedFlag[1])
+            );
+
 
             /// Switch to the army setup view!
-            ArmySetupView armySetupView = new ArmySetupView();
-            ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView, model.getGame().getPlayers()[0], 0);
-            view.getScene().setRoot(armySetupView);
-            armySetupPresenter.addWindowEventHandlers();
+            Style.changeScreen(Style.Screens.ARMYSETUP, model, view);
         });
 
 
         //BtnCancel
-        view.getBtnCancel().setOnAction(actionEvent -> {
-            MainMenuView mainMenuView = new MainMenuView();
-            MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(model, mainMenuView);
-            view.getScene().setRoot(mainMenuView);
-            mainMenuPresenter.addWindowEventHandlers();
-        });
+        view.getBtnCancel().setOnAction(actionEvent -> Style.changeScreen(Style.Screens.MAINMENU, model, view));
     }
 
     private void updateView() {

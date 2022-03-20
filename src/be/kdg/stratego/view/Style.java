@@ -1,5 +1,14 @@
 package be.kdg.stratego.view;
 
+import be.kdg.stratego.model.ProgrammaModel;
+import be.kdg.stratego.view.armysetup.ArmySetupPresenter;
+import be.kdg.stratego.view.armysetup.ArmySetupView;
+import be.kdg.stratego.view.battlefield.BattleFieldPresenter;
+import be.kdg.stratego.view.battlefield.BattleFieldView;
+import be.kdg.stratego.view.mainmenu.MainMenuPresenter;
+import be.kdg.stratego.view.mainmenu.MainMenuView;
+import be.kdg.stratego.view.newgame.NewGamePresenter;
+import be.kdg.stratego.view.newgame.NewGameView;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -11,6 +20,12 @@ import javafx.stage.Screen;
 
 public class Style {
     private final static double baseScale = 1.25;
+    public enum Screens {
+        MAINMENU,
+        NEWGAME,
+        ARMYSETUP,
+        BATTLEFIELD
+    }
 
     //Backgrounds
     public static Background bgImage(String path, boolean contain) {
@@ -111,6 +126,34 @@ public class Style {
         double screenScale = screen.getOutputScaleX();
 
         return (scale / screenScale * baseScale);
+    }
+
+    public static void changeScreen(Screens screen, ProgrammaModel model, Pane view) {
+        switch (screen) {
+            case MAINMENU:
+                MainMenuView mainMenuView = new MainMenuView();
+                MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(model, mainMenuView);
+                view.getScene().setRoot(mainMenuView);
+                mainMenuPresenter.addWindowEventHandlers();
+                break;
+            case NEWGAME:
+                NewGameView newGameView = new NewGameView();
+                NewGamePresenter newGamePresenter = new NewGamePresenter(model, newGameView);
+                view.getScene().setRoot(newGameView);
+                newGamePresenter.addWindowEventHandlers();
+                break;
+            case ARMYSETUP:
+                ArmySetupView armySetupView = new ArmySetupView();
+                ArmySetupPresenter armySetupPresenter = new ArmySetupPresenter(model, armySetupView);
+                view.getScene().setRoot(armySetupView);
+                armySetupPresenter.addWindowEventHandlers();
+                break;
+            case BATTLEFIELD:
+                BattleFieldView battleFieldView = new BattleFieldView();
+                BattleFieldPresenter battleFieldPresenter = new BattleFieldPresenter(model, battleFieldView);
+                view.getScene().setRoot(battleFieldView);
+                battleFieldPresenter.addWindowEventHandlers();
+        }
     }
 
 }

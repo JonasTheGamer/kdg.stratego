@@ -17,12 +17,12 @@ public class ProgrammaModel {
 
     // Constructor
     public ProgrammaModel() {
-        highscores = new TreeSet<Highscore>();
+        highscores = new TreeSet<>();
     }
 
     // Methoden
-    public void newGame() {
-        game = new Game();
+    public void newGame(Player player1, Player player2) {
+        game = new Game(player1, player2);
         gameBoard = game.getGameBoard();
     }
 
@@ -60,7 +60,7 @@ public class ProgrammaModel {
 
     // Setter
     public void setNewHighscore(String name, int score) {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
 
         /// Add line to list
         lines.add(name + ";" + score);

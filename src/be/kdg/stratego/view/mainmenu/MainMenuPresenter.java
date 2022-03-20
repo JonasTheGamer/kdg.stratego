@@ -27,15 +27,7 @@ public class MainMenuPresenter {
 
     private void addEventHandlers() {
         //Code
-        view.getBtnPlay().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                NewGameView newGameView = new NewGameView();
-                NewGamePresenter newGamePresenter = new NewGamePresenter(model, newGameView);
-                view.getScene().setRoot(newGameView);
-                newGamePresenter.addWindowEventHandlers();
-            }
-        });
+        view.getBtnPlay().setOnAction(actionEvent -> Style.changeScreen(Style.Screens.NEWGAME, model, view));
 
         view.getBtnHelp().setOnAction(actionEvent -> {
             HelpView helpView = new HelpView();
@@ -84,9 +76,7 @@ public class MainMenuPresenter {
     public void addWindowEventHandlers() {
         Stage stage = (Stage) view.getScene().getWindow();
 
-        view.getBtnQuit().setOnAction(actionEvent -> {
-            stage.close();
-        });
+        view.getBtnQuit().setOnAction(actionEvent -> stage.close());
     }
 
 }
