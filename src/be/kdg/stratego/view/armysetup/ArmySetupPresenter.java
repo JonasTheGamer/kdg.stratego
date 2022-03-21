@@ -70,12 +70,13 @@ public class ArmySetupPresenter {
 
             // Special places pieces (for quick winning, ...)
             GameBoard gb = model.getGame().getGameBoard();
+            if (getPieceFromName("scout") != null && getPieceFromName("flag") != null) {
+                GameBoardField field = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
+                getPieceFromName("scout").placeOnField(field);
 
-            GameBoardField f = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
-            getPieceFromName("scout").placeOnField(f);
-
-            f = f.getFieldOnRight();
-            getPieceFromName("flag").placeOnField(f);
+                field = field.getFieldOnRight();
+                getPieceFromName("flag").placeOnField(field);
+            }
 
             refreshPlacablePieces();
 
