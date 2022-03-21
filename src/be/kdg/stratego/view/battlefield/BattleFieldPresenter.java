@@ -2,10 +2,16 @@ package be.kdg.stratego.view.battlefield;
 
 import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.model.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 import java.util.HashSet;
 
@@ -46,6 +52,7 @@ public class BattleFieldPresenter {
 
                 StackPane fieldPane = field.getPane();
                 fieldPane.setOnMouseClicked(mouseEvent -> {
+
                     // UNSELECT - Check if player clicked on the currently selected piece
                     if (field.isOccupied() && field.getPiece().equals(selectedPiece)) {
                         // Clear the selection
@@ -56,7 +63,7 @@ public class BattleFieldPresenter {
                         return;
                     }
 
-                    // SELECT - Did the player click on a piece that's one of their own?
+                    // SELECT - Check if the player clicked on their own piece?
                     if (field.isOccupied() && field.getPiece().getPlayer().equals(currentPlayer)) {
                         // They probably want to move this piece
                         Piece piece = field.getPiece();
@@ -75,34 +82,38 @@ public class BattleFieldPresenter {
                             updateView();
 
                         } else {
-                            // Ignore their request
+                            // Jonas: Ignore their request
                         }
                         return;
                     }
 
-                    // MOVE
-                    MovingPiece piece = selectedPiece;
+                    // MOVE - Check if a piece was selected
+                    if (selectedPiece != null) {
+                        try {
+                            selectedPiece.moveTo(field);
+                            clearSelection();
+                        } catch (InvalidMoveException exception) {
+                            /// Place an X on the field
+                            //// Define X image
+                            ImageView ivInvalid = new ImageView("error.png");
+                            ivInvalid.setFitHeight(field.getFieldSize());
+                            ivInvalid.setFitWidth(field.getFieldSize());
+                            fieldPane.getChildren().add(ivInvalid);
 
-                    // Move the piece
-                    try {
-                        piece.moveTo(field);
-                        clearSelection();
-                    } catch (InvalidMoveException exception) {
-                        // Place an X on the field
-                        field.setInvalid(true);
-                        updateView();
+                            //// Values for fade
+                            KeyValue transparent = new KeyValue(ivInvalid.opacityProperty(), 0.0);
+                            KeyValue opaque = new KeyValue(ivInvalid.opacityProperty(), 1.0);
 
-                        // delay & exit on other thread
-                        Platform.runLater(() -> {
-                            // Wait 2 seconds
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException ex) {
-                            }
-                            // Remove the x from the field)
-                            field.setInvalid(false);
-                            updateView();
-                        });
+                            //// Timeline
+                            Timeline timeline = new Timeline();
+                            timeline.getKeyFrames().addAll(
+                                    new KeyFrame(Duration.ZERO, transparent),
+                                    new KeyFrame(Duration.millis(250), opaque),
+                                    new KeyFrame(Duration.millis(750), opaque),
+                                    new KeyFrame(Duration.millis(1000), transparent)
+                            );
+                            timeline.play();
+                        }
                     }
 
                     // Update the view
@@ -110,6 +121,7 @@ public class BattleFieldPresenter {
                 });
             }
         }
+
     }
 
     private void updateView() {
@@ -128,6 +140,7 @@ public class BattleFieldPresenter {
         }
         addEventHandlers();
     }
+
     public void addWindowEventHandlers() {
 
     }

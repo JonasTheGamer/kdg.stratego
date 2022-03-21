@@ -1,11 +1,16 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.view.Style;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.CacheHint;
 import javafx.scene.effect.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.util.Objects;
 
@@ -64,7 +69,7 @@ public class GameBoardField extends Position {
         // Generate the main stackpane
         StackPane container = new StackPane();
 
-        container.setPrefSize(fieldSize,fieldSize);
+        container.setPrefSize(fieldSize, fieldSize);
 
         // Set the right background
         if (groundType == GroundType.GRASS) {
@@ -119,14 +124,6 @@ public class GameBoardField extends Position {
             }
         }
 
-        // If the field is invalid, show an X
-        if (this.invalid) {
-            ImageView ivInvalid = new ImageView("error.png");
-            ivInvalid.setFitHeight(fieldSize);
-            ivInvalid.setFitWidth(fieldSize);
-            container.getChildren().add(ivInvalid);
-        }
-
         container.setId(this.positionX + "-" + this.positionY);
 
         this.pane = container;
@@ -145,6 +142,10 @@ public class GameBoardField extends Position {
     }
 
     // Getters
+    public double getFieldSize() {
+        return fieldSize;
+    }
+
     public Piece getPiece() {
         return piece;
     }
@@ -159,10 +160,6 @@ public class GameBoardField extends Position {
 
     public boolean isWalkable() {
         return this.walkable;
-    }
-
-    public boolean isInvalid() {
-        return invalid;
     }
 
     public GameBoard getGameBoard() {
@@ -201,10 +198,5 @@ public class GameBoardField extends Position {
     public void setPositionY(int positionY) {
         super.setPositionY(positionY);
         regeneratePane();
-    }
-
-    public void setInvalid(boolean invalid) {
-        this.invalid = invalid;
-        this.regeneratePane();
     }
 }
