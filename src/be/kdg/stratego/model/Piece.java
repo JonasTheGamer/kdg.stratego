@@ -33,7 +33,6 @@ public class Piece {
 
     public void removeFromField() {
         this.field.setPiece(null);
-        this.field.regeneratePane();
         // Remove from global 2D array
         this.field.getGameBoard().setGameBoardField(this.field);
         this.field = null;
