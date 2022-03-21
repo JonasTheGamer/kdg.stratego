@@ -1,5 +1,6 @@
 package be.kdg.stratego.view.armysetup;
 
+import be.kdg.stratego.model.GameBoard;
 import be.kdg.stratego.model.GameBoardField;
 import be.kdg.stratego.model.Piece;
 import be.kdg.stratego.model.ProgrammaModel;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -65,6 +67,17 @@ public class ArmySetupPresenter {
 
 
         view.getBtnFill().setOnAction(actionEvent -> {
+
+            // Special places pieces (for quick winning, ...)
+            GameBoard gb = model.getGame().getGameBoard();
+
+            GameBoardField f = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
+            getPieceFromName("scout").placeOnField(f);
+
+            f = f.getFieldOnRight();
+            getPieceFromName("flag").placeOnField(f);
+
+            refreshPlacablePieces();
 
             // Loop through placable pieces
             for (String pieceName : piecesToPlace.keySet()) {
@@ -133,7 +146,7 @@ public class ArmySetupPresenter {
                             }
 
                             // Grab a random piece that's not on the field yet
-                            Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getClass().getName());
+                            Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getName());
 
                             // Place on the field
                             pieceToPlace.placeOnField(field);
@@ -142,7 +155,7 @@ public class ArmySetupPresenter {
                             model.getGameBoard().setGameBoardField(field);
 
                             // Stop placing
-                            if (piecesToPlace.get(pieceToPlace.getClass().getName()) == 1) {
+                            if (piecesToPlace.get(pieceToPlace.getName()) == 1) {
                                 placingPiece = false;
                             }
 
@@ -247,10 +260,10 @@ public class ArmySetupPresenter {
     }
 
     //Methoden
-    private Piece getPieceFromName(String name) {
+    private Piece getPieceFromName(String pieceName) {
         Piece foundPiece = null;
         for (Piece piece : model.getGame().getCurrentPlayer().getPieces()) {
-            if (piece.getClass().getName().equals(name) && Objects.isNull(piece.getField())) {
+            if (piece.getName().equals(pieceName) && Objects.isNull(piece.getField())) {
                 foundPiece = piece;
                 break;
             }
@@ -270,7 +283,7 @@ public class ArmySetupPresenter {
                 continue;
             }
 
-            String pieceName = piece.getClass().getName();
+            String pieceName = piece.getName();
 
             // Figure out if there's already something placed
             int amountPlacable = 0;
