@@ -5,6 +5,7 @@ import be.kdg.stratego.model.pieces.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class MovingPiece extends Piece {
@@ -19,6 +20,8 @@ public abstract class MovingPiece extends Piece {
     // Attack
     protected ArrayList<Piece> attack(Piece piece) {
         ArrayList<Piece> killedPieces = new ArrayList<>();
+        this.hidden = false;
+        piece.setHidden(false);
 
         if(piece instanceof MovingPiece) {
             // Highest rank always wins
@@ -35,7 +38,6 @@ public abstract class MovingPiece extends Piece {
                 this.startKill();
                 killedPieces.add(piece);
                 piece.startKill();
-
             }
         } else {
             // Check if piece jumps on flag
@@ -52,18 +54,22 @@ public abstract class MovingPiece extends Piece {
     }
 
     // Move
-    public void moveTo(GameBoardField destination) throws InvalidMoveException {
+    public ArrayList<Piece> moveTo(GameBoardField destination) throws InvalidMoveException {
+        ArrayList<Piece> killedPieces = new ArrayList<Piece>();
+
         if(this.getAllowedMoves().contains(destination)) {
             if(!destination.isOccupied()) {
                 this.removeFromField();
                 this.placeOnField(destination);
             } else {
-                this.attack(destination.getPiece());
+                killedPieces.addAll(this.attack(destination.getPiece()));
             }
 
         } else {
             throw new InvalidMoveException();
         }
+
+        return killedPieces;
     }
 
     // Getters
