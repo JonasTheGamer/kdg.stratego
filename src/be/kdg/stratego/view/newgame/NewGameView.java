@@ -2,48 +2,36 @@ package be.kdg.stratego.view.newgame;
 
 import be.kdg.stratego.view.Style;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.shape.StrokeLineJoin;
-import javafx.scene.shape.StrokeType;
 
 public class NewGameView extends HBox {
-    // Controls
     private Label[] lblName;
-
     private Label[] lblTxtName;
-
     private TextField[] txtName;
-
     private Label[] lblCpColor;
-
     private ColorPicker[] cpColor;
-
     private Label[] lblFlagTitle;
-
-    private GridPane[] gpFlags;
-
     private Button[][] btnFlag;
-
     private ImageView imgTitle;
-
     private Button btnReady;
     private Button btnCancel;
-
-    // Panes
     private VBox[] vbPlayer;
     private HBox[] hbName;
     private HBox[] hbColor;
     private VBox[] vbNameColor;
+    private GridPane[] gpFlags;
     private VBox[] vbFlags;
-
     private VBox vbMenu;
     private VBox vbButtons;
-
-    private HBox hb;
+    private HBox hbBackground;
 
     public NewGameView() {
         this.InitialiseNodes();
@@ -87,7 +75,6 @@ public class NewGameView extends HBox {
         btnFlag[1][3] = new Button();
 
         imgTitle = new ImageView("/title.png");
-
         btnReady = new Button("Ready");
         btnCancel = new Button("Cancel");
 
@@ -118,8 +105,7 @@ public class NewGameView extends HBox {
 
         vbButtons = new VBox();
         vbMenu = new VBox();
-
-        hb = new HBox();
+        hbBackground = new HBox();
     }
 
     public void layoutNodes() {
@@ -224,11 +210,11 @@ public class NewGameView extends HBox {
         vbMenu.setSpacing(Style.size(150));
         vbMenu.setTranslateY(Style.size(-140));
 
-        hb.setBackground(Style.background);
-        hb.getChildren().addAll(vbPlayer[0], vbMenu, vbPlayer[1]);
+        hbBackground.setBackground(Style.background);
+        hbBackground.getChildren().addAll(vbPlayer[0], vbMenu, vbPlayer[1]);
 
         ///View
-        this.getChildren().addAll(hb);
+        this.getChildren().addAll(hbBackground);
         this.setSpacing(Style.size(20));
         this.setBackground(Style.bgApplication);
         this.setAlignment(Pos.CENTER);
@@ -238,36 +224,16 @@ public class NewGameView extends HBox {
         return lblName;
     }
 
-    public Label[] getLblTxtName() {
-        return lblTxtName;
-    }
-
     public TextField[] getTxtName() {
         return txtName;
-    }
-
-    public Label[] getLblCpColor() {
-        return lblCpColor;
     }
 
     public ColorPicker[] getCpColor() {
         return cpColor;
     }
 
-    public Label[] getLblFlagTitle() {
-        return lblFlagTitle;
-    }
-
-    public GridPane[] getGpFlags() {
-        return gpFlags;
-    }
-
     public Button[][] getBtnFlag() {
         return btnFlag;
-    }
-
-    public ImageView getImgTitle() {
-        return imgTitle;
     }
 
     public Button getBtnReady() {
@@ -276,37 +242,5 @@ public class NewGameView extends HBox {
 
     public Button getBtnCancel() {
         return btnCancel;
-    }
-
-    public VBox[] getVbPlayer() {
-        return vbPlayer;
-    }
-
-    public HBox[] getHbName() {
-        return hbName;
-    }
-
-    public HBox[] getHbColor() {
-        return hbColor;
-    }
-
-    public VBox[] getVbNameColor() {
-        return vbNameColor;
-    }
-
-    public VBox[] getVbFlags() {
-        return vbFlags;
-    }
-
-    public VBox getVbMenu() {
-        return vbMenu;
-    }
-
-    public VBox getVbButtons() {
-        return vbButtons;
-    }
-
-    public HBox getHb() {
-        return hb;
     }
 }

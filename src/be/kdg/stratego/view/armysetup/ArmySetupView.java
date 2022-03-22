@@ -3,23 +3,22 @@ package be.kdg.stratego.view.armysetup;
 import be.kdg.stratego.view.Style;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class ArmySetupView extends BorderPane {
-    // Controls
     private Label lblScreenTitle;
     private Label lblSetupTitle;
     private Button btnLoad;
     private Button btnSave;
-
     private Label lblGameTitle;
     private Button btnStart;
     private Button btnBack;
     private Button btnFill;
-
-    // Panes
     private GridPane gpPieces;
     private GridPane gpBoard;
     private VBox vbSetup;
@@ -33,16 +32,11 @@ public class ArmySetupView extends BorderPane {
 
     public void InitializeNodes() {
         // Controls
-
-        //// Header
         lblScreenTitle = new Label();
-
-        //// Menu setup
         lblSetupTitle = new Label("Setup");
         btnLoad = new Button("Load");
         btnSave = new Button("Save");
 
-        //// Menu game
         lblGameTitle = new Label("Game");
         btnStart = new Button("Continue");
         btnBack = new Button("Back");
@@ -54,92 +48,64 @@ public class ArmySetupView extends BorderPane {
         vbMenu = new VBox();
         vbSetup = new VBox();
         vbGame = new VBox();
-
-        // The gridpane gpPieces will be filled in the presenter class with all pieces that are available.
     }
 
     public void LayoutNodes() {
         // Main borderpane
         this.setBackground(Style.bgApplication);
 
-        // Header (title)
-
         //// Title (player X, place your army)
         Style.txt(lblScreenTitle,40,Color.BLACK);
         setAlignment(lblScreenTitle, Pos.CENTER);
         setMargin(lblScreenTitle, new Insets(Style.size(15), 0, 0, 0));
-
         this.setTop(lblScreenTitle);
 
-        //// Army pieces
-        ////// The gridpane will be filled in the presenter class with all pieces that are available.
+
+        //// Army pieces (will be filled in the presenter class with all pieces that are available)
         gpPieces.setPrefWidth(Style.size(400));
         gpPieces.setHgap(Style.size(30));
         gpPieces.setVgap(Style.size(30));
         gpPieces.setAlignment(Pos.CENTER);
-
         setMargin(gpPieces, new Insets(0, Style.size(50), 0, Style.size(50)));
         this.setLeft(gpPieces);
 
-        //// Field
-        ////// The field will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
-        this.setCenter(gpBoard);
+
+        //// Field (will be filled in the presenter class with all pieces that are available)
         gpBoard.setAlignment(Pos.CENTER);
+        this.setCenter(gpBoard);
+
 
         //// Menu
         vbMenu.setBackground(Style.bgBoxNoPadding);
         vbMenu.setAlignment(Pos.CENTER);
-
         vbMenu.setSpacing(Style.size(100));
         vbMenu.setPadding(new Insets(0, Style.size(50), 0, Style.size(50)));
         setMargin(vbMenu, new Insets(Style.size(138), Style.size(92), Style.size(138), Style.size(98)));
-
         this.setRight(vbMenu);
+        vbMenu.getChildren().addAll(vbSetup,vbGame);
 
         ////// Setup buttons (load & save)
-        Style.txt(lblSetupTitle, 20);
-
+        vbSetup.getChildren().addAll(lblSetupTitle, btnLoad, btnSave);
         vbSetup.setAlignment(Pos.CENTER);
         vbSetup.setSpacing(Style.size(20));
 
+        Style.txt(lblSetupTitle, 20);
         Style.btn(btnLoad, 15, 225, 50);
         Style.btn(btnSave, 15,  225, 50);
 
-        vbSetup.getChildren().addAll(lblSetupTitle, btnLoad, btnSave);
-        vbMenu.getChildren().add(vbSetup);
-
         ////// Game buttons (start & back)
-        Style.txt(lblGameTitle, 20);
-
         vbGame.setAlignment(Pos.CENTER);
         vbGame.setSpacing(Style.size(20));
+        vbGame.getChildren().addAll(lblGameTitle, btnStart, btnBack, btnFill);
 
+        Style.txt(lblGameTitle, 20);
         Style.btn(btnStart, 15, 225,50);
         Style.btn(btnBack, 15, 225,50);
         Style.btn(btnFill, 15, 225, 50);
-
-        vbGame.getChildren().addAll(lblGameTitle, btnStart, btnBack, btnFill);
-        vbMenu.getChildren().add(vbGame);
     }
 
     public Label getLblScreenTitle() {
         return lblScreenTitle;
-    }
-
-    public Label getLblSetupTitle() {
-        return lblSetupTitle;
-    }
-
-    public Button getBtnLoad() {
-        return btnLoad;
-    }
-
-    public Button getBtnSave() {
-        return btnSave;
-    }
-
-    public Label getLblGameTitle() {
-        return lblGameTitle;
     }
 
     public Button getBtnStart() {
@@ -160,17 +126,5 @@ public class ArmySetupView extends BorderPane {
 
     public GridPane getGpBoard() {
         return gpBoard;
-    }
-
-    public VBox getVbSetup() {
-        return vbSetup;
-    }
-
-    public VBox getVbMenu() {
-        return vbMenu;
-    }
-
-    public VBox getVbGame() {
-        return vbGame;
     }
 }

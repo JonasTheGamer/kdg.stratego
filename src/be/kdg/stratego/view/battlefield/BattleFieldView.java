@@ -10,12 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class BattleFieldView extends BorderPane {
-    // Controls
     private Label lblScreenTitle;
     private Label lblClock;
     private Button btnClose;
-
-    // Panes
     private HBox hbHeader;
     private GridPane gpBoard;
 
@@ -26,7 +23,6 @@ public class BattleFieldView extends BorderPane {
 
     public void InitializeNodes() {
         // Controls
-        //// Header
         lblClock = new Label("00:00");
         lblScreenTitle = new Label("STRATEGO");
         btnClose = new Button("X");
@@ -34,7 +30,6 @@ public class BattleFieldView extends BorderPane {
         // Panes
         hbHeader = new HBox();
         gpBoard = new GridPane();
-
     }
 
     public void LayoutNodes() {
@@ -43,6 +38,8 @@ public class BattleFieldView extends BorderPane {
 
         // Header (clock, title & close button)
         hbHeader.setAlignment(Pos.CENTER);
+        hbHeader.getChildren().addAll(lblClock, lblScreenTitle, btnClose);
+        this.setTop(hbHeader);
 
         //// Clock
         Style.txt(lblClock, 20, Color.BLACK);
@@ -53,13 +50,9 @@ public class BattleFieldView extends BorderPane {
         //// Close button
         Style.btn(btnClose, 20, Style.size(45), Style.size(45));
 
-        hbHeader.getChildren().addAll(lblClock, lblScreenTitle, btnClose);
-        this.setTop(hbHeader);
-
-        //// Field
-        ////// The field will also be filled with the question marks and the pieces in the presenter, to allow for a dynamic map size. (x rows & x columns)
-        this.setCenter(gpBoard);
+        //// Field (will be filled in the presenter class with all pieces that are available)
         gpBoard.setAlignment(Pos.CENTER);
+        this.setCenter(gpBoard);
     }
 
     public Label getLblScreenTitle() {

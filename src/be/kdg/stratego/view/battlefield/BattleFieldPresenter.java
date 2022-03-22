@@ -2,14 +2,10 @@ package be.kdg.stratego.view.battlefield;
 
 import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.model.*;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -36,9 +32,6 @@ public class BattleFieldPresenter {
 
         // Initialize allowed moves
         allowedMoves = new HashSet<>();
-
-        // Make their pieces visible
-        currentPlayer.showPieces();
 
         this.addEventHandlers();
         this.updateView();

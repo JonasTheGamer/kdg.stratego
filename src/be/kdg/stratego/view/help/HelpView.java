@@ -10,7 +10,6 @@ import javafx.scene.media.MediaView;
 import java.io.File;
 
 public class HelpView extends StackPane {
-    // Controls
     private MediaPlayer mediaPlayer;
     private MediaView mediaView;
     private Button btnControl;
@@ -21,6 +20,7 @@ public class HelpView extends StackPane {
     }
 
     private void initialiseNodes() {
+        // Controls
         mediaPlayer = new MediaPlayer(new Media(new File("resources/help.mp4").toURI().toString()));
         mediaView = new MediaView(mediaPlayer);
 
@@ -43,24 +43,12 @@ public class HelpView extends StackPane {
         return mediaPlayer;
     }
 
-    public void setMediaPlayer(MediaPlayer mediaPlayer) {
-        this.mediaPlayer = mediaPlayer;
-    }
-
     public MediaView getMediaView() {
         return mediaView;
     }
 
-    public void setMediaView(MediaView mediaView) {
-        this.mediaView = mediaView;
-    }
-
     public Button getBtnControl() {
         return btnControl;
-    }
-
-    public void setBtnControl(Button btnControl) {
-        this.btnControl = btnControl;
     }
 }
 

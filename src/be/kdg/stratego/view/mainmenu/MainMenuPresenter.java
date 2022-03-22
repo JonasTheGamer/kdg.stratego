@@ -5,10 +5,6 @@ import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.view.Style;
 import be.kdg.stratego.view.help.HelpPresenter;
 import be.kdg.stratego.view.help.HelpView;
-import be.kdg.stratego.view.newgame.NewGamePresenter;
-import be.kdg.stratego.view.newgame.NewGameView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
@@ -26,7 +22,6 @@ public class MainMenuPresenter {
     }
 
     private void addEventHandlers() {
-        //Code
         view.getBtnPlay().setOnAction(actionEvent -> Style.changeScreen(Style.Screens.NEWGAME, model, view));
 
         view.getBtnHelp().setOnAction(actionEvent -> {
@@ -48,8 +43,7 @@ public class MainMenuPresenter {
     }
 
     private void updateView() {
-        /* Highscores */
-        String highscores = "";
+        // Highscores
         int positie = 0;
         model.updateHighscores();
 
@@ -78,5 +72,4 @@ public class MainMenuPresenter {
 
         view.getBtnQuit().setOnAction(actionEvent -> stage.close());
     }
-
 }

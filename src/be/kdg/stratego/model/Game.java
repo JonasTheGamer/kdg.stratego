@@ -19,6 +19,9 @@ public class Game {
         this.players = new Player[]{player1, player2};
         this.currentPlayer = player1;
         this.gameBoard = new GameBoard();
+
+        // Make their pieces visible
+        currentPlayer.showPieces();
     }
 
     // Methods
@@ -113,6 +116,8 @@ public class Game {
         } else {
             currentPlayer = players[0];
         }
+
+        currentPlayer.showPieces();
     }
 
     // Getters

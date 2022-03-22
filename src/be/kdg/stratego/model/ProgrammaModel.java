@@ -27,7 +27,7 @@ public class ProgrammaModel {
     }
 
     public void updateHighscores() {
-        /// Deleting duplicates
+        /// Clearing list
         highscores.clear();
 
         /// Read lines from file

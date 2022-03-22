@@ -94,7 +94,6 @@ public class GameBoard {
         }
     }
 
-
     public int coordinateX(int x) {
         //Humanreadable version x in GameBoard(Field)
         return x - 1;
