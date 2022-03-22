@@ -94,6 +94,7 @@ public class BattleFieldPresenter {
                         if (selectedPiece != null) {
                             try {
                                 // Move the piece
+                                MovingPiece attackingPiece = selectedPiece;
                                 ArrayList<Piece> killedPieces = selectedPiece.moveTo(field);
 
                                 // Clear the selection
@@ -167,6 +168,9 @@ public class BattleFieldPresenter {
                                             for (Piece killedPiece : killedPieces) {
                                                 killedPiece.setHidden(false);
                                             }
+
+                                            // Make the attacking piece visible
+                                            attackingPiece.setHidden(false);
 
                                             // Update the view
                                             updateView();

@@ -117,6 +117,7 @@ public class Game {
             currentPlayer = players[0];
         }
 
+        currentPlayer.addTurn();
         currentPlayer.showPieces();
     }
 

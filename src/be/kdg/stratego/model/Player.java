@@ -11,6 +11,7 @@ public class Player {
     private String color;
     private String flag;
     private ArrayList<Piece> pieces = new ArrayList<>();
+    private int amountOfTurns;
     private boolean piecesPlaced;
 
     // Constructor
@@ -19,6 +20,7 @@ public class Player {
         this.color = color;
         this.flag = flag;
         this.piecesPlaced = false;
+        this.amountOfTurns = 0;
 
         this.givePieces();
     }
@@ -90,6 +92,10 @@ public class Player {
         }
     }
 
+    public void addTurn() {
+        this.amountOfTurns++;
+    }
+
     // Getters
     public String getName() {
         return name;
@@ -113,5 +119,9 @@ public class Player {
             }
         }
         return piecesPlaced;
+    }
+
+    public int getAmountOfTurns() {
+        return amountOfTurns;
     }
 }
