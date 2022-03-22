@@ -21,7 +21,6 @@ public class GameBoardField extends Position {
     private Piece piece;
     private boolean walkable;
     private boolean highlighted;
-    private boolean invalid;
     private GameBoard gameBoard;
 
     // Field (stackpane) properties
