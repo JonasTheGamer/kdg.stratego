@@ -61,7 +61,9 @@ public class Piece {
 
         // If there is an attacker to be moved to this spot, move the attacker
         MovingPiece pieceToMove = (MovingPiece) attacker;
-        pieceToMove.moveTo(oldField);
+        if(!Objects.isNull(pieceToMove)){
+            pieceToMove.moveTo(oldField);
+        }
     }
 
     // Getters
@@ -71,9 +73,6 @@ public class Piece {
     }
     public String getName() {
         return name;
-    }
-    public GameBoardField getField() {
-        return field;
     }
     public Player getPlayer() {
         return player;
@@ -88,17 +87,14 @@ public class Piece {
         return hidden;
     }
 
+    public GameBoardField getField() {
+        return field;
+    }
+
     // Setters
     public void setHidden(boolean hidden) {
         if(!Objects.isNull(field)) {
             this.hidden = hidden;
-            if(this.isOnField()) {
-                this.field.regeneratePane();
-            }
         }
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }
