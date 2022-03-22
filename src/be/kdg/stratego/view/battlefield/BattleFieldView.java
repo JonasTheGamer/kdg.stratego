@@ -24,7 +24,7 @@ public class BattleFieldView extends BorderPane {
     public void InitializeNodes() {
         // Controls
         lblClock = new Label("00:00");
-        lblScreenTitle = new Label("STRATEGO");
+        lblScreenTitle = new Label("Player x");
         btnClose = new Button("X");
 
         // Panes

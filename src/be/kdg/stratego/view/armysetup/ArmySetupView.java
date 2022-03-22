@@ -32,7 +32,7 @@ public class ArmySetupView extends BorderPane {
 
     public void InitializeNodes() {
         // Controls
-        lblScreenTitle = new Label();
+        lblScreenTitle = new Label("Player x: Place your army");
         lblSetupTitle = new Label("Setup");
         btnLoad = new Button("Load");
         btnSave = new Button("Save");
