@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -117,8 +116,7 @@ public class ArmySetupPresenter {
                 }
 
                 // Get a random piece that has this name to place on the field later on
-                Piece pieceToPlace = getPieceFromName(pieceClassName);
-                lastClickedPlaceablePiece = pieceToPlace;
+                lastClickedPlaceablePiece = getPieceFromName(pieceClassName);
 
                 // Remember that the user is placing this piece.
                 placingPiece = true;
