@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -117,8 +116,7 @@ public class ArmySetupPresenter {
                 }
 
                 // Get a random piece that has this name to place on the field later on
-                Piece pieceToPlace = getPieceFromName(pieceClassName);
-                lastClickedPlaceablePiece = pieceToPlace;
+                lastClickedPlaceablePiece = getPieceFromName(pieceClassName);
 
                 // Remember that the user is placing this piece.
                 placingPiece = true;
@@ -146,17 +144,14 @@ public class ArmySetupPresenter {
                                 return;
                             }
 
-                            // Grab a random piece that's not on the field yet
-                            Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getName());
-
                             // Place on the field
-                            pieceToPlace.placeOnField(field);
+                            lastClickedPlaceablePiece.placeOnField(field);
 
                             // Add it to the board
                             model.getGameBoard().setGameBoardField(field);
 
                             // Stop placing
-                            if (piecesToPlace.get(pieceToPlace.getName()) == 1) {
+                            if (piecesToPlace.get(lastClickedPlaceablePiece.getName()) == 1) {
                                 placingPiece = false;
                             }
 
