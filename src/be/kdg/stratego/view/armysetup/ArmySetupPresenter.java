@@ -7,12 +7,17 @@ import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.view.Style;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.ColorInput;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -21,6 +26,8 @@ public class ArmySetupPresenter {
     private ProgrammaModel model;
     private ArmySetupView view;
     private HashMap<String, Integer> piecesToPlace;
+    private final double fieldSize = Style.size(50);
+    private HashMap<GameBoardField, StackPane> fieldPanes;
 
     private Boolean placingPiece = false;
     private Piece lastClickedPlaceablePiece;
@@ -29,7 +36,7 @@ public class ArmySetupPresenter {
         this.model = model;
         this.view = view;
         this.piecesToPlace = new HashMap<>();
-
+        this.fieldPanes = new HashMap<>();
         this.addEventHandlers();
         this.updateView();
     }
@@ -128,55 +135,57 @@ public class ArmySetupPresenter {
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
-                StackPane fieldPane = field.getPane();
-                fieldPane.setOnMouseClicked(mouseEvent -> {
+                StackPane fieldPane = fieldPanes.get(field);
+                if(!Objects.isNull(fieldPane)) {
+                    fieldPane.setOnMouseClicked(mouseEvent -> {
 
-                    // PLACE - Check if we were placing a piece.
-                    if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                        if (placingPiece) {
-                            // Only allow placing in row 6 to 9;
-                            if (field.getPositionY() < (model.getGameBoard().getGrootteY() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGrootteY() - 1) {
-                                return;
+                        // PLACE - Check if we were placing a piece.
+                        if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                            if (placingPiece) {
+                                // Only allow placing in row 6 to 9;
+                                if (field.getPositionY() < (model.getGameBoard().getGrootteY() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGrootteY() - 1) {
+                                    return;
+                                }
+
+                                // Check if the field is already occupied.
+                                if (field.isOccupied()) {
+                                    return;
+                                }
+
+                                // Grab a random piece that's not on the field yet
+                                Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getName());
+
+                                // Place on the field
+                                pieceToPlace.placeOnField(field);
+
+                                // Add it to the board
+                                model.getGameBoard().setGameBoardField(field);
+
+                                // Stop placing
+                                if (piecesToPlace.get(pieceToPlace.getName()) == 1) {
+                                    placingPiece = false;
+                                }
+
+                                // Refresh the view
+                                updateView();
                             }
-
-                            // Check if the field is already occupied.
-                            if (field.isOccupied()) {
-                                return;
-                            }
-
-                            // Grab a random piece that's not on the field yet
-                            Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getName());
-
-                            // Place on the field
-                            pieceToPlace.placeOnField(field);
-
-                            // Add it to the board
-                            model.getGameBoard().setGameBoardField(field);
-
-                            // Stop placing
-                            if (piecesToPlace.get(pieceToPlace.getName()) == 1) {
-                                placingPiece = false;
-                            }
-
-                            // Refresh the view
-                            updateView();
                         }
-                    }
 
 
-                    // REMOVE - Check if player wants to remove a piece from the board
-                    if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                        // REMOVE - Check if player wants to remove a piece from the board
+                        if (mouseEvent.getButton() == MouseButton.SECONDARY) {
 
-                        // Only remove if the field is occupied & the piece is not hidden
-                        if (field.isOccupied() && !field.getPiece().getHidden()) {
-                            // Remove the piece from the field
-                            field.getPiece().removeFromField();
+                            // Only remove if the field is occupied & the piece is not hidden
+                            if (field.isOccupied() && !field.getPiece().getHidden()) {
+                                // Remove the piece from the field
+                                field.getPiece().removeFromField();
 
-                            // Refresh the view
-                            updateView();
+                                // Refresh the view
+                                updateView();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     }
@@ -246,7 +255,8 @@ public class ArmySetupPresenter {
 
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
-                StackPane fieldPane = field.getPane();
+                StackPane fieldPane = generatePane(field);
+                fieldPanes.put(field, fieldPane);
                 view.getGpBoard().add(fieldPane, field.getPositionX(), field.getPositionY());
             }
         }
@@ -258,7 +268,7 @@ public class ArmySetupPresenter {
 
     }
 
-    //Methoden
+    //Methods
     private Piece getPieceFromName(String pieceName) {
         Piece foundPiece = null;
         for (Piece piece : model.getGame().getCurrentPlayer().getPieces()) {
@@ -292,6 +302,75 @@ public class ArmySetupPresenter {
             piecesToPlace.put(pieceName, amountPlacable + 1);
         }
 
+    }
+
+    public StackPane generatePane(GameBoardField field) {
+        // Generate the main stackpane
+        StackPane container = new StackPane();
+
+        container.setPrefSize(fieldSize, fieldSize);
+
+        // Set the right background
+        if (field.getGroundType() == GameBoardField.GroundType.GRASS) {
+            container.setBackground((field.isHighlighted()) ? Style.highlightedGrass : Style.grass);
+        } else {
+            container.setBackground(Style.water);
+        }
+
+        // If there's a piece on it, place it
+        if (field.isOccupied()) {
+            // Define the tower image
+            String towerImage = (field.getPiece().getHidden() ? "/towerBackView.png" : "/towerFrontView.png");
+
+            // Define the main imageView
+            ImageView ivTower = new ImageView(towerImage);
+            ivTower.setFitHeight(fieldSize * 0.95);
+            ivTower.setFitWidth(fieldSize * 0.95);
+            if(field.getPiece().isDying()) {
+                ivTower.setOpacity(0.5);
+            }
+
+            // Define the clip imageView
+            ImageView ivClip = new ImageView(towerImage);
+            ivClip.setFitHeight(fieldSize * 0.95);
+            ivClip.setFitWidth(fieldSize * 0.95);
+
+            // Set the image view clip
+            ivTower.setClip(ivClip);
+
+            ivTower.setEffect(new Blend(
+                    BlendMode.MULTIPLY,
+                    null,
+                    new ColorInput(
+                            0,
+                            0,
+                            ivTower.getImage().getWidth(),
+                            ivTower.getImage().getHeight(),
+                            Color.valueOf(field.getPiece().getPlayer().getColor())
+
+                    )
+            ));
+
+            container.getChildren().add(ivTower);
+
+            // If the piece is not hidden, add the icon
+            if (!field.getPiece().getHidden()) {
+                ImageView ivPiece = new ImageView(field.getPiece().getImage());
+                ivPiece.setFitHeight(fieldSize * 0.4);
+                ivPiece.setFitWidth(fieldSize * 0.4);
+                if(field.getPiece().isDying()) {
+                    System.out.println("This piece is dying!");
+                    ivPiece.setOpacity(0.5);
+                } else {
+
+                }
+
+                container.getChildren().add(ivPiece);
+            }
+
+        }
+
+        return container;
     }
 
     private GameBoardField getNextAvailableField() {
