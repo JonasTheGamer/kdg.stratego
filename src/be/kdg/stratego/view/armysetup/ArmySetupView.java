@@ -7,10 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class ArmySetupView extends BorderPane {
+public class ArmySetupView extends VBox {
     private Label lblScreenTitle;
     private Label lblSetupTitle;
     private Button btnLoad;
@@ -24,6 +25,7 @@ public class ArmySetupView extends BorderPane {
     private VBox vbSetup;
     private VBox vbMenu;
     private VBox vbGame;
+    private HBox hbCenter;
 
     public ArmySetupView() {
         InitializeNodes();
@@ -48,59 +50,61 @@ public class ArmySetupView extends BorderPane {
         vbMenu = new VBox();
         vbSetup = new VBox();
         vbGame = new VBox();
+        hbCenter = new HBox();
+
     }
 
     public void LayoutNodes() {
         // Main borderpane
         this.setBackground(Style.bgApplication);
+        this.getChildren().addAll(lblScreenTitle,hbCenter);
+        this.setSpacing(Style.size(40));
+        this.setAlignment(Pos.CENTER);
 
-        //// Title (player X, place your army)
-        Style.txt(lblScreenTitle,40,Color.BLACK);
-        setAlignment(lblScreenTitle, Pos.CENTER);
-        setMargin(lblScreenTitle, new Insets(Style.size(15), 0, 0, 0));
-        this.setTop(lblScreenTitle);
 
+        /// Title (player X, place your army)
+        Style.txt(lblScreenTitle, 40, Color.BLACK);
+        lblScreenTitle.setAlignment(Pos.CENTER);
+
+        /// hbCenter (gpPieces, gpBoard, vbMenu)
+        hbCenter.getChildren().addAll(gpPieces, gpBoard, vbMenu);
+        hbCenter.setAlignment(Pos.TOP_CENTER);
+        hbCenter.setSpacing(Style.size(80));
+        hbCenter.setMaxHeight(550);
 
         //// Army pieces (will be filled in the presenter class with all pieces that are available)
-        gpPieces.setPrefWidth(Style.size(400));
-        gpPieces.setHgap(Style.size(30));
-        gpPieces.setVgap(Style.size(30));
+        gpPieces.setPrefWidth(Style.size(350));
+        gpPieces.setHgap(Style.size(10));
+        gpPieces.setVgap(Style.size(10));
         gpPieces.setAlignment(Pos.CENTER);
-        setMargin(gpPieces, new Insets(0, Style.size(50), 0, Style.size(50)));
-        this.setLeft(gpPieces);
-
 
         //// Field (will be filled in the presenter class with all pieces that are available)
         gpBoard.setAlignment(Pos.CENTER);
-        this.setCenter(gpBoard);
 
-
-        //// Menu
+        /// Menu
+        vbMenu.setPrefWidth(Style.size(350));
+        vbMenu.setSpacing(Style.size(40));
         vbMenu.setBackground(Style.bgBoxNoPadding);
         vbMenu.setAlignment(Pos.CENTER);
-        vbMenu.setSpacing(Style.size(100));
-        vbMenu.setPadding(new Insets(0, Style.size(50), 0, Style.size(50)));
-        setMargin(vbMenu, new Insets(Style.size(138), Style.size(92), Style.size(138), Style.size(98)));
-        this.setRight(vbMenu);
-        vbMenu.getChildren().addAll(vbSetup,vbGame);
+        vbMenu.getChildren().addAll(vbSetup, vbGame);
 
-        ////// Setup buttons (load & save)
+        //// Setup buttons (load & save)
         vbSetup.getChildren().addAll(lblSetupTitle, btnLoad, btnSave);
         vbSetup.setAlignment(Pos.CENTER);
-        vbSetup.setSpacing(Style.size(20));
+        vbSetup.setSpacing(Style.size(10));
 
         Style.txt(lblSetupTitle, 20);
         Style.btn(btnLoad, 15, 225, 50);
-        Style.btn(btnSave, 15,  225, 50);
+        Style.btn(btnSave, 15, 225, 50);
 
-        ////// Game buttons (start & back)
+        //// Game buttons (start & back)
         vbGame.setAlignment(Pos.CENTER);
-        vbGame.setSpacing(Style.size(20));
+        vbGame.setSpacing(Style.size(10));
         vbGame.getChildren().addAll(lblGameTitle, btnStart, btnBack, btnFill);
 
         Style.txt(lblGameTitle, 20);
-        Style.btn(btnStart, 15, 225,50);
-        Style.btn(btnBack, 15, 225,50);
+        Style.btn(btnStart, 15, 225, 50);
+        Style.btn(btnBack, 15, 225, 50);
         Style.btn(btnFill, 15, 225, 50);
     }
 

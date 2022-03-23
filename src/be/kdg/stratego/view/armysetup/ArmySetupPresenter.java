@@ -23,9 +23,10 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class ArmySetupPresenter {
-    private final double fieldSize = Style.size(50);
-    private final double placeablePieceHeight = Style.size(100);
-    private final double placeablePieceWidth = Style.size(75);
+    private final double fieldSize = Style.size(55);
+    private final double placeablePieceWidth = fieldSize * 2;
+    private final double placeablePieceHeight = fieldSize * 2 * 1.5;
+
 
     private ProgrammaModel model;
     private ArmySetupView view;
@@ -204,29 +205,27 @@ public class ArmySetupPresenter {
             /// Get a random piece that has this name. We'll use it to find out the image
             Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName);
 
-            /// Main piece container
-            VBox pieceContainer = new VBox();
-            pieceContainer.setBackground(Style.background);
-            pieceContainer.setAlignment(Pos.CENTER);
-            pieceContainer.setPrefHeight(placeablePieceHeight);
-            pieceContainer.setPrefWidth(placeablePieceWidth);
-
             /// Piece image
             ImageView ivPiece = new ImageView(piece.getImage());
+            ivPiece.setPreserveRatio(true);
             ivPiece.setFitWidth(placeablePieceWidth * 0.5);
-            ivPiece.setFitHeight(placeablePieceWidth * 0.5);
-            pieceContainer.getChildren().add(ivPiece);
 
             /// Piece title
             Label lblPieceTitle = new Label(piece.getName());
             Style.txt(lblPieceTitle, 15);
-            pieceContainer.getChildren().add(lblPieceTitle);
 
             /// Amount left to place
             Label lblPlacable = new Label(Integer.toString(amountPlacable));
             Style.txt(lblPlacable, 15);
-            pieceContainer.getChildren().add(lblPlacable);
 
+            /// Main piece container
+            VBox pieceContainer = new VBox();
+            pieceContainer.setBackground(Style.bgBoxNoPadding);
+            pieceContainer.setAlignment(Pos.CENTER);
+            pieceContainer.setPrefHeight(placeablePieceHeight);
+            pieceContainer.setPrefWidth(placeablePieceWidth);
+
+            pieceContainer.getChildren().addAll(ivPiece, lblPieceTitle, lblPlacable);
             pieceContainer.setId("placablePiece-" + pieceName);
 
             view.getGpPieces().add(pieceContainer, posXCounter, posYCounter);
