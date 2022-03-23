@@ -34,7 +34,7 @@ public class Spy extends MovingPiece {
         } else {
             // Check if piece jumps on flag
             if(piece instanceof Flag) {
-                // We won! :D
+                // Jonas: We won! :D
             }
 
             // We jumped on a bomb

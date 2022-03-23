@@ -42,7 +42,7 @@ public abstract class MovingPiece extends Piece {
         } else {
             // Check if piece jumps on flag
             if(piece instanceof Flag) {
-                // We won! :D
+                // Jonas: We won! :D
             }
 
             // We jumped on a bomb
@@ -55,7 +55,7 @@ public abstract class MovingPiece extends Piece {
 
     // Move
     public ArrayList<Piece> moveTo(GameBoardField destination) throws InvalidMoveException {
-        ArrayList<Piece> killedPieces = new ArrayList<Piece>();
+        ArrayList<Piece> killedPieces = new ArrayList<>();
 
         if(this.getAllowedMoves().contains(destination)) {
             if(!destination.isOccupied()) {
