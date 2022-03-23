@@ -1,11 +1,6 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.view.Style;
-import javafx.scene.CacheHint;
-import javafx.scene.effect.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
@@ -102,15 +97,5 @@ public class GameBoardField extends Position {
     // Setters
     public void setPiece(Piece piece) {
         this.piece = piece;
-    }
-
-    @Override
-    public void setPositionX(int positionX) {
-        super.setPositionX(positionX);
-    }
-
-    @Override
-    public void setPositionY(int positionY) {
-        super.setPositionY(positionY);
     }
 }

@@ -1,10 +1,6 @@
 package be.kdg.stratego.model;
 
-import be.kdg.stratego.exceptions.InvalidMoveException;
-import be.kdg.stratego.view.Style;
-
 import java.util.HashSet;
-import java.util.Objects;
 
 public class GameBoard {
     private final int grootteX = 10;
@@ -40,23 +36,18 @@ public class GameBoard {
     // Methods
     // Rotate the board
     public void rotate() {
-
-        // First, give all fields a new position
-        for (int posX = 0; posX < grootteX; posX++) {
-            for (int posY = 0; posY < grootteY; posY++) {
-                GameBoardField field = gameBoardFields[posX][posY];
-                field.setPositionX(grootteX - 1 - field.getPositionX());
-                field.setPositionY(grootteY - 1 - field.getPositionY());
-            }
-        }
-
-        // Then, loop trough them to update their position in the 2D array
         GameBoardField[][] tempGameBoardFields = new GameBoardField[grootteX][grootteY];
 
-        for (int posX = 0; posX < grootteX; posX++) {
-            for (int posY = 0; posY < grootteY; posY++) {
-                GameBoardField field = gameBoardFields[posX][posY];
+        for (GameBoardField[] fieldRow : gameBoardFields) {
+            for (GameBoardField field : fieldRow) {
+
+                // Change field position
+                field.setPositionX(grootteX - 1 - field.getPositionX());
+                field.setPositionY(grootteY - 1 - field.getPositionY());
+
+                // Update their position in the 2D array
                 tempGameBoardFields[field.getPositionX()][field.getPositionY()] = field;
+
             }
         }
 
