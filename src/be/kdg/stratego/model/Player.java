@@ -96,6 +96,18 @@ public class Player {
         this.amountOfTurns++;
     }
 
+    public Piece getPieceFromName(String pieceName) {
+        Piece foundPiece = null;
+        for (Piece piece : getPieces()) {
+            if (piece.getName().equals(pieceName) && !piece.isOnField()) {
+                foundPiece = piece;
+                break;
+            }
+        }
+
+        return foundPiece;
+    }
+
     // Getters
     public String getName() {
         return name;

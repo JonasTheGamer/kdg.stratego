@@ -23,10 +23,13 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class ArmySetupPresenter {
+    private final double fieldSize = Style.size(50);
+    private final double placeablePieceHeight = Style.size(100);
+    private final double placeablePieceWidth = Style.size(75);
+
     private ProgrammaModel model;
     private ArmySetupView view;
     private HashMap<String, Integer> piecesToPlace;
-    private final double fieldSize = Style.size(50);
     private HashMap<GameBoardField, StackPane> fieldPanes;
 
     private Boolean placingPiece = false;
@@ -76,12 +79,12 @@ public class ArmySetupPresenter {
 
             // Special places pieces (for quick winning, ...)
             GameBoard gb = model.getGame().getGameBoard();
-            if (getPieceFromName("scout") != null && getPieceFromName("flag") != null) {
+            if (model.getGame().getCurrentPlayer().getPieceFromName("scout") != null && model.getGame().getCurrentPlayer().getPieceFromName("flag") != null) {
                 GameBoardField field = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
-                getPieceFromName("scout").placeOnField(field);
+                model.getGame().getCurrentPlayer().getPieceFromName("scout").placeOnField(field);
 
                 field = field.getFieldOnRight();
-                getPieceFromName("flag").placeOnField(field);
+                model.getGame().getCurrentPlayer().getPieceFromName("flag").placeOnField(field);
             }
 
             refreshPlacablePieces();
@@ -92,7 +95,7 @@ public class ArmySetupPresenter {
 
                 for (int i = 0; i < amountPlacable; i++) {
                     // Get a random piece that has this name
-                    Piece piece = getPieceFromName(pieceName);
+                    Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName);
 
                     // Get the next unoccupied (available) field
                     GameBoardField field = getNextAvailableField();
@@ -123,7 +126,7 @@ public class ArmySetupPresenter {
                 }
 
                 // Get a random piece that has this name to place on the field later on
-                lastClickedPlaceablePiece = getPieceFromName(pieceClassName);
+                lastClickedPlaceablePiece = model.getGame().getCurrentPlayer().getPieceFromName(pieceClassName);
 
                 // Remember that the user is placing this piece.
                 placingPiece = true;
@@ -153,7 +156,7 @@ public class ArmySetupPresenter {
                                 }
 
                                 // Grab a random piece that's not on the field yet
-                                Piece pieceToPlace = getPieceFromName(lastClickedPlaceablePiece.getName());
+                                Piece pieceToPlace = model.getGame().getCurrentPlayer().getPieceFromName(lastClickedPlaceablePiece.getName());
 
                                 // Place on the field
                                 pieceToPlace.placeOnField(field);
@@ -191,10 +194,6 @@ public class ArmySetupPresenter {
     }
 
     private void updateView() {
-        // Initialize variables
-        double placeablePieceHeight = Style.size(100);
-        double placeablePieceWidth = Style.size(75);
-
         // Set title
         view.getLblScreenTitle().setText(model.getGame().getCurrentPlayer().getName() + ": Place your army");
 
@@ -209,7 +208,7 @@ public class ArmySetupPresenter {
         for (String pieceName : piecesToPlace.keySet()) {
             int amountPlacable = piecesToPlace.get(pieceName);
             /// Get a random piece that has this name. We'll use it to find out the image
-            Piece piece = getPieceFromName(pieceName);
+            Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName);
 
             /// Main piece container
             VBox pieceContainer = new VBox();
@@ -269,18 +268,6 @@ public class ArmySetupPresenter {
     }
 
     //Methods
-    private Piece getPieceFromName(String pieceName) {
-        Piece foundPiece = null;
-        for (Piece piece : model.getGame().getCurrentPlayer().getPieces()) {
-            if (piece.getName().equals(pieceName) && Objects.isNull(piece.getField())) {
-                foundPiece = piece;
-                break;
-            }
-        }
-
-        return foundPiece;
-    }
-
     private void refreshPlacablePieces() {
         // Clear pieces to place
         piecesToPlace.clear();
@@ -362,7 +349,7 @@ public class ArmySetupPresenter {
                     System.out.println("This piece is dying!");
                     ivPiece.setOpacity(0.5);
                 } else {
-
+                    //Jonas
                 }
 
                 container.getChildren().add(ivPiece);
