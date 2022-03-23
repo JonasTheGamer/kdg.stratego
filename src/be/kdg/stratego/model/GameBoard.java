@@ -36,23 +36,23 @@ public class GameBoard {
     // Methods
     // Rotate the board
     public void rotate() {
-        GameBoardField[][] tempGameBoardFields = new GameBoardField[grootteX][grootteY];
+        GameBoardField[][] rotatedGameBoardFields = new GameBoardField[grootteX][grootteY];
 
-        for (GameBoardField[] fieldRow : gameBoardFields) {
+        for (GameBoardField[] fieldRow : this.gameBoardFields) {
             for (GameBoardField field : fieldRow) {
 
-                // Change field position
+                // Reverse field position
                 field.setPositionX(grootteX - 1 - field.getPositionX());
                 field.setPositionY(grootteY - 1 - field.getPositionY());
 
-                // Update their position in the 2D array
-                tempGameBoardFields[field.getPositionX()][field.getPositionY()] = field;
+                // Fill empty 2D array
+                rotatedGameBoardFields[field.getPositionX()][field.getPositionY()] = field;
 
             }
         }
 
-        // Update the 2D array that holds all pieces
-        gameBoardFields = tempGameBoardFields;
+        // Update our 2D array
+        this.gameBoardFields = rotatedGameBoardFields;
     }
 
     // Highlight the allowed moves
