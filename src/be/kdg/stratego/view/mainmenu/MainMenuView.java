@@ -83,7 +83,7 @@ public class MainMenuView extends VBox {
         this.getChildren().addAll(imgTitle, hBoxTitlesAndLeaderboard);
         this.setBackground(Style.bgApplication);
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(Style.size(60));
+        this.setSpacing(Style.size(80));
     }
 
     public Button getBtnPlay() {

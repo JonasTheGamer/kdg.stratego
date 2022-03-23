@@ -206,9 +206,9 @@ public class NewGameView extends HBox {
         vbButtons.setSpacing(Style.size(20));
 
         vbMenu.getChildren().addAll(imgTitle, vbButtons);
-        vbMenu.setAlignment(Pos.CENTER);
+        vbMenu.setAlignment(Pos.TOP_CENTER);
+        vbMenu.setTranslateY(Style.size(150));
         vbMenu.setSpacing(Style.size(150));
-        vbMenu.setTranslateY(Style.size(-140));
 
         hbBackground.setBackground(Style.background);
         hbBackground.getChildren().addAll(vbPlayer[0], vbMenu, vbPlayer[1]);
