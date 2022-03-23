@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Miner extends MovingPiece {
 
     public Miner(Player player) {
-        super(player = player, "miner", "/pieces/miner.png", 3);
+        super(player, "miner", "/pieces/miner.png", 3);
     }
 
     @Override
