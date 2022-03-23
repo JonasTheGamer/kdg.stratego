@@ -72,7 +72,7 @@ public class ArmySetupPresenter {
         view.getBtnFill().setOnAction(actionEvent -> {
 
             // Special places pieces (for quick winning, ...)
-            GameBoard gb = model.getGame().getGameBoard();
+            GameBoard gb = model.getGameBoard();
             if (model.getGame().getCurrentPlayer().getPieceFromName("scout") != null && model.getGame().getCurrentPlayer().getPieceFromName("flag") != null) {
                 GameBoardField field = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
                 model.getGame().getCurrentPlayer().getPieceFromName("scout").placeOnField(field);
