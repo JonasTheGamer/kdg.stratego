@@ -198,8 +198,8 @@ public class NewGameView extends HBox {
         imgTitle.setScaleX(Style.scale(1.5));
         imgTitle.setScaleY(Style.scale(1.5));
 
-        Style.btn(btnReady, 15);
-        Style.btn(btnCancel, 15);
+        Style.btn(btnReady, 15, 400, 50);
+        Style.btn(btnCancel, 15, 400, 50);
 
         vbButtons.getChildren().addAll(btnReady, btnCancel);
         vbButtons.setAlignment(Pos.CENTER);

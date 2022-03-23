@@ -77,25 +77,17 @@ public class Style {
     ));
 
     //Borders
-    public static Border border(Paint paint, double width) {
+    public static Border border(Paint paint) {
         return new Border(new BorderStroke(
                 paint,
                 new BorderStrokeStyle(null, null, null, 1, 0, null),
                 new CornerRadii(5),
-                new BorderWidths(width)
+                new BorderWidths(1)
         ));
-    }
-
-    public static Border border(Paint paint) {
-        return border(paint, 1);
     }
 
 
     //Buttons
-    public static void btn(Button btn, double fontSize) {
-        Style.btn(btn, fontSize, 400, 50);
-    }
-
     public static void btn(Button btn, double fontSize, double width, double height) {
         btn.setPrefWidth(Style.size(width));
         btn.setPrefHeight(Style.size(height));

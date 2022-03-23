@@ -50,9 +50,9 @@ public class MainMenuView extends VBox {
         imgTitle.setScaleX(Style.scale(1.5));
         imgTitle.setScaleY(Style.scale(1.5));
 
-        Style.btn(btnPlay, 15);
-        Style.btn(btnHelp, 15);
-        Style.btn(btnQuit, 15);
+        Style.btn(btnPlay, 15, 400, 50);
+        Style.btn(btnHelp, 15, 400, 50);
+        Style.btn(btnQuit, 15, 400, 50);
 
         Style.txt(lblHighscores, 12);
         lblHighscores.setStyle("-fx-font-weight: bold");
