@@ -39,12 +39,12 @@ public class GameBoardField extends Position {
     }
 
     // Methods
-    // Highlight field
+    /// Highlight field
     public void highLight() {
         this.highlighted = true;
     }
 
-    // Unhighlight field
+    /// Unhighlight field
     public void unHighLight() {
         this.highlighted = false;
     }
