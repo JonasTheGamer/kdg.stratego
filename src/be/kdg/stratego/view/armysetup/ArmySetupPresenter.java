@@ -66,13 +66,7 @@ public class ArmySetupPresenter {
         });
 
 
-        view.getBtnBack().setOnAction(actionEvent -> {
-            // Empty the board
-            model.getGameBoard().clearGameBoardFields();
-
-            // Switch back to the newGameView
-            Style.changeScreen(Style.Screens.NEWGAME, model, view);
-        });
+        view.getBtnBack().setOnAction(actionEvent -> Style.changeScreen(Style.Screens.NEWGAME, model, view));
 
 
         view.getBtnFill().setOnAction(actionEvent -> {
@@ -139,7 +133,7 @@ public class ArmySetupPresenter {
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
                 StackPane fieldPane = fieldPanes.get(field);
-                if(!Objects.isNull(fieldPane)) {
+                if (!Objects.isNull(fieldPane)) {
                     fieldPane.setOnMouseClicked(mouseEvent -> {
 
                         // PLACE - Check if we were placing a piece.
@@ -313,7 +307,7 @@ public class ArmySetupPresenter {
             ImageView ivTower = new ImageView(towerImage);
             ivTower.setFitHeight(fieldSize * 0.95);
             ivTower.setFitWidth(fieldSize * 0.95);
-            if(field.getPiece().isDying()) {
+            if (field.getPiece().isDying()) {
                 ivTower.setOpacity(0.5);
             }
 
@@ -345,7 +339,7 @@ public class ArmySetupPresenter {
                 ImageView ivPiece = new ImageView(field.getPiece().getImage());
                 ivPiece.setFitHeight(fieldSize * 0.4);
                 ivPiece.setFitWidth(fieldSize * 0.4);
-                if(field.getPiece().isDying()) {
+                if (field.getPiece().isDying()) {
                     System.out.println("This piece is dying!");
                     ivPiece.setOpacity(0.5);
                 } else {

@@ -95,14 +95,6 @@ public class GameBoard {
         return grootteY - y;
     }
 
-    public void clearGameBoardFields() {
-        for (int posX = 0; posX < grootteX; posX++) {
-            for (int posY = 0; posY < grootteY; posY++) {
-                gameBoardFields[posX][posY] = null;
-            }
-        }
-    }
-
     // Getters
     public int getGrootteY() {
         return grootteY;
