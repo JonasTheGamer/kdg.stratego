@@ -98,7 +98,7 @@ public class ArmySetupPresenter {
                     Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName);
 
                     // Get the next unoccupied (available) field
-                    GameBoardField field = getNextAvailableField();
+                    GameBoardField field = model.getGameBoard().getNextAvailableField();
 
                     // Place the piece on the field
                     piece.placeOnField(field);
@@ -358,23 +358,5 @@ public class ArmySetupPresenter {
         }
 
         return container;
-    }
-
-    private GameBoardField getNextAvailableField() {
-        int boardSizeX = model.getGameBoard().getGrootteX();
-        int boardSizeY = model.getGameBoard().getGrootteY();
-
-        GameBoardField availableField = null;
-        for (int posY = 0; posY < boardSizeY; posY++) {
-            for (int posX = 0; posX < boardSizeX; posX++) {
-                GameBoardField fieldOnThisPosition = model.getGameBoard().getGameBoardField(posX, posY);
-                if (!fieldOnThisPosition.isOccupied()) {
-                    availableField = fieldOnThisPosition;
-                    break;
-                }
-            }
-        }
-
-        return availableField;
     }
 }

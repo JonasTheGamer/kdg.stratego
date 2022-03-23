@@ -13,7 +13,7 @@ public class GameBoard {
 
     public GameBoard() {
         gameBoardFields = new GameBoardField[this.grootteX][this.grootteY];
-        
+
         //// Add fields
         for (int posY = 0; posY < grootteY; posY++) {
             // Per row
@@ -104,11 +104,15 @@ public class GameBoard {
         return grootteY - y;
     }
 
-    // Getters
-    public int getGrootteX() {
-        return grootteX;
+    public void clearGameBoardFields() {
+        for (int posX = 0; posX < grootteX; posX++) {
+            for (int posY = 0; posY < grootteY; posY++) {
+                gameBoardFields[posX][posY] = null;
+            }
+        }
     }
 
+    // Getters
     public int getGrootteY() {
         return grootteY;
     }
@@ -131,16 +135,23 @@ public class GameBoard {
         return foundField;
     }
 
+    public GameBoardField getNextAvailableField() {
+        GameBoardField availableField = null;
+        for (int posY = 0; posY < grootteY; posY++) {
+            for (int posX = 0; posX < grootteX; posX++) {
+                GameBoardField fieldOnThisPosition = getGameBoardField(posX, posY);
+                if (!fieldOnThisPosition.isOccupied()) {
+                    availableField = fieldOnThisPosition;
+                    break;
+                }
+            }
+        }
+
+        return availableField;
+    }
+
     // Setters
     public void setGameBoardField(GameBoardField field) {
         this.gameBoardFields[field.getPositionX()][field.getPositionY()] = field;
-    }
-
-    public void clearGameBoardFields() {
-        for (int posX = 0; posX < getGrootteX(); posX++) {
-            for (int posY = 0; posY < getGrootteY(); posY++) {
-                gameBoardFields[posX][posY] = null;
-            }
-        }
     }
 }
