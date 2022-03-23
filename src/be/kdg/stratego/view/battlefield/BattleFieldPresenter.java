@@ -28,7 +28,7 @@ public class BattleFieldPresenter {
     private BattleFieldView view;
 
     // Variables for generating StackPanes
-    private final double fieldSize = Style.size(50);
+    private final double fieldSize = Style.size(65);
     private HashMap<GameBoardField, StackPane> fieldPanes;
 
     // Variables for moving a piece
@@ -48,12 +48,17 @@ public class BattleFieldPresenter {
     }
 
     private synchronized void addEventHandlers() {
+        view.getBtnClose().setOnAction(actionEvent -> {
+            //Liam: game.save() & game.stop() modal
+            Style.changeScreen(Style.Screens.MAINMENU, model, view);
+        });
+
         // Click on field
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
                 StackPane fieldPane = fieldPanes.get(field);
-                if(!Objects.isNull(fieldPane)){
+                if (!Objects.isNull(fieldPane)) {
                     fieldPane.setOnMouseClicked(mouseEvent -> {
 
                         // UNSELECT - Check if player clicked on the currently selected piece
@@ -111,7 +116,7 @@ public class BattleFieldPresenter {
                                     ImageView ivPiece = null;
 
                                     for (Node child : killedPiecePane.getChildren()) {
-                                        if(child.getId().equals("tower")) {
+                                        if (child.getId().equals("tower")) {
                                             ivTower = (ImageView) child;
                                         } else if (child.getId().equals("piece")) {
                                             ivPiece = (ImageView) child;
@@ -144,7 +149,7 @@ public class BattleFieldPresenter {
                                     lastTimeline = timelineTower;
                                 }
 
-                                if(Objects.isNull(lastTimeline)) {
+                                if (Objects.isNull(lastTimeline)) {
                                     // No pieces were killed
 
                                     // Rotate the board
@@ -182,7 +187,7 @@ public class BattleFieldPresenter {
                                             ImageView ivPiece = null;
 
                                             for (Node child : killedPiecePane.getChildren()) {
-                                                if(child.getId().equals("tower")) {
+                                                if (child.getId().equals("tower")) {
                                                     ivTower = (ImageView) child;
                                                 } else if (child.getId().equals("piece")) {
                                                     ivPiece = (ImageView) child;
@@ -209,7 +214,6 @@ public class BattleFieldPresenter {
                                                     new KeyFrame(Duration.millis(1250), opaquePiece),
                                                     new KeyFrame(Duration.millis(1500), transparentPiece)
                                             );
-
 
 
                                             timelineTower.play();
@@ -245,7 +249,6 @@ public class BattleFieldPresenter {
                                         updateView();
                                     }
                                 });*/
-
 
 
                             } catch (InvalidMoveException exception) {
@@ -329,7 +332,7 @@ public class BattleFieldPresenter {
             ivTower.setFitHeight(fieldSize * 0.95);
             ivTower.setFitWidth(fieldSize * 0.95);
             ivTower.setId("tower");
-            if(field.getPiece().isDying()) {
+            if (field.getPiece().isDying()) {
                 ivTower.setOpacity(0.5);
             }
 
@@ -362,7 +365,7 @@ public class BattleFieldPresenter {
                 ivPiece.setFitHeight(fieldSize * 0.4);
                 ivPiece.setFitWidth(fieldSize * 0.4);
                 ivPiece.setId("piece");
-                if(field.getPiece().isDying()) {
+                if (field.getPiece().isDying()) {
                     ivPiece.setOpacity(0.5);
                 }
 
