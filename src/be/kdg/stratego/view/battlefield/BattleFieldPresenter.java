@@ -215,13 +215,7 @@ public class BattleFieldPresenter {
                                             lastTimeline1 = timelinePiece;
                                         }
 
-                                        lastTimeline1.setOnFinished(new EventHandler<ActionEvent>() {
-                                            @Override
-                                            public void handle(ActionEvent actionEvent) {
-                                                model.getGame().getcu
-                                                updateView();
-                                            }
-                                        });
+                                        lastTimeline1.setOnFinished(actionEvent12 -> updateView());
                                     });
                                 }
 
