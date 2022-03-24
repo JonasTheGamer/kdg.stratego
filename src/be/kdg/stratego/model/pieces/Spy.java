@@ -14,13 +14,11 @@ public class Spy extends MovingPiece {
     }
 
     @Override
-    protected ArrayList<Piece> attackMarshal(MovingPiece piece) {
-        ArrayList<Piece> killedPieces = new ArrayList<>();
-
-        // Spy jumped on Marshal, Marshal dead
-        killedPieces.add(piece);
-        piece.startKill(this);
-
-        return killedPieces;
+    protected Piece attackLose(Piece piece) {
+        if (piece instanceof Marshal) {
+            return attackWin(piece);
+        } else {
+            return attackLose(piece);
+        }
     }
 }

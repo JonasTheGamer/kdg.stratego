@@ -16,63 +16,7 @@ public abstract class MovingPiece extends Piece {
     }
 
     // Methods
-    // Attack
-    public ArrayList<Piece> attackNormal(MovingPiece piece) {
-        ArrayList<Piece> killedPieces = new ArrayList<>();
-
-        // Highest rank always wins
-        if (rank < piece.getRank()) {
-            killedPieces.add(this);
-            this.startKill(); // No need to specify attacker, the winning piece doesn't have to move
-        } else if (rank > piece.getRank()) {
-            killedPieces.add(piece);
-            piece.startKill(this);
-        } else {
-            // Ranks are equal, both pieces die
-            killedPieces.add(this);
-            this.startKill();
-            killedPieces.add(piece);
-            piece.startKill();
-        }
-        return killedPieces;
-    }
-
-    protected ArrayList<Piece> attackMarshal(MovingPiece piece) {
-        return attackNormal(piece);
-    }
-
-
-    public ArrayList<Piece> attackBomb(Bomb piece) {
-        ArrayList<Piece> killedPieces = new ArrayList<>();
-
-        killedPieces.add(this);
-        this.startKill();
-
-        return killedPieces;
-    }
-
-    public ArrayList<Piece> attack(Piece piece) {
-        ArrayList<Piece> killedPieces = new ArrayList<>();
-        this.hidden = false;
-        piece.setHidden(false);
-
-        if (piece instanceof Marshal) {
-            killedPieces = this.attackMarshal((MovingPiece) piece);
-
-        } else if (piece instanceof MovingPiece) {
-            killedPieces = this.attackNormal((MovingPiece) piece);
-
-        } else if (piece instanceof Bomb) {
-            killedPieces = attackBomb((Bomb) piece);
-
-        } else if (piece instanceof Flag) {
-            // Jonas: We won! :D
-        }
-
-        return killedPieces;
-    }
-
-    // Move
+    /// Move
     public ArrayList<Piece> moveTo(GameBoardField destination) throws InvalidMoveException {
         ArrayList<Piece> killedPieces = new ArrayList<>();
 
@@ -89,6 +33,59 @@ public abstract class MovingPiece extends Piece {
         }
 
         return killedPieces;
+    }
+
+    /// Attack
+    public ArrayList<Piece> attack(Piece piece) {
+        ArrayList<Piece> killedPieces = new ArrayList<>();
+        this.hidden = false;
+        piece.setHidden(false);
+
+        if (piece instanceof MovingPiece) {
+            MovingPiece movingPiece = (MovingPiece)piece;
+
+            if (rank < movingPiece.getRank()) {
+
+                killedPieces.add(attackLose(piece));
+
+            } else if (rank > movingPiece.getRank()) {
+
+                killedPieces.add(attackWin(piece));
+
+            } else {
+
+                //Liam attackwin and lose
+                killedPieces.add(this);
+                this.startKill();
+                killedPieces.add(piece);
+                piece.startKill();
+
+            }
+
+        } else if (piece instanceof Bomb) {
+            killedPieces.add(attackLose(piece));
+
+        } else if (piece instanceof Flag) {
+            // Jonas: We won! :D
+
+        }
+
+        return killedPieces;
+    }
+
+    ///Sub attacks (for overwriting purposes)
+    protected Piece attackWin(Piece piece) {
+
+        piece.startKill(this);
+        return piece;
+
+    }
+
+    protected Piece attackLose(Piece piece) {
+
+        this.startKill();
+        return this;
+
     }
 
     // Getters

@@ -13,15 +13,13 @@ public class Miner extends MovingPiece {
         super(player, "miner", "/pieces/miner.png", 3);
     }
 
-
     @Override
-    public ArrayList<Piece> attackBomb(Bomb piece) {
-        ArrayList<Piece> killedPieces = new ArrayList<>();
+    protected Piece attackLose(Piece piece) {
+        if (piece instanceof Bomb) {
+            return attackWin(piece);
+        } else {
+            return attackLose(piece);
+        }
 
-        // The bomb is dead
-        killedPieces.add(piece);
-        piece.startKill(this);
-
-        return killedPieces;
     }
 }
