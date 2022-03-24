@@ -14,41 +14,37 @@ public class Spy extends MovingPiece {
     }
 
     @Override
-    protected ArrayList<Piece> attack(Piece piece) {
+    public ArrayList<Piece> attackNormal(MovingPiece piece) {
         ArrayList<Piece> killedPieces = new ArrayList<>();
-        this.hidden = false;
-        piece.setHidden(false);
-
-        if(piece instanceof MovingPiece) {
-            // Highest rank always wins
-            MovingPiece convertedPiece = (MovingPiece) piece;
-            if(convertedPiece instanceof Marshal) {
-                killedPieces.add(piece);
-                piece.startKill(this);
-            } else if(rank < convertedPiece.getRank()) {
-                killedPieces.add(this);
-                this.startKill();
-            } else if(rank > convertedPiece.getRank()) {
-                killedPieces.add(piece);
-                piece.startKill(this);
-            } else {
-                // Ranks are equal, both pieces die
-                killedPieces.add(this);
-                this.startKill();
-                killedPieces.add(piece);
-                piece.startKill();
-            }
+        // Highest rank always wins
+        MovingPiece convertedPiece = (MovingPiece) piece;
+        if (convertedPiece instanceof Marshal) {
+            killedPieces.add(piece);
+            piece.startKill(this);
+        } else if (rank < convertedPiece.getRank()) {
+            killedPieces.add(this);
+            this.startKill();
+        } else if (rank > convertedPiece.getRank()) {
+            killedPieces.add(piece);
+            piece.startKill(this);
         } else {
-            // Check if piece jumps on flag
-            if(piece instanceof Flag) {
-                // Jonas: We won! :D
-            }
-
-            // We jumped on a bomb
-            if(piece instanceof Bomb) {
-                killedPieces.add(this);
-            }
+            // Ranks are equal, both pieces die
+            killedPieces.add(this);
+            this.startKill();
+            killedPieces.add(piece);
+            piece.startKill();
         }
+        return killedPieces;
+    }
+
+    @Override
+    public ArrayList<Piece> attackMarshal(Marshal piece) {
+        ArrayList<Piece> killedPieces = new ArrayList<>();
+
+        // Spy jumped on Marshal, Marshal dead
+        killedPieces.add(piece);
+        piece.startKill(this);
+
         return killedPieces;
     }
 }

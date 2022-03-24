@@ -5,7 +5,6 @@ import be.kdg.stratego.model.pieces.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 
 public abstract class MovingPiece extends Piece {
@@ -18,38 +17,67 @@ public abstract class MovingPiece extends Piece {
 
     // Methods
     // Attack
-    protected ArrayList<Piece> attack(Piece piece) {
+    public ArrayList<Piece> attackNormal(MovingPiece piece) {
+        ArrayList<Piece> killedPieces = new ArrayList<>();
+
+        // Highest rank always wins
+        if (rank < piece.getRank()) {
+            killedPieces.add(this);
+            this.startKill(); // No need to specify attacker, the winning piece doesn't have to move
+        } else if (rank > piece.getRank()) {
+            killedPieces.add(piece);
+            piece.startKill(this);
+        } else {
+            // Ranks are equal, both pieces die
+            killedPieces.add(this);
+            this.startKill();
+            killedPieces.add(piece);
+            piece.startKill();
+        }
+        return killedPieces;
+    }
+
+    public ArrayList<Piece> attackBomb(Bomb piece) {
+        ArrayList<Piece> killedPieces = new ArrayList<>();
+
+        killedPieces.add(this);
+        this.startKill();
+
+        return killedPieces;
+    }
+
+    public ArrayList<Piece> attackMarshal(Marshal piece) {
+        ArrayList<Piece> killedPieces = new ArrayList<>();
+
+        // By default, everyone is dead when attacking a Marshal
+        killedPieces.add(this);
+        this.startKill();
+
+        return killedPieces;
+    }
+
+    public ArrayList<Piece> attack(Piece piece) {
         ArrayList<Piece> killedPieces = new ArrayList<>();
         this.hidden = false;
         piece.setHidden(false);
 
-        if(piece instanceof MovingPiece) {
-            // Highest rank always wins
-            MovingPiece convertedPiece = (MovingPiece) piece;
-            if(rank < convertedPiece.getRank()) {
-                killedPieces.add(this);
-                this.startKill(); // No need to specify attacker, the winning piece doesn't have to move
-            } else if(rank > convertedPiece.getRank()) {
-                killedPieces.add(piece);
-                piece.startKill(this);
+        if (piece instanceof MovingPiece) {
+            if (piece instanceof Marshal) {
+                killedPieces = this.attackMarshal((Marshal) piece);
             } else {
-                // Ranks are equal, both pieces die
-                killedPieces.add(this);
-                this.startKill();
-                killedPieces.add(piece);
-                piece.startKill();
+                killedPieces = this.attackNormal((MovingPiece) piece);
             }
         } else {
             // Check if piece jumps on flag
-            if(piece instanceof Flag) {
+            if (piece instanceof Flag) {
                 // Jonas: We won! :D
             }
-
             // We jumped on a bomb
-            if(piece instanceof Bomb) {
-                killedPieces.add(this);
+            if (piece instanceof Bomb) {
+                killedPieces = attackBomb((Bomb) piece);
             }
         }
+
         return killedPieces;
     }
 
@@ -57,8 +85,8 @@ public abstract class MovingPiece extends Piece {
     public ArrayList<Piece> moveTo(GameBoardField destination) throws InvalidMoveException {
         ArrayList<Piece> killedPieces = new ArrayList<>();
 
-        if(this.getAllowedMoves().contains(destination)) {
-            if(!destination.isOccupied()) {
+        if (this.getAllowedMoves().contains(destination)) {
+            if (!destination.isOccupied()) {
                 this.removeFromField();
                 this.placeOnField(destination);
             } else {
@@ -76,6 +104,7 @@ public abstract class MovingPiece extends Piece {
     public int getRank() {
         return rank;
     }
+
     public HashSet<GameBoardField> getAllowedMoves() {
         HashSet<GameBoardField> allowedMoves = new HashSet<>();
         HashSet<GameBoardField> allFields = new HashSet<>();

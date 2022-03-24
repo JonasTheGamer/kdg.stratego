@@ -13,39 +13,15 @@ public class Miner extends MovingPiece {
         super(player, "miner", "/pieces/miner.png", 3);
     }
 
+
     @Override
-    protected ArrayList<Piece> attack(Piece piece) {
+    public ArrayList<Piece> attackBomb(Bomb piece) {
         ArrayList<Piece> killedPieces = new ArrayList<>();
-        this.hidden = false;
-        piece.setHidden(false);
 
-        if(piece instanceof MovingPiece) {
-            // Highest rank always wins
-            MovingPiece convertedPiece = (MovingPiece) piece;
-            if(rank < convertedPiece.getRank()) {
-                killedPieces.add(this);
-                this.startKill(); // No need to specify attacker, the winning piece doesn't have to move
-            } else if(rank > convertedPiece.getRank()) {
-                killedPieces.add(piece);
-                piece.startKill(this);
-            } else {
-                // Ranks are equal, both pieces die
-                killedPieces.add(this);
-                this.startKill();
-                killedPieces.add(piece);
-                piece.startKill();
-            }
-        } else {
-            // Check if piece jumps on flag
-            if(piece instanceof Flag) {
-                // Jonas: We won! :D
-            }
+        // The bomb is dead
+        killedPieces.add(piece);
+        piece.startKill(this);
 
-            // We jumped on a bomb, but we can defuse it! :-)
-            if(piece instanceof Bomb) {
-                killedPieces.add(piece);
-            }
-        }
         return killedPieces;
     }
 }
