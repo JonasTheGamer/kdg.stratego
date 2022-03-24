@@ -254,6 +254,9 @@ public class BattleFieldPresenter {
     }
 
     private void updateView() {
+        // Title
+        view.getLblScreenTitle().setText(model.getGame().getCurrentPlayer().getName());
+
         // Game board
         //// Empty game board gridpane
         view.getGpBoard().getChildren().clear();
@@ -356,6 +359,7 @@ public class BattleFieldPresenter {
     private void showNextPlayerOverlay() {
         // Switch to the next player
         view.getBtnNextPlayer().setVisible(true);
+        view.getBtnNextPlayer().setText("Pass the computer to " + model.getGame().getNextPlayer().getName() + ". \nClick to continue");
 
         // Show the overlay
         Timeline showNextPlayerOverlay = new Timeline();

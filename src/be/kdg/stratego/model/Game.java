@@ -14,10 +14,12 @@ public class Game {
     private boolean ongoing = false;
     private GameBoard gameBoard;
     private Player currentPlayer;
+    private Player nextPlayer;
 
     public Game(Player player1, Player player2) {
         this.players = new Player[]{player1, player2};
         this.currentPlayer = player1;
+        this.nextPlayer = player2;
         this.gameBoard = new GameBoard();
 
         // Make their pieces visible
@@ -113,8 +115,10 @@ public class Game {
         // Switch player
         if (currentPlayer.equals(players[0])) {
             currentPlayer = players[1];
+            nextPlayer = players[0];
         } else {
             currentPlayer = players[0];
+            nextPlayer = players[1];
         }
 
         currentPlayer.addTurn();
@@ -130,7 +134,16 @@ public class Game {
         return currentPlayer;
     }
 
+    public Player getNextPlayer() {
+        return nextPlayer;
+    }
+
+    public void setNextPlayer(Player nextPlayer) {
+        this.nextPlayer = nextPlayer;
+    }
+
     public GameBoard getGameBoard() {
         return gameBoard;
     }
+
 }

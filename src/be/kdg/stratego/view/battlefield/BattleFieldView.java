@@ -31,7 +31,7 @@ public class BattleFieldView extends BorderPane {
         lblClock = new Label("00:00");
         lblScreenTitle = new Label("Player 1234567890");
         btnClose = new Button("X");
-        btnNextPlayer = new Button("Pass the computer to the next player. \nClick to continue");
+        btnNextPlayer = new Button("");
 
         // Panes
         bpHeader = new BorderPane();
