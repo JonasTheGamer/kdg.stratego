@@ -26,6 +26,7 @@ public class BattleFieldPresenter {
     // References
     private ProgrammaModel model;
     private BattleFieldView view;
+    private boolean killFadeOngoing = false;
 
     // Variables for generating StackPanes
     private final double fieldSize = Style.size(65);
@@ -57,216 +58,190 @@ public class BattleFieldPresenter {
                 if (!Objects.isNull(fieldPane)) {
                     fieldPane.setOnMouseClicked(mouseEvent -> {
 
-                        // UNSELECT - Check if player clicked on the currently selected piece
-                        if (field.isOccupied() && field.getPiece().equals(selectedPiece)) {
-                            // Clear the selection
-                            clearSelection();
-
-                            // Update view
-                            updateView();
-                            return;
-                        }
-
-                        // SELECT - Check if the player clicked on their own piece?
-                        if (field.isOccupied() && field.getPiece().getPlayer().equals(model.getGame().getCurrentPlayer())) {
-                            // They probably want to move this piece
-                            Piece piece = field.getPiece();
-
-                            // But let's check if it's movable
-                            if (piece instanceof MovingPiece) {
-                                // Select it for movement!
-                                selectedPiece = (MovingPiece) piece;
-
-                                // Highlight them
-                                model.getGameBoard().highLightAllowedMoves(selectedPiece);
-
-                                updateView();
-
-                            }
-                            return;
-                        }
-
-                        // MOVE - Check if a piece was selected
-                        if (selectedPiece != null) {
-                            try {
-                                // Move the piece
-                                MovingPiece attackingPiece = selectedPiece;
-                                ArrayList<Piece> killedPieces = selectedPiece.moveTo(field);
-
+                        if(!killFadeOngoing) {
+                            // UNSELECT - Check if player clicked on the currently selected piece
+                            if (field.isOccupied() && field.getPiece().equals(selectedPiece)) {
                                 // Clear the selection
                                 clearSelection();
 
-                                // Update the view
+                                // Update view
                                 updateView();
+                                return;
+                            }
 
-                                // Make killed pieces transparent
-                                Timeline lastTimeline = null;
-                                for (Piece killedPiece : killedPieces) {
-                                    StackPane killedPiecePane = fieldPanes.get(killedPiece.getField());
-                                    ImageView ivTower = null;
-                                    ImageView ivPiece = null;
+                            // SELECT - Check if the player clicked on their own piece?
+                            if (field.isOccupied() && field.getPiece().getPlayer().equals(model.getGame().getCurrentPlayer())) {
+                                // They probably want to move this piece
+                                Piece piece = field.getPiece();
 
-                                    for (Node child : killedPiecePane.getChildren()) {
-                                        if (child.getId().equals("tower")) {
-                                            ivTower = (ImageView) child;
-                                        } else if (child.getId().equals("piece")) {
-                                            ivPiece = (ImageView) child;
-                                        }
-                                    }
+                                // But let's check if it's movable
+                                if (piece instanceof MovingPiece) {
+                                    // Select it for movement!
+                                    selectedPiece = (MovingPiece) piece;
 
-                                    //// Fadeout the killed piece to half transparent
-                                    KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.5);
-                                    KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 1.0);
-                                    KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
-                                    KeyValue opaquePiece = new KeyValue(ivPiece.opacityProperty(), 1.0);
+                                    // Highlight them
+                                    model.getGameBoard().highLightAllowedMoves(selectedPiece);
 
-                                    //// Timelines
-                                    Timeline timelineTower = new Timeline();
-                                    timelineTower.getKeyFrames().addAll(
-                                            new KeyFrame(Duration.ZERO, opaqueTower),
-                                            new KeyFrame(Duration.millis(250), transparentTower),
-                                            new KeyFrame(Duration.millis(1500), transparentTower)
-                                    );
+                                    updateView();
 
-                                    Timeline timelinePiece = new Timeline();
-                                    timelinePiece.getKeyFrames().addAll(
-                                            new KeyFrame(Duration.ZERO, opaquePiece),
-                                            new KeyFrame(Duration.millis(250), transparentPiece),
-                                            new KeyFrame(Duration.millis(1500), transparentPiece)
-                                    );
-
-                                    timelineTower.play();
-                                    timelinePiece.play();
-                                    lastTimeline = timelineTower;
                                 }
+                                return;
+                            }
 
-                                if (Objects.isNull(lastTimeline)) {
-                                    // No pieces were killed
+                            // MOVE - Check if a piece was selected
+                            if (selectedPiece != null) {
+                                try {
+                                    // Move the piece
+                                    MovingPiece attackingPiece = selectedPiece;
+                                    ArrayList<Piece> killedPieces = selectedPiece.moveTo(field);
 
-                                    // Rotate the board
-                                    model.getGame().nextTurn();
-
-                                    // Make the killed pieces visible again
-                                    for (Piece killedPiece : killedPieces) {
-                                        killedPiece.setHidden(false);
-                                    }
+                                    // Clear the selection
+                                    clearSelection();
 
                                     // Update the view
                                     updateView();
-                                } else {
-                                    lastTimeline.setOnFinished(actionEvent -> {
+
+                                    // Make killed pieces transparent
+                                    Timeline lastTimeline = null;
+                                    for (Piece killedPiece : killedPieces) {
+                                        killFadeOngoing = true;
+                                        StackPane killedPiecePane = fieldPanes.get(killedPiece.getField());
+                                        ImageView ivTower = null;
+                                        ImageView ivPiece = null;
+
+                                        for (Node child : killedPiecePane.getChildren()) {
+                                            if (child.getId().equals("tower")) {
+                                                ivTower = (ImageView) child;
+                                            } else if (child.getId().equals("piece")) {
+                                                ivPiece = (ImageView) child;
+                                            }
+                                        }
+
+                                        //// Fadeout the killed piece to half transparent
+                                        KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.5);
+                                        KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 1.0);
+                                        KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
+                                        KeyValue opaquePiece = new KeyValue(ivPiece.opacityProperty(), 1.0);
+
+                                        //// Timelines
+                                        Timeline timelineTower = new Timeline();
+                                        timelineTower.getKeyFrames().addAll(
+                                                new KeyFrame(Duration.ZERO, opaqueTower),
+                                                new KeyFrame(Duration.millis(250), transparentTower),
+                                                new KeyFrame(Duration.millis(1500), transparentTower)
+                                        );
+
+                                        Timeline timelinePiece = new Timeline();
+                                        timelinePiece.getKeyFrames().addAll(
+                                                new KeyFrame(Duration.ZERO, opaquePiece),
+                                                new KeyFrame(Duration.millis(250), transparentPiece),
+                                                new KeyFrame(Duration.millis(1500), transparentPiece)
+                                        );
+
+                                        timelineTower.play();
+                                        timelinePiece.play();
+                                        lastTimeline = timelineTower;
+                                    }
+
+                                    if (Objects.isNull(lastTimeline)) {
+                                        // No pieces were killed
+
                                         // Rotate the board
                                         model.getGame().nextTurn();
 
-                                        // Make the killed pieces visible again
-                                        for (Piece killedPiece : killedPieces) {
-                                            killedPiece.setHidden(false);
-                                        }
-
-                                        // Make the attacking piece visible
-                                        attackingPiece.setHidden(false);
-
                                         // Update the view
                                         updateView();
+                                    } else {
+                                        lastTimeline.setOnFinished(actionEvent -> {
+                                            // Rotate the board
+                                            model.getGame().nextTurn();
 
-                                        // Make the killed pieces vanish
-                                        // Make killed pieces transparent
-                                        Timeline lastTimeline1 = null;
-                                        for (Piece killedPiece : killedPieces) {
-                                            StackPane killedPiecePane = fieldPanes.get(killedPiece.getField());
-                                            ImageView ivTower = null;
-                                            ImageView ivPiece = null;
-
-                                            for (Node child : killedPiecePane.getChildren()) {
-                                                if (child.getId().equals("tower")) {
-                                                    ivTower = (ImageView) child;
-                                                } else if (child.getId().equals("piece")) {
-                                                    ivPiece = (ImageView) child;
-                                                }
+                                            // Make the killed pieces visible again
+                                            for (Piece killedPiece : killedPieces) {
+                                                killedPiece.setHidden(false);
                                             }
 
-                                            //// Values for fade
-                                            KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.0);
-                                            KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 0.5);
-                                            KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.0);
-                                            KeyValue opaquePiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
+                                            // Make the attacking piece visible
+                                            attackingPiece.setHidden(false);
 
-                                            //// Timelines
-                                            Timeline timelineTower = new Timeline();
-                                            timelineTower.getKeyFrames().addAll(
-                                                    new KeyFrame(Duration.ZERO, opaqueTower),
-                                                    new KeyFrame(Duration.millis(1250), opaqueTower),
-                                                    new KeyFrame(Duration.millis(1500), transparentTower)
-                                            );
+                                            // Update the view
+                                            updateView();
 
-                                            Timeline timelinePiece = new Timeline();
-                                            timelinePiece.getKeyFrames().addAll(
-                                                    new KeyFrame(Duration.ZERO, opaquePiece),
-                                                    new KeyFrame(Duration.millis(1250), opaquePiece),
-                                                    new KeyFrame(Duration.millis(1500), transparentPiece)
-                                            );
+                                            // Make the killed pieces vanish
+                                            Timeline lastTimeline1 = null;
+                                            for (Piece killedPiece : killedPieces) {
+                                                StackPane killedPiecePane = fieldPanes.get(killedPiece.getField());
+                                                ImageView ivTower = null;
+                                                ImageView ivPiece = null;
 
+                                                for (Node child : killedPiecePane.getChildren()) {
+                                                    if (child.getId().equals("tower")) {
+                                                        ivTower = (ImageView) child;
+                                                    } else if (child.getId().equals("piece")) {
+                                                        ivPiece = (ImageView) child;
+                                                    }
+                                                }
 
-                                            timelineTower.play();
-                                            timelinePiece.play();
+                                                //// Values for fade
+                                                KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.0);
+                                                KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 0.5);
+                                                KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.0);
+                                                KeyValue opaquePiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
 
-                                            timelineTower.setOnFinished(actionEvent1 -> killedPiece.finishKill());
+                                                //// Timelines
+                                                Timeline fadeoutTimeline = new Timeline();
+                                                fadeoutTimeline.getKeyFrames().addAll(
+                                                        new KeyFrame(Duration.ZERO, opaqueTower, opaquePiece),
+                                                        new KeyFrame(Duration.millis(1250), opaqueTower, opaquePiece),
+                                                        new KeyFrame(Duration.millis(1500), transparentTower, transparentPiece)
+                                                );
 
-                                            lastTimeline1 = timelinePiece;
-                                        }
+                                                fadeoutTimeline.play();
+                                                lastTimeline1 = fadeoutTimeline;
+                                            }
 
-                                        lastTimeline1.setOnFinished(actionEvent12 -> updateView());
-                                    });
-                                }
+                                            lastTimeline1.setOnFinished(new EventHandler<ActionEvent>() {
+                                                @Override
+                                                public void handle(ActionEvent actionEvent) {
+                                                    // Finish the kills
+                                                    for(Piece killedPiece: killedPieces) {
+                                                        killedPiece.finishKill();
+                                                    }
+                                                    killFadeOngoing = false;
 
-                                //Jonas:
-                                // Wait 4 seconds to finish the kill
-                                /*Platform.runLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        // Wait 2 seconds
-                                        try {
-                                            Thread.sleep(4000);
-                                        } catch (InterruptedException ex) {
-                                        }
-
-                                        // Make the pieces hidden again and finish the kill
-                                        for (Piece killedPiece : killedPieces) {
-                                            killedPiece.setHidden(true);
-                                            killedPiece.finishKill();
-                                        }
-
-                                        // Update the view
-                                        updateView();
+                                                    // Update the view
+                                                    updateView();
+                                                }
+                                            });
+                                        });
                                     }
-                                });*/
+
+                                } catch (InvalidMoveException exception) {
+                                    /// Place an X on the field
+                                    //// Define X image
+                                    ImageView ivInvalid = new ImageView("error.png");
+                                    //// Values for fade
+                                    KeyValue transparent = new KeyValue(ivInvalid.opacityProperty(), 0.0);
+                                    KeyValue opaque = new KeyValue(ivInvalid.opacityProperty(), 1.0);
+
+                                    //// Timeline
+                                    Timeline timeline = new Timeline();
+                                    timeline.getKeyFrames().addAll(
+                                            new KeyFrame(Duration.ZERO, transparent),
+                                            new KeyFrame(Duration.millis(250), opaque),
+                                            new KeyFrame(Duration.millis(750), opaque),
+                                            new KeyFrame(Duration.millis(1000), transparent)
+                                    );
+
+                                    ivInvalid.setFitHeight(field.getFieldSize());
+                                    ivInvalid.setFitWidth(field.getFieldSize());
+                                    fieldPane.getChildren().add(ivInvalid);
 
 
-                            } catch (InvalidMoveException exception) {
-                                /// Place an X on the field
-                                //// Define X image
-                                ImageView ivInvalid = new ImageView("error.png");
-                                //// Values for fade
-                                KeyValue transparent = new KeyValue(ivInvalid.opacityProperty(), 0.0);
-                                KeyValue opaque = new KeyValue(ivInvalid.opacityProperty(), 1.0);
+                                    timeline.play();
 
-                                //// Timeline
-                                Timeline timeline = new Timeline();
-                                timeline.getKeyFrames().addAll(
-                                        new KeyFrame(Duration.ZERO, transparent),
-                                        new KeyFrame(Duration.millis(250), opaque),
-                                        new KeyFrame(Duration.millis(750), opaque),
-                                        new KeyFrame(Duration.millis(1000), transparent)
-                                );
-
-                                ivInvalid.setFitHeight(field.getFieldSize());
-                                ivInvalid.setFitWidth(field.getFieldSize());
-                                fieldPane.getChildren().add(ivInvalid);
-
-
-                                timeline.play();
-
-                                updateView();
+                                    updateView();
+                                }
                             }
                         }
                     });
