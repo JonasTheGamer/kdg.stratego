@@ -37,19 +37,14 @@ public abstract class MovingPiece extends Piece {
         return killedPieces;
     }
 
+    protected ArrayList<Piece> attackMarshal(MovingPiece piece) {
+        return attackNormal(piece);
+    }
+
+
     public ArrayList<Piece> attackBomb(Bomb piece) {
         ArrayList<Piece> killedPieces = new ArrayList<>();
 
-        killedPieces.add(this);
-        this.startKill();
-
-        return killedPieces;
-    }
-
-    public ArrayList<Piece> attackMarshal(Marshal piece) {
-        ArrayList<Piece> killedPieces = new ArrayList<>();
-
-        // By default, everyone is dead when attacking a Marshal
         killedPieces.add(this);
         this.startKill();
 
@@ -61,21 +56,17 @@ public abstract class MovingPiece extends Piece {
         this.hidden = false;
         piece.setHidden(false);
 
-        if (piece instanceof MovingPiece) {
-            if (piece instanceof Marshal) {
-                killedPieces = this.attackMarshal((Marshal) piece);
-            } else {
-                killedPieces = this.attackNormal((MovingPiece) piece);
-            }
-        } else {
-            // Check if piece jumps on flag
-            if (piece instanceof Flag) {
-                // Jonas: We won! :D
-            }
-            // We jumped on a bomb
-            if (piece instanceof Bomb) {
-                killedPieces = attackBomb((Bomb) piece);
-            }
+        if (piece instanceof Marshal) {
+            killedPieces = this.attackMarshal((MovingPiece) piece);
+
+        } else if (piece instanceof MovingPiece) {
+            killedPieces = this.attackNormal((MovingPiece) piece);
+
+        } else if (piece instanceof Bomb) {
+            killedPieces = attackBomb((Bomb) piece);
+
+        } else if (piece instanceof Flag) {
+            // Jonas: We won! :D
         }
 
         return killedPieces;
