@@ -74,15 +74,16 @@ public class ArmySetupPresenter {
 
             // Special places pieces (for quick winning, ...)
             GameBoard gb = model.getGameBoard();
-            if (model.getGame().getCurrentPlayer().getPieceFromName("scout") != null && model.getGame().getCurrentPlayer().getPieceFromName("flag") != null) {
-                GameBoardField field = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
-                model.getGame().getCurrentPlayer().getPieceFromName("scout").placeOnField(field);
+            GameBoardField specialField = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
+            if (Objects.isNull(specialField.getPiece()) && Objects.isNull(specialField.getFieldOnRight().getPiece())) {
+                if (model.getGame().getCurrentPlayer().getPieceFromName("scout") != null && model.getGame().getCurrentPlayer().getPieceFromName("flag") != null) {
 
-                field = field.getFieldOnRight();
-                model.getGame().getCurrentPlayer().getPieceFromName("flag").placeOnField(field);
+                    model.getGame().getCurrentPlayer().getPieceFromName("scout").placeOnField(specialField);
+                    model.getGame().getCurrentPlayer().getPieceFromName("flag").placeOnField(specialField.getFieldOnRight());
+
+                    refreshPlacablePieces();
+                }
             }
-
-            refreshPlacablePieces();
 
             // Loop through placable pieces
             for (String pieceName : piecesToPlace.keySet()) {
