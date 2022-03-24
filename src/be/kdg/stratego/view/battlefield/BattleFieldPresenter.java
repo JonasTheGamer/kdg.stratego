@@ -114,7 +114,7 @@ public class BattleFieldPresenter {
                                         }
                                     }
 
-                                    //// Values for fade
+                                    //// Fadeout the killed piece to half transparent
                                     KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.5);
                                     KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 1.0);
                                     KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
@@ -215,7 +215,13 @@ public class BattleFieldPresenter {
                                             lastTimeline1 = timelinePiece;
                                         }
 
-                                        lastTimeline1.setOnFinished(actionEvent12 -> updateView());
+                                        lastTimeline1.setOnFinished(new EventHandler<ActionEvent>() {
+                                            @Override
+                                            public void handle(ActionEvent actionEvent) {
+                                                model.getGame().getcu
+                                                updateView();
+                                            }
+                                        });
                                     });
                                 }
 
