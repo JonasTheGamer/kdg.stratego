@@ -65,11 +65,8 @@ public class GameBoard {
         // Highlight the field itself
         field.highLight();
 
-        // Get the allowed moves
-        HashSet<GameBoardField> allowedMoves = piece.getAllowedMoves();
-
         // Highlight them
-        for (GameBoardField fieldToHighlight : allowedMoves) {
+        for (GameBoardField fieldToHighlight : piece.getAllowedMoves()) {
             fieldToHighlight.highLight();
         }
     }
