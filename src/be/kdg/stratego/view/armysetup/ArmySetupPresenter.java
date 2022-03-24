@@ -157,9 +157,6 @@ public class ArmySetupPresenter {
                                 // Place on the field
                                 pieceToPlace.placeOnField(field);
 
-                                // Add it to the board
-                                model.getGameBoard().setGameBoardField(field);
-
                                 // Stop placing
                                 if (piecesToPlace.get(pieceToPlace.getName()) == 1) {
                                     placingPiece = false;

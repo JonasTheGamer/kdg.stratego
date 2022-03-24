@@ -16,20 +16,27 @@ public class Spy extends MovingPiece {
     @Override
     protected ArrayList<Piece> attack(Piece piece) {
         ArrayList<Piece> killedPieces = new ArrayList<>();
+        this.hidden = false;
+        piece.setHidden(false);
 
         if(piece instanceof MovingPiece) {
             // Highest rank always wins
             MovingPiece convertedPiece = (MovingPiece) piece;
             if(convertedPiece instanceof Marshal) {
                 killedPieces.add(piece);
+                piece.startKill(this);
             } else if(rank < convertedPiece.getRank()) {
                 killedPieces.add(this);
+                this.startKill();
             } else if(rank > convertedPiece.getRank()) {
                 killedPieces.add(piece);
+                piece.startKill(this);
             } else {
                 // Ranks are equal, both pieces die
                 killedPieces.add(this);
+                this.startKill();
                 killedPieces.add(piece);
+                piece.startKill();
             }
         } else {
             // Check if piece jumps on flag

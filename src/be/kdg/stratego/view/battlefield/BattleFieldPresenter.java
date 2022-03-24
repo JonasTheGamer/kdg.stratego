@@ -33,15 +33,11 @@ public class BattleFieldPresenter {
 
     // Variables for moving a piece
     private MovingPiece selectedPiece;
-    private HashSet<GameBoardField> allowedMoves;
 
     public BattleFieldPresenter(ProgrammaModel model, BattleFieldView view) {
         this.model = model;
         this.view = view;
         this.fieldPanes = new HashMap<>();
-
-        // Initialize allowed moves
-        allowedMoves = new HashSet<>();
 
         this.addEventHandlers();
         this.updateView();
@@ -81,16 +77,11 @@ public class BattleFieldPresenter {
                                 // Select it for movement!
                                 selectedPiece = (MovingPiece) piece;
 
-                                // Get the allowed moves
-                                allowedMoves = selectedPiece.getAllowedMoves();
-
                                 // Highlight them
                                 model.getGameBoard().highLightAllowedMoves(selectedPiece);
 
                                 updateView();
 
-                            } else {
-                                // Jonas: Ignore their request
                             }
                             return;
                         }
@@ -383,7 +374,6 @@ public class BattleFieldPresenter {
 
         // Unselect
         selectedPiece = null;
-        allowedMoves.clear();
     }
 }
 

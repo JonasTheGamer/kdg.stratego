@@ -27,14 +27,10 @@ public class Piece {
     public void placeOnField(GameBoardField field) {
         this.field = field;
         this.field.setPiece(this);
-        // Update global 2D array
-        this.field.getGameBoard().setGameBoardField(field);
     }
 
     public void removeFromField() {
         this.field.setPiece(null);
-        // Remove from global 2D array
-        this.field.getGameBoard().setGameBoardField(this.field);
         this.field = null;
     }
 
