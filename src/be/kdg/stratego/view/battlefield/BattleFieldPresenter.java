@@ -199,7 +199,7 @@ public class BattleFieldPresenter {
 
                 // If pieces were killed, show them & do the animation
                 if (lastKilledPieces.size() > 0) {
-                                        // Make the killed pieces visible again
+                    // Make the killed pieces visible again
                     for (Piece killedPiece : lastKilledPieces) {
                         killedPiece.setHidden(false);
                     }
