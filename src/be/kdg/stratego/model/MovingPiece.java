@@ -45,47 +45,35 @@ public abstract class MovingPiece extends Piece {
             MovingPiece movingPiece = (MovingPiece)piece;
 
             if (rank < movingPiece.getRank()) {
-
+                //Piece loses the attack
                 killedPieces.add(attackLose(piece));
-
             } else if (rank > movingPiece.getRank()) {
-
+                //Piece wins the attack
                 killedPieces.add(attackWin(piece));
-
             } else {
-
-                //Liam attackwin and lose
-                killedPieces.add(this);
-                this.startKill();
-                killedPieces.add(piece);
-                piece.startKill();
-
+                //Piece wins the attack at the cost of their own life
+                killedPieces.add(attackLose(piece));
+                killedPieces.add(attackWin(piece));
             }
-
         } else if (piece instanceof Bomb) {
+            //Piece gets blown up
             killedPieces.add(attackLose(piece));
-
         } else if (piece instanceof Flag) {
             // Jonas: We won! :D
 
         }
-
         return killedPieces;
     }
 
     ///Sub attacks (for overwriting purposes)
     protected Piece attackWin(Piece piece) {
-
         piece.startKill(this);
         return piece;
-
     }
 
     protected Piece attackLose(Piece piece) {
-
         this.startKill();
         return this;
-
     }
 
     // Getters

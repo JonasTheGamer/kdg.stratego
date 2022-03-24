@@ -16,6 +16,7 @@ public class Spy extends MovingPiece {
     @Override
     protected Piece attackLose(Piece piece) {
         if (piece instanceof Marshal) {
+            //Spy assassinates the Marshal
             return attackWin(piece);
         } else {
             return attackLose(piece);
