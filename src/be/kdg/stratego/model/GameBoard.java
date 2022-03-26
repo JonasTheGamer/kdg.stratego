@@ -1,19 +1,17 @@
 package be.kdg.stratego.model;
 
-import java.util.HashSet;
-
 public class GameBoard {
-    private final int grootteX = 10;
-    private final int grootteY = 10;
+    private final int GROOTTE_X = 10;
+    private final int GROOTTE_Y = 10;
     private GameBoardField[][] gameBoardFields;
 
     public GameBoard() {
-        gameBoardFields = new GameBoardField[this.grootteX][this.grootteY];
+        gameBoardFields = new GameBoardField[this.GROOTTE_X][this.GROOTTE_Y];
 
         //// Add fields
-        for (int posY = 0; posY < grootteY; posY++) {
+        for (int posY = 0; posY < GROOTTE_Y; posY++) {
             // Per row
-            for (int posX = 0; posX < grootteX; posX++) {
+            for (int posX = 0; posX < GROOTTE_X; posX++) {
                 // Per column
                 this.setGameBoardField(new GameBoardField(this, posX, posY, GameBoardField.GroundType.GRASS));
             }
@@ -36,14 +34,14 @@ public class GameBoard {
     // Methods
     // Rotate the board
     public void rotate() {
-        GameBoardField[][] rotatedGameBoardFields = new GameBoardField[grootteX][grootteY];
+        GameBoardField[][] rotatedGameBoardFields = new GameBoardField[GROOTTE_X][GROOTTE_Y];
 
         for (GameBoardField[] fieldRow : this.gameBoardFields) {
             for (GameBoardField field : fieldRow) {
 
                 // Reverse field position
-                field.setPositionX(grootteX - 1 - field.getPositionX());
-                field.setPositionY(grootteY - 1 - field.getPositionY());
+                field.setPositionX(GROOTTE_X - 1 - field.getPositionX());
+                field.setPositionY(GROOTTE_Y - 1 - field.getPositionY());
 
                 // Fill empty 2D array
                 rotatedGameBoardFields[field.getPositionX()][field.getPositionY()] = field;
@@ -74,8 +72,8 @@ public class GameBoard {
     // Unhighlight all fields
     public void unHighlightAllFields() {
         // Loop through all fields
-        for (int posX = 0; posX < grootteX; posX++) {
-            for (int posY = 0; posY < grootteY; posY++) {
+        for (int posX = 0; posX < GROOTTE_X; posX++) {
+            for (int posY = 0; posY < GROOTTE_Y; posY++) {
                 GameBoardField field = gameBoardFields[posX][posY];
                 field.unHighLight();
             }
@@ -89,12 +87,12 @@ public class GameBoard {
 
     public int coordinateY(int y) {
         //Humanreadable version y in GameBoard(Field)
-        return grootteY - y;
+        return GROOTTE_Y - y;
     }
 
     // Getters
-    public int getGrootteY() {
-        return grootteY;
+    public int getGROOTTE_Y() {
+        return GROOTTE_Y;
     }
 
     public GameBoardField[][] getGameBoardFields() {
@@ -117,8 +115,8 @@ public class GameBoard {
 
     public GameBoardField getNextAvailableField() {
         GameBoardField availableField = null;
-        for (int posY = 0; posY < grootteY; posY++) {
-            for (int posX = 0; posX < grootteX; posX++) {
+        for (int posY = 0; posY < GROOTTE_Y; posY++) {
+            for (int posX = 0; posX < GROOTTE_X; posX++) {
                 GameBoardField fieldOnThisPosition = getGameBoardField(posX, posY);
                 if (!fieldOnThisPosition.isOccupied()) {
                     availableField = fieldOnThisPosition;

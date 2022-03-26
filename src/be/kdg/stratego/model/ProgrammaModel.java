@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class ProgrammaModel {
-    private final File winnersFile = new File("resources/winners.csv");
+    private final File WINNERS_FILE = new File("resources/winners.csv");
 
     private Game game;
     private GameBoard gameBoard;
@@ -32,7 +32,7 @@ public class ProgrammaModel {
         lowturns.clear();
 
         /// Read lines from file
-        List<String> lines = Files.readAllLines(this.winnersFile.toPath());
+        List<String> lines = Files.readAllLines(this.WINNERS_FILE.toPath());
 
         for (String currentLine : lines) {
             if (!currentLine.equals("")) {
@@ -64,6 +64,6 @@ public class ProgrammaModel {
     }
 
     public File getWinnersFile() {
-        return winnersFile;
+        return WINNERS_FILE;
     }
 }

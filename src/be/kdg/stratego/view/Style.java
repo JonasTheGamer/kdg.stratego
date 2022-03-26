@@ -19,7 +19,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 
 public class Style {
-    private final static double baseScale = 1.25;
+    private final static double BASE_SCALE = 1.25;
     public enum Screens {
         MAINMENU,
         NEWGAME,
@@ -113,14 +113,14 @@ public class Style {
         Screen screen = Screen.getPrimary();
         double screenScale = screen.getOutputScaleX();
 
-        return (pixels / screenScale * baseScale);
+        return (pixels / screenScale * BASE_SCALE);
     }
 
     public static double scale(double scale) {
         Screen screen = Screen.getPrimary();
         double screenScale = screen.getOutputScaleX();
 
-        return (scale / screenScale * baseScale);
+        return (scale / screenScale * BASE_SCALE);
     }
 
     public static void changeScreen(Screens screen, ProgrammaModel model, Pane view) {

@@ -97,4 +97,8 @@ public class BattleFieldView extends BorderPane {
     public Button getBtnNextPlayer() {
         return btnNextPlayer;
     }
+
+    public Label getLblClock() {
+        return lblClock;
+    }
 }
