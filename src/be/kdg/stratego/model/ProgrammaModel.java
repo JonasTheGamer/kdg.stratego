@@ -9,15 +9,17 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class ProgrammaModel {
-    private final File highscoreFile = new File("highscores.csv");
+    private final File highscoreFile = new File("winners.csv");
 
     private Game game;
     private GameBoard gameBoard;
     private TreeSet<Highscore> highscores;
+    private TreeSet<Lowturn> lowturns;
 
     // Constructor
     public ProgrammaModel() {
         highscores = new TreeSet<>();
+        lowturns = new TreeSet<>();
     }
 
     // Methoden
@@ -26,7 +28,7 @@ public class ProgrammaModel {
         gameBoard = game.getGameBoard();
     }
 
-    public void updateHighscores() {
+    public void updateWinners() {
         /// Clearing list
         highscores.clear();
 
@@ -37,8 +39,11 @@ public class ProgrammaModel {
             for (String currentLine : lines) {
                 String spelernaam = currentLine.split(";")[0];
                 int score = Integer.parseInt(currentLine.split(";")[1]);
+                int turns = Integer.parseInt(currentLine.split(";")[2]);
+
 
                 highscores.add(new Highscore(spelernaam, score));
+                lowturns.add(new Lowturn(spelernaam, turns));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,12 +63,16 @@ public class ProgrammaModel {
         return highscores;
     }
 
+    public TreeSet<Lowturn> getLowturns() {
+        return lowturns;
+    }
+
     // Setter
-    public void setNewHighscore(String name, int score) {
+    public void setNewWinner(String name, int score, int turns) {
         ArrayList<String> lines = new ArrayList<>();
 
         /// Add line to list
-        lines.add(name + ";" + score);
+        lines.add(name + ";" + score + ";" + turns);
 
         /// Write lines to file
         try {

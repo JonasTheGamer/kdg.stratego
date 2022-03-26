@@ -1,6 +1,5 @@
 package be.kdg.stratego.model;
 
-import java.io.File;
 import java.util.Objects;
 
 public class Highscore implements Comparable<Highscore> {

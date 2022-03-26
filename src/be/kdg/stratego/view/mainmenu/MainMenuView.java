@@ -13,11 +13,8 @@ public class MainMenuView extends VBox {
     private Button btnHelp;
     private Button btnQuit;
     private Label lblHighscores;
-    private Label lblPositie;
-    private Label lblScore;
-    private Label lblName;
     private VBox vBoxTitles;
-    private GridPane gpHighscores;
+    private GridPane gpWinners;
     private VBox vBoxLeaderboards;
     private HBox hBoxTitlesAndLeaderboard;
 
@@ -34,13 +31,10 @@ public class MainMenuView extends VBox {
         this.btnHelp = new Button("Help");
         this.btnQuit = new Button("Quit");
 
-        this.lblHighscores = new Label("Highscores");
-        this.lblPositie = new Label("Rank");
-        this.lblScore = new Label("Score");
-        this.lblName = new Label("Name");
+        this.lblHighscores = new Label("Highscores/Lowturns");
 
         // Panes
-        this.gpHighscores = new GridPane();
+        this.gpWinners = new GridPane();
         this.vBoxTitles = new VBox();
         this.vBoxLeaderboards = new VBox();
         this.hBoxTitlesAndLeaderboard = new HBox();
@@ -57,14 +51,7 @@ public class MainMenuView extends VBox {
         Style.txt(lblHighscores, 12);
         lblHighscores.setStyle("-fx-font-weight: bold");
 
-        Style.txt(lblPositie, 10);
-        Style.txt(lblScore, 10);
-        Style.txt(lblName, 10);
-
-        gpHighscores.add(lblPositie, 0, 0);
-        gpHighscores.add(lblScore, 1, 0);
-        gpHighscores.add(lblName, 2, 0);
-        gpHighscores.setHgap(20);
+        gpWinners.setHgap(20);
 
         hBoxTitlesAndLeaderboard.getChildren().addAll(vBoxTitles, vBoxLeaderboards);
         hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
@@ -75,7 +62,7 @@ public class MainMenuView extends VBox {
         vBoxTitles.setAlignment(Pos.CENTER);
         vBoxTitles.setSpacing(Style.size(20));
 
-        vBoxLeaderboards.getChildren().addAll(lblHighscores, gpHighscores);
+        vBoxLeaderboards.getChildren().addAll(lblHighscores, gpWinners);
         vBoxLeaderboards.setBackground(Style.background);
         vBoxLeaderboards.setAlignment(Pos.CENTER);
         vBoxLeaderboards.setSpacing(Style.size(10));
@@ -98,7 +85,11 @@ public class MainMenuView extends VBox {
         return btnQuit;
     }
 
-    public GridPane getGpHighscores() {
-        return gpHighscores;
+    public GridPane getGpWinners() {
+        return gpWinners;
+    }
+
+    public Label getLblHighscores() {
+        return lblHighscores;
     }
 }
