@@ -42,6 +42,7 @@ public class BattleFieldPresenter {
     // Variables for switching to the next player
     private ArrayList<Piece> lastKilledPieces;
     private MovingPiece attackingPiece;
+    private boolean overlayClickDebounce;
 
     public BattleFieldPresenter(ProgrammaModel model, BattleFieldView view) {
         this.model = model;
@@ -50,6 +51,7 @@ public class BattleFieldPresenter {
 
         lastKilledPieces = new ArrayList<>();
         attackingPiece = null;
+        overlayClickDebounce = false;
 
         this.addEventHandlers();
         this.updateView();
@@ -216,6 +218,12 @@ public class BattleFieldPresenter {
 
         // Click on overlay to pass to the next player
         view.getBtnNextPlayer().setOnAction(actionEvent -> {
+            // Do nothing if the debounce is still activated
+            if(overlayClickDebounce) return;
+
+            // Enable the debounce
+            overlayClickDebounce = true;
+
             // Switch to the next player
             model.getGame().nextTurn();
 
@@ -401,6 +409,7 @@ public class BattleFieldPresenter {
                 new KeyFrame(Duration.millis(500), (nextPlayerOverlay ? visableBtn : hiddenBtn))
         );
         timeline.play();
+        timeline.setOnFinished(actionEvent -> overlayClickDebounce = false);
 
         //When turned off
         if (!nextPlayerOverlay) {
