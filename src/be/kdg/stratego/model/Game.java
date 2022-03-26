@@ -1,7 +1,6 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.customUtil.AskUtility;
-import be.kdg.stratego.view.Style;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -98,12 +97,20 @@ public class Game {
     public void stop() {
         ongoing = false;
         this.endTime = LocalDateTime.now();
-        System.out.println("The game has been stopped.");
+
+        //Score
+        int score = 0;
+        for (Piece piece : currentPlayer.getPieces()) {
+            if (piece instanceof MovingPiece) {
+                score += ((MovingPiece) piece).getRank();
+            }
+        }
+        //Liam: score voor highscore
     }
 
     public void nextTurn() {
         if (ongoing) {
-            //Liam: Hier komen das punten per turn enzo ...
+            currentPlayer.addTurn();
         }
 
         // Rotate gameboard
@@ -121,7 +128,6 @@ public class Game {
             nextPlayer = players[1];
         }
 
-        currentPlayer.addTurn();
         currentPlayer.showPieces();
     }
 

@@ -45,6 +45,8 @@ public class BattleFieldPresenter {
 
         this.addEventHandlers();
         this.updateView();
+
+        model.getGame().start();
     }
 
     private synchronized void addEventHandlers() {

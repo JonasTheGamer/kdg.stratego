@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class ProgrammaModel {
-    private final File highscoreFile = new File("winners.csv");
+    private final File winnersFile = new File("winners.csv");
 
     private Game game;
     private GameBoard gameBoard;
@@ -29,12 +29,13 @@ public class ProgrammaModel {
     }
 
     public void updateWinners() {
-        /// Clearing list
+        /// Clearing lists
         highscores.clear();
+        lowturns.clear();
 
         /// Read lines from file
         try {
-            List<String> lines = Files.readAllLines(this.highscoreFile.toPath());
+            List<String> lines = Files.readAllLines(this.winnersFile.toPath());
 
             for (String currentLine : lines) {
                 String spelernaam = currentLine.split(";")[0];
@@ -76,7 +77,7 @@ public class ProgrammaModel {
 
         /// Write lines to file
         try {
-            Files.write(this.highscoreFile.toPath(), lines, StandardOpenOption.APPEND);
+            Files.write(this.winnersFile.toPath(), lines, StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();
         }
