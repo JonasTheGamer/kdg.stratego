@@ -38,13 +38,15 @@ public class ProgrammaModel {
             List<String> lines = Files.readAllLines(this.winnersFile.toPath());
 
             for (String currentLine : lines) {
-                String spelernaam = currentLine.split(";")[0];
-                int score = Integer.parseInt(currentLine.split(";")[1]);
-                int turns = Integer.parseInt(currentLine.split(";")[2]);
+                if (!currentLine.equals("")) {
+                    String spelernaam = currentLine.split(";")[0];
+                    int score = Integer.parseInt(currentLine.split(";")[1]);
+                    int turns = Integer.parseInt(currentLine.split(";")[2]);
 
 
-                highscores.add(new Highscore(spelernaam, score));
-                lowturns.add(new Lowturn(spelernaam, turns));
+                    highscores.add(new Highscore(spelernaam, score));
+                    lowturns.add(new Lowturn(spelernaam, turns));
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
