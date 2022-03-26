@@ -4,7 +4,10 @@ import be.kdg.stratego.customUtil.AskUtility;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Game {
     private Player[] players;
@@ -32,7 +35,7 @@ public class Game {
         this.startTime = LocalDateTime.now();
     }
 
-    public boolean save() {
+    public boolean save(File winnersFile) {
         // Check to allow for a loop that keeps asking for a valid file location
         boolean fileOk = false;
         boolean fileSaved = false;
@@ -85,7 +88,7 @@ public class Game {
 
         if (fileSaved) {
             // Stop the game when it's saved.
-            this.stop();
+            this.stop(winnersFile);
         }
         return fileSaved;
     }
@@ -94,7 +97,7 @@ public class Game {
         // Resume the timer
     }
 
-    public void stop() {
+    public void stop(File winnersFile) {
         ongoing = false;
         this.endTime = LocalDateTime.now();
 
@@ -105,6 +108,7 @@ public class Game {
         currentPlayer.getAmountOfTurns();
 
         // Save the highscores
+        registerWinner(winnersFile);
     }
 
     public void nextTurn() {
@@ -154,12 +158,23 @@ public class Game {
         return nextPlayer;
     }
 
-    public void setNextPlayer(Player nextPlayer) {
-        this.nextPlayer = nextPlayer;
-    }
-
     public GameBoard getGameBoard() {
         return gameBoard;
     }
+
+    public void registerWinner(File winnersFile) {
+        ArrayList<String> lines = new ArrayList<>();
+
+        /// Add line to list
+        lines.add(currentPlayer.getName() + ";" + calculateLeftOverPiecesScore() + ";" + currentPlayer.getAmountOfTurns());
+
+        /// Write lines to file
+        try {
+            Files.write(winnersFile.toPath(), lines, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

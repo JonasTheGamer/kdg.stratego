@@ -68,18 +68,7 @@ public class ProgrammaModel {
         return lowturns;
     }
 
-    // Setter
-    public void setNewWinner(String name, int score, int turns) {
-        ArrayList<String> lines = new ArrayList<>();
-
-        /// Add line to list
-        lines.add(name + ";" + score + ";" + turns);
-
-        /// Write lines to file
-        try {
-            Files.write(this.winnersFile.toPath(), lines, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public File getWinnersFile() {
+        return winnersFile;
     }
 }

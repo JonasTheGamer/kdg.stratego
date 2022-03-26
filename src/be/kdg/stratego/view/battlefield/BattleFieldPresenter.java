@@ -157,11 +157,8 @@ public class BattleFieldPresenter {
 
                                     // Check if the game ended or we need to switch to the next player
                                     if (containsFlag) {
-                                        System.out.println("A flag was hit!");
-
                                         // Stop the game
-                                        model.getGame().stop();
-                                        System.out.println("The game was stopped");
+                                        model.getGame().stop(model.getWinnersFile());
 
                                         // Show the winner screen
                                         EndOfGameView eoGameView = new EndOfGameView();
@@ -170,7 +167,6 @@ public class BattleFieldPresenter {
                                         Stage stage = new Stage();
                                         stage.setScene(new Scene(eoGameView));
 
-                                        stage.setTitle("Einde spel");
                                         stage.initOwner(view.getScene().getWindow());
                                         stage.initModality(Modality.APPLICATION_MODAL);
                                         stage.showAndWait();
@@ -178,7 +174,6 @@ public class BattleFieldPresenter {
                                         Style.changeScreen(Style.Screens.MAINMENU, model, view);
 
                                     } else {
-                                        System.out.println("No flag was hit");
                                         // Switch to next player
                                         if (!Objects.isNull(showKilledPieces)) {
                                             // Wait for the fade to finish before showing the overlay
