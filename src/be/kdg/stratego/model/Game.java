@@ -99,6 +99,19 @@ public class Game {
         ongoing = false;
         this.endTime = LocalDateTime.now();
         System.out.println("The game has been stopped.");
+
+        // Calculate the first score (sum of pieces left)
+        int piecesSum = 0;
+        for (Piece pieceOnBoard : currentPlayer.getPieces()) {
+            if(pieceOnBoard.isOnField()) {
+                piecesSum += pieceOnBoard.getRank();
+            }
+        }
+
+        // Second high score (amount of turns needed)
+        currentPlayer.getAmountOfTurns();
+
+        // Save the highscores
     }
 
     public void nextTurn() {
@@ -121,7 +134,6 @@ public class Game {
             nextPlayer = players[1];
         }
 
-        currentPlayer.addTurn();
         currentPlayer.showPieces();
     }
 
