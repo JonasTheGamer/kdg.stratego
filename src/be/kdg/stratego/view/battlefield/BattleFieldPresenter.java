@@ -8,9 +8,7 @@ import be.kdg.stratego.view.endofgame.EndOfGamePresenter;
 import be.kdg.stratego.view.endofgame.EndOfGameView;
 import be.kdg.stratego.view.help.HelpPresenter;
 import be.kdg.stratego.view.help.HelpView;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -401,19 +399,16 @@ public class BattleFieldPresenter {
         }
 
         //Each toggle
-        Timeline timeline = new Timeline();
-        KeyValue visableBtn = new KeyValue(btn.opacityProperty(), 1);
-        KeyValue hiddenBtn = new KeyValue(btn.opacityProperty(), 0);
-        timeline.getKeyFrames().addAll(
-                new KeyFrame(Duration.ZERO, (nextPlayerOverlay ? hiddenBtn : visableBtn)),
-                new KeyFrame(Duration.millis(500), (nextPlayerOverlay ? visableBtn : hiddenBtn))
-        );
-        timeline.play();
-        timeline.setOnFinished(actionEvent -> overlayClickDebounce = false);
+        FadeTransition transition = new FadeTransition(Duration.millis(500), btn);
+        transition.setFromValue(nextPlayerOverlay?0:1);
+        transition.setToValue(nextPlayerOverlay?1:0);
+        transition.play();
+
+        transition.setOnFinished(actionEvent -> overlayClickDebounce = false);
 
         //When turned off
         if (!nextPlayerOverlay) {
-            timeline.setOnFinished(actionEvent -> btn.setVisible(false));
+            transition.setOnFinished(actionEvent -> btn.setVisible(false));
         }
     }
 }
