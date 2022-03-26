@@ -97,20 +97,25 @@ public class Game {
     public void stop() {
         ongoing = false;
         this.endTime = LocalDateTime.now();
+        System.out.println("The game has been stopped.");
 
-        //Score
-        int score = 0;
-        for (Piece piece : currentPlayer.getPieces()) {
-            if (piece instanceof MovingPiece) {
-                score += ((MovingPiece) piece).getRank();
+        // Calculate the first score (sum of pieces left)
+        int piecesSum = 0;
+        for (Piece pieceOnBoard : currentPlayer.getPieces()) {
+            if(pieceOnBoard.isOnField()) {
+                piecesSum += pieceOnBoard.getRank();
             }
         }
-        //Liam: score voor highscore
+
+        // Second high score (amount of turns needed)
+        currentPlayer.getAmountOfTurns();
+
+        // Save the highscores
     }
 
     public void nextTurn() {
         if (ongoing) {
-            currentPlayer.addTurn();
+            nextPlayer.addTurn();
         }
 
         // Rotate gameboard

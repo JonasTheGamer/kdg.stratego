@@ -5,7 +5,7 @@ import be.kdg.stratego.model.Player;
 
 public class Flag extends Piece {
     public Flag(Player player, String flagImage) {
-        super(player, "flag", (flagImage != null ? flagImage : "/pieces/flag.png"));
+        super(player, "flag", (flagImage != null ? flagImage : "/pieces/flag.png"), 0);
     }
 
 }

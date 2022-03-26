@@ -2,6 +2,7 @@ package be.kdg.stratego.view.battlefield;
 
 import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.model.*;
+import be.kdg.stratego.model.pieces.Flag;
 import be.kdg.stratego.view.Style;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -108,6 +109,7 @@ public class BattleFieldPresenter {
 
                                     // Make killed pieces transparent
                                     Timeline showKilledPieces = null;
+                                    boolean containsFlag = false;
                                     for (Piece killedPiece : killedPieces) {
                                         killFadeOngoing = true;
 
@@ -138,15 +140,28 @@ public class BattleFieldPresenter {
                                         );
 
                                         showKilledPieces.play();
+                                        // Check whether the killed piece was the flag
+                                        if (killedPiece instanceof Flag) {
+                                            containsFlag = true;
+                                        }
                                     }
 
                                     lastKilledPieces = killedPieces;
 
-                                    if (!Objects.isNull(showKilledPieces)) {
-                                        // Wait for the fade to finish before showing the overlay
-                                        showKilledPieces.setOnFinished(actionEvent -> toggleNextPlayerOverlay());
+                                    // Check if the game ended or we need to switch to the next player
+                                    if (containsFlag) {
+                                        // Stop the game
+                                        model.getGame().stop();
+
+                                        // Show the winner screen
                                     } else {
-                                        toggleNextPlayerOverlay();
+                                        // Switch to next player
+                                        if (!Objects.isNull(showKilledPieces)) {
+                                            // Wait for the fade to finish before showing the overlay
+                                            showKilledPieces.setOnFinished(actionEvent -> toggleNextPlayerOverlay());
+                                        } else {
+                                            toggleNextPlayerOverlay();
+                                        }
                                     }
 
                                 } catch (InvalidMoveException exception) {
