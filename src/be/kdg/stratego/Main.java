@@ -8,6 +8,7 @@ import be.kdg.stratego.view.mainmenu.MainMenuView;
 import be.kdg.stratego.view.newgame.NewGamePresenter;
 import be.kdg.stratego.view.newgame.NewGameView;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -29,6 +30,8 @@ public class Main extends Application {
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        primaryStage.setTitle("Stratego");
+        primaryStage.getIcons().add(new Image("icon.png"));
 
         presenter.addWindowEventHandlers();
 
