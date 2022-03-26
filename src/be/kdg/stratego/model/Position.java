@@ -1,3 +1,7 @@
+/*
+    Class: Position
+    Responsiblity: Base class for GameBoardField which handles the positioning of the field in the grid
+ */
 package be.kdg.stratego.model;
 
 public class Position {

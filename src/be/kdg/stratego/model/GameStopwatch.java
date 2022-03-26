@@ -1,3 +1,7 @@
+/*
+    Class: GameStopwatch
+    Responsiblity: Handles the stopwatch on the BattleFieldView
+ */
 package be.kdg.stratego.model;
 
 public class GameStopwatch {

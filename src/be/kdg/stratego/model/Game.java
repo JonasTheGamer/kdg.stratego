@@ -1,3 +1,8 @@
+/*
+    Class: Game
+    Responsiblity: Takes care of the game itself
+ */
+
 package be.kdg.stratego.model;
 
 import java.io.*;

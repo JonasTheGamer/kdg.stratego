@@ -1,3 +1,7 @@
+/*
+    Class: Programmamodel
+    Responsiblity: The heart of our application
+ */
 package be.kdg.stratego.model;
 
 import java.io.File;

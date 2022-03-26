@@ -1,3 +1,8 @@
+/*
+    Class: Highscore
+    Responsibility: Manages the highscore based on the sum of the pieces that were left when capturing the flag
+ */
+
 package be.kdg.stratego.model;
 
 import java.util.Objects;

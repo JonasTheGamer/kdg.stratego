@@ -1,3 +1,8 @@
+/*
+    Class: MovingPiece
+    Responsibility: Manages everything that a moving piece can do on the board, such as moving & attacking,
+                    and finding out the allowed moves for this piece in particular
+ */
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.exceptions.InvalidMoveException;

@@ -1,3 +1,7 @@
+/*
+    Class: Flag
+    Responsiblity: Extends the Piece class with character-specific properties and methods
+ */
 package be.kdg.stratego.model.pieces;
 
 import be.kdg.stratego.model.Piece;

@@ -1,7 +1,12 @@
+/*
+    Class: GameBoardField
+    Responsiblity: Handles everything regarding one field on the gameboard, such as remembering the position,
+                    the ground type,...
+*/
+
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.view.Style;
-
 import java.util.Objects;
 
 public class GameBoardField extends Position {

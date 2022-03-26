@@ -1,3 +1,8 @@
+/*
+    Class: Piece
+    Responsibility: Handles all information and methods regarding one piece on the board, such as the field
+                    it's on, placing and removing it on and from a field, bieng killed,...
+ */
 package be.kdg.stratego.model;
 
 import java.util.Objects;

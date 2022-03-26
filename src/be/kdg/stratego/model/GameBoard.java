@@ -1,3 +1,9 @@
+/*
+    Class: GameBoard
+    Responsibility: Takes care of everything that has to do with the GameBoard, such as placing
+                    pieces, rotating the board,...
+
+*/
 package be.kdg.stratego.model;
 
 public class GameBoard {

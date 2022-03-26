@@ -1,3 +1,7 @@
+/*
+    Class: Lowturn
+    Responsibility: Handles the sorting and comparing of the amount of turns that were needed to win
+ */
 package be.kdg.stratego.model;
 
 import java.util.Objects;

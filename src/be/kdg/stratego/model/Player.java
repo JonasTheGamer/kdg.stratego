@@ -1,3 +1,8 @@
+/*
+    Class: Player
+    Responbility: Takes care of all data and methods from one individual player, such as their pieces, the
+                  amount of turns they needed,...
+ */
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.model.pieces.*;
