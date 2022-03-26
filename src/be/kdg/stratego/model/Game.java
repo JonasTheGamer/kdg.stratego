@@ -116,7 +116,7 @@ public class Game {
 
     public void nextTurn() {
         if (ongoing) {
-            //Liam: Hier komen das punten per turn enzo ...
+            nextPlayer.addTurn();
         }
 
         // Rotate gameboard
