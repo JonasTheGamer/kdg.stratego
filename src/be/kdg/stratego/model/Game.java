@@ -67,7 +67,7 @@ public class Game {
     public int calculateLeftOverPiecesScore() {
         int piecesSum = 0;
         for (Piece pieceOnBoard : currentPlayer.getPieces()) {
-            if(pieceOnBoard.isOnField()) {
+            if (pieceOnBoard.isOnField()) {
                 piecesSum += pieceOnBoard.getRank();
             }
         }
@@ -99,10 +99,6 @@ public class Game {
         lines.add(currentPlayer.getName() + ";" + calculateLeftOverPiecesScore() + ";" + currentPlayer.getAmountOfTurns());
 
         /// Write lines to file
-        try {
-            Files.write(winnersFile.toPath(), lines, StandardOpenOption.APPEND);
-        }
+        Files.write(winnersFile.toPath(), lines, StandardOpenOption.APPEND);
     }
-
-
 }
