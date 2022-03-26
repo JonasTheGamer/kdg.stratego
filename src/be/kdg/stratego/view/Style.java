@@ -77,15 +77,18 @@ public class Style {
     ));
 
     //Borders
-    public static Border border(Paint paint) {
+    public static Border border(Paint paint, double cornerRadius) {
         return new Border(new BorderStroke(
                 paint,
                 new BorderStrokeStyle(null, null, null, 1, 0, null),
-                new CornerRadii(5),
+                new CornerRadii(cornerRadius),
                 new BorderWidths(1)
         ));
     }
 
+    public static Border border(Paint paint) {
+        return border(paint,5);
+    }
 
     //Buttons
     public static void btn(Button btn, double fontSize, double width, double height) {

@@ -7,7 +7,6 @@ import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.view.Style;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Blend;
@@ -15,6 +14,7 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.ColorInput;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -32,6 +32,7 @@ public class ArmySetupPresenter {
     private ArmySetupView view;
     private HashMap<String, Integer> piecesToPlace;
     private HashMap<GameBoardField, StackPane> fieldPanes;
+    private String selectedPlaceablePiece;
 
     private Boolean placingPiece = false;
     private Piece lastClickedPlaceablePiece;
@@ -50,6 +51,8 @@ public class ArmySetupPresenter {
 
             // Check if the player has placed all pieces
             if (model.getGame().getCurrentPlayer().isPiecesPlaced()) {
+                // Unselect PlaceablePiece before switching players
+                selectedPlaceablePiece = null;
 
                 // Check if we're on the first (0) or second (1) player
                 if (model.getGame().getCurrentPlayer().equals(model.getGame().getPlayers()[0])) {
@@ -110,6 +113,11 @@ public class ArmySetupPresenter {
         ObservableList<Node> stpPlacablePieces = view.getGpPieces().getChildren();
         for (Node stpPiece : stpPlacablePieces) {
             stpPiece.setOnMouseClicked(mouseEvent -> {
+                //Border selected placable piece (in updateview)
+                if (stpPiece instanceof VBox) {
+                    selectedPlaceablePiece = stpPiece.getId();
+                }
+
                 // Find out which piece the user would like to place on the field
                 String clickedId = stpPiece.getId();
                 String[] idData = clickedId.split("-");
@@ -126,6 +134,9 @@ public class ArmySetupPresenter {
 
                 // Remember that the user is placing this piece.
                 placingPiece = true;
+
+                //Update view
+                updateView();
             });
         }
 
@@ -225,6 +236,11 @@ public class ArmySetupPresenter {
 
             pieceContainer.getChildren().addAll(ivPiece, lblPieceTitle, lblPlacable);
             pieceContainer.setId("placablePiece-" + pieceName);
+
+            //// Border selected Placeable piece
+            if (pieceContainer.getId().equals(selectedPlaceablePiece)){
+                pieceContainer.setBorder(Style.border(Color.RED, 20));
+            }
 
             view.getGpPieces().add(pieceContainer, posXCounter, posYCounter);
 
