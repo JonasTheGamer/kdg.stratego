@@ -16,7 +16,6 @@ public class Piece implements Comparable {
     protected String name;
     protected String image;
     protected boolean hidden;
-    protected boolean dying;
     protected Piece attacker;
     protected int rank;
 
@@ -25,7 +24,6 @@ public class Piece implements Comparable {
         this.name = name;
         this.image = image;
         this.hidden = false;
-        this.dying = false;
         this.attacker = null;
         this.rank = rank;
     }
@@ -42,8 +40,6 @@ public class Piece implements Comparable {
     }
 
     public void startKill(Piece attacker) {
-        this.dying = true;
-
         if(attacker instanceof MovingPiece) {
             this.attacker = attacker;
         } else {
@@ -56,8 +52,6 @@ public class Piece implements Comparable {
 
     public void finishKill() {
         // When the kill is being finished, the attacker should be moved towards the current pieces field
-        this.dying = false;
-
         // Store the field this piece is on for later use
         GameBoardField oldField = this.field;
         this.removeFromField();
@@ -70,10 +64,6 @@ public class Piece implements Comparable {
     }
 
     // Getters
-
-    public boolean isDying() {
-        return dying;
-    }
     public String getName() {
         return name;
     }
@@ -112,7 +102,6 @@ public class Piece implements Comparable {
 
         Piece otherPiece = (Piece)obj;
         return (field == otherPiece.getField() && rank == otherPiece.getRank());
-
     }
 
     @Override

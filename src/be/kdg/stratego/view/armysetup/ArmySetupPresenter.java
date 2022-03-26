@@ -5,16 +5,14 @@ import be.kdg.stratego.model.GameBoardField;
 import be.kdg.stratego.model.Piece;
 import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.view.Style;
+import be.kdg.stratego.view.Board;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.ColorInput;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -24,13 +22,13 @@ import java.util.TreeMap;
 
 public class ArmySetupPresenter {
     private final double FIELD_SIZE = Style.size(55);
-    private final double PLACABLE_PIECE_WIDTH = FIELD_SIZE * 2;
-    private final double PLACABLE_PIECE_HEIGTH = FIELD_SIZE * 2 * 1.5;
+    private final double PLACABLE_PIECE_WIDTH = 110;
+    private final double PLACABLE_PIECE_HEIGTH = 165;
 
     private ProgrammaModel model;
     private ArmySetupView view;
     private TreeMap<String, Integer> piecesToPlace;
-    private HashMap<GameBoardField, StackPane> fieldPanes;
+    private HashMap<GameBoardField, Pane> fieldPanes;
     private String selectedPlaceablePiece;
 
     private Boolean placingPiece = false;
@@ -143,7 +141,7 @@ public class ArmySetupPresenter {
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
-                StackPane fieldPane = fieldPanes.get(field);
+                Pane fieldPane = fieldPanes.get(field);
                 if (!Objects.isNull(fieldPane)) {
                     fieldPane.setOnMouseClicked(mouseEvent -> {
 
@@ -263,12 +261,11 @@ public class ArmySetupPresenter {
 
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
-                StackPane fieldPane = generatePane(field);
+                Pane fieldPane = Board.generatePane(field, FIELD_SIZE);
                 fieldPanes.put(field, fieldPane);
                 view.getGpBoard().add(fieldPane, field.getPositionX(), field.getPositionY());
             }
         }
-
         addEventHandlers();
     }
 
@@ -302,72 +299,5 @@ public class ArmySetupPresenter {
             piecesToPlace.put(pieceName, amountPlacable + 1);
         }
 
-    }
-
-    public StackPane generatePane(GameBoardField field) {
-        // Generate the main stackpane
-        StackPane container = new StackPane();
-
-        container.setPrefSize(FIELD_SIZE, FIELD_SIZE);
-
-        // Set the right background
-        if (field.isWalkable()) {
-            container.setBackground((field.isHighlighted()) ? Style.highlightedGrass : Style.grass);
-        } else {
-            container.setBackground(Style.water);
-        }
-
-        // If there's a piece on it, place it
-        if (field.isOccupied()) {
-            // Define the tower image
-            String towerImage = (field.getPiece().getHidden() ? "/towerBackView.png" : "/towerFrontView.png");
-
-            // Define the main imageView
-            ImageView ivTower = new ImageView(towerImage);
-            ivTower.setFitHeight(FIELD_SIZE * 0.95);
-            ivTower.setFitWidth(FIELD_SIZE * 0.95);
-            if (field.getPiece().isDying()) {
-                ivTower.setOpacity(0.5);
-            }
-
-            // Define the clip imageView
-            ImageView ivClip = new ImageView(towerImage);
-            ivClip.setFitHeight(FIELD_SIZE * 0.95);
-            ivClip.setFitWidth(FIELD_SIZE * 0.95);
-
-            // Set the image view clip
-            ivTower.setClip(ivClip);
-
-            ivTower.setEffect(new Blend(
-                    BlendMode.MULTIPLY,
-                    null,
-                    new ColorInput(
-                            0,
-                            0,
-                            ivTower.getImage().getWidth(),
-                            ivTower.getImage().getHeight(),
-                            Color.valueOf(field.getPiece().getPlayer().getColor())
-
-                    )
-            ));
-
-            container.getChildren().add(ivTower);
-
-            // If the piece is not hidden, add the icon
-            if (!field.getPiece().getHidden()) {
-                ImageView ivPiece = new ImageView(field.getPiece().getImage());
-                ivPiece.setFitHeight(FIELD_SIZE * 0.4);
-                ivPiece.setFitWidth(FIELD_SIZE * 0.4);
-                if (field.getPiece().isDying()) {
-                    System.out.println("This piece is dying!");
-                    ivPiece.setOpacity(0.5);
-                }
-
-                container.getChildren().add(ivPiece);
-            }
-
-        }
-
-        return container;
     }
 }

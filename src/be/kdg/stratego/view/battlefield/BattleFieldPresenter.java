@@ -4,24 +4,19 @@ import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.model.*;
 import be.kdg.stratego.model.pieces.Flag;
 import be.kdg.stratego.view.Style;
+import be.kdg.stratego.view.Board;
 import be.kdg.stratego.view.endofgame.*;
 import javafx.animation.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.ColorInput;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -38,7 +33,7 @@ public class BattleFieldPresenter {
     private ProgrammaModel model;
     private BattleFieldView view;
     private boolean killFadeOngoing = false;
-    private HashMap<GameBoardField, StackPane> fieldPanes;
+    private HashMap<GameBoardField, Pane> fieldPanes;
     private GameStopwatch stopwatch;
 
     // Variables for moving a piece
@@ -76,7 +71,7 @@ public class BattleFieldPresenter {
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
-                StackPane fieldPane = fieldPanes.get(field);
+                Pane fieldPane = fieldPanes.get(field);
                 if (!Objects.isNull(fieldPane)) {
                     fieldPane.setOnMouseClicked(mouseEvent -> {
 
@@ -129,30 +124,19 @@ public class BattleFieldPresenter {
                                     for (Piece killedPiece : killedPieces) {
                                         killFadeOngoing = true;
 
-                                        StackPane killedPiecePane = fieldPanes.get(killedPiece.getField());
-                                        ImageView ivTower = null;
-                                        ImageView ivPiece = null;
-
-                                        for (Node child : killedPiecePane.getChildren()) {
-                                            if (child.getId().equals("tower")) {
-                                                ivTower = (ImageView) child;
-                                            } else if (child.getId().equals("piece")) {
-                                                ivPiece = (ImageView) child;
-                                            }
-                                        }
+                                        Pane killedPiecePane = fieldPanes.get(killedPiece.getField());
+                                        StackPane panePiece = (StackPane) killedPiecePane.getChildren().get(0);
 
                                         //// Fadeout the killed piece to half transparent
                                         showKilledPieces = new Timeline();
-                                        KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.5);
-                                        KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 1.0);
-                                        KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
-                                        KeyValue opaquePiece = new KeyValue(ivPiece.opacityProperty(), 1.0);
+                                        KeyValue transparentPiece = new KeyValue(panePiece.opacityProperty(), 0.5);
+                                        KeyValue opaquePiece = new KeyValue(panePiece.opacityProperty(), 1.0);
 
                                         //// Timelines
                                         showKilledPieces.getKeyFrames().addAll(
-                                                new KeyFrame(Duration.ZERO, opaqueTower, opaquePiece),
-                                                new KeyFrame(Duration.millis(250), transparentTower, transparentPiece),
-                                                new KeyFrame(Duration.millis(1500), transparentTower, transparentPiece)
+                                                new KeyFrame(Duration.ZERO, opaquePiece),
+                                                new KeyFrame(Duration.millis(250), transparentPiece),
+                                                new KeyFrame(Duration.millis(1500), transparentPiece)
                                         );
 
                                         showKilledPieces.play();
@@ -164,7 +148,7 @@ public class BattleFieldPresenter {
 
                                     lastKilledPieces = killedPieces;
 
-                                    // Check if the game ended or we need to switch to the next player
+                                    // Check if the game ended, or we need to switch to the next player
                                     if (containsFlag) {
                                         // Stop the game
                                         model.getGame().stop(model.getWinnersFile());
@@ -262,30 +246,19 @@ public class BattleFieldPresenter {
 
                 // Make the killed pieces vanish
                 for (Piece killedPiece : lastKilledPieces) {
-                    StackPane killedPiecePane = fieldPanes.get(killedPiece.getField());
-                    ImageView ivTower = null;
-                    ImageView ivPiece = null;
-
-                    for (Node child : killedPiecePane.getChildren()) {
-                        if (child.getId().equals("tower")) {
-                            ivTower = (ImageView) child;
-                        } else if (child.getId().equals("piece")) {
-                            ivPiece = (ImageView) child;
-                        }
-                    }
+                    Pane killedPiecePane = fieldPanes.get(killedPiece.getField());
+                    StackPane panePiece = (StackPane) killedPiecePane.getChildren().get(0);
 
                     //// Make them vanish
-                    KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.0);
-                    KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 0.5);
-                    KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.0);
-                    KeyValue opaquePiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
+                    KeyValue transparentPiece = new KeyValue(panePiece.opacityProperty(), 0.0);
+                    KeyValue opaquePiece = new KeyValue(panePiece.opacityProperty(), 0.5);
 
                     //// Timeline
                     Timeline fadeoutTimeline = new Timeline();
                     fadeoutTimeline.getKeyFrames().addAll(
-                            new KeyFrame(Duration.ZERO, opaqueTower, opaquePiece),
-                            new KeyFrame(Duration.millis(1750), opaqueTower, opaquePiece),
-                            new KeyFrame(Duration.millis(2000), transparentTower, transparentPiece)
+                            new KeyFrame(Duration.ZERO, opaquePiece),
+                            new KeyFrame(Duration.millis(1750), opaquePiece),
+                            new KeyFrame(Duration.millis(2000), transparentPiece)
                     );
 
                     fadeoutTimeline.play();
@@ -316,7 +289,7 @@ public class BattleFieldPresenter {
 
         for (GameBoardField[] fieldColumn : fields) {
             for (GameBoardField field : fieldColumn) {
-                StackPane fieldPane = generatePane(field);
+                Pane fieldPane = Board.generatePane(field, FIELD_SIZE);
                 fieldPanes.put(field, fieldPane);
                 view.getGpBoard().add(fieldPane, field.getPositionX(), field.getPositionY());
             }
@@ -330,74 +303,6 @@ public class BattleFieldPresenter {
 
 
     // Methods
-    public StackPane generatePane(GameBoardField field) {
-        // Generate the main stackpane
-        StackPane container = new StackPane();
-
-        container.setPrefSize(FIELD_SIZE, FIELD_SIZE);
-
-        // Set the right background
-        if (field.isWalkable()) {
-            container.setBackground((field.isHighlighted()) ? Style.highlightedGrass : Style.grass);
-        } else {
-            container.setBackground(Style.water);
-        }
-
-        // If there's a piece on it, place it
-        if (field.isOccupied()) {
-            // Define the tower image
-            String towerImage = (field.getPiece().getHidden() ? "/towerBackView.png" : "/towerFrontView.png");
-
-            // Define the main imageView
-            ImageView ivTower = new ImageView(towerImage);
-            ivTower.setFitHeight(FIELD_SIZE * 0.95);
-            ivTower.setFitWidth(FIELD_SIZE * 0.95);
-            ivTower.setId("tower");
-            if (field.getPiece().isDying()) {
-                ivTower.setOpacity(0.5);
-            }
-
-            // Define the clip imageView
-            ImageView ivClip = new ImageView(towerImage);
-            ivClip.setFitHeight(FIELD_SIZE * 0.95);
-            ivClip.setFitWidth(FIELD_SIZE * 0.95);
-
-            // Set the image view clip
-            ivTower.setClip(ivClip);
-
-            ivTower.setEffect(new Blend(
-                    BlendMode.MULTIPLY,
-                    null,
-                    new ColorInput(
-                            0,
-                            0,
-                            ivTower.getImage().getWidth(),
-                            ivTower.getImage().getHeight(),
-                            Color.valueOf(field.getPiece().getPlayer().getColor())
-
-                    )
-            ));
-
-            container.getChildren().add(ivTower);
-
-            // If the piece is not hidden, add the icon
-            if (!field.getPiece().getHidden()) {
-                ImageView ivPiece = new ImageView(field.getPiece().getImage());
-                ivPiece.setFitHeight(FIELD_SIZE * 0.4);
-                ivPiece.setFitWidth(FIELD_SIZE * 0.4);
-                ivPiece.setId("piece");
-                if (field.getPiece().isDying()) {
-                    ivPiece.setOpacity(0.5);
-                }
-
-                container.getChildren().add(ivPiece);
-            }
-
-        }
-
-        return container;
-    }
-
     private void clearSelection() {
         // Unhighlight
         model.getGameBoard().unHighlightAllFields();
@@ -420,8 +325,8 @@ public class BattleFieldPresenter {
 
         //Each toggle
         FadeTransition transition = new FadeTransition(Duration.millis(500), btn);
-        transition.setFromValue(nextPlayerOverlay?0:1);
-        transition.setToValue(nextPlayerOverlay?1:0);
+        transition.setFromValue(nextPlayerOverlay ? 0 : 1);
+        transition.setToValue(nextPlayerOverlay ? 1 : 0);
         transition.play();
 
         transition.setOnFinished(actionEvent -> overlayClickDebounce = false);
