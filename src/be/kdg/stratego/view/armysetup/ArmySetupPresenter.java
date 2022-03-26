@@ -107,16 +107,16 @@ public class ArmySetupPresenter {
         });
 
         // Placable pieces
-        ObservableList<Node> stpPlacablePieces = view.getGpPieces().getChildren();
-        for (Node stpPiece : stpPlacablePieces) {
-            stpPiece.setOnMouseClicked(mouseEvent -> {
+        ObservableList<Node> vbsPlacablePieces = view.getGpPieces().getChildren();
+        for (Node vbPiece : vbsPlacablePieces) {
+            vbPiece.setOnMouseClicked(mouseEvent -> {
                 //Border selected placable piece (in updateview)
-                if (stpPiece instanceof VBox) {
-                    selectedPlaceablePiece = stpPiece.getId();
+                if (vbPiece instanceof VBox) {
+                    selectedPlaceablePiece = vbPiece.getId();
                 }
 
                 // Find out which piece the user would like to place on the field
-                String clickedId = stpPiece.getId();
+                String clickedId = vbPiece.getId();
                 String[] idData = clickedId.split("-");
                 String pieceClassName = idData[1];
 
