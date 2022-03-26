@@ -88,7 +88,8 @@ public class GameBoardField extends Position {
     }
 
     // Setters
-    public void setPiece(Piece piece) {
+    ///Used in Piece
+    protected void setPiece(Piece piece) {
         this.piece = piece;
     }
 }
