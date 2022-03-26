@@ -23,7 +23,7 @@ public class MainMenuPresenter {
     private final ProgrammaModel model;
     private final MainMenuView view;
 
-    private boolean toggler;
+    private boolean togglerWinners;
     private Timeline timelineWinners;
 
     public MainMenuPresenter(ProgrammaModel model, MainMenuView view) {
@@ -35,13 +35,13 @@ public class MainMenuPresenter {
     }
 
     private void winnerTimelineSetup() {
-        toggler = false;
+        togglerWinners = false;
 
         timelineWinners = new Timeline();
         timelineWinners.setCycleCount(Animation.INDEFINITE);
         timelineWinners.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(5), event -> {
-                    toggler = !toggler;
+                    togglerWinners = !togglerWinners;
                     updateView();
                 }));
         timelineWinners.play();
@@ -71,41 +71,31 @@ public class MainMenuPresenter {
     private void updateView() {
         // Winners
         try {
-            int positie = 0;
             model.updateWinners();
             view.getGpWinners().getChildren().clear();
 
-            if (toggler) {
+            int position = 0;
+            if (togglerWinners) {
                 ///Highscores
                 view.getLblHighscores().setText("Highscores");
 
                 for (Highscore highscore : model.getHighscores()) {
-                    positie++;
-                    if (positie <= 10) {
-                        Label lblPositie = new Label(Integer.toString(positie));
-                        Label lblName = new Label(highscore.getSpelernaam());
-                        Label lblScore = new Label(Integer.toString(highscore.getScore()));
+                    position++;
+                    String name = highscore.getSpelernaam();
+                    int score = highscore.getScore();
 
-                        fillGpWinners(positie, lblPositie, lblName, lblScore);
-                    } else {
-                        return;
-                    }
+                    fillGpWinners(position, name, score);
                 }
             } else {
                 ///Lowturns
                 view.getLblHighscores().setText("Lowturns");
 
                 for (Lowturn lowturn : model.getLowturns()) {
-                    positie++;
-                    if (positie <= 10) {
-                        Label lblPositie = new Label(Integer.toString(positie));
-                        Label lblName = new Label(lowturn.getSpelernaam());
-                        Label lblTurns = new Label(Integer.toString(lowturn.getTurns()));
+                    position++;
+                    String name = lowturn.getSpelernaam();
+                    int turns = lowturn.getTurns();
 
-                        fillGpWinners(positie, lblPositie, lblName, lblTurns);
-                    } else {
-                        return;
-                    }
+                    fillGpWinners(position, name, turns);
                 }
             }
         } catch (IOException e) {
@@ -118,16 +108,23 @@ public class MainMenuPresenter {
         view.getBtnQuit().setOnAction(actionEvent -> stage.close());
     }
 
-    private void fillGpWinners(int positie, Label lblPositie, Label lblName, Label lblExtra) {
-        Style.txt(lblPositie, 10);
-        Style.txt(lblName, 10);
-        Style.txt(lblExtra, 10);
+    private void fillGpWinners(int position, String name, int value) {
+        //Add scores to Gridpane
+        if (position <= 10) {
+            Label lblPositie = new Label(Integer.toString(position));
+            Label lblName = new Label(name);
+            Label lblValue = new Label(Integer.toString(value));
 
-        GridPane.setHalignment(lblPositie, HPos.CENTER);
-        GridPane.setHalignment(lblExtra, HPos.RIGHT);
+            Style.txt(lblPositie, 10);
+            Style.txt(lblName, 10);
+            Style.txt(lblValue, 10);
 
-        view.getGpWinners().add(lblPositie, 0, positie);
-        view.getGpWinners().add(lblName, 1, positie);
-        view.getGpWinners().add(lblExtra, 2, positie);
+            GridPane.setHalignment(lblPositie, HPos.CENTER);
+            GridPane.setHalignment(lblValue, HPos.RIGHT);
+
+            view.getGpWinners().add(lblPositie, 0, position);
+            view.getGpWinners().add(lblName, 1, position);
+            view.getGpWinners().add(lblValue, 2, position);
+        }
     }
 }
