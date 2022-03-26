@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class ProgrammaModel {
-    private final File winnersFile = new File("winners.csv");
+    private final File winnersFile = new File("resources/winners.csv");
 
     private Game game;
     private GameBoard gameBoard;
@@ -28,27 +28,23 @@ public class ProgrammaModel {
         gameBoard = game.getGameBoard();
     }
 
-    public void updateWinners() {
+    public void updateWinners() throws IOException {
         /// Clearing lists
         highscores.clear();
         lowturns.clear();
 
         /// Read lines from file
-        try {
-            List<String> lines = Files.readAllLines(this.winnersFile.toPath());
+        List<String> lines = Files.readAllLines(this.winnersFile.toPath());
 
-            for (String currentLine : lines) {
-                if (!currentLine.equals("")) {
-                    String spelernaam = currentLine.split(";")[0];
-                    int score = Integer.parseInt(currentLine.split(";")[1]);
-                    int turns = Integer.parseInt(currentLine.split(";")[2]);
+        for (String currentLine : lines) {
+            if (!currentLine.equals("")) {
+                String spelernaam = currentLine.split(";")[0];
+                int score = Integer.parseInt(currentLine.split(";")[1]);
+                int turns = Integer.parseInt(currentLine.split(";")[2]);
 
-                    highscores.add(new Highscore(spelernaam, score));
-                    lowturns.add(new Lowturn(spelernaam, turns));
-                }
+                highscores.add(new Highscore(spelernaam, score));
+                lowturns.add(new Lowturn(spelernaam, turns));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

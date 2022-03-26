@@ -17,6 +17,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 public class MainMenuPresenter {
     private final ProgrammaModel model;
     private final MainMenuView view;
@@ -67,44 +69,47 @@ public class MainMenuPresenter {
     }
 
     private void updateView() {
-
         // Winners
-        int positie = 0;
-        model.updateWinners();
-        view.getGpWinners().getChildren().clear();
+        try {
+            int positie = 0;
+            model.updateWinners();
+            view.getGpWinners().getChildren().clear();
 
-        if (toggler) {
-            ///Highscores
-            view.getLblHighscores().setText("Highscores");
+            if (toggler) {
+                ///Highscores
+                view.getLblHighscores().setText("Highscores");
 
-            for (Highscore highscore : model.getHighscores()) {
-                positie++;
-                if (positie <= 10) {
-                    Label lblPositie = new Label(Integer.toString(positie));
-                    Label lblName = new Label(highscore.getSpelernaam());
-                    Label lblScore = new Label(Integer.toString(highscore.getScore()));
+                for (Highscore highscore : model.getHighscores()) {
+                    positie++;
+                    if (positie <= 10) {
+                        Label lblPositie = new Label(Integer.toString(positie));
+                        Label lblName = new Label(highscore.getSpelernaam());
+                        Label lblScore = new Label(Integer.toString(highscore.getScore()));
 
-                    fillGpWinners(positie, lblPositie, lblName, lblScore);
-                } else {
-                    return;
+                        fillGpWinners(positie, lblPositie, lblName, lblScore);
+                    } else {
+                        return;
+                    }
+                }
+            } else {
+                ///Lowturns
+                view.getLblHighscores().setText("Lowturns");
+
+                for (Lowturn lowturn : model.getLowturns()) {
+                    positie++;
+                    if (positie <= 10) {
+                        Label lblPositie = new Label(Integer.toString(positie));
+                        Label lblName = new Label(lowturn.getSpelernaam());
+                        Label lblTurns = new Label(Integer.toString(lowturn.getTurns()));
+
+                        fillGpWinners(positie, lblPositie, lblName, lblTurns);
+                    } else {
+                        return;
+                    }
                 }
             }
-        } else {
-            ///Lowturns
-            view.getLblHighscores().setText("Lowturns");
-
-            for (Lowturn lowturn : model.getLowturns()) {
-                positie++;
-                if (positie <= 10) {
-                    Label lblPositie = new Label(Integer.toString(positie));
-                    Label lblName = new Label(lowturn.getSpelernaam());
-                    Label lblTurns = new Label(Integer.toString(lowturn.getTurns()));
-
-                    fillGpWinners(positie, lblPositie, lblName, lblTurns);
-                } else {
-                    return;
-                }
-            }
+        } catch (IOException e) {
+            view.getLblHighscores().setText("No file was found");
         }
     }
 
