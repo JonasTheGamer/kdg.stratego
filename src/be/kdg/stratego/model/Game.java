@@ -101,13 +101,7 @@ public class Game {
         ongoing = false;
         this.endTime = LocalDateTime.now();
 
-        // Calculate the first score (sum of pieces left)
-        int piecesSum = calculateLeftOverPiecesScore();
-
-        // Second high score (amount of turns needed)
-        currentPlayer.getAmountOfTurns();
-
-        // Save the highscores
+        // Save the winner
         registerWinner(winnersFile);
     }
 
