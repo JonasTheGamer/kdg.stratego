@@ -43,7 +43,6 @@ public class ProgrammaModel {
                     int score = Integer.parseInt(currentLine.split(";")[1]);
                     int turns = Integer.parseInt(currentLine.split(";")[2]);
 
-
                     highscores.add(new Highscore(spelernaam, score));
                     lowturns.add(new Lowturn(spelernaam, turns));
                 }
