@@ -42,6 +42,7 @@ public class BattleFieldPresenter {
     // Variables for switching to the next player
     private ArrayList<Piece> lastKilledPieces;
     private MovingPiece attackingPiece;
+    private MovingPiece lastMovedPiece;
     private boolean overlayClickDebounce;
 
     public BattleFieldPresenter(ProgrammaModel model, BattleFieldView view) {
@@ -219,7 +220,7 @@ public class BattleFieldPresenter {
         // Click on overlay to pass to the next player
         view.getBtnNextPlayer().setOnAction(actionEvent -> {
             // Do nothing if the debounce is still activated
-            if(overlayClickDebounce) return;
+            if (overlayClickDebounce) return;
 
             // Enable the debounce
             overlayClickDebounce = true;
@@ -245,6 +246,7 @@ public class BattleFieldPresenter {
 
                 // Update the view
                 updateView();
+
 
                 // Make the killed pieces vanish
                 for (Piece killedPiece : lastKilledPieces) {
@@ -281,6 +283,10 @@ public class BattleFieldPresenter {
                         updateView();
                     });
                 }
+            } else {
+                // Highlight the moved piece
+                attackingPiece.getField().highLight();
+                updateView();
             }
         });
     }
