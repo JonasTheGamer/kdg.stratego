@@ -6,6 +6,6 @@ import be.kdg.stratego.model.Player;
 
 public class Bomb extends Piece {
     public Bomb(Player player) {
-        super(player,"bomb","/pieces/bomb.png");
+        super(player,"bomb","/pieces/bomb.png", 0);
     }
 }

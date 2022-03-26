@@ -8,11 +8,9 @@ import java.util.HashSet;
 import java.util.Objects;
 
 public abstract class MovingPiece extends Piece {
-    protected int rank;
 
     public MovingPiece(Player player, String name, String image, int rank) {
-        super(player, name, image);
-        this.rank = rank;
+        super(player, name, image, rank);
     }
 
     // Methods
@@ -79,10 +77,6 @@ public abstract class MovingPiece extends Piece {
     }
 
     // Getters
-    public int getRank() {
-        return rank;
-    }
-
     public HashSet<GameBoardField> getAllowedMoves() {
         HashSet<GameBoardField> allowedMoves = new HashSet<>();
         HashSet<GameBoardField> allFields = new HashSet<>();

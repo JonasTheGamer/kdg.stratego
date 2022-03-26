@@ -2,7 +2,7 @@ package be.kdg.stratego.model;
 
 import java.util.Objects;
 
-public class Piece {
+public class Piece implements Comparable {
     // References
     protected Player player;
     protected GameBoardField field;
@@ -13,14 +13,16 @@ public class Piece {
     protected boolean hidden;
     protected boolean dying;
     protected Piece attacker;
+    protected int rank;
 
-    public Piece(Player player, String name, String image)  {
+    public Piece(Player player, String name, String image, int rank)  {
         this.player = player;
         this.name = name;
         this.image = image;
         this.hidden = false;
         this.dying = false;
         this.attacker = null;
+        this.rank = rank;
     }
 
     //Methods
@@ -82,6 +84,9 @@ public class Piece {
     public boolean getHidden() {
         return hidden;
     }
+    public int getRank() {
+        return rank;
+    }
 
     public GameBoardField getField() {
         return field;
@@ -92,5 +97,31 @@ public class Piece {
         if(!Objects.isNull(field)) {
             this.hidden = hidden;
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Piece otherPiece = (Piece)obj;
+        return (field == otherPiece.getField() && rank == otherPiece.getRank());
+
+    }
+
+    @Override
+    public int hashCode() {
+        if(Objects.isNull(this.field)) {
+            return Objects.hash(Integer.toString(this.rank));
+        } else {
+            return Objects.hash((this.rank) + this.field.toString());
+        }
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Piece otherPiece = (Piece) o;
+        return Integer.compare(this.rank, otherPiece.getRank());
     }
 }
