@@ -52,8 +52,10 @@ public abstract class MovingPiece extends Piece {
                 killedPieces.add(attackWin(piece));
             } else {
                 //Piece wins the attack at the cost of their own life
-                killedPieces.add(attackLose(piece));
-                killedPieces.add(attackWin(piece));
+                killedPieces.add(this);
+                this.startKill();
+                killedPieces.add(piece);
+                piece.startKill();
             }
         } else if (piece instanceof Bomb) {
             //Piece gets blown up
