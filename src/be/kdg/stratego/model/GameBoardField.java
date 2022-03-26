@@ -12,7 +12,6 @@ public class GameBoardField extends Position {
     private boolean walkable;
     private boolean highlighted;
     private GameBoard gameBoard;
-    private GroundType groundType;
 
     // Enumeration for ground type
     public enum GroundType {
@@ -30,9 +29,6 @@ public class GameBoardField extends Position {
 
         // Set highligted to false
         this.highlighted = false;
-
-        // Set parameters for the pane
-        this.groundType = groundType;
 
         // Figure out whether the field is walkable.
         this.walkable = (groundType != GroundType.WATER);
@@ -56,10 +52,6 @@ public class GameBoardField extends Position {
 
     public Piece getPiece() {
         return piece;
-    }
-
-    public GroundType getGroundType() {
-        return groundType;
     }
 
     public boolean isHighlighted() {

@@ -185,69 +185,63 @@ public class BattleFieldPresenter {
         }
 
         // Click on overlay to pass to the next player
-        view.getBtnNextPlayer().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                // Switch to the next player
-                model.getGame().nextTurn();
+        view.getBtnNextPlayer().setOnAction(actionEvent -> {
+            // Switch to the next player
+            model.getGame().nextTurn();
+
+            // Update the view
+            updateView();
+
+            // Hide the overlay
+            hideNextPlayerOverlay();
+
+            // If pieces were killed, show them & do the animation
+            if (lastKilledPieces.size() > 0) {
+                // Make the killed pieces visible again
+                for (Piece killedPiece : lastKilledPieces) {
+                    killedPiece.setHidden(false);
+                }
+
+                // Make the attacking piece visible
+                attackingPiece.setHidden(false);
 
                 // Update the view
                 updateView();
 
-                // Hide the overlay
-                hideNextPlayerOverlay();
+                // Make the killed pieces vanish
+                for (Piece killedPiece : lastKilledPieces) {
+                    StackPane killedPiecePane = fieldPanes.get(killedPiece.getField());
+                    ImageView ivTower = null;
+                    ImageView ivPiece = null;
 
-                // If pieces were killed, show them & do the animation
-                if (lastKilledPieces.size() > 0) {
-                    // Make the killed pieces visible again
-                    for (Piece killedPiece : lastKilledPieces) {
-                        killedPiece.setHidden(false);
-                    }
-
-                    // Make the attacking piece visible
-                    attackingPiece.setHidden(false);
-
-                    // Update the view
-                    updateView();
-
-                    // Make the killed pieces vanish
-                    for (Piece killedPiece : lastKilledPieces) {
-                        StackPane killedPiecePane = fieldPanes.get(killedPiece.getField());
-                        ImageView ivTower = null;
-                        ImageView ivPiece = null;
-
-                        for (Node child : killedPiecePane.getChildren()) {
-                            if (child.getId().equals("tower")) {
-                                ivTower = (ImageView) child;
-                            } else if (child.getId().equals("piece")) {
-                                ivPiece = (ImageView) child;
-                            }
+                    for (Node child : killedPiecePane.getChildren()) {
+                        if (child.getId().equals("tower")) {
+                            ivTower = (ImageView) child;
+                        } else if (child.getId().equals("piece")) {
+                            ivPiece = (ImageView) child;
                         }
-
-                        //// Make them vanish
-                        KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.0);
-                        KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 0.5);
-                        KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.0);
-                        KeyValue opaquePiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
-
-                        //// Timeline
-                        Timeline fadeoutTimeline = new Timeline();
-                        fadeoutTimeline.getKeyFrames().addAll(
-                                new KeyFrame(Duration.ZERO, opaqueTower, opaquePiece),
-                                new KeyFrame(Duration.millis(1750), opaqueTower, opaquePiece),
-                                new KeyFrame(Duration.millis(2000), transparentTower, transparentPiece)
-                        );
-
-                        fadeoutTimeline.play();
-                        fadeoutTimeline.setOnFinished(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent actionEvent) {
-                                killedPiece.finishKill();
-                                killFadeOngoing = false;
-                                updateView();
-                            }
-                        });
                     }
+
+                    //// Make them vanish
+                    KeyValue transparentTower = new KeyValue(ivTower.opacityProperty(), 0.0);
+                    KeyValue opaqueTower = new KeyValue(ivTower.opacityProperty(), 0.5);
+                    KeyValue transparentPiece = new KeyValue(ivPiece.opacityProperty(), 0.0);
+                    KeyValue opaquePiece = new KeyValue(ivPiece.opacityProperty(), 0.5);
+
+                    //// Timeline
+                    Timeline fadeoutTimeline = new Timeline();
+                    fadeoutTimeline.getKeyFrames().addAll(
+                            new KeyFrame(Duration.ZERO, opaqueTower, opaquePiece),
+                            new KeyFrame(Duration.millis(1750), opaqueTower, opaquePiece),
+                            new KeyFrame(Duration.millis(2000), transparentTower, transparentPiece)
+                    );
+
+                    fadeoutTimeline.play();
+                    fadeoutTimeline.setOnFinished(actionEvent1 -> {
+                        killedPiece.finishKill();
+                        killFadeOngoing = false;
+                        updateView();
+                    });
                 }
             }
         });
@@ -287,7 +281,7 @@ public class BattleFieldPresenter {
         container.setPrefSize(fieldSize, fieldSize);
 
         // Set the right background
-        if (field.getGroundType() == GameBoardField.GroundType.GRASS) {
+        if (field.isWalkable()) {
             container.setBackground((field.isHighlighted()) ? Style.highlightedGrass : Style.grass);
         } else {
             container.setBackground(Style.water);

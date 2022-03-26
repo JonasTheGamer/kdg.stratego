@@ -289,7 +289,7 @@ public class ArmySetupPresenter {
         container.setPrefSize(fieldSize, fieldSize);
 
         // Set the right background
-        if (field.getGroundType() == GameBoardField.GroundType.GRASS) {
+        if (field.isWalkable()) {
             container.setBackground((field.isHighlighted()) ? Style.highlightedGrass : Style.grass);
         } else {
             container.setBackground(Style.water);
