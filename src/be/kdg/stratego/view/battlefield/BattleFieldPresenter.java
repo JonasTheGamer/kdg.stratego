@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
@@ -24,6 +25,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 import java.util.*;
 
 
@@ -212,6 +215,13 @@ public class BattleFieldPresenter {
                                     ivInvalid.setFitWidth(field.getFIELDSIZE());
                                     timeline.play();
 
+                                } catch (IOException e) {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("Error");
+                                    alert.setHeaderText(null);
+                                    alert.setContentText("An error happened whilst trying to save your scores, we're sorry...");
+
+                                    alert.showAndWait();
                                 }
                             }
                         }

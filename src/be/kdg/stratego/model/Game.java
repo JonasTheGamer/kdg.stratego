@@ -34,7 +34,7 @@ public class Game {
         this.ongoing = true;
     }
 
-    public void stop(File winnersFile) {
+    public void stop(File winnersFile) throws IOException {
         ongoing = false;
 
         // Save the winner
@@ -92,7 +92,7 @@ public class Game {
         return gameBoard;
     }
 
-    public void registerWinner(File winnersFile) {
+    public void registerWinner(File winnersFile) throws IOException {
         ArrayList<String> lines = new ArrayList<>();
 
         /// Add line to list
@@ -101,8 +101,6 @@ public class Game {
         /// Write lines to file
         try {
             Files.write(winnersFile.toPath(), lines, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
