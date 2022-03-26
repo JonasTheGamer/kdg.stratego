@@ -22,11 +22,11 @@ public class BattleFieldView extends BorderPane {
     private GridPane gpBoard;
 
     public BattleFieldView() {
-        InitializeNodes();
-        LayoutNodes();
+        initializeNodes();
+        layoutNodes();
     }
 
-    public void InitializeNodes() {
+    public void initializeNodes() {
         // Controls
         lblClock = new Label("00:00");
         lblScreenTitle = new Label("Player 1234567890");
@@ -39,7 +39,7 @@ public class BattleFieldView extends BorderPane {
         gpBoard = new GridPane();
     }
 
-    public void LayoutNodes() {
+    public void layoutNodes() {
         // Main borderpane
         this.setBackground(Style.bgApplication);
 

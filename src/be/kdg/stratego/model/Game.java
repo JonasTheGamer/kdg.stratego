@@ -97,15 +97,9 @@ public class Game {
     public void stop() {
         ongoing = false;
         this.endTime = LocalDateTime.now();
-        System.out.println("The game has been stopped.");
 
         // Calculate the first score (sum of pieces left)
-        int piecesSum = 0;
-        for (Piece pieceOnBoard : currentPlayer.getPieces()) {
-            if(pieceOnBoard.isOnField()) {
-                piecesSum += pieceOnBoard.getRank();
-            }
-        }
+        int piecesSum = calculateLeftOverPiecesScore();
 
         // Second high score (amount of turns needed)
         currentPlayer.getAmountOfTurns();
@@ -134,6 +128,17 @@ public class Game {
         }
 
         currentPlayer.showPieces();
+    }
+
+    public int calculateLeftOverPiecesScore() {
+        int piecesSum = 0;
+        for (Piece pieceOnBoard : currentPlayer.getPieces()) {
+            if(pieceOnBoard.isOnField()) {
+                piecesSum += pieceOnBoard.getRank();
+            }
+        }
+
+        return piecesSum;
     }
 
     // Getters
