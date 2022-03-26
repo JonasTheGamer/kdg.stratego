@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.TreeMap;
 
 public class ArmySetupPresenter {
     private final double FIELD_SIZE = Style.size(55);
@@ -28,7 +29,7 @@ public class ArmySetupPresenter {
 
     private ProgrammaModel model;
     private ArmySetupView view;
-    private HashMap<String, Integer> piecesToPlace;
+    private TreeMap<String, Integer> piecesToPlace;
     private HashMap<GameBoardField, StackPane> fieldPanes;
     private String selectedPlaceablePiece;
 
@@ -38,7 +39,7 @@ public class ArmySetupPresenter {
     public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
         this.model = model;
         this.view = view;
-        this.piecesToPlace = new HashMap<>();
+        this.piecesToPlace = new TreeMap<>();
         this.fieldPanes = new HashMap<>();
         this.addEventHandlers();
         this.updateView();
@@ -93,7 +94,7 @@ public class ArmySetupPresenter {
 
                 for (int i = 0; i < amountPlacable; i++) {
                     // Get a random piece that has this name
-                    Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName);
+                    Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName.split("-")[1]);
 
                     // Get the next unoccupied (available) field
                     GameBoardField field = model.getGameBoard().getNextAvailableField();
@@ -122,7 +123,7 @@ public class ArmySetupPresenter {
                 String pieceClassName = idData[1];
 
                 // Make sure we still have pieces left to place
-                int amountPlacable = piecesToPlace.get(pieceClassName);
+                int amountPlacable = piecesToPlace.get(clickedId);
                 if (amountPlacable == 0) {
                     return;
                 }
@@ -166,7 +167,11 @@ public class ArmySetupPresenter {
                                 pieceToPlace.placeOnField(field);
 
                                 // Stop placing
-                                if (piecesToPlace.get(pieceToPlace.getName()) == 1) {
+                                int adjustedRank = 0;
+                                if (pieceToPlace.getRank() > 0) {
+                                    adjustedRank = pieceToPlace.getRank() - 1;
+                                }
+                                if (piecesToPlace.get(adjustedRank + "-" + pieceToPlace.getName()) == 1) {
                                     placingPiece = false;
                                 }
 
@@ -209,7 +214,7 @@ public class ArmySetupPresenter {
         for (String pieceName : piecesToPlace.keySet()) {
             int amountPlacable = piecesToPlace.get(pieceName);
             /// Get a random piece that has this name. We'll use it to find out the image
-            Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName);
+            Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName.split("-")[1]);
 
             /// Piece image
             ImageView ivPiece = new ImageView(piece.getImage());
@@ -232,7 +237,7 @@ public class ArmySetupPresenter {
             pieceContainer.setPrefWidth(PLACABLE_PIECE_WIDTH);
 
             pieceContainer.getChildren().addAll(ivPiece, lblPieceTitle, lblPlacable);
-            pieceContainer.setId("placablePiece-" + pieceName);
+            pieceContainer.setId(pieceName);
 
             //// Border selected Placeable piece
             if (pieceContainer.getId().equals(selectedPlaceablePiece)){
@@ -283,7 +288,11 @@ public class ArmySetupPresenter {
                 continue;
             }
 
-            String pieceName = piece.getName();
+            int adjustedRank = 0;
+            if (piece.getRank() > 0) {
+                adjustedRank = piece.getRank() - 1;
+            }
+            String pieceName = adjustedRank + "-" + piece.getName();
 
             // Figure out if there's already something placed
             int amountPlacable = 0;
