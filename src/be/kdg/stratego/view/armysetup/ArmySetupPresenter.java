@@ -45,6 +45,7 @@ public class ArmySetupPresenter {
     }
 
     private void addEventHandlers() {
+        // Start button
         view.getBtnStart().setOnAction(actionEvent -> {
 
             // Check if the player has placed all pieces
@@ -67,10 +68,10 @@ public class ArmySetupPresenter {
 
         });
 
-
+        // Back button
         view.getBtnBack().setOnAction(actionEvent -> Style.changeScreen(Style.Screens.NEWGAME, model, view));
 
-
+        // Fill button
         view.getBtnFill().setOnAction(actionEvent -> {
 
             // Special places pieces (for quick winning, ...)
@@ -106,7 +107,6 @@ public class ArmySetupPresenter {
             updateView();
         });
 
-
         // Placable pieces
         ObservableList<Node> stpPlacablePieces = view.getGpPieces().getChildren();
         for (Node stpPiece : stpPlacablePieces) {
@@ -137,7 +137,6 @@ public class ArmySetupPresenter {
                 updateView();
             });
         }
-
 
         // Fields
         GameBoardField[][] fields = model.getGameBoard().getGameBoardFields();
