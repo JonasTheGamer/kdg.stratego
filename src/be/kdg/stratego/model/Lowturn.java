@@ -14,7 +14,7 @@ public class Lowturn implements Comparable<Lowturn> {
     // Methods
     @Override
     public int compareTo(Lowturn lowturn) {
-        return Integer.compare(lowturn.getTurns(), this.turns);
+        return Integer.compare(this.turns, lowturn.getTurns());
     }
 
     @Override
