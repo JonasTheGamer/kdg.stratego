@@ -187,6 +187,8 @@ public class BattleFieldPresenter {
                                     /// Place an X on the field
                                     //// Define X image
                                     ImageView ivInvalid = new ImageView("error.png");
+                                    fieldPane.getChildren().add(ivInvalid);
+
                                     //// Values for fade
                                     KeyValue transparent = new KeyValue(ivInvalid.opacityProperty(), 0.0);
                                     KeyValue opaque = new KeyValue(ivInvalid.opacityProperty(), 1.0);
@@ -202,12 +204,8 @@ public class BattleFieldPresenter {
 
                                     ivInvalid.setFitHeight(field.getFieldSize());
                                     ivInvalid.setFitWidth(field.getFieldSize());
-                                    fieldPane.getChildren().add(ivInvalid);
-
-
                                     timeline.play();
 
-                                    updateView();
                                 }
                             }
                         }

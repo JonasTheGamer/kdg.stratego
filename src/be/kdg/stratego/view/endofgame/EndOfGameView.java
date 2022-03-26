@@ -1,10 +1,14 @@
 package be.kdg.stratego.view.endofgame;
 
 import be.kdg.stratego.view.Style;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class EndOfGameView extends VBox {
     // Controls
@@ -41,21 +45,33 @@ public class EndOfGameView extends VBox {
     public void layoutNodes() {
         // Main screen layout
         this.setAlignment(Pos.TOP_CENTER);
+        this.setBackground(new Background(new BackgroundFill(
+                Color.BLACK,
+                null,
+                null
+        )));
 
         // Title & subtitle
         Style.txt(lblQuote, 35);
+        this.setMargin(lblQuote, new Insets(30, 15, 5, 15));
         Style.txt(lblSubtitle, 20);
+        this.setMargin(lblSubtitle, new Insets(5, 15, 25, 15));
 
         // Turns
         Style.txt(lblTurnsTitle, 25);
+        this.setMargin(lblTurnsTitle, new Insets(5, 15, 5, 15));
         Style.txt(lblTurnsValue, 20);
+        this.setMargin(lblTurnsValue, new Insets(5, 15, 20, 15));
 
         // Score
         Style.txt(lblScoreTitle, 25);
+        this.setMargin(lblScoreTitle, new Insets(5, 15, 5, 15));
         Style.txt(lblScoreValue, 20);
+        this.setMargin(lblScoreValue, new Insets(5, 15, 20, 15));
 
         // Back to menu button
-        Style.btn(btnMenu, 20, 300, 150);
+        Style.btn(btnMenu, 20, 300, 45);
+        this.setMargin(btnMenu, new Insets(5, 15, 20, 15));
 
         // Add all nodes to the pane
         this.getChildren().addAll(
