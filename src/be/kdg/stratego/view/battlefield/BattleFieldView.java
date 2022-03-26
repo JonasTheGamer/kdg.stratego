@@ -75,7 +75,6 @@ public class BattleFieldView extends BorderPane {
                 new CornerRadii(0),
                 null
         )));
-        btnNextPlayer.setOpacity(0);
         btnNextPlayer.setVisible(false);
 
         spBoard.getChildren().add(btnNextPlayer);

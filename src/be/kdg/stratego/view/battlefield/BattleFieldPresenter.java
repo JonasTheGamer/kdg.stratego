@@ -6,12 +6,8 @@ import be.kdg.stratego.view.Style;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.CacheHint;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.ColorInput;
@@ -146,9 +142,9 @@ public class BattleFieldPresenter {
 
                                     if (!Objects.isNull(showKilledPieces)) {
                                         // Wait for the fade to finish before showing the overlay
-                                        showKilledPieces.setOnFinished(actionEvent -> showNextPlayerOverlay());
+                                        showKilledPieces.setOnFinished(actionEvent -> toggleNextPlayerOverlay());
                                     } else {
-                                        showNextPlayerOverlay();
+                                        toggleNextPlayerOverlay();
                                     }
 
                                 } catch (InvalidMoveException exception) {
@@ -193,7 +189,7 @@ public class BattleFieldPresenter {
             updateView();
 
             // Hide the overlay
-            hideNextPlayerOverlay();
+            toggleNextPlayerOverlay();
 
             // If pieces were killed, show them & do the animation
             if (lastKilledPieces.size() > 0) {
@@ -350,36 +346,32 @@ public class BattleFieldPresenter {
         selectedPiece = null;
     }
 
-    private void showNextPlayerOverlay() {
-        // Switch to the next player
-        view.getBtnNextPlayer().setVisible(true);
-        view.getBtnNextPlayer().setText("Pass the computer to " + model.getGame().getNextPlayer().getName() + ". \nClick to continue");
+    private void toggleNextPlayerOverlay() {
+        Button btn = view.getBtnNextPlayer();
 
-        // Show the overlay
-        Timeline showNextPlayerOverlay = new Timeline();
-        KeyValue hideBtn = new KeyValue(view.getBtnNextPlayer().opacityProperty(), 0);
-        KeyValue showBtn = new KeyValue(view.getBtnNextPlayer().opacityProperty(), 1);
+        //Toggler of this button
+        boolean nextPlayerOverlay = !view.getBtnNextPlayer().isVisible();
 
-        showNextPlayerOverlay.getKeyFrames().addAll(
-                new KeyFrame(Duration.ZERO, hideBtn),
-                new KeyFrame(Duration.millis(500), showBtn)
+        //When turned on
+        if (nextPlayerOverlay) {
+            btn.setVisible(true);
+            btn.setText("Pass the computer to " + model.getGame().getNextPlayer().getName() + ". \nClick to continue");
+        }
+
+        //Each toggle
+        Timeline timeline = new Timeline();
+        KeyValue visableBtn = new KeyValue(btn.opacityProperty(), 1);
+        KeyValue hiddenBtn = new KeyValue(btn.opacityProperty(), 0);
+        timeline.getKeyFrames().addAll(
+                new KeyFrame(Duration.ZERO, (nextPlayerOverlay ? hiddenBtn : visableBtn)),
+                new KeyFrame(Duration.millis(500), (nextPlayerOverlay ? visableBtn : hiddenBtn))
         );
+        timeline.play();
 
-        showNextPlayerOverlay.play();
-    }
-
-    private void hideNextPlayerOverlay() {
-        Timeline hideNextPlayerOverlay = new Timeline();
-        KeyValue showBtn = new KeyValue(view.getBtnNextPlayer().opacityProperty(), 1);
-        KeyValue hideBtn = new KeyValue(view.getBtnNextPlayer().opacityProperty(), 0);
-
-        hideNextPlayerOverlay.getKeyFrames().addAll(
-                new KeyFrame(Duration.ZERO, showBtn),
-                new KeyFrame(Duration.millis(500), hideBtn)
-        );
-
-        hideNextPlayerOverlay.play();
-        hideNextPlayerOverlay.setOnFinished(actionEvent1 -> view.getBtnNextPlayer().setVisible(false));
+        //When turned off
+        if (!nextPlayerOverlay) {
+            timeline.setOnFinished(actionEvent -> btn.setVisible(false));
+        }
     }
 }
 
