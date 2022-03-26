@@ -4,10 +4,15 @@ import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.model.*;
 import be.kdg.stratego.model.pieces.Flag;
 import be.kdg.stratego.view.Style;
+import be.kdg.stratego.view.endofgame.EndOfGamePresenter;
+import be.kdg.stratego.view.endofgame.EndOfGameView;
+import be.kdg.stratego.view.help.HelpPresenter;
+import be.kdg.stratego.view.help.HelpView;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
@@ -15,6 +20,8 @@ import javafx.scene.effect.ColorInput;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.*;
@@ -148,11 +155,28 @@ public class BattleFieldPresenter {
 
                                     // Check if the game ended or we need to switch to the next player
                                     if (containsFlag) {
+                                        System.out.println("A flag was hit!");
+
                                         // Stop the game
                                         model.getGame().stop();
+                                        System.out.println("The game was stopped");
 
                                         // Show the winner screen
+                                        EndOfGameView eoGameView = new EndOfGameView();
+                                        EndOfGamePresenter eoGamePresenter = new EndOfGamePresenter(model, eoGameView);
+
+                                        Stage stage = new Stage();
+                                        stage.setScene(new Scene(eoGameView));
+
+                                        stage.setTitle("Einde spel");
+                                        stage.initOwner(view.getScene().getWindow());
+                                        stage.initModality(Modality.APPLICATION_MODAL);
+                                        stage.showAndWait();
+
+                                        Style.changeScreen(Style.Screens.MAINMENU, model, view);
+
                                     } else {
+                                        System.out.println("No flag was hit");
                                         // Switch to next player
                                         if (!Objects.isNull(showKilledPieces)) {
                                             // Wait for the fade to finish before showing the overlay
