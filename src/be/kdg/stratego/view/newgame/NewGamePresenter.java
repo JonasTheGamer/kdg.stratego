@@ -74,9 +74,9 @@ public class NewGamePresenter {
         ///Max characters for name
         String input = view.getTxtName()[player].getText();
 
-        if (input.length() > Player.maxNameCharacters) {
-            view.getTxtName()[player].setText(input.substring(0, Player.maxNameCharacters));
-            view.getTxtName()[player].positionCaret(Player.maxNameCharacters);
+        if (input.length() > Player.MAX_NAME_CHARACTERS) {
+            view.getTxtName()[player].setText(input.substring(0, Player.MAX_NAME_CHARACTERS));
+            view.getTxtName()[player].positionCaret(Player.MAX_NAME_CHARACTERS);
         }
 
         ///Change Lblname

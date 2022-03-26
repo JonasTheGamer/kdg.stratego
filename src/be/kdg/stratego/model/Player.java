@@ -5,7 +5,7 @@ import be.kdg.stratego.model.pieces.*;
 import java.util.ArrayList;
 
 public class Player {
-    public static final int maxNameCharacters = 10;
+    public static final int MAX_NAME_CHARACTERS = 10;
 
     private String name;
     private String color;

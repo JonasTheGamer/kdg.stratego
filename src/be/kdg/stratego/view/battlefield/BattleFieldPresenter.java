@@ -9,6 +9,12 @@ import be.kdg.stratego.view.endofgame.EndOfGameView;
 import be.kdg.stratego.view.help.HelpPresenter;
 import be.kdg.stratego.view.help.HelpView;
 import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,12 +33,14 @@ import java.util.*;
 
 public class BattleFieldPresenter {
     // Variables for generating StackPanes
-    private final double fieldSize = Style.size(65);
+    private final double FIELD_SIZE = Style.size(65);
+
     // References
     private ProgrammaModel model;
     private BattleFieldView view;
     private boolean killFadeOngoing = false;
     private HashMap<GameBoardField, StackPane> fieldPanes;
+    private GameStopwatch stopwatch;
 
     // Variables for moving a piece
     private MovingPiece selectedPiece;
@@ -40,12 +48,15 @@ public class BattleFieldPresenter {
     // Variables for switching to the next player
     private ArrayList<Piece> lastKilledPieces;
     private MovingPiece attackingPiece;
+    private MovingPiece lastMovedPiece;
     private boolean overlayClickDebounce;
 
     public BattleFieldPresenter(ProgrammaModel model, BattleFieldView view) {
         this.model = model;
         this.view = view;
         this.fieldPanes = new HashMap<>();
+        this.stopwatch = new GameStopwatch();
+        startStopwatch();
 
         lastKilledPieces = new ArrayList<>();
         attackingPiece = null;
@@ -202,8 +213,8 @@ public class BattleFieldPresenter {
                                             new KeyFrame(Duration.millis(1000), transparent)
                                     );
 
-                                    ivInvalid.setFitHeight(field.getFieldSize());
-                                    ivInvalid.setFitWidth(field.getFieldSize());
+                                    ivInvalid.setFitHeight(field.getFIELDSIZE());
+                                    ivInvalid.setFitWidth(field.getFIELDSIZE());
                                     timeline.play();
 
                                 }
@@ -217,7 +228,7 @@ public class BattleFieldPresenter {
         // Click on overlay to pass to the next player
         view.getBtnNextPlayer().setOnAction(actionEvent -> {
             // Do nothing if the debounce is still activated
-            if(overlayClickDebounce) return;
+            if (overlayClickDebounce) return;
 
             // Enable the debounce
             overlayClickDebounce = true;
@@ -279,6 +290,10 @@ public class BattleFieldPresenter {
                         updateView();
                     });
                 }
+            } else {
+                // Highlight the moved piece
+                attackingPiece.getField().highLight();
+                updateView();
             }
         });
     }
@@ -314,7 +329,7 @@ public class BattleFieldPresenter {
         // Generate the main stackpane
         StackPane container = new StackPane();
 
-        container.setPrefSize(fieldSize, fieldSize);
+        container.setPrefSize(FIELD_SIZE, FIELD_SIZE);
 
         // Set the right background
         if (field.isWalkable()) {
@@ -330,8 +345,8 @@ public class BattleFieldPresenter {
 
             // Define the main imageView
             ImageView ivTower = new ImageView(towerImage);
-            ivTower.setFitHeight(fieldSize * 0.95);
-            ivTower.setFitWidth(fieldSize * 0.95);
+            ivTower.setFitHeight(FIELD_SIZE * 0.95);
+            ivTower.setFitWidth(FIELD_SIZE * 0.95);
             ivTower.setId("tower");
             if (field.getPiece().isDying()) {
                 ivTower.setOpacity(0.5);
@@ -339,8 +354,8 @@ public class BattleFieldPresenter {
 
             // Define the clip imageView
             ImageView ivClip = new ImageView(towerImage);
-            ivClip.setFitHeight(fieldSize * 0.95);
-            ivClip.setFitWidth(fieldSize * 0.95);
+            ivClip.setFitHeight(FIELD_SIZE * 0.95);
+            ivClip.setFitWidth(FIELD_SIZE * 0.95);
 
             // Set the image view clip
             ivTower.setClip(ivClip);
@@ -363,8 +378,8 @@ public class BattleFieldPresenter {
             // If the piece is not hidden, add the icon
             if (!field.getPiece().getHidden()) {
                 ImageView ivPiece = new ImageView(field.getPiece().getImage());
-                ivPiece.setFitHeight(fieldSize * 0.4);
-                ivPiece.setFitWidth(fieldSize * 0.4);
+                ivPiece.setFitHeight(FIELD_SIZE * 0.4);
+                ivPiece.setFitWidth(FIELD_SIZE * 0.4);
                 ivPiece.setId("piece");
                 if (field.getPiece().isDying()) {
                     ivPiece.setOpacity(0.5);
@@ -410,6 +425,22 @@ public class BattleFieldPresenter {
         if (!nextPlayerOverlay) {
             transition.setOnFinished(actionEvent -> btn.setVisible(false));
         }
+    }
+
+    private void startStopwatch() {
+        Timeline stopwatchTimeline = new Timeline();
+        stopwatchTimeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        stopwatch.tick();
+                        view.getLblClock().setText(String.format("%02d:%02d:%02d", stopwatch.getHours(), stopwatch.getMinutes(), stopwatch.getSeconds()));
+                    }
+                })
+        );
+
+        stopwatchTimeline.setCycleCount(Animation.INDEFINITE);
+        stopwatchTimeline.play();
     }
 }
 

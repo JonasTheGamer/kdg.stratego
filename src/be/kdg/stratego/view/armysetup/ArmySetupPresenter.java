@@ -14,7 +14,6 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.ColorInput;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -23,10 +22,9 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class ArmySetupPresenter {
-    private final double fieldSize = Style.size(55);
-    private final double placeablePieceWidth = fieldSize * 2;
-    private final double placeablePieceHeight = fieldSize * 2 * 1.5;
-
+    private final double FIELD_SIZE = Style.size(55);
+    private final double PLACABLE_PIECE_WIDTH = FIELD_SIZE * 2;
+    private final double PLACABLE_PIECE_HEIGTH = FIELD_SIZE * 2 * 1.5;
 
     private ProgrammaModel model;
     private ArmySetupView view;
@@ -153,7 +151,7 @@ public class ArmySetupPresenter {
                         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                             if (placingPiece) {
                                 // Only allow placing in row 6 to 9;
-                                if (field.getPositionY() < (model.getGameBoard().getGrootteY() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGrootteY() - 1) {
+                                if (field.getPositionY() < (model.getGameBoard().getGROOTTE_Y() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGROOTTE_Y() - 1) {
                                     return;
                                 }
 
@@ -217,7 +215,7 @@ public class ArmySetupPresenter {
             /// Piece image
             ImageView ivPiece = new ImageView(piece.getImage());
             ivPiece.setPreserveRatio(true);
-            ivPiece.setFitWidth(placeablePieceWidth * 0.5);
+            ivPiece.setFitWidth(PLACABLE_PIECE_WIDTH * 0.5);
 
             /// Piece title
             Label lblPieceTitle = new Label(piece.getName());
@@ -231,8 +229,8 @@ public class ArmySetupPresenter {
             VBox pieceContainer = new VBox();
             pieceContainer.setBackground(Style.bgBoxNoPadding);
             pieceContainer.setAlignment(Pos.CENTER);
-            pieceContainer.setPrefHeight(placeablePieceHeight);
-            pieceContainer.setPrefWidth(placeablePieceWidth);
+            pieceContainer.setPrefHeight(PLACABLE_PIECE_HEIGTH);
+            pieceContainer.setPrefWidth(PLACABLE_PIECE_WIDTH);
 
             pieceContainer.getChildren().addAll(ivPiece, lblPieceTitle, lblPlacable);
             pieceContainer.setId("placablePiece-" + pieceName);
@@ -302,7 +300,7 @@ public class ArmySetupPresenter {
         // Generate the main stackpane
         StackPane container = new StackPane();
 
-        container.setPrefSize(fieldSize, fieldSize);
+        container.setPrefSize(FIELD_SIZE, FIELD_SIZE);
 
         // Set the right background
         if (field.isWalkable()) {
@@ -318,16 +316,16 @@ public class ArmySetupPresenter {
 
             // Define the main imageView
             ImageView ivTower = new ImageView(towerImage);
-            ivTower.setFitHeight(fieldSize * 0.95);
-            ivTower.setFitWidth(fieldSize * 0.95);
+            ivTower.setFitHeight(FIELD_SIZE * 0.95);
+            ivTower.setFitWidth(FIELD_SIZE * 0.95);
             if (field.getPiece().isDying()) {
                 ivTower.setOpacity(0.5);
             }
 
             // Define the clip imageView
             ImageView ivClip = new ImageView(towerImage);
-            ivClip.setFitHeight(fieldSize * 0.95);
-            ivClip.setFitWidth(fieldSize * 0.95);
+            ivClip.setFitHeight(FIELD_SIZE * 0.95);
+            ivClip.setFitWidth(FIELD_SIZE * 0.95);
 
             // Set the image view clip
             ivTower.setClip(ivClip);
@@ -350,8 +348,8 @@ public class ArmySetupPresenter {
             // If the piece is not hidden, add the icon
             if (!field.getPiece().getHidden()) {
                 ImageView ivPiece = new ImageView(field.getPiece().getImage());
-                ivPiece.setFitHeight(fieldSize * 0.4);
-                ivPiece.setFitWidth(fieldSize * 0.4);
+                ivPiece.setFitHeight(FIELD_SIZE * 0.4);
+                ivPiece.setFitWidth(FIELD_SIZE * 0.4);
                 if (field.getPiece().isDying()) {
                     System.out.println("This piece is dying!");
                     ivPiece.setOpacity(0.5);

@@ -20,8 +20,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class MainMenuPresenter {
-    private final ProgrammaModel model;
-    private final MainMenuView view;
+    private ProgrammaModel model;
+    private MainMenuView view;
 
     private boolean togglerWinners;
     private Timeline timelineWinners;
