@@ -64,18 +64,6 @@ public class Style {
             null
     ));
 
-    public static Background red = new Background(new BackgroundFill(
-            new Color(1, 0, 0.2, 0.9),
-            new CornerRadii(20),
-            null
-    ));
-
-    public static Background green = new Background(new BackgroundFill(
-            new Color(0, 1, 0.2, 0.9),
-            new CornerRadii(20),
-            null
-    ));
-
     //Borders
     public static Border border(Paint paint, double cornerRadius) {
         return new Border(new BorderStroke(

@@ -6,7 +6,6 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.model.pieces.*;
-
 import java.util.ArrayList;
 
 public class Player {

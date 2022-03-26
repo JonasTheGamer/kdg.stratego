@@ -87,24 +87,13 @@ public class EndOfGameView extends VBox {
     }
 
     // Getters
-    public Label getLblQuote() {
-        return lblQuote;
-    }
 
     public Label getLblSubtitle() {
         return lblSubtitle;
     }
 
-    public Label getLblTurnsTitle() {
-        return lblTurnsTitle;
-    }
-
     public Label getLblTurnsValue() {
         return lblTurnsValue;
-    }
-
-    public Label getLblScoreTitle() {
-        return lblScoreTitle;
     }
 
     public Label getLblScoreValue() {

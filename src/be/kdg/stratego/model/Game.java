@@ -6,7 +6,6 @@
 package be.kdg.stratego.model;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
@@ -14,8 +13,6 @@ import java.util.ArrayList;
 
 public class Game {
     private Player[] players;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
     private boolean ongoing = false;
     private GameBoard gameBoard;
     private Player currentPlayer;
@@ -35,12 +32,10 @@ public class Game {
     public void start() {
         //Set starting variables
         this.ongoing = true;
-        this.startTime = LocalDateTime.now();
     }
 
     public void stop(File winnersFile) {
         ongoing = false;
-        this.endTime = LocalDateTime.now();
 
         // Save the winner
         registerWinner(winnersFile);

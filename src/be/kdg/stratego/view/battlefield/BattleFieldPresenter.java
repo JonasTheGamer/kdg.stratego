@@ -4,10 +4,7 @@ import be.kdg.stratego.exceptions.InvalidMoveException;
 import be.kdg.stratego.model.*;
 import be.kdg.stratego.model.pieces.Flag;
 import be.kdg.stratego.view.Style;
-import be.kdg.stratego.view.endofgame.EndOfGamePresenter;
-import be.kdg.stratego.view.endofgame.EndOfGameView;
-import be.kdg.stratego.view.help.HelpPresenter;
-import be.kdg.stratego.view.help.HelpView;
+import be.kdg.stratego.view.endofgame.*;
 import javafx.animation.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -27,7 +24,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.util.*;
 
 

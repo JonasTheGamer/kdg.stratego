@@ -1,7 +1,6 @@
 package be.kdg.stratego.view.endofgame;
 
 import be.kdg.stratego.model.ProgrammaModel;
-import be.kdg.stratego.view.Style;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -42,9 +41,5 @@ public class EndOfGamePresenter {
 
         // Set the leftover piece score
         view.getLblScoreValue().setText(Integer.toString(model.getGame().calculateLeftOverPiecesScore()));
-    }
-
-    public void addWindowEventHandlers() {
-
     }
 }

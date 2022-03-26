@@ -1,16 +1,11 @@
 package be.kdg.stratego;
 
 import be.kdg.stratego.model.ProgrammaModel;
-import be.kdg.stratego.view.armysetup.ArmySetupPresenter;
-import be.kdg.stratego.view.armysetup.ArmySetupView;
 import be.kdg.stratego.view.mainmenu.MainMenuPresenter;
 import be.kdg.stratego.view.mainmenu.MainMenuView;
-import be.kdg.stratego.view.newgame.NewGamePresenter;
-import be.kdg.stratego.view.newgame.NewGameView;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 

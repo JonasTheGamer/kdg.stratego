@@ -71,10 +71,6 @@ public class GameBoardField extends Position {
         return this.walkable;
     }
 
-    public GameBoard getGameBoard() {
-        return gameBoard;
-    }
-
     public GameBoardField getFieldAbove() {
         return gameBoard.getGameBoardField(this.positionX, this.positionY - 1);
     }
