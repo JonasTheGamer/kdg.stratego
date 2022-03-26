@@ -53,25 +53,25 @@ public class EndOfGameView extends VBox {
 
         // Title & subtitle
         Style.txt(lblQuote, 35);
-        this.setMargin(lblQuote, new Insets(30, 15, 5, 15));
+        setMargin(lblQuote, new Insets(30, 15, 5, 15));
         Style.txt(lblSubtitle, 20);
-        this.setMargin(lblSubtitle, new Insets(5, 15, 25, 15));
+        setMargin(lblSubtitle, new Insets(5, 15, 25, 15));
 
         // Turns
         Style.txt(lblTurnsTitle, 25);
-        this.setMargin(lblTurnsTitle, new Insets(5, 15, 5, 15));
+        setMargin(lblTurnsTitle, new Insets(5, 15, 5, 15));
         Style.txt(lblTurnsValue, 20);
-        this.setMargin(lblTurnsValue, new Insets(5, 15, 20, 15));
+        setMargin(lblTurnsValue, new Insets(5, 15, 20, 15));
 
         // Score
         Style.txt(lblScoreTitle, 25);
-        this.setMargin(lblScoreTitle, new Insets(5, 15, 5, 15));
+        setMargin(lblScoreTitle, new Insets(5, 15, 5, 15));
         Style.txt(lblScoreValue, 20);
-        this.setMargin(lblScoreValue, new Insets(5, 15, 20, 15));
+        setMargin(lblScoreValue, new Insets(5, 15, 20, 15));
 
         // Back to menu button
         Style.btn(btnMenu, 20, 300, 45);
-        this.setMargin(btnMenu, new Insets(5, 15, 20, 15));
+        setMargin(btnMenu, new Insets(5, 15, 20, 15));
 
         // Add all nodes to the pane
         this.getChildren().addAll(

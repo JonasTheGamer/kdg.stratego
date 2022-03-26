@@ -353,8 +353,6 @@ public class ArmySetupPresenter {
                 if (field.getPiece().isDying()) {
                     System.out.println("This piece is dying!");
                     ivPiece.setOpacity(0.5);
-                } else {
-                    //Jonas
                 }
 
                 container.getChildren().add(ivPiece);

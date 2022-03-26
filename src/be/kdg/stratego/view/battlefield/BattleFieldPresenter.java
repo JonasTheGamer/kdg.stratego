@@ -44,7 +44,6 @@ public class BattleFieldPresenter {
     // Variables for switching to the next player
     private ArrayList<Piece> lastKilledPieces;
     private MovingPiece attackingPiece;
-    private MovingPiece lastMovedPiece;
     private boolean overlayClickDebounce;
 
     public BattleFieldPresenter(ProgrammaModel model, BattleFieldView view) {
@@ -426,12 +425,9 @@ public class BattleFieldPresenter {
     private void startStopwatch() {
         Timeline stopwatchTimeline = new Timeline();
         stopwatchTimeline.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        stopwatch.tick();
-                        view.getLblClock().setText(String.format("%02d:%02d:%02d", stopwatch.getHours(), stopwatch.getMinutes(), stopwatch.getSeconds()));
-                    }
+                new KeyFrame(Duration.seconds(1), event -> {
+                    stopwatch.tick();
+                    view.getLblClock().setText(String.format("%02d:%02d:%02d", stopwatch.getHours(), stopwatch.getMinutes(), stopwatch.getSeconds()));
                 })
         );
 

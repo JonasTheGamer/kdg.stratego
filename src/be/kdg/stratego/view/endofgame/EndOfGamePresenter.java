@@ -20,15 +20,12 @@ public class EndOfGamePresenter {
     }
 
     public void addEventHandlers() {
-        view.getBtnMenu().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Scene scene = view.getScene();
-                Window wd = scene.getWindow();
-                Stage stg = (Stage) wd;
+        view.getBtnMenu().setOnAction(actionEvent -> {
+            Scene scene = view.getScene();
+            Window wd = scene.getWindow();
+            Stage stg = (Stage) wd;
 
-                stg.close();
-            }
+            stg.close();
         });
     }
 

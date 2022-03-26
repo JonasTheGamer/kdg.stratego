@@ -23,7 +23,6 @@ public class MainMenuPresenter {
     private MainMenuView view;
 
     private boolean togglerWinners;
-    private Timeline timelineWinners;
 
     public MainMenuPresenter(ProgrammaModel model, MainMenuView view) {
         this.model = model;
@@ -34,6 +33,7 @@ public class MainMenuPresenter {
     }
 
     private void winnerTimelineSetup() {
+        Timeline timelineWinners;
         togglerWinners = false;
 
         timelineWinners = new Timeline();
