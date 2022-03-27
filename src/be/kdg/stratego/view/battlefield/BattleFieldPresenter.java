@@ -119,7 +119,7 @@ public class BattleFieldPresenter {
                                     updateView();
 
                                     // Make killed pieces transparent
-                                    SequentialTransition showKilledPiecesFade = new SequentialTransition();
+                                    SequentialTransition showKilledPiecesFade = null;
                                     boolean containsFlag = false;
 
                                     for (Piece killedPiece : killedPieces) {
@@ -132,7 +132,7 @@ public class BattleFieldPresenter {
                                         transitionFadeOut.setFromValue(1);
                                         transitionFadeOut.setToValue(0.5);
                                         PauseTransition pauseTransition = new PauseTransition(Duration.millis(1250));
-                                        showKilledPiecesFade.getChildren().addAll(
+                                        showKilledPiecesFade = new SequentialTransition(
                                                 transitionFadeOut,
                                                 pauseTransition
                                         );
@@ -167,7 +167,7 @@ public class BattleFieldPresenter {
 
                                     } else {
                                         // Switch to next player
-                                        if (!killedPieces.isEmpty()) {
+                                        if (!Objects.isNull(showKilledPiecesFade)) {
                                             // Wait for the fade to finish before showing the overlay
                                             showKilledPiecesFade.setOnFinished(actionEvent -> toggleNextPlayerOverlay());
                                         } else {
