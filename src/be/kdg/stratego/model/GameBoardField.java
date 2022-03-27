@@ -10,8 +10,6 @@ import be.kdg.stratego.view.Style;
 import java.util.Objects;
 
 public class GameBoardField extends Position {
-    private final double FIELDSIZE = Style.size(50);
-
     // GameBoardField properties
     private Piece piece;
     private boolean walkable;
@@ -51,10 +49,6 @@ public class GameBoardField extends Position {
     }
 
     // Getters
-    public double getFIELDSIZE() {
-        return FIELDSIZE;
-    }
-
     public Piece getPiece() {
         return piece;
     }
