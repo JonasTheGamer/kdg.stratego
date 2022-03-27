@@ -30,7 +30,6 @@ public class ArmySetupPresenter {
     private TreeMap<String, Integer> piecesToPlace;
     private HashMap<GameBoardField, Pane> fieldPanes;
     private String selectedPlaceablePiece;
-    private Piece lastClickedPlaceablePiece;
 
     public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
         this.model = model;
@@ -124,9 +123,6 @@ public class ArmySetupPresenter {
                     return;
                 }
 
-                // Get a random piece that has this name to place on the field later on
-                lastClickedPlaceablePiece = model.getGame().getCurrentPlayer().getPieceFromName(pieceClassName);
-
                 //Update view
                 updateView();
             });
@@ -154,7 +150,7 @@ public class ArmySetupPresenter {
                                 }
 
                                 // Grab a random piece that's not on the field yet
-                                Piece pieceToPlace = model.getGame().getCurrentPlayer().getPieceFromName(lastClickedPlaceablePiece.getName());
+                                Piece pieceToPlace = model.getGame().getCurrentPlayer().getPieceFromName(selectedPlaceablePiece.split("-")[1]);
 
                                 // Place on the field
                                 pieceToPlace.placeOnField(field);
