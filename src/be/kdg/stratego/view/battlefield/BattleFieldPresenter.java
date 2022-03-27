@@ -1,14 +1,21 @@
 package be.kdg.stratego.view.battlefield;
 
 import be.kdg.stratego.exceptions.InvalidMoveException;
-import be.kdg.stratego.model.*;
+import be.kdg.stratego.model.GameBoardField;
+import be.kdg.stratego.model.GameStopwatch;
+import be.kdg.stratego.model.MovingPiece;
+import be.kdg.stratego.model.Piece;
+import be.kdg.stratego.model.ProgrammaModel;
 import be.kdg.stratego.model.pieces.Flag;
 import be.kdg.stratego.view.Style;
 import be.kdg.stratego.view.Board;
-import be.kdg.stratego.view.endofgame.*;
-import javafx.animation.*;
+import be.kdg.stratego.view.endofgame.EndOfGamePresenter;
+import be.kdg.stratego.view.endofgame.EndOfGameView;
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -19,9 +26,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 
 public class BattleFieldPresenter {
@@ -40,7 +48,7 @@ public class BattleFieldPresenter {
 
     // Variables for switching to the next player
     private ArrayList<Piece> killedPieces; //Current round killed pieces
-    private MovingPiece attackingPiece; //Current attacking piece
+    private MovingPiece attackingPiece; //Current round attacking piece
     private boolean overlayClickDebounce; //Used for limiting method runs
 
     public BattleFieldPresenter(ProgrammaModel model, BattleFieldView view) {
@@ -62,7 +70,7 @@ public class BattleFieldPresenter {
 
     private synchronized void addEventHandlers() {
         view.getBtnClose().setOnAction(actionEvent -> {
-            //Liam: Extra -> game.save() & game.stop() modal
+            // Liam: Extra -> game.save() & game.stop() modal
             Style.changeScreen(Style.Screens.MAINMENU, model, view);
         });
 
@@ -205,8 +213,9 @@ public class BattleFieldPresenter {
                                     alert.setTitle("Error");
                                     alert.setHeaderText(null);
                                     alert.setContentText("An error happened whilst trying to save your scores, we're sorry...");
-
+                                    alert.initOwner(view.getScene().getWindow());
                                     alert.showAndWait();
+                                    Style.changeScreen(Style.Screens.MAINMENU, model, view);
                                 }
                             }
                         }

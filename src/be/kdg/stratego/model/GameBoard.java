@@ -14,7 +14,7 @@ public class GameBoard {
     public GameBoard() {
         gameBoardFields = new GameBoardField[this.GROOTTE_X][this.GROOTTE_Y];
 
-        //// Add fields
+        //// Initialize fields with grass
         for (int posY = 0; posY < GROOTTE_Y; posY++) {
             // Per row
             for (int posX = 0; posX < GROOTTE_X; posX++) {
@@ -23,7 +23,7 @@ public class GameBoard {
             }
         }
 
-        //// Water
+        //// Override with Water
         ////// Left water
         this.setGameBoardField(new GameBoardField(this, coordinateX(3), coordinateY(5), GameBoardField.GroundType.WATER));
         this.setGameBoardField(new GameBoardField(this, coordinateX(3), coordinateY(6), GameBoardField.GroundType.WATER));
@@ -70,6 +70,7 @@ public class GameBoard {
         }
     }
 
+    // Human readable -> GridPane position
     public int coordinateX(int x) {
         //Humanreadable version x in GameBoard(Field)
         return x - 1;

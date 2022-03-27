@@ -17,10 +17,9 @@ public class Miner extends MovingPiece {
     @Override
     protected Piece attackLose(Piece piece) {
         if (piece instanceof Bomb) {
-            //Miner defuses the bomb
+            // Miner defuses the bomb
             return super.attackWin(piece);
-        } else {
-            return super.attackLose(piece);
         }
+        return super.attackLose(piece);
     }
 }

@@ -6,8 +6,8 @@
 package be.kdg.stratego.model;
 
 import be.kdg.stratego.exceptions.InvalidMoveException;
-import be.kdg.stratego.model.pieces.*;
-
+import be.kdg.stratego.model.pieces.Bomb;
+import be.kdg.stratego.model.pieces.Flag;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;

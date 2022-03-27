@@ -22,8 +22,8 @@ import java.util.TreeMap;
 
 public class ArmySetupPresenter {
     private final double FIELD_SIZE = Style.size(55);
-    private final double PLACABLE_PIECE_HEIGTH = 165;
-    private final double PLACABLE_PIECE_WIDTH = 110;
+    private final double PLACEABLE_PIECE_HEIGTH = 165;
+    private final double PLACEABLE_PIECE_WIDTH = 110;
 
     private ProgrammaModel model;
     private ArmySetupView view;
@@ -62,7 +62,6 @@ public class ArmySetupPresenter {
                     Style.changeScreen(Style.Screens.BATTLEFIELD, model, view);
                 }
             }
-
         });
 
         // Back button
@@ -74,21 +73,22 @@ public class ArmySetupPresenter {
             // Special places pieces (for quick winning, ...)
             GameBoard gb = model.getGameBoard();
             GameBoardField specialField = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
-            if (Objects.isNull(specialField.getPiece()) && Objects.isNull(specialField.getFieldOnRight().getPiece())) {
+            if (!specialField.isOccupied() && !specialField.getFieldOnRight().isOccupied()) {
+                // Check if there's still a scout and a flag available
                 if (model.getGame().getCurrentPlayer().getPieceFromName("scout") != null && model.getGame().getCurrentPlayer().getPieceFromName("flag") != null) {
 
                     model.getGame().getCurrentPlayer().getPieceFromName("scout").placeOnField(specialField);
                     model.getGame().getCurrentPlayer().getPieceFromName("flag").placeOnField(specialField.getFieldOnRight());
 
-                    refreshPlacablePieces();
+                    refreshPlaceablePieces();
                 }
             }
 
-            // Loop through placable pieces
+            // Loop through placeable pieces
             for (String pieceName : piecesToPlace.keySet()) {
-                int amountPlacable = piecesToPlace.get(pieceName);
+                int amountPlaceable = piecesToPlace.get(pieceName);
 
-                for (int i = 0; i < amountPlacable; i++) {
+                for (int i = 0; i < amountPlaceable; i++) {
                     // Get a random piece that has this name
                     Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName.split("-")[1]);
 
@@ -104,23 +104,21 @@ public class ArmySetupPresenter {
             updateView();
         });
 
-        // Placable pieces
-        ObservableList<Node> vbsPlacablePieces = view.getGpPieces().getChildren();
-        for (Node vbPiece : vbsPlacablePieces) {
+        // Placeable pieces
+        ObservableList<Node> vbsPlaceablePieces = view.getGpPieces().getChildren();
+        for (Node vbPiece : vbsPlaceablePieces) {
             vbPiece.setOnMouseClicked(mouseEvent -> {
-                //Border selected placable piece (in updateview)
+                //Border selected placeable piece (in updateview)
                 if (vbPiece instanceof VBox) {
                     selectedPlaceablePiece = vbPiece.getId();
                 }
 
                 // Find out which piece the user would like to place on the field
                 String clickedId = vbPiece.getId();
-                String[] idData = clickedId.split("-");
-                String pieceClassName = idData[1];
 
                 // Make sure we still have pieces left to place
-                int amountPlacable = piecesToPlace.get(clickedId);
-                if (amountPlacable == 0) {
+                int amountPlaceable = piecesToPlace.get(clickedId);
+                if (amountPlaceable == 0) {
                     return;
                 }
 
@@ -161,6 +159,8 @@ public class ArmySetupPresenter {
                                 if (pieceToPlace.getRank() > 0) {
                                     adjustedRank = pieceToPlace.getRank() - 1;
                                 }
+
+                                // Check if this was the last piece of this piece type that could be placed
                                 if (piecesToPlace.get(adjustedRank + "-" + pieceToPlace.getName()) == 1) {
                                     selectedPlaceablePiece = null;
                                 }
@@ -193,8 +193,8 @@ public class ArmySetupPresenter {
         // Set title
         view.getLblScreenTitle().setText(model.getGame().getCurrentPlayer().getName() + ": Place your army");
 
-        // Refresh pieces that are placable
-        refreshPlacablePieces();
+        // Refresh pieces that are placeable
+        refreshPlaceablePieces();
 
         // Available Pieces
         int posXCounter = 0;
@@ -202,31 +202,31 @@ public class ArmySetupPresenter {
 
         view.getGpPieces().getChildren().clear();
         for (String pieceName : piecesToPlace.keySet()) {
-            int amountPlacable = piecesToPlace.get(pieceName);
+            int amountPlaceable = piecesToPlace.get(pieceName);
             /// Get a random piece that has this name. We'll use it to find out the image
             Piece piece = model.getGame().getCurrentPlayer().getPieceFromName(pieceName.split("-")[1]);
 
             /// Piece image
             ImageView ivPiece = new ImageView(piece.getImage());
             ivPiece.setPreserveRatio(true);
-            ivPiece.setFitWidth(PLACABLE_PIECE_WIDTH * 0.5);
+            ivPiece.setFitWidth(PLACEABLE_PIECE_WIDTH * 0.5);
 
             /// Piece title
             Label lblPieceTitle = new Label(piece.getName());
             Style.txt(lblPieceTitle, 15);
 
             /// Amount left to place
-            Label lblPlacable = new Label(Integer.toString(amountPlacable));
-            Style.txt(lblPlacable, 15);
+            Label lblPlaceable = new Label(Integer.toString(amountPlaceable));
+            Style.txt(lblPlaceable, 15);
 
             /// Main piece container
             VBox pieceContainer = new VBox();
             pieceContainer.setBackground(Style.bgBoxNoPadding);
             pieceContainer.setAlignment(Pos.CENTER);
-            pieceContainer.setPrefHeight(PLACABLE_PIECE_HEIGTH);
-            pieceContainer.setPrefWidth(PLACABLE_PIECE_WIDTH);
+            pieceContainer.setPrefHeight(PLACEABLE_PIECE_HEIGTH);
+            pieceContainer.setPrefWidth(PLACEABLE_PIECE_WIDTH);
 
-            pieceContainer.getChildren().addAll(ivPiece, lblPieceTitle, lblPlacable);
+            pieceContainer.getChildren().addAll(ivPiece, lblPieceTitle, lblPlaceable);
             pieceContainer.setId(pieceName);
 
             //// Border selected Placeable piece
@@ -266,13 +266,13 @@ public class ArmySetupPresenter {
     }
 
     //Methods
-    private void refreshPlacablePieces() {
+    private void refreshPlaceablePieces() {
         // Clear pieces to place
         piecesToPlace.clear();
 
         // Add the fresh ones in
         for (Piece piece : model.getGame().getCurrentPlayer().getPieces()) {
-            // If the piece is already on the board, it's not placable anymore
+            // If the piece is already on the board, it's not placeable anymore
             if (piece.isOnField()) {
                 continue;
             }
@@ -283,12 +283,13 @@ public class ArmySetupPresenter {
             }
             String pieceName = adjustedRank + "-" + piece.getName();
 
-            // Figure out if there's already something placed
-            int amountPlacable = 0;
+            // Figure out if there's already a piece of this type in the piecesToPlace keyset
+            // and calculate placeable amount
+            int amountPlaceable = 0;
             if (piecesToPlace.containsKey(pieceName)) {
-                amountPlacable = piecesToPlace.get(pieceName);
+                amountPlaceable = piecesToPlace.get(pieceName);
             }
-            piecesToPlace.put(pieceName, amountPlacable + 1);
+            piecesToPlace.put(pieceName, amountPlaceable + 1);
         }
     }
 }

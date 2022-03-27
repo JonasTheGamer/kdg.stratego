@@ -1,3 +1,7 @@
+/*
+    Class: Board
+    Responsibility: Takes care of all common board methods
+*/
 package be.kdg.stratego.view;
 
 import be.kdg.stratego.model.GameBoardField;
@@ -10,7 +14,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class Board {
-
     public static Pane generatePane(GameBoardField field, double FIELD_SIZE) {
         // Generate the containers
         Pane container = new Pane();

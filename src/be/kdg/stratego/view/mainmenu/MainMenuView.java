@@ -10,11 +10,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class MainMenuView extends VBox {
+    // Controls
     private ImageView imgTitle;
     private Button btnPlay;
     private Button btnHelp;
     private Button btnQuit;
     private Label lblHighscores;
+
+    // Panes
     private VBox vBoxTitles;
     private GridPane gpLeaderboard;
     private VBox vBoxLeaderboards;

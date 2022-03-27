@@ -52,7 +52,7 @@ public class Piece {
     }
 
     public void finishKill() {
-        // When the kill is being finished, the attacker should be moved towards the current pieces field
+        // When the kill is being finished, the attacker should be moved towards the current piece's field
         // Store the field this piece is on for later use
         GameBoardField oldField = this.field;
         this.removeFromField();
