@@ -30,8 +30,6 @@ public class ArmySetupPresenter {
     private TreeMap<String, Integer> piecesToPlace;
     private HashMap<GameBoardField, Pane> fieldPanes;
     private String selectedPlaceablePiece;
-
-    private Boolean placingPiece = false;
     private Piece lastClickedPlaceablePiece;
 
     public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
@@ -129,9 +127,6 @@ public class ArmySetupPresenter {
                 // Get a random piece that has this name to place on the field later on
                 lastClickedPlaceablePiece = model.getGame().getCurrentPlayer().getPieceFromName(pieceClassName);
 
-                // Remember that the user is placing this piece.
-                placingPiece = true;
-
                 //Update view
                 updateView();
             });
@@ -147,7 +142,7 @@ public class ArmySetupPresenter {
 
                         // PLACE - Check if we were placing a piece.
                         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                            if (placingPiece) {
+                            if (!Objects.isNull(selectedPlaceablePiece)) {
                                 // Only allow placing in row 6 to 9;
                                 if (field.getPositionY() < (model.getGameBoard().getGROOTTE_Y() / 2) + 1 || field.getPositionY() > model.getGameBoard().getGROOTTE_Y() - 1) {
                                     return;
@@ -170,7 +165,7 @@ public class ArmySetupPresenter {
                                     adjustedRank = pieceToPlace.getRank() - 1;
                                 }
                                 if (piecesToPlace.get(adjustedRank + "-" + pieceToPlace.getName()) == 1) {
-                                    placingPiece = false;
+                                    selectedPlaceablePiece = null;
                                 }
 
                                 // Refresh the view
