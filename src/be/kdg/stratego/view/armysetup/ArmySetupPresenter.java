@@ -72,13 +72,26 @@ public class ArmySetupPresenter {
 
             // Special places pieces (for quick winning, ...)
             GameBoard gb = model.getGameBoard();
-            GameBoardField specialField = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
+            GameBoardField specialField = gb.getGameBoardField(gb.coordinateX(1), gb.coordinateY(4));
             if (!specialField.isOccupied() && !specialField.getFieldOnRight().isOccupied()) {
                 // Check if there's still a scout and a flag available
                 if (model.getGame().getCurrentPlayer().getPieceFromName("scout") != null && model.getGame().getCurrentPlayer().getPieceFromName("flag") != null) {
 
+                    model.getGame().getCurrentPlayer().getPieceFromName("spy").placeOnField(specialField);
+                    model.getGame().getCurrentPlayer().getPieceFromName("miner").placeOnField(specialField.getFieldOnRight());
+
+                    specialField = gb.getGameBoardField(gb.coordinateX(5), gb.coordinateY(4));
                     model.getGame().getCurrentPlayer().getPieceFromName("scout").placeOnField(specialField);
                     model.getGame().getCurrentPlayer().getPieceFromName("flag").placeOnField(specialField.getFieldOnRight());
+
+                    specialField = gb.getGameBoardField(gb.coordinateX(9), gb.coordinateY(4));
+                    model.getGame().getCurrentPlayer().getPieceFromName("bomb").placeOnField(specialField);
+                    model.getGame().getCurrentPlayer().getPieceFromName("marshal").placeOnField(specialField.getFieldOnRight());
+
+                    specialField = gb.getGameBoardField(gb.coordinateX(10), gb.coordinateY(3));
+                    model.getGame().getCurrentPlayer().getPieceFromName("scout").placeOnField(specialField);
+                    specialField = gb.getGameBoardField(gb.coordinateX(1), gb.coordinateY(3));
+                    model.getGame().getCurrentPlayer().getPieceFromName("scout").placeOnField(specialField);
 
                     refreshPlaceablePieces();
                 }
