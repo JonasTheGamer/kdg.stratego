@@ -27,7 +27,7 @@ public class HelpView extends StackPane {
     }
 
     private void layoutNodes() {
-        mediaPlayer.setVolume(0.15);
+        mediaPlayer.setVolume(0.125);
 
         mediaView.setFitWidth(Style.size(1120));
         mediaView.setFitHeight(Style.size(630));
