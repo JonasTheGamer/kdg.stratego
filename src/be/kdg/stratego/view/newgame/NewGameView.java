@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class NewGameView extends HBox {
-    // Controls
     private Label[] lblName;
     private Label[] lblTxtName;
     private TextField[] txtName;
@@ -24,8 +23,6 @@ public class NewGameView extends HBox {
     private ImageView imgTitle;
     private Button btnReady;
     private Button btnCancel;
-
-    // Panes
     private VBox[] vbPlayer;
     private HBox[] hbName;
     private HBox[] hbColor;

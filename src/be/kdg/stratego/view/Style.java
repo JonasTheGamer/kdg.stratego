@@ -39,7 +39,7 @@ public class Style {
         BATTLEFIELD
     }
 
-    // Backgrounds
+    //Backgrounds
     public static Background bgImage(String path, boolean contain) {
         return new Background(new BackgroundImage(
                 new Image(path),
@@ -52,33 +52,31 @@ public class Style {
 
     public static Background bgApplication = bgImage("background.jpg", true);
 
-    // Field backgrounds
     public static Background grass = bgImage("grassTexture.png", true);
+
     public static Background highlightedGrass = bgImage("highlightedGrassTexture.png", true);
+
     public static Background water = bgImage("waterTexture.png", true);
 
-    // Semi-transparent black background
     public static Background background = new Background(new BackgroundFill(
             new Color(0, 0, 0, 0.8),
             new CornerRadii(20),
             new Insets(-10)
     ));
 
-    // Same as above, without padding
     public static Background bgBoxNoPadding = new Background(new BackgroundFill(
             new Color(0, 0, 0, 0.8),
             new CornerRadii(20),
             null
     ));
 
-    // Dark blueish button background
     public static Background backgroundBtn = new Background(new BackgroundFill(
             new Color(0, 0, 0.2, 0.8),
             new CornerRadii(20),
             null
     ));
 
-    // Borders
+    //Borders
     public static Border border(Paint paint, double cornerRadius) {
         return new Border(new BorderStroke(
                 paint,
@@ -92,7 +90,7 @@ public class Style {
         return border(paint,5);
     }
 
-    // Buttons
+    //Buttons
     public static void btn(Button btn, double fontSize, double width, double height) {
         btn.setPrefWidth(Style.size(width));
         btn.setPrefHeight(Style.size(height));
@@ -100,7 +98,7 @@ public class Style {
         Style.txt(btn, fontSize);
     }
 
-    // Labels
+    //Labels
     public static void txt(Labeled txt, double fontSize) {
         Style.txt(txt, fontSize, Color.WHITE);
     }
@@ -111,7 +109,6 @@ public class Style {
     }
 
     // Responsive handler
-    // Size = pixels
     public static double size(double pixels) {
         Screen screen = Screen.getPrimary();
         double screenScale = screen.getOutputScaleX();
@@ -119,7 +116,6 @@ public class Style {
         return (pixels / screenScale * BASE_SCALE);
     }
 
-    // Scale = "percentage" (1 = 100%)
     public static double scale(double scale) {
         Screen screen = Screen.getPrimary();
         double screenScale = screen.getOutputScaleX();
@@ -154,4 +150,5 @@ public class Style {
                 battleFieldPresenter.addWindowEventHandlers();
         }
     }
+
 }

@@ -6,6 +6,7 @@
 
 package be.kdg.stratego.model;
 
+import be.kdg.stratego.view.Style;
 import java.util.Objects;
 
 public class GameBoardField extends Position {

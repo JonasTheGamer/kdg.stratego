@@ -19,7 +19,8 @@ public class Spy extends MovingPiece {
         if (piece instanceof Marshal) {
             //Spy assassinates the Marshal
             return super.attackWin(piece);
+        } else {
+            return super.attackLose(piece);
         }
-        return super.attackLose(piece);
     }
 }

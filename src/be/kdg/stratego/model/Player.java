@@ -85,16 +85,14 @@ public class Player {
     }
 
     public void hidePieces() {
-        setPiecesHiddenProperty(true);
+        for (Piece piece : pieces) {
+            piece.setHidden(true);
+        }
     }
 
     public void showPieces() {
-        setPiecesHiddenProperty(false);
-    }
-
-    private void setPiecesHiddenProperty(boolean hidden) {
         for (Piece piece : pieces) {
-            piece.setHidden(hidden);
+            piece.setHidden(false);
         }
     }
 

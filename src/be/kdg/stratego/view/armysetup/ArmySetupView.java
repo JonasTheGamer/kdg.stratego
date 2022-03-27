@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class ArmySetupView extends VBox {
-    // Controls
     private Label lblScreenTitle;
     private Label lblSetupTitle;
     private Button btnLoad;
@@ -19,8 +18,6 @@ public class ArmySetupView extends VBox {
     private Button btnStart;
     private Button btnBack;
     private Button btnFill;
-
-    // Panes
     private GridPane gpPieces;
     private GridPane gpBoard;
     private VBox vbSetup;

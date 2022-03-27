@@ -17,6 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         ProgrammaModel model = new ProgrammaModel();
+
         MainMenuView view = new MainMenuView();
         MainMenuPresenter presenter = new MainMenuPresenter(model, view);
 
