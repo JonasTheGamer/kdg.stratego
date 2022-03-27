@@ -125,8 +125,7 @@ public class BattleFieldPresenter {
                                     for (Piece killedPiece : killedPieces) {
                                         killFadeOngoing = true;
 
-                                        Pane killedPiecePane = fieldPanes.get(killedPiece.getField());
-                                        StackPane panePiece = (StackPane) killedPiecePane.getChildren().get(0);
+                                        StackPane panePiece = (StackPane) fieldPanes.get(killedPiece.getField()).getChildren().get(0);
 
                                         //// Half Fadeout
                                         FadeTransition transitionFadeOut = new FadeTransition(Duration.millis(250), panePiece);
@@ -181,8 +180,8 @@ public class BattleFieldPresenter {
                                     //// Define X image
                                     ImageView ivInvalid = new ImageView("error.png");
                                     fieldPane.getChildren().add(ivInvalid);
-                                    ivInvalid.setFitHeight(field.getFIELDSIZE());
-                                    ivInvalid.setFitWidth(field.getFIELDSIZE());
+                                    ivInvalid.setFitHeight(FIELD_SIZE);
+                                    ivInvalid.setFitWidth(FIELD_SIZE);
 
                                     //// Fade
                                     FadeTransition transitionFadeIn = new FadeTransition(Duration.millis(250), ivInvalid);
