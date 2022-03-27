@@ -22,8 +22,8 @@ import java.util.TreeMap;
 
 public class ArmySetupPresenter {
     private final double FIELD_SIZE = Style.size(55);
-    private final double PLACABLE_PIECE_WIDTH = 110;
     private final double PLACABLE_PIECE_HEIGTH = 165;
+    private final double PLACABLE_PIECE_WIDTH = 110;
 
     private ProgrammaModel model;
     private ArmySetupView view;
@@ -293,6 +293,5 @@ public class ArmySetupPresenter {
             }
             piecesToPlace.put(pieceName, amountPlacable + 1);
         }
-
     }
 }

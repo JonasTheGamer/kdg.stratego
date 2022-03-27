@@ -5,10 +5,10 @@
 
 package be.kdg.stratego.model;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Game {
@@ -65,6 +65,16 @@ public class Game {
         currentPlayer.showPieces();
     }
 
+    public void registerWinner(File winnersFile) throws IOException {
+        ArrayList<String> lines = new ArrayList<>();
+
+        /// Add line to list
+        lines.add(currentPlayer.getName() + ";" + calculateLeftOverPiecesScore() + ";" + currentPlayer.getAmountOfTurns());
+
+        /// Write lines to file
+        Files.write(winnersFile.toPath(), lines, StandardOpenOption.APPEND);
+    }
+
     public int calculateLeftOverPiecesScore() {
         int piecesSum = 0;
         for (Piece pieceOnBoard : currentPlayer.getPieces()) {
@@ -91,15 +101,5 @@ public class Game {
 
     public GameBoard getGameBoard() {
         return gameBoard;
-    }
-
-    public void registerWinner(File winnersFile) throws IOException {
-        ArrayList<String> lines = new ArrayList<>();
-
-        /// Add line to list
-        lines.add(currentPlayer.getName() + ";" + calculateLeftOverPiecesScore() + ";" + currentPlayer.getAmountOfTurns());
-
-        /// Write lines to file
-        Files.write(winnersFile.toPath(), lines, StandardOpenOption.APPEND);
     }
 }

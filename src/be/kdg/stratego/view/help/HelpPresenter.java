@@ -18,7 +18,6 @@ public class HelpPresenter {
     }
 
     private void addEventHandlers() {
-
         view.getMediaView().setOnMouseClicked(mouseEvent -> videoControl());
 
         view.getBtnControl().setOnAction(actionEvent -> videoControl());
@@ -35,7 +34,7 @@ public class HelpPresenter {
         stage.setOnCloseRequest(windowEvent -> view.getMediaPlayer().stop());
 
         // Close window at end video
-        view.getMediaPlayer().setOnEndOfMedia(() -> stage.close());
+        view.getMediaPlayer().setOnEndOfMedia(stage::close);
 
         // All KeyEvents
         view.getScene().setOnKeyPressed(keyEvent -> {

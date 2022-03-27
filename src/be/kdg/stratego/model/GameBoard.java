@@ -59,22 +59,6 @@ public class GameBoard {
         this.gameBoardFields = rotatedGameBoardFields;
     }
 
-    // Highlight the allowed moves
-    public void highLightAllowedMoves(MovingPiece piece) {
-        GameBoardField field = piece.getField();
-
-        // Unhighlight all fields
-        unHighlightAllFields();
-
-        // Highlight the field itself
-        field.highLight();
-
-        // Highlight them
-        for (GameBoardField fieldToHighlight : piece.getAllowedMoves()) {
-            fieldToHighlight.highLight();
-        }
-    }
-
     // Unhighlight all fields
     public void unHighlightAllFields() {
         // Loop through all fields

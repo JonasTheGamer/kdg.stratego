@@ -166,7 +166,7 @@ public class NewGameView extends HBox {
             playerButtons[0].setBackground(Style.bgImage("/pieces/flag.png", false));
             playerButtons[1].setBackground(Style.bgImage("/pieces/flag_belguim.png", false));
             playerButtons[2].setBackground(Style.bgImage("/pieces/flag_europe.gif", false));
-            playerButtons[3].setBackground(Style.bgImage("/pieces/flag.png", false));
+            playerButtons[3].setBackground(Style.bgImage("/pieces/flag_squidward.gif", false));
         }
 
         for (int i = 0; i < gpFlags.length; i++) {

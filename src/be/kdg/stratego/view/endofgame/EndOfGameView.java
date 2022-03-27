@@ -87,7 +87,6 @@ public class EndOfGameView extends VBox {
     }
 
     // Getters
-
     public Label getLblSubtitle() {
         return lblSubtitle;
     }

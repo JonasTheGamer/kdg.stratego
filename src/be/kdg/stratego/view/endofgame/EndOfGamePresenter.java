@@ -1,8 +1,6 @@
 package be.kdg.stratego.view.endofgame;
 
 import be.kdg.stratego.model.ProgrammaModel;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -15,21 +13,15 @@ public class EndOfGamePresenter {
         this.model = model;
         this.view = view;
 
-        updateView();
         addEventHandlers();
+        updateView();
     }
 
-    public void addEventHandlers() {
-        view.getBtnMenu().setOnAction(actionEvent -> {
-            Scene scene = view.getScene();
-            Window wd = scene.getWindow();
-            Stage stg = (Stage) wd;
+    private void addEventHandlers() {
 
-            stg.close();
-        });
     }
 
-    public void updateView() {
+    private void updateView() {
         // Set player that has won the game
         view.getLblSubtitle().setText(model.getGame().getCurrentPlayer().getName() + " has won the game!");
 
@@ -38,5 +30,11 @@ public class EndOfGamePresenter {
 
         // Set the leftover piece score
         view.getLblScoreValue().setText(Integer.toString(model.getGame().calculateLeftOverPiecesScore()));
+    }
+
+    public void windowEventHandlers(){
+        Stage stage = (Stage) view.getScene().getWindow();
+
+        view.getBtnMenu().setOnAction(actionEvent -> stage.close());
     }
 }
