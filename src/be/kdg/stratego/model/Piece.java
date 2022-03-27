@@ -101,7 +101,7 @@ public class Piece implements Comparable {
         if (obj == null || getClass() != obj.getClass()) return false;
 
         Piece otherPiece = (Piece)obj;
-        return (field == otherPiece.getField() && rank == otherPiece.getRank());
+        return (name.equals(otherPiece.getName()) && rank == otherPiece.getRank());
     }
 
     @Override
