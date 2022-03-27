@@ -16,7 +16,7 @@ public class MainMenuView extends VBox {
     private Button btnQuit;
     private Label lblHighscores;
     private VBox vBoxTitles;
-    private GridPane gpWinners;
+    private GridPane gpLeaderboard;
     private VBox vBoxLeaderboards;
     private HBox hBoxTitlesAndLeaderboard;
 
@@ -36,7 +36,7 @@ public class MainMenuView extends VBox {
         this.lblHighscores = new Label("Highscores/Lowturns");
 
         // Panes
-        this.gpWinners = new GridPane();
+        this.gpLeaderboard = new GridPane();
         this.vBoxTitles = new VBox();
         this.vBoxLeaderboards = new VBox();
         this.hBoxTitlesAndLeaderboard = new HBox();
@@ -53,7 +53,7 @@ public class MainMenuView extends VBox {
         Style.txt(lblHighscores, 12);
         lblHighscores.setStyle("-fx-font-weight: bold");
 
-        gpWinners.setHgap(20);
+        gpLeaderboard.setHgap(20);
 
         hBoxTitlesAndLeaderboard.getChildren().addAll(vBoxTitles, vBoxLeaderboards);
         hBoxTitlesAndLeaderboard.setAlignment(Pos.CENTER);
@@ -64,7 +64,7 @@ public class MainMenuView extends VBox {
         vBoxTitles.setAlignment(Pos.CENTER);
         vBoxTitles.setSpacing(Style.size(20));
 
-        vBoxLeaderboards.getChildren().addAll(lblHighscores, gpWinners);
+        vBoxLeaderboards.getChildren().addAll(lblHighscores, gpLeaderboard);
         vBoxLeaderboards.setBackground(Style.background);
         vBoxLeaderboards.setAlignment(Pos.CENTER);
         vBoxLeaderboards.setSpacing(Style.size(10));
@@ -87,8 +87,8 @@ public class MainMenuView extends VBox {
         return btnQuit;
     }
 
-    public GridPane getGpWinners() {
-        return gpWinners;
+    public GridPane getGpLeaderboard() {
+        return gpLeaderboard;
     }
 
     public Label getLblHighscores() {

@@ -35,11 +35,11 @@ public class Game {
         currentPlayer.addTurn();
     }
 
-    public void stop(File winnersFile) throws IOException {
+    public void stop(File leaderboardFile) throws IOException {
         ongoing = false;
 
         // Save the winner
-        registerWinner(winnersFile);
+        registerWinner(leaderboardFile);
     }
 
     public void nextTurn() {
@@ -65,14 +65,14 @@ public class Game {
         currentPlayer.showPieces();
     }
 
-    public void registerWinner(File winnersFile) throws IOException {
+    public void registerWinner(File leaderboardFile) throws IOException {
         ArrayList<String> lines = new ArrayList<>();
 
         /// Add line to list
         lines.add(currentPlayer.getName() + ";" + calculateLeftOverPiecesScore() + ";" + currentPlayer.getAmountOfTurns());
 
         /// Write lines to file
-        Files.write(winnersFile.toPath(), lines, StandardOpenOption.APPEND);
+        Files.write(leaderboardFile.toPath(), lines, StandardOpenOption.APPEND);
     }
 
     public int calculateLeftOverPiecesScore() {

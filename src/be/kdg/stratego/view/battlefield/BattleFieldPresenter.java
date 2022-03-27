@@ -149,7 +149,7 @@ public class BattleFieldPresenter {
                                     // Check if the game ended, or we need to switch to the next player
                                     if (containsFlag) {
                                         // Stop the game
-                                        model.getGame().stop(model.getWinnersFile());
+                                        model.getGame().stop(model.getLeaderboardFile());
 
                                         // Show the winner screen
                                         EndOfGameView eoGameView = new EndOfGameView();

@@ -1,9 +1,7 @@
 package be.kdg.stratego.view.endofgame;
 
 import be.kdg.stratego.model.ProgrammaModel;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class EndOfGamePresenter {
     private ProgrammaModel model;

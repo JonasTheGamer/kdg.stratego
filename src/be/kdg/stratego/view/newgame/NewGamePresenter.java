@@ -10,7 +10,7 @@ public class NewGamePresenter {
     private ProgrammaModel model;
     private NewGameView view;
 
-    private String[] selectedFlag = new String[2];
+    private String[] selectedFlag = new String[2]; //Current selected flag per player
 
     public NewGamePresenter(ProgrammaModel model, NewGameView view) {
         this.model = model;

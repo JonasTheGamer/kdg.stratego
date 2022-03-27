@@ -64,7 +64,7 @@ public abstract class MovingPiece extends Piece {
             //Piece gets blown up
             killedPieces.add(attackLose(piece));
         } else if (piece instanceof Flag) {
-            // Jonas: We won! :D
+            //We won! :D (catch flag from returned list in presenter)
             killedPieces.add(attackWin(piece));
         }
         return killedPieces;

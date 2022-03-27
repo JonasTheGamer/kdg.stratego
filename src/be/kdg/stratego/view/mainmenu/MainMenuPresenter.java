@@ -22,28 +22,28 @@ public class MainMenuPresenter {
     private ProgrammaModel model;
     private MainMenuView view;
 
-    private boolean togglerWinners;
+    private boolean togglerLeaderboard;//Toggler for leaderboard
 
     public MainMenuPresenter(ProgrammaModel model, MainMenuView view) {
         this.model = model;
         this.view = view;
-        this.winnerTimelineSetup();
+        this.leaderboardTimelineSetup();
         this.addEventHandlers();
         this.updateView();
     }
 
-    private void winnerTimelineSetup() {
-        Timeline timelineWinners;
-        togglerWinners = false;
+    private void leaderboardTimelineSetup() {
+        Timeline timelineLeaderboard;
+        togglerLeaderboard = false;
 
-        timelineWinners = new Timeline();
-        timelineWinners.setCycleCount(Animation.INDEFINITE);
-        timelineWinners.getKeyFrames().add(
+        timelineLeaderboard = new Timeline();
+        timelineLeaderboard.setCycleCount(Animation.INDEFINITE);
+        timelineLeaderboard.getKeyFrames().add(
                 new KeyFrame(Duration.seconds(5), event -> {
-                    togglerWinners = !togglerWinners;
+                    togglerLeaderboard = !togglerLeaderboard;
                     updateView();
                 }));
-        timelineWinners.play();
+        timelineLeaderboard.play();
     }
 
     private void addEventHandlers() {
@@ -68,13 +68,13 @@ public class MainMenuPresenter {
     }
 
     private void updateView() {
-        // Winners
+        // Leaderboard
         try {
-            model.updateWinners();
-            view.getGpWinners().getChildren().clear();
+            model.updateLeaderboard();
+            view.getGpLeaderboard().getChildren().clear();
 
             int position = 0;
-            if (togglerWinners) {
+            if (togglerLeaderboard) {
                 ///Highscores
                 view.getLblHighscores().setText("Highscores");
 
@@ -83,7 +83,7 @@ public class MainMenuPresenter {
                     String name = highscore.getSpelernaam();
                     int score = highscore.getScore();
 
-                    fillGpWinners(position, name, score);
+                    fillGpLeaderboard(position, name, score);
                 }
             } else {
                 ///Lowturns
@@ -94,7 +94,7 @@ public class MainMenuPresenter {
                     String name = lowturn.getSpelernaam();
                     int turns = lowturn.getTurns();
 
-                    fillGpWinners(position, name, turns);
+                    fillGpLeaderboard(position, name, turns);
                 }
             }
         } catch (IOException e) {
@@ -107,7 +107,7 @@ public class MainMenuPresenter {
         view.getBtnQuit().setOnAction(actionEvent -> stage.close());
     }
 
-    private void fillGpWinners(int position, String name, int value) {
+    private void fillGpLeaderboard(int position, String name, int value) {
         //Add scores to Gridpane
         if (position <= 10) {
             Label lblPositie = new Label(Integer.toString(position));
@@ -121,9 +121,9 @@ public class MainMenuPresenter {
             GridPane.setHalignment(lblPositie, HPos.CENTER);
             GridPane.setHalignment(lblValue, HPos.RIGHT);
 
-            view.getGpWinners().add(lblPositie, 0, position);
-            view.getGpWinners().add(lblName, 1, position);
-            view.getGpWinners().add(lblValue, 2, position);
+            view.getGpLeaderboard().add(lblPositie, 0, position);
+            view.getGpLeaderboard().add(lblName, 1, position);
+            view.getGpLeaderboard().add(lblValue, 2, position);
         }
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class ProgrammaModel {
-    private final File WINNERS_FILE = new File("resources/winners.csv");
+    private final File LEADERBOARD_FILE = new File("resources/leaderboard.csv");
 
     private Game game;
     private GameBoard gameBoard;
@@ -30,13 +30,13 @@ public class ProgrammaModel {
         gameBoard = game.getGameBoard();
     }
 
-    public void updateWinners() throws IOException {
+    public void updateLeaderboard() throws IOException {
         /// Clearing lists
         highscores.clear();
         lowturns.clear();
 
         /// Read lines from file
-        List<String> lines = Files.readAllLines(this.WINNERS_FILE.toPath());
+        List<String> lines = Files.readAllLines(this.LEADERBOARD_FILE.toPath());
 
         for (String currentLine : lines) {
             if (!currentLine.equals("")) {
@@ -67,7 +67,7 @@ public class ProgrammaModel {
         return lowturns;
     }
 
-    public File getWinnersFile() {
-        return WINNERS_FILE;
+    public File getLeaderboardFile() {
+        return LEADERBOARD_FILE;
     }
 }

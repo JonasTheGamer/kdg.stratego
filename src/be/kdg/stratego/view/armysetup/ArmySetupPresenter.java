@@ -27,9 +27,10 @@ public class ArmySetupPresenter {
 
     private ProgrammaModel model;
     private ArmySetupView view;
-    private TreeMap<String, Integer> piecesToPlace;
-    private HashMap<GameBoardField, Pane> fieldPanes;
-    private String selectedPlaceablePiece;
+
+    private TreeMap<String, Integer> piecesToPlace; //Amount of pieces per type
+    private HashMap<GameBoardField, Pane> fieldPanes; //Gameboardfields and linked Panes
+    private String selectedPlaceablePiece; //Holds id of Vbox placeable piece
 
     public ArmySetupPresenter(ProgrammaModel model, ArmySetupView view) {
         this.model = model;
