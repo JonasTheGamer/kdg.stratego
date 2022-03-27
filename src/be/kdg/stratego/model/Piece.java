@@ -7,7 +7,7 @@ package be.kdg.stratego.model;
 
 import java.util.Objects;
 
-public class Piece implements Comparable {
+public class Piece {
     // References
     protected Player player;
     protected GameBoardField field;
@@ -92,30 +92,5 @@ public class Piece implements Comparable {
         if(!Objects.isNull(field)) {
             this.hidden = hidden;
         }
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-
-        if (obj == null || getClass() != obj.getClass()) return false;
-
-        Piece otherPiece = (Piece)obj;
-        return (field == otherPiece.getField() && rank == otherPiece.getRank());
-    }
-
-    @Override
-    public int hashCode() {
-        if(Objects.isNull(this.field)) {
-            return Objects.hash(Integer.toString(this.rank));
-        } else {
-            return Objects.hash((this.rank) + this.field.toString());
-        }
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        Piece otherPiece = (Piece) o;
-        return Integer.compare(this.rank, otherPiece.getRank());
     }
 }
