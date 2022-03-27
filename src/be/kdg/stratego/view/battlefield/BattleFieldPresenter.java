@@ -9,7 +9,6 @@ import be.kdg.stratego.view.endofgame.*;
 import javafx.animation.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -37,12 +36,12 @@ public class BattleFieldPresenter {
     private GameStopwatch stopwatch;
 
     // Variables for moving a piece
-    private MovingPiece selectedPiece;
+    private MovingPiece selectedPiece; //Current selected piece
 
     // Variables for switching to the next player
-    private ArrayList<Piece> lastKilledPieces;
-    private MovingPiece attackingPiece;
-    private boolean overlayClickDebounce;
+    private ArrayList<Piece> killedPieces; //Current round killed pieces
+    private MovingPiece attackingPiece; //Current attacking piece
+    private boolean overlayClickDebounce; //Used for limiting method runs
 
     public BattleFieldPresenter(ProgrammaModel model, BattleFieldView view) {
         this.model = model;
@@ -51,7 +50,7 @@ public class BattleFieldPresenter {
         this.stopwatch = new GameStopwatch();
         startStopwatch();
 
-        lastKilledPieces = new ArrayList<>();
+        killedPieces = new ArrayList<>();
         attackingPiece = null;
         overlayClickDebounce = false;
 
@@ -63,7 +62,7 @@ public class BattleFieldPresenter {
 
     private synchronized void addEventHandlers() {
         view.getBtnClose().setOnAction(actionEvent -> {
-            //Liam: game.save() & game.stop() modal
+            //Liam: Extra -> game.save() & game.stop() modal
             Style.changeScreen(Style.Screens.MAINMENU, model, view);
         });
 
@@ -91,16 +90,18 @@ public class BattleFieldPresenter {
                                 // They probably want to move this piece
                                 Piece piece = field.getPiece();
 
+                                //Clear current selection
+                                clearSelection();
+
                                 // But let's check if it's movable
                                 if (piece instanceof MovingPiece) {
                                     // Select it for movement!
                                     selectedPiece = (MovingPiece) piece;
 
                                     // Highlight them
-                                    model.getGameBoard().highLightAllowedMoves(selectedPiece);
+                                    selectedPiece.highLightAllowedMoves();
 
                                     updateView();
-
                                 }
                                 return;
                             }
@@ -110,7 +111,7 @@ public class BattleFieldPresenter {
                                 try {
                                     // Move the piece
                                     attackingPiece = selectedPiece;
-                                    ArrayList<Piece> killedPieces = selectedPiece.moveTo(field);
+                                    killedPieces = selectedPiece.moveTo(field);
 
                                     // Clear the selection
                                     clearSelection();
@@ -145,8 +146,6 @@ public class BattleFieldPresenter {
                                         }
                                     }
 
-                                    lastKilledPieces = killedPieces;
-
                                     // Check if the game ended, or we need to switch to the next player
                                     if (containsFlag) {
                                         // Stop the game
@@ -158,9 +157,12 @@ public class BattleFieldPresenter {
 
                                         Stage stage = new Stage();
                                         stage.setScene(new Scene(eoGameView));
-
                                         stage.initOwner(view.getScene().getWindow());
                                         stage.initModality(Modality.APPLICATION_MODAL);
+                                        stage.setResizable(false);
+
+                                        eoGamePresenter.windowEventHandlers();
+
                                         stage.showAndWait();
 
                                         Style.changeScreen(Style.Screens.MAINMENU, model, view);
@@ -231,9 +233,9 @@ public class BattleFieldPresenter {
             toggleNextPlayerOverlay();
 
             // If pieces were killed, show them & do the animation
-            if (lastKilledPieces.size() > 0) {
+            if (killedPieces.size() > 0) {
                 // Make the killed pieces visible again
-                for (Piece killedPiece : lastKilledPieces) {
+                for (Piece killedPiece : killedPieces) {
                     killedPiece.setHidden(false);
                 }
 
@@ -244,7 +246,7 @@ public class BattleFieldPresenter {
                 updateView();
 
                 // Make the killed pieces vanish
-                for (Piece killedPiece : lastKilledPieces) {
+                for (Piece killedPiece : killedPieces) {
                     Pane killedPiecePane = fieldPanes.get(killedPiece.getField());
                     StackPane panePiece = (StackPane) killedPiecePane.getChildren().get(0);
 

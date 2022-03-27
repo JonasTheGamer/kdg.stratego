@@ -28,7 +28,7 @@ public class BattleFieldView extends BorderPane {
 
     public void initializeNodes() {
         // Controls
-        lblClock = new Label("00:00");
+        lblClock = new Label("00:00:00");
         lblScreenTitle = new Label("Player 1234567890");
         btnClose = new Button("X");
         btnNextPlayer = new Button("");

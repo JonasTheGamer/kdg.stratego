@@ -46,6 +46,7 @@ public class Piece {
             this.attacker = null;
         }
     }
+
     public void startKill() {
         this.startKill(null);
     }

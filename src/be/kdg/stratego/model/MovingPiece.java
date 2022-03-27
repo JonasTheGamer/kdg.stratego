@@ -81,6 +81,19 @@ public abstract class MovingPiece extends Piece {
         return this;
     }
 
+    // Highlight the allowed moves
+    public void highLightAllowedMoves() {
+        GameBoardField field = this.getField();
+
+        // Highlight the field itself
+        field.highLight();
+
+        // Highlight them
+        for (GameBoardField fieldToHighlight : this.getAllowedMoves()) {
+            fieldToHighlight.highLight();
+        }
+    }
+
     // Getters
     public HashSet<GameBoardField> getAllowedMoves() {
         HashSet<GameBoardField> allowedMoves = new HashSet<>();
