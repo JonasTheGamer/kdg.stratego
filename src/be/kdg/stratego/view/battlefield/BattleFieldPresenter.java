@@ -119,27 +119,27 @@ public class BattleFieldPresenter {
                                     updateView();
 
                                     // Make killed pieces transparent
-                                    Timeline showKilledPieces = null;
+                                    SequentialTransition showKilledPiecesFade = new SequentialTransition();
                                     boolean containsFlag = false;
+
                                     for (Piece killedPiece : killedPieces) {
                                         killFadeOngoing = true;
 
                                         Pane killedPiecePane = fieldPanes.get(killedPiece.getField());
                                         StackPane panePiece = (StackPane) killedPiecePane.getChildren().get(0);
 
-                                        //// Fadeout the killed piece to half transparent
-                                        showKilledPieces = new Timeline();
-                                        KeyValue transparentPiece = new KeyValue(panePiece.opacityProperty(), 0.5);
-                                        KeyValue opaquePiece = new KeyValue(panePiece.opacityProperty(), 1.0);
-
-                                        //// Timelines
-                                        showKilledPieces.getKeyFrames().addAll(
-                                                new KeyFrame(Duration.ZERO, opaquePiece),
-                                                new KeyFrame(Duration.millis(250), transparentPiece),
-                                                new KeyFrame(Duration.millis(1500), transparentPiece)
+                                        //// Half Fadeout
+                                        FadeTransition transitionFadeOut = new FadeTransition(Duration.millis(250), panePiece);
+                                        transitionFadeOut.setFromValue(1);
+                                        transitionFadeOut.setToValue(0.5);
+                                        PauseTransition pauseTransition = new PauseTransition(Duration.millis(1250));
+                                        showKilledPiecesFade.getChildren().addAll(
+                                                transitionFadeOut,
+                                                pauseTransition
                                         );
+                                        showKilledPiecesFade.play();
 
-                                        showKilledPieces.play();
+
                                         // Check whether the killed piece was the flag
                                         if (killedPiece instanceof Flag) {
                                             containsFlag = true;
@@ -168,9 +168,9 @@ public class BattleFieldPresenter {
 
                                     } else {
                                         // Switch to next player
-                                        if (!Objects.isNull(showKilledPieces)) {
+                                        if (!killedPieces.isEmpty()) {
                                             // Wait for the fade to finish before showing the overlay
-                                            showKilledPieces.setOnFinished(actionEvent -> toggleNextPlayerOverlay());
+                                            showKilledPiecesFade.setOnFinished(actionEvent -> toggleNextPlayerOverlay());
                                         } else {
                                             toggleNextPlayerOverlay();
                                         }
@@ -181,23 +181,23 @@ public class BattleFieldPresenter {
                                     //// Define X image
                                     ImageView ivInvalid = new ImageView("error.png");
                                     fieldPane.getChildren().add(ivInvalid);
-
-                                    //// Values for fade
-                                    KeyValue transparent = new KeyValue(ivInvalid.opacityProperty(), 0.0);
-                                    KeyValue opaque = new KeyValue(ivInvalid.opacityProperty(), 1.0);
-
-                                    //// Timeline
-                                    Timeline timeline = new Timeline();
-                                    timeline.getKeyFrames().addAll(
-                                            new KeyFrame(Duration.ZERO, transparent),
-                                            new KeyFrame(Duration.millis(250), opaque),
-                                            new KeyFrame(Duration.millis(750), opaque),
-                                            new KeyFrame(Duration.millis(1000), transparent)
-                                    );
-
                                     ivInvalid.setFitHeight(field.getFIELDSIZE());
                                     ivInvalid.setFitWidth(field.getFIELDSIZE());
-                                    timeline.play();
+
+                                    //// Fade
+                                    FadeTransition transitionFadeIn = new FadeTransition(Duration.millis(250), ivInvalid);
+                                    transitionFadeIn.setFromValue(0);
+                                    transitionFadeIn.setToValue(1);
+                                    PauseTransition pauseTransition = new PauseTransition(Duration.millis(500));
+                                    FadeTransition transitionFadeOut = new FadeTransition(Duration.millis(250), ivInvalid);
+                                    transitionFadeOut.setFromValue(1);
+                                    transitionFadeOut.setToValue(0);
+                                    SequentialTransition errorTransitions = new SequentialTransition(
+                                            transitionFadeIn,
+                                            pauseTransition,
+                                            transitionFadeOut
+                                    );
+                                    errorTransitions.play();
 
                                 } catch (IOException e) {
                                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -249,20 +249,18 @@ public class BattleFieldPresenter {
                     Pane killedPiecePane = fieldPanes.get(killedPiece.getField());
                     StackPane panePiece = (StackPane) killedPiecePane.getChildren().get(0);
 
-                    //// Make them vanish
-                    KeyValue transparentPiece = new KeyValue(panePiece.opacityProperty(), 0.0);
-                    KeyValue opaquePiece = new KeyValue(panePiece.opacityProperty(), 0.5);
-
-                    //// Timeline
-                    Timeline fadeoutTimeline = new Timeline();
-                    fadeoutTimeline.getKeyFrames().addAll(
-                            new KeyFrame(Duration.ZERO, opaquePiece),
-                            new KeyFrame(Duration.millis(1750), opaquePiece),
-                            new KeyFrame(Duration.millis(2000), transparentPiece)
+                    //// Full Fadeout
+                    PauseTransition pauseTransition = new PauseTransition(Duration.millis(1750));
+                    FadeTransition transitionFadeOut = new FadeTransition(Duration.millis(250), panePiece);
+                    transitionFadeOut.setFromValue(0.5);
+                    transitionFadeOut.setToValue(0);
+                    SequentialTransition fadeoutTransitions = new SequentialTransition(
+                            pauseTransition,
+                            transitionFadeOut
                     );
+                    fadeoutTransitions.play();
 
-                    fadeoutTimeline.play();
-                    fadeoutTimeline.setOnFinished(actionEvent1 -> {
+                    fadeoutTransitions.setOnFinished(actionEvent1 -> {
                         killedPiece.finishKill();
                         killFadeOngoing = false;
                         updateView();
