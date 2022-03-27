@@ -32,6 +32,7 @@ public class Game {
     public void start() {
         //Set starting variables
         this.ongoing = true;
+        currentPlayer.addTurn();
     }
 
     public void stop(File winnersFile) throws IOException {
